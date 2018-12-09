@@ -2,12 +2,37 @@
   "pages": [
     "pages/index/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/message/main",
+    "pages/center/main",
+    "pages/user_setting/main",
+    "pages/user_setting_student/main",
+    "pages/user_setting_teacher/main",
+    "pages/user_setting_strator/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#C8D686",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color":"#707070",
+    "selectedColor":"#C8D686",
+    "list": [{
+      "pagePath": "pages/index/main",
+      "text": "首页",
+      "iconPath": "/static/img/index-from.png",
+      "selectedIconPath": "/static/img/index-active.png"
+    },{
+      "pagePath": "pages/message/main",
+      "text": "消息",
+      "iconPath": "/static/img/message-from.png",
+      "selectedIconPath": "/static/img/message-active.png"
+    },{
+      "pagePath": "pages/center/main",
+      "text": "个人中心",
+      "iconPath": "/static/img/center-from.png",
+      "selectedIconPath": "/static/img/center-active.png"
+    }]
   }
 }
