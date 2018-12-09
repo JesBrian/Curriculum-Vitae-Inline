@@ -2,7 +2,7 @@
 
 True My Graduation Design -_-
 
-##适用平台
+## 适用平台
 
     前台适用：
         移动端：android, ios, 微信小程序
@@ -13,7 +13,7 @@ True My Graduation Design -_-
         目前仅支持浏览器 web 端管理
 
 
-##技术栈
+## 技术栈
 
     移动端：Apache Cordova + Vue + iView
     微信小程序：MpVue + iView
