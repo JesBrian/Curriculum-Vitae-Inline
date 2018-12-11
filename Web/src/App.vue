@@ -8,19 +8,19 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import PageFrame from './layout/PageFrame.vue';
+<script>
+  import PageFrame from './layout/PageFrame.vue'
 
-
-  @Component({
+  export default {
     components: {
-      PageFrame,
-    },
-  })
-  export default class App extends Vue {}
+      PageFrame
+    }
+  }
 </script>
 
 <style lang="scss">
-
+  html, body, #app, .layout, .ivu-layout {
+    width:100%;
+    height:100%;
+  }
 </style>

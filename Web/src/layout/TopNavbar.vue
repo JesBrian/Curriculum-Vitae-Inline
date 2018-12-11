@@ -25,11 +25,8 @@
 </template>
 
 <script>
-  import { Component, Vue } from 'vue-property-decorator';
-
-  @Component({})
-
-  export default class TopNavbar extends Vue {
+  export default {
+    name: 'TopNavbar'
   }
 </script>
 

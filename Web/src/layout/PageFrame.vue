@@ -36,24 +36,29 @@
 </template>
 
 <script>
-  import { Component, Vue } from 'vue-property-decorator';
-  import TopNavbar from './TopNavbar.vue';
-  import PathNavbar from './PathNavbar.vue';
+  import TopNavbar from './TopNavbar.vue'
+  import PathNavbar from './PathNavbar.vue'
 
-  @Component({
+  export default {
+    name: 'PageFrame',
+
     components: {
       TopNavbar, PathNavbar
     },
-  })
 
-  export default class PageFrame extends  Vue {
-    isCollapsed: boolean = false
+    data () {
+      return {
+        isCollapsed: false
+      }
+    },
 
-    get menuitemClasses (): Array<string> {
-      return [
-        'menu-item',
-        this.isCollapsed ? 'collapsed-menu' : ''
-      ]
+    computed: {
+      menuitemClasses () {
+        return [
+          'menu-item',
+          this.isCollapsed ? 'collapsed-menu' : ''
+        ]
+      }
     }
   }
 </script>
