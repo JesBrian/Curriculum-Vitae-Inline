@@ -1,21 +1,32 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+
+const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 
 module.exports = {
-  mode: 'development',
-  resolve: {
-    modules: [path.resolve(__dirname, 'node_modules')]
+  entry: {
+    index: [
+      hotMiddlewareScript, './index.js'
+    ]
   },
-  entry: ["webpack-hot-middleware/client?noInfo=true&reload=true", "./index.js"],
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'server.js'
+  output:{
+    filename: 'bundle.[name].js',
+    path: path.resolve(__dirname, "./dist")
   },
   module: {
-    rules: [
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          'presets': ['es2015', 'stage-0']
+        }
+      }
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
