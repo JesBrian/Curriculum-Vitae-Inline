@@ -23,4 +23,8 @@
     width:100%;
     height:100%;
   }
+
+  .ivu-layout-sider-zero-width-trigger {
+    z-index:9;
+  }
 </style>

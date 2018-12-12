@@ -1,5 +1,5 @@
 <template>
-  <Breadcrumb :style="{margin: '0 0 20px'}">
+  <Breadcrumb class="path-navbar" :style="{margin: '0 0 20px'}">
     <BreadcrumbItem>Home</BreadcrumbItem>
     <BreadcrumbItem>Components</BreadcrumbItem>
     <BreadcrumbItem>Layout</BreadcrumbItem>
@@ -12,6 +12,9 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .path-navbar {
+    top:-5px;
+    position:absolute;
+  }
 </style>

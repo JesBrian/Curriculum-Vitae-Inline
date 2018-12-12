@@ -23,7 +23,7 @@
           <div slot="trigger"></div>
         </Sider>
 
-        <Content :style="{margin: '20px'}">
+        <Content class="page-layout" :style="{margin: '20px'}">
           <PathNavbar />
 
           <Layout style="background:#fff; min-height:260px">
@@ -95,5 +95,10 @@
     transition: font-size .2s ease .2s, transform .2s ease .2s;
     vertical-align: middle;
     font-size: 22px;
+  }
+
+  .page-layout {
+    padding-top:30px;
+    position:relative;
   }
 </style>
