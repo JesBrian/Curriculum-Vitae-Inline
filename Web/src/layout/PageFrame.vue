@@ -2,9 +2,7 @@
   <div class="layout">
     <Layout>
       <TopNavbar />
-
       <Layout>
-
         <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
           <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
             <MenuItem name="1-1">
@@ -23,7 +21,7 @@
           <div slot="trigger"></div>
         </Sider>
 
-        <Content class="page-layout" :style="{margin: '20px'}">
+        <Content class="page-layout" style="padding:50px 20px 20px;">
           <PathNavbar />
 
           <Layout style="background:#fff; min-height:260px">
@@ -36,8 +34,8 @@
 </template>
 
 <script>
-  import TopNavbar from './TopNavbar.vue'
-  import PathNavbar from './PathNavbar.vue'
+  import TopNavbar from './TopNavbar/TopNavbar.vue'
+  import PathNavbar from './PathNavbar/PathNavbar.vue'
 
   export default {
     name: 'PageFrame',

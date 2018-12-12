@@ -1,0 +1,30 @@
+<template>
+  <div>
+    <Breadcrumb class="path-navbar">
+      <BreadcrumbItem>Home</BreadcrumbItem>
+      <BreadcrumbItem>Components</BreadcrumbItem>
+      <BreadcrumbItem>Layout</BreadcrumbItem>
+    </Breadcrumb>
+
+    <div style="margin-top:-38px; float:right">
+      <Button type="success" icon="logo-buffer" size="small" ghost style="margin:0 3px;">预览</Button>
+      <Button type="primary" icon="md-code-download" size="small" ghost style="margin:0 3px;">导出</Button>
+      <Button type="info" icon="md-list" size="small" ghost style="margin:0 3px;">保存</Button>
+      <Button type="error" icon="md-trash" size="small" ghost style="margin:0 3px;">删除</Button>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'PathNavbar'
+  }
+</script>
+
+<style lang="scss" scoped>
+  .path-navbar {
+    top:15px;
+    margin: 0 0 20px;
+    position:absolute;
+  }
+</style>
