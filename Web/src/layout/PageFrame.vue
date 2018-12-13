@@ -117,7 +117,7 @@
     font-size: 16px;
   }
   .collapsed-menu span{
-    width: 0px;
+    width: 0;
     transition: width .2s ease;
   }
   .collapsed-menu i{
