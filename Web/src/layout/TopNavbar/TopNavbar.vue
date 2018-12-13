@@ -20,13 +20,23 @@
           Item 4
         </MenuItem>
       </div>
+
+      <div style="float:right;">
+        <img @click="changeRightNavbar" style="width:35px; height:35px; border-radius:50%; box-shadow:0 0 6px #282828;" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+      </div>
     </Menu>
   </Header>
 </template>
 
 <script>
   export default {
-    name: 'TopNavbar'
+    name: 'TopNavbar',
+
+    methods: {
+      changeRightNavbar () {
+        this.$emit('changeRightNavbar')
+      }
+    }
   }
 </script>
 

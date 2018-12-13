@@ -1,36 +1,38 @@
 <template>
-  <div class="layout">
+  <Layout class="layout">
+    <TopNavbar @changeRightNavbar="changeRightNavbar" />
     <Layout>
-      <TopNavbar />
-      <Layout>
-        <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
-          <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-            <MenuItem name="1-1">
-              <Icon type="ios-navigate"></Icon>
-              <span>Option 1</span>
-            </MenuItem>
-            <MenuItem name="1-2">
-              <Icon type="ios-search"></Icon>
-              <span>Option 2</span>
-            </MenuItem>
-            <MenuItem name="1-3">
-              <Icon type="ios-settings"></Icon>
-              <span>Option 3</span>
-            </MenuItem>
-          </Menu>
-          <div slot="trigger"></div>
-        </Sider>
+      <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
+        <Menu theme="dark" width="auto" :class="menuitemClasses">
+          <Submenu v-for="(item, index) in componentCell" :name="item.ch">
+            <template slot="title">
+              <Icon type="ios-paper" />{{item.ch}}
+            </template>
+            <div :name="`${item}${index}`">
+              <div>
+                <div v-for="n in 12" style="width:38px; height:38px; display:inline-block;">33</div>
+              </div>
+            </div>
+          </Submenu>
+        </Menu>
+        <div slot="trigger"></div>
+      </Sider>
 
-        <Content class="page-layout" style="padding:50px 20px 20px;">
-          <PathNavbar />
+      <Content class="page-layout" style="padding:50px 20px 20px;">
+        <PathNavbar />
 
-          <Layout style="background:#fff; min-height:260px">
-            <slot />
-          </Layout>
-        </Content>
-      </Layout>
+        <Layout style="background:#fff; min-height:260px">
+          <slot />
+        </Layout>
+      </Content>
     </Layout>
-  </div>
+
+    <Drawer title="Basic Drawer" :closable="false" v-model="showRightNavbar">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
+  </Layout>
 </template>
 
 <script>
@@ -46,7 +48,31 @@
 
     data () {
       return {
-        isCollapsed: false
+        isCollapsed: false,
+        showRightNavbar: false,
+
+        componentCell: {
+          PreventCell: {
+            ch: '预设组件',
+            cell: []
+          },
+          BaseCell:{
+            ch: '基本组件',
+            cell: []
+          },
+          AdvanceCell: {
+            ch: '高级组件',
+            cell: []
+          },
+          SelfCell: {
+            ch: '个人组件',
+            cell: []
+          },
+          NetCell: {
+            ch: '网络组件库',
+            cell: []
+          }
+        }
       }
     },
 
@@ -56,6 +82,12 @@
           'menu-item',
           this.isCollapsed ? 'collapsed-menu' : ''
         ]
+      }
+    },
+
+    methods: {
+      changeRightNavbar () {
+        this.showRightNavbar = !this.showRightNavbar;
       }
     }
   }

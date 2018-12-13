@@ -31,6 +31,11 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 Vue.use(iView)
 
+
+// import COMPONENT_CELL from './conf/COMPONENT_CELL_CONF.js';
+// Vue.prototype.$COMPONENT_CELL = COMPONENT_CELL;
+
+
 new Vue({
   router,
   store,
