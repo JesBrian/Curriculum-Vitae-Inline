@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-
     <PageFrame>
       <RouterView />
     </PageFrame>
 
+    <TempShow v-if="$store.state.showTemp" />
+    <ModalFrame v-if="$store.state.showModal" />
+    <TipsProcess v-if="$store.state.showTips" />
   </div>
 </template>
 
 <script>
   import PageFrame from './layout/PageFrame.vue'
+  import TempShow from './components/TempShow.vue'
+  import ModalFrame from './components/Modal/ModalFrame.vue'
+  import TipsProcess from './components/Tips/TipsProcess.vue'
 
   export default {
     components: {
-      PageFrame
+      PageFrame, TempShow, ModalFrame, TipsProcess
     }
   }
 </script>

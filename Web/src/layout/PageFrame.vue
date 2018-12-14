@@ -6,7 +6,7 @@
         <Menu theme="dark" width="auto" :class="menuitemClasses">
           <Submenu v-for="(categoryItem, index) in componentCell" :name="categoryItem.ch">
             <template slot="title">
-              <Icon type="ios-paper" />{{categoryItem.ch}}
+              <Icon :type="categoryItem.icon" />{{categoryItem.ch}}
             </template>
             <div :name="`${categoryItem}${index}`">
               <div v-if="categoryItem.cell.length" style="padding:12px 4px 4px;">
@@ -57,6 +57,7 @@
         componentCell: {
           PreventCell: {
             ch: '预设组件',
+            icon: 'md-list',
             cell: [
               {id: 1, name: '姓名'},
               {id: 2, name: '头像'},
@@ -69,6 +70,7 @@
           },
           BaseCell:{
             ch: '基本组件',
+            icon: 'ios-browsers',
             cell: [
               {id: 8, name: '文本'},
               {id: 9, name: '线条'},
@@ -80,6 +82,7 @@
           },
           AdvanceCell:{
             ch: '高级组件',
+            icon: 'logo-dropbox',
             cell: [
               {id: 14, name: '星星'},
               {id: 15, name: '心形'}
@@ -87,10 +90,12 @@
           },
           SelfCell: {
             ch: '个人组件',
+            icon: 'ios-briefcase',
             cell: []
           },
           NetCell: {
             ch: '网络组件库',
+            icon: 'md-code-download',
             cell: []
           }
         }
@@ -157,7 +162,10 @@
   .cell-item {
     width:33px; height:33px; margin:0 7px 8px; display:inline-block; border-radius:4px; background:#AAA; box-shadow:0 0 12px #282828;
     &:hover {
-      box-shadow:1px 1px 10px #000;
+      box-shadow:1px 1px 10px #000; cursor:pointer;
+    }
+    &:active {
+      cursor:crosshair;
     }
   }
 </style>
