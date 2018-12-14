@@ -4,13 +4,16 @@
     <Layout>
       <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
         <Menu theme="dark" width="auto" :class="menuitemClasses">
-          <Submenu v-for="(item, index) in componentCell" :name="item.ch">
+          <Submenu v-for="(categoryItem, index) in componentCell" :name="categoryItem.ch">
             <template slot="title">
-              <Icon type="ios-paper" />{{item.ch}}
+              <Icon type="ios-paper" />{{categoryItem.ch}}
             </template>
-            <div :name="`${item}${index}`">
-              <div>
-                <div v-for="n in 12" style="width:38px; height:38px; display:inline-block;">33</div>
+            <div :name="`${categoryItem}${index}`">
+              <div v-if="categoryItem.cell.length" style="padding:12px 4px 4px;">
+                <div v-for="cellItem in categoryItem.cell" class="cell-item">{{cellItem.id}}</div>
+              </div>
+              <div v-else>
+                请登录账号同步组件信息
               </div>
             </div>
           </Submenu>
@@ -54,15 +57,33 @@
         componentCell: {
           PreventCell: {
             ch: '预设组件',
-            cell: []
+            cell: [
+              {id: 1, name: '姓名'},
+              {id: 2, name: '头像'},
+              {id: 3, name: '手机'},
+              {id: 4, name: '邮箱'},
+              {id: 5, name: '地址'},
+              {id: 6, name: '职位'},
+              {id: 7, name: '薪酬'}
+            ]
           },
           BaseCell:{
             ch: '基本组件',
-            cell: []
+            cell: [
+              {id: 8, name: '文本'},
+              {id: 9, name: '线条'},
+              {id: 10, name: '图片'},
+              {id: 11, name: '三角形'},
+              {id: 12, name: '矩形'},
+              {id: 13, name: '圆形'}
+            ]
           },
-          AdvanceCell: {
+          AdvanceCell:{
             ch: '高级组件',
-            cell: []
+            cell: [
+              {id: 14, name: '星星'},
+              {id: 15, name: '心形'}
+            ]
           },
           SelfCell: {
             ch: '个人组件',
@@ -130,5 +151,13 @@
   .page-layout {
     padding-top:30px;
     position:relative;
+  }
+
+
+  .cell-item {
+    width:33px; height:33px; margin:0 7px 8px; display:inline-block; border-radius:4px; background:#AAA; box-shadow:0 0 12px #282828;
+    &:hover {
+      box-shadow:1px 1px 10px #000;
+    }
   }
 </style>
