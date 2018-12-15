@@ -1,5 +1,5 @@
 <template>
-  <Header>
+  <Header class="top-navbar">
     <Menu mode="horizontal" theme="dark" active-name="1">
       <div class="layout-logo">
         <router-link to="/" >
@@ -46,8 +46,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .ivu-layout-header {
+  .top-navbar {
     padding:0 28px 0 20px;
+    border-bottom:1px solid #444;
+    box-shadow:0 0 18px #000;
+    z-index:99;
   }
 
   .layout-logo {

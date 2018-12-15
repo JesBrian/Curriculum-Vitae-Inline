@@ -4,7 +4,7 @@
     <Layout>
 
       <!-- 左侧菜单 -->
-      <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
+      <Sider v-model="isCollapsed" breakpoint="md" collapsible collapsed-width="78" class="left-navbar">
         <LeftNavbar :is-collapsed="isCollapsed" />
         <div slot="trigger"></div>
       </Sider>
@@ -23,6 +23,8 @@
       <p>Some contents...</p>
       <p>Some contents...</p>
     </Drawer>
+
+    <div id="tempDragBox" style="top: 100%; left: 100%; position: fixed; z-index: -999;"></div>
   </Layout>
 </template>
 
@@ -85,6 +87,11 @@
     transition: font-size .2s ease .2s, transform .2s ease .2s;
     vertical-align: middle;
     font-size: 22px;
+  }
+
+  .left-navbar {
+    border-right:1px solid #555;
+    box-shadow:0 0 18px #000;
   }
 
   .page-layout {
