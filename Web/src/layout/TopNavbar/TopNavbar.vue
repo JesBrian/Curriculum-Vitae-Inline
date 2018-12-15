@@ -26,8 +26,8 @@
         </MenuItem>
       </div>
 
-      <div style="float:right;">
-        <img @click="changeRightNavbar" style="width:35px; height:35px; border-radius:50%; box-shadow:0 0 6px #282828;" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+      <div class="layout-user">
+        <img @click="changeRightNavbar" class="user" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
       </div>
     </Menu>
   </Header>
@@ -47,13 +47,20 @@
 
 <style lang="scss" scoped>
   .ivu-layout-header {
-    padding:0 28px 0 15px;
+    padding:0 28px 0 20px;
   }
 
   .layout-logo {
     float: left;
     .logo {
-      width: 35px; height: 35px; margin: 12px 0;
+      width: 28px; height: 28px; margin: 16px 0;
+    }
+  }
+
+  .layout-user {
+    float:right;
+    .user {
+      width:35px; height:35px; margin-top:13px; border-radius:50%; box-shadow:0 0 6px #282828;
     }
   }
 </style>
