@@ -2,6 +2,8 @@
   <Layout class="layout">
     <TopNavbar @changeRightNavbar="changeRightNavbar" />
     <Layout>
+
+      <!-- 左侧菜单 -->
       <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
         <Menu theme="dark" width="auto" :class="menuitemClasses">
           <Submenu v-for="(categoryItem, index) in componentCell" :name="categoryItem.ch">
@@ -10,7 +12,7 @@
             </template>
             <div :name="`${categoryItem}${index}`">
               <div v-if="categoryItem.cell.length" style="padding:12px 4px 4px;">
-                <div v-for="cellItem in categoryItem.cell" class="cell-item">{{cellItem.id}}</div>
+                <div v-for="cellItem in categoryItem.cell" class="cell-item" draggable="true">{{cellItem.id}}</div>
               </div>
               <div v-else>
                 请登录账号同步组件信息

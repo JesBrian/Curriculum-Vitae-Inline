@@ -1,7 +1,12 @@
 <template>
   <Header>
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <div class="layout-logo"></div>
+      <div class="layout-logo">
+        <router-link to="/" >
+          <img class="logo" src="../../../public/img/logo.png">
+        </router-link>
+      </div>
+
       <div class="layout-nav">
         <MenuItem name="1">
           <Icon type="ios-navigate"></Icon>
@@ -40,6 +45,15 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .ivu-layout-header {
+    padding:0 28px 0 15px;
+  }
 
+  .layout-logo {
+    float: left;
+    .logo {
+      width: 35px; height: 35px; margin: 12px 0;
+    }
+  }
 </style>
