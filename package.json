@@ -1,0 +1,19 @@
+{
+  "name": "curriculum-vitae-inline",
+  "version": "1.0.0",
+  "description": "inline cv web system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesBrian/Curriculum-Vitae-Inline.git"
+  },
+  "author": "JesBrian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesBrian/Curriculum-Vitae-Inline/issues"
+  },
+  "homepage": "https://github.com/JesBrian/Curriculum-Vitae-Inline#readme"
+}
