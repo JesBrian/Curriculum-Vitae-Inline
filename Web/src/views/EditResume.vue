@@ -1,17 +1,17 @@
 <template>
   <div>
-    <EditComtainer />
+    <EditContainer />
   </div>
 </template>
 
 <script>
-  import EditComtainer from '../components/EditComtainer.vue'
+  import EditContainer from '../components/EditContainer.vue'
 
   export default {
     name: 'EditResume',
 
     components: {
-      EditComtainer
+      EditContainer
     }
   }
 </script>

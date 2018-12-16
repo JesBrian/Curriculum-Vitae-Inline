@@ -31,6 +31,8 @@
 
     data () {
       return {
+        nowDragCellDom: null,
+        tempCellBoxDom: null,
         componentCell: {
           PreventCell: {
             ch: '预设组件',
@@ -76,16 +78,24 @@
     },
 
     mounted () {
-      this.$refs.cellComponentBox.$el.addEventListener('dragstart', (event) => {
+      this.nowDragCellDom = this.$refs.cellComponentBox.$el;
+      this.tempCellBoxDom = document.querySelector('#tempDragBox');
+
+      this.nowDragCellDom.addEventListener('dragstart', (event) => {
         let cellDom = event.target.cloneNode(true);
         cellDom.style.background = 'red';
-        document.querySelector('#tempDragBox').appendChild(cellDom);
+        cellDom.id = 'tempCellComponent';
+        this.tempCellBoxDom.appendChild(cellDom);
         event.dataTransfer.setDragImage(cellDom, 16, 16);
+      }, false);
+      this.nowDragCellDom.addEventListener('dragend', () => {
+        this.tempCellBoxDom.removeChild(this.tempCellBoxDom.childNodes[0]);
       }, false);
     },
 
     beforeDestroy() {
-      this.$refs.cellComponentBox.$el.removeEventListener('dragstart');
+      this.nowDragCellDom.removeEventListener('dragstart');
+      this.nowDragCellDom.removeEventListener('dragend');
     }
   }
 </script>
