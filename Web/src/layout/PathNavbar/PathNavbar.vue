@@ -1,8 +1,12 @@
 <template>
   <div>
     <Breadcrumb class="path-navbar">
-      <BreadcrumbItem>Home</BreadcrumbItem>
-      <BreadcrumbItem>Components</BreadcrumbItem>
+      <BreadcrumbItem>
+        <RouterLink to="/">Home</RouterLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <RouterLink to="/">Components</RouterLink>
+      </BreadcrumbItem>
       <BreadcrumbItem>Layout</BreadcrumbItem>
     </Breadcrumb>
 

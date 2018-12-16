@@ -97,7 +97,7 @@
       box-shadow:1px 1px 10px #000; cursor:pointer;
     }
     &:active {
-      cursor:crosshair;
+      cursor:move;
     }
   }
 </style>

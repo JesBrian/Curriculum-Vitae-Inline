@@ -1,17 +1,13 @@
 <template>
   <div class="home">
-    <ChooseTemplate />
+    <RouterLink to="ChooseTemplate">ChooseTemplate</RouterLink> /
+    <RouterLink to="ChooseFormat">ChooseFormat</RouterLink>
   </div>
 </template>
 
 <script>
-import ChooseTemplate from '../components/ChooseTemplate.vue'
 
 export default {
   name: 'home',
-
-  components: {
-    ChooseTemplate
-  }
 }
 </script>

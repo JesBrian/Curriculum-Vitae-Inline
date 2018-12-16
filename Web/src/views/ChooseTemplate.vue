@@ -1,12 +1,10 @@
 <template>
-  <div>
-    选择格式 - 名片/简历/海报等...
-  </div>
+  <div>选择模板</div>
 </template>
 
 <script>
   export default {
-    name: 'ChooseFormat'
+    name: "ChooseTemplate"
   }
 </script>
 

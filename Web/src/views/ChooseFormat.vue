@@ -1,12 +1,10 @@
 <template>
-  <div>
-    选择模板 - 初始模板
-  </div>
+  <div>选择格式</div>
 </template>
 
 <script>
   export default {
-    name: 'ChooseTemplate'
+    name: 'ChooseFormat'
   }
 </script>
 
