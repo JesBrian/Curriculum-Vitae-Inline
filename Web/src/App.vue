@@ -12,7 +12,7 @@
 
 <script>
   import PageFrame from './layout/PageFrame.vue'
-  import TempShow from './components/TempShow.vue'
+  import TempShow from './layout/TempShow.vue'
   import ModalFrame from './components/Modal/ModalFrame.vue'
   import TipsProcess from './components/Tips/TipsProcess.vue'
 

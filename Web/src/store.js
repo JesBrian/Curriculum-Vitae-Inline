@@ -15,13 +15,13 @@ export default new Vuex.Store({
       state.nowCell = cell;
     },
 
-    changeShowTemp (state, status = 'false') {
+    changeShowTemp (state, status = false) {
       state.showTemp = status;
     },
-    changeShowModal (state, status = 'false') {
+    changeShowModal (state, status = false) {
       state.showModal = status;
     },
-    changeShowTips (state, status = 'false') {
+    changeShowTips (state, status = false) {
       state.showTips = status;
     }
   },

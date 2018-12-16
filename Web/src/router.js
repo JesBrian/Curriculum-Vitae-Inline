@@ -10,17 +10,22 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import(/* webpackChunkName: "about" */ './views/Home.vue')
+      component: () => import('./views/Home.vue')
     },
     {
       path: '/ChooseTemplate',
       name: 'ChooseTemplate',
-      component: () => import(/* webpackChunkName: "about" */ './views/ChooseTemplate.vue')
+      component: () => import('./views/ChooseTemplate.vue')
     },
     {
       path: '/ChooseFormat',
       name: 'ChooseFormat',
-      component: () => import(/* webpackChunkName: "about" */ './views/ChooseFormat.vue')
+      component: () => import('./views/ChooseFormat.vue')
+    },
+    {
+      path: '/EditResume',
+      name: 'EditResume',
+      component: () => import('./views/EditResume.vue')
     },
   ]
 })
