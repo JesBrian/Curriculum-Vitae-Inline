@@ -1,7 +1,6 @@
 <template>
-  <div>
-    编辑容器
-  </div>
+  <Card shadow style="width:600px; height:888px; position:relative;">
+  </Card>
 </template>
 
 <script>

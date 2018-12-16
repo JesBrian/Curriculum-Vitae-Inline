@@ -9,10 +9,10 @@
         <div slot="trigger"></div>
       </Sider>
 
-      <Content class="page-layout" style="padding:50px 20px 20px;">
+      <Content class="page-layout" style="padding:50px 20px 18px;">
         <PathNavbar />
 
-        <Layout style="background:#fff; min-height:260px">
+        <Layout style="padding:20px; background:#EEE; overflow:auto;">
           <slot />
         </Layout>
       </Content>

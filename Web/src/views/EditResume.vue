@@ -1,12 +1,18 @@
 <template>
   <div>
-    编辑简历页面
+    <EditComtainer />
   </div>
 </template>
 
 <script>
+  import EditComtainer from '../components/EditComtainer.vue'
+
   export default {
-    name: 'EditResume'
+    name: 'EditResume',
+
+    components: {
+      EditComtainer
+    }
   }
 </script>
 
