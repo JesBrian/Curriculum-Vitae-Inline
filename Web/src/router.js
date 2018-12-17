@@ -22,7 +22,21 @@ export default new Router({
           name: 'ChooseFormat',
           component: () => import('./views/Home/SubPages/ChooseFormat.vue')
         },
+        {
+          path: '/Home/SelfWeb',
+          name: 'SelfWeb',
+          component: () => import('./views/Home/SubPages/SelfWeb.vue')
+        },
+        {
+          path: '/Home/UploadLocal',
+          name: 'UploadLocal',
+          component: () => import('./views/Home/SubPages/UploadLocal.vue')
+        },
       ]
+    },
+    {
+      path: '/Home',
+      redirect: '/'
     },
     {
       path: '/EditResume',
