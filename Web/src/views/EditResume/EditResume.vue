@@ -13,7 +13,7 @@
         <PathNavbar />
 
         <Layout style="padding:20px; background:#EEE; overflow:auto;">
-          <slot />
+          <EditContainer />
         </Layout>
       </Content>
     </Layout>
@@ -30,14 +30,15 @@
 
 <script>
   import TopNavbar from './TopNavbar/TopNavbar.vue'
-  import PathNavbar from './PathNavbar/PathNavbar.vue'
   import LeftNavbar from './LeftNavbar/LeftNavbar.vue'
+  import PathNavbar from './PathNavbar/PathNavbar.vue'
+  import EditContainer from '../../components/EditContainer.vue'
 
   export default {
-    name: 'PageFrame',
+    name: 'EditResume',
 
     components: {
-      TopNavbar, PathNavbar, LeftNavbar
+      TopNavbar, PathNavbar, LeftNavbar, EditContainer
     },
 
     data () {

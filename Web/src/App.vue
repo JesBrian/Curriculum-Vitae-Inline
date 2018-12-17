@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <PageFrame>
-      <RouterView />
-    </PageFrame>
+    <RouterView />
 
     <TempShow v-if="$store.state.showTemp" />
     <ModalFrame v-if="$store.state.showModal" />
@@ -11,14 +9,13 @@
 </template>
 
 <script>
-  import PageFrame from './layout/PageFrame.vue'
   import TempShow from './layout/TempShow.vue'
-  import ModalFrame from './components/Modal/ModalFrame.vue'
-  import TipsProcess from './components/Tips/TipsProcess.vue'
+  import ModalFrame from './layout/Modal/ModalFrame.vue'
+  import TipsProcess from './layout/Tips/TipsProcess.vue'
 
   export default {
     components: {
-      PageFrame, TempShow, ModalFrame, TipsProcess
+      TempShow, ModalFrame, TipsProcess
     }
   }
 </script>

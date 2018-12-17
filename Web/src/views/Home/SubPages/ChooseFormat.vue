@@ -1,5 +1,8 @@
 <template>
-  <div>选择格式</div>
+  <div>
+    选择格式
+    <RouterLink to="/Home/ChooseTemplate">进一步选择模板</RouterLink>
+  </div>
 </template>
 
 <script>

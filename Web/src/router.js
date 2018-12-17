@@ -10,22 +10,24 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import('./views/Home.vue')
-    },
-    {
-      path: '/ChooseTemplate',
-      name: 'ChooseTemplate',
-      component: () => import('./views/ChooseTemplate.vue')
-    },
-    {
-      path: '/ChooseFormat',
-      name: 'ChooseFormat',
-      component: () => import('./views/ChooseFormat.vue')
+      component: () => import('./views/Home/Home.vue'),
+      children: [
+        {
+          path: '/Home/ChooseTemplate',
+          name: 'ChooseTemplate',
+          component: () => import('./views/Home/SubPages/ChooseTemplate.vue')
+        },
+        {
+          path: '/Home/ChooseFormat',
+          name: 'ChooseFormat',
+          component: () => import('./views/Home/SubPages/ChooseFormat.vue')
+        },
+      ]
     },
     {
       path: '/EditResume',
       name: 'EditResume',
-      component: () => import('./views/EditResume.vue')
+      component: () => import('./views/EditResume/EditResume.vue')
     },
   ]
 })

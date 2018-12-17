@@ -3,7 +3,7 @@
     <Menu mode="horizontal" theme="dark" active-name="1">
       <div class="layout-logo">
         <router-link to="/" >
-          <img class="logo" src="../../../public/img/logo.png">
+          <img class="logo" src="../../../../public/img/logo.png">
         </router-link>
       </div>
 
