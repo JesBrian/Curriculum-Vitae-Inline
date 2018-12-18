@@ -9,19 +9,25 @@
       </div>
 
       <div class="home-header-user">
-        <img class="home-header-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+        <img @click="showLoginModal" class="home-header-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
       </div>
     </Header>
 
     <Layout>
       <Sider hide-trigger class="home-left-navbar">
         <div class="home-left-navbar-user">
-          <img class="home-left-navbar-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+          <img @click="showLoginModal" class="home-left-navbar-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
         </div>
 
-        <RouterLink to="/Home/ChooseFormat">新建</RouterLink> /
-        <RouterLink to="/Home/SelfWeb">网络</RouterLink> /
-        <RouterLink to="/Home/UploadLocal">本地</RouterLink>
+        <RouterLink to="/Home/ChooseFormat">
+          <Icon type="ios-copy" />新建
+        </RouterLink> /
+        <RouterLink to="/Home/SelfWeb">
+          <Icon type="md-planet" />网络
+        </RouterLink> /
+        <RouterLink to="/Home/UploadLocal">
+          <Icon type="logo-buffer" />本地
+        </RouterLink>
       </Sider>
 
       <Layout>
@@ -29,7 +35,10 @@
           <RouterView />
         </Content>
 
-        <Footer class="home-footer">Footer</Footer>
+        <Footer class="home-footer">
+          <Button icon="md-list" ghost style="margin:0 6px;">取消</Button>
+          <Button icon="md-list" ghost style="margin:0 6px;">保存</Button>
+        </Footer>
       </Layout>
     </Layout>
   </Layout>
@@ -38,6 +47,12 @@
 <script>
 export default {
   name: 'home',
+
+  methods: {
+    showLoginModal () {
+      this.$store.commit('changeShowModal', 'LoginModal');
+    }
+  }
 }
 </script>
 
@@ -73,7 +88,7 @@ export default {
     }
 
     &-footer {
-      height: 38px; padding: 0; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000;
+      height: 52px; padding: 0 13px 0 0; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000; text-align: right; line-height: 49px;
     }
   }
 </style>

@@ -25,7 +25,7 @@
 
     methods: {
       showTempCurriculumVitae () {
-        this.$store.commit('changeShowTemp', true);
+        this.$store.commit('changeShowModal', 'TempShowModal');
       },
 
       delNowCurriculumVitae () {
