@@ -1,5 +1,8 @@
 <template>
-  <div>选择模板</div>
+  <div>
+    选择模板
+    <RouterLink to="/EditResume">编辑简历</RouterLink>
+  </div>
 </template>
 
 <script>

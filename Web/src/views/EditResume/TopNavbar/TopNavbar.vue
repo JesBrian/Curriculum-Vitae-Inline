@@ -56,7 +56,7 @@
   .layout-logo {
     float: left;
     .logo {
-      width: 28px; height: 28px; margin: 16px 0;
+      width: 28px; height: 28px; margin: 16px 0 0;
     }
   }
 
