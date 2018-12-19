@@ -48,20 +48,20 @@
 <style lang="scss" scoped>
   .top-navbar {
     height: 60px;
-    padding:0 28px 0 20px;
+    padding:0 88px 0 68px;
+    position:relative;
     box-shadow:0 0 18px #000;
-    z-index:99;
   }
 
   .layout-logo {
-    float: left;
+    left:-48px; position:absolute;
     .logo {
       width: 28px; height: 28px; margin: 16px 0 0;
     }
   }
 
   .layout-user {
-    float:right;
+    top:0; right: -58px; position:absolute;
     .user {
       width:35px; height:35px; margin-top:13px; border-radius:50%; box-shadow:0 0 6px #282828;
     }

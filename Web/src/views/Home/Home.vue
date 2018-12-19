@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
   .home {
     &-header {
-      height: 60px; padding: 0 18px 0 38px; box-sizing: content-box; border-bottom:1px solid #555; box-shadow:0 0 18px #000; z-index:99;
+      height: 60px; padding: 0 18px 0 32px; box-sizing: content-box; border-bottom:1px solid #555; box-shadow:0 0 18px #000; z-index:99;
       &-logo {
         float: left;
         .logo {
