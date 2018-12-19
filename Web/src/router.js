@@ -13,14 +13,9 @@ export default new Router({
       component: () => import('./views/Home/Home.vue'),
       children: [
         {
-          path: '/Home/ChooseTemplate',
-          name: 'ChooseTemplate',
-          component: () => import('./views/Home/SubPages/ChooseTemplate.vue')
-        },
-        {
-          path: '/Home/ChooseFormat',
-          name: 'ChooseFormat',
-          component: () => import('./views/Home/SubPages/ChooseFormat.vue')
+          path: '/Home/CreateResume',
+          name: 'CreateResume',
+          component: () => import('./views/Home/SubPages/CreateResume.vue')
         },
         {
           path: '/Home/SelfWeb',

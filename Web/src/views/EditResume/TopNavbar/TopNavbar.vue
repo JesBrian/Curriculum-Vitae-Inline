@@ -47,8 +47,8 @@
 
 <style lang="scss" scoped>
   .top-navbar {
+    height: 60px;
     padding:0 28px 0 20px;
-    border-bottom:1px solid #444;
     box-shadow:0 0 18px #000;
     z-index:99;
   }

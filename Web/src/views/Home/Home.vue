@@ -19,14 +19,14 @@
           <img @click="showLoginModal" class="home-left-navbar-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
         </div>
 
-        <RouterLink to="/Home/ChooseFormat">
-          <Icon type="ios-copy" />新建
-        </RouterLink> /
-        <RouterLink to="/Home/SelfWeb">
-          <Icon type="md-planet" />网络
-        </RouterLink> /
-        <RouterLink to="/Home/UploadLocal">
-          <Icon type="logo-buffer" />本地
+        <RouterLink class="home-left-navbar-link" to="/Home/CreateResume">
+          <Icon type="ios-copy" class="icon" />新建
+        </RouterLink>
+        <RouterLink class="home-left-navbar-link" to="/Home/SelfWeb">
+          <Icon type="md-planet" class="icon" />网络
+        </RouterLink>
+        <RouterLink class="home-left-navbar-link" to="/Home/UploadLocal">
+          <Icon type="logo-buffer" class="icon" />本地
         </RouterLink>
       </Sider>
 
@@ -78,11 +78,24 @@ export default {
     }
 
     &-left-navbar {
-      width: 108px!important; min-width: 108px!important; max-width: 108px!important; padding: 8px 12px; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
+      width: 88px!important; min-width: 88px!important; max-width: 88px!important; padding: 8px 1px; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
       &-user {
         text-align: center;
         &-avatar {
           width: 43px; height: 43px; margin: 8px auto; border-radius: 50%; box-shadow:0.5px 0.5px 10px #282828;
+        }
+      }
+
+      &-link {
+        height: 88px; padding-top: 12px; display: block; border-top: 1px solid #454545; text-align: center; font-size: 18px; font-weight: 700; color: #BBB;
+        &:last-child {
+          border-bottom: 1px solid #454545;
+        }
+        &.router-link-exact-active {
+          background: #3F4757; color: #FFF;
+        }
+        > .icon {
+          display: block; font-size: 35px;
         }
       }
     }
