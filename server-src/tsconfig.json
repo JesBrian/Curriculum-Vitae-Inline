@@ -5,17 +5,17 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "server-src/dist",
+    "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
       "*": [
         "node_modules/*",
-        "server-src/types/*"
+        "../types/*"
       ]
     },
     "lib": ["es2017"]
   },
   "include": [
-    "server-src/**/*"
+    "./**/*"
   ]
 }

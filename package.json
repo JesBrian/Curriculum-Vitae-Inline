@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "node server-src/index.js",
-    "ts-server-dev": "tsc && node server-src/dist/index.js"
+    "ts-server-dev": "tsc -p server-src && node server-src/dist/index.js"
   },
   "repository": {
     "type": "git",
