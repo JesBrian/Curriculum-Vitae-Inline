@@ -1,4 +1,5 @@
 const Koa = require('koa');
+// @ts-ignore
 const registerRouter = require('./router/index.js');
 
 // const webpack = require('webpack');
@@ -11,9 +12,9 @@ const app = new Koa();
 // app.use(devMiddleware(compiler));
 // app.use(hotMiddleware(compiler));
 
-app.use(async (ctx, next) => {
-  ctx.body = 'Hello World';
-  next();
+app.use(async (ctx: any, next: any) => {
+    ctx.body = 'Hello World';
+    next();
 });
 
 app.use(registerRouter());
