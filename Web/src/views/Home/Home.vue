@@ -28,19 +28,22 @@
         <RouterLink class="home-left-navbar-link" to="/Home/UploadLocal">
           <Icon type="logo-buffer" class="icon" />本地
         </RouterLink>
+        <RouterLink class="home-left-navbar-link" to="/Home/SystemConfig">
+          <Icon type="md-build" class="icon" />配置
+        </RouterLink>
       </Sider>
 
-      <Layout>
+      <Layout style="padding-bottom: 53px;">
         <Content>
           <RouterView />
         </Content>
-
-        <Footer class="home-footer">
-          <Button icon="md-list" ghost style="margin:0 6px;">取消</Button>
-          <Button icon="md-list" ghost style="margin:0 6px;">上一步</Button>
-          <Button icon="md-list" ghost style="margin:0 6px;">下一步</Button>
-        </Footer>
       </Layout>
+
+      <Footer class="home-footer">
+        <Button icon="md-list" ghost style="margin:0 6px;">取消</Button>
+        <Button icon="md-list" ghost style="margin:0 6px;">上一步</Button>
+        <Button icon="md-list" ghost style="margin:0 6px;">下一步</Button>
+      </Footer>
     </Layout>
   </Layout>
 </template>
@@ -79,7 +82,7 @@ export default {
     }
 
     &-left-navbar {
-      width: 88px!important; min-width: 88px!important; max-width: 88px!important; padding: 8px 1px; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
+      width: 88px!important; min-width: 88px!important; max-width: 88px!important; padding: 8px 0 8px 1px; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
       &-user {
         text-align: center;
         &-avatar {
@@ -93,7 +96,7 @@ export default {
           border-bottom: 1px solid #454545;
         }
         &.router-link-exact-active {
-          background: #3F4757; color: #FFF;
+          background: #363B4A; color: #FFF; box-shadow: 4px 0 3px -2px #333;
         }
         > .icon {
           display: block; font-size: 35px;
@@ -102,7 +105,7 @@ export default {
     }
 
     &-footer {
-      height: 51px; padding: 0 13px 0 0; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000; text-align: right; line-height: 49px;
+      width: 100%; height: 51px; left: 0; bottom: 0; padding: 0 13px 0 0; position: absolute; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000; text-align: right; line-height: 49px;
     }
   }
 </style>

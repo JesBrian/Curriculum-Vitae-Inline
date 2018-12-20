@@ -27,6 +27,16 @@ export default new Router({
           name: 'UploadLocal',
           component: () => import('./views/Home/SubPages/UploadLocal.vue')
         },
+        {
+          path: '/Home/UserSetting',
+          name: 'UserSetting',
+          component: () => import('./views/Home/SubPages/UserSetting/UserSetting.vue')
+        },
+        {
+          path: '/Home/SystemConfig',
+          name: 'SystemConfig',
+          component: () => import('./views/Home/SubPages/SystemConfig/SystemConfig.vue')
+        },
       ]
     },
     {

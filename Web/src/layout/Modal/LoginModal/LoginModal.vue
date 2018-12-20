@@ -1,7 +1,7 @@
 <template>
-  <div>
-    这是登录模态框
-  </div>
+  <Card shadow style="width: 628px; height: 408px;">
+    <div style="width: 100%; height: 100%; background: lightblue;">This is Login Modal !</div>
+  </Card>
 </template>
 
 <script>

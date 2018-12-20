@@ -1,6 +1,6 @@
 <template>
   <div style="width:100%; height:100%; top:0; left:0; position:fixed; z-index:999;">
-    <Component :is="$store.state.showModal" />
+    <Component :is="$store.state.showModal" style="top: 50%; left: 50%; transform: translate(-50%, -50%); position:absolute; z-index:5;" />
 
     <BlackCover @click.native="closeModal" />
   </div>
