@@ -37,7 +37,8 @@
 
         <Footer class="home-footer">
           <Button icon="md-list" ghost style="margin:0 6px;">取消</Button>
-          <Button icon="md-list" ghost style="margin:0 6px;">保存</Button>
+          <Button icon="md-list" ghost style="margin:0 6px;">上一步</Button>
+          <Button icon="md-list" ghost style="margin:0 6px;">下一步</Button>
         </Footer>
       </Layout>
     </Layout>
@@ -101,7 +102,7 @@ export default {
     }
 
     &-footer {
-      height: 52px; padding: 0 13px 0 0; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000; text-align: right; line-height: 49px;
+      height: 51px; padding: 0 13px 0 0; background: #515a6e; border-top:1px solid #555; box-shadow:0 0 18px #000; text-align: right; line-height: 49px;
     }
   }
 </style>
