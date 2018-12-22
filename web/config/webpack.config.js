@@ -1,8 +1,9 @@
+const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
   entry: {
-    index: "./main.js"  //webpack的入口文件，指定将哪个文件进行打包
+    index: './src/main.js'  //webpack的入口文件，指定将哪个文件进行打包
   },
   module: {
     rules: [{
