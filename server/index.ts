@@ -13,7 +13,7 @@ const app = new Koa();
 // app.use(hotMiddleware(compiler));
 
 app.use(async (ctx: any, next: any) => {
-    ctx.body = 'Hello World';
+    ctx.body = 'Hello World 686';
     next();
 });
 

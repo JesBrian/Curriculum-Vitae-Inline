@@ -6,7 +6,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 router.get('/f-index', async (ctx: { body: string; }, next: any) => {
-  ctx.body += 'f-index888';
+  ctx.body += 'f-index8';
 });
 
 module.exports = router;
