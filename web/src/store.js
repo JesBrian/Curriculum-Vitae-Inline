@@ -6,8 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     nowCell: null,
-    showTemp: false,
-    showModal: false,
+    showModal: '',
     showTips: false,
   },
   mutations: {
@@ -15,13 +14,10 @@ export default new Vuex.Store({
       state.nowCell = cell;
     },
 
-    changeShowTemp (state, status = 'false') {
-      state.showTemp = status;
+    changeShowModal (state, modalType = '') {
+      state.showModal = modalType;
     },
-    changeShowModal (state, status = 'false') {
-      state.showModal = status;
-    },
-    changeShowTips (state, status = 'false') {
+    changeShowTips (state, status = false) {
       state.showTips = status;
     }
   },

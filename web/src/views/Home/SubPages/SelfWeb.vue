@@ -1,10 +1,10 @@
 <template>
-  <div>选择模板</div>
+  <div>账户网络储存</div>
 </template>
 
 <script>
   export default {
-    name: "ChooseTemplate"
+    name: 'SelfWeb'
   }
 </script>
 
