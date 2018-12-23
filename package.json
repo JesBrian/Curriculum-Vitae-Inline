@@ -4,7 +4,7 @@
   "description": "inline cv web system",
   "main": "index.js",
   "scripts": {
-    "web-dev": "webpack-dev-server --hot --config ./web/config/webpack.dev.config.js",
+    "web-dev": "webpack-dev-server --hot --config ./web/config/webpack.dev.js",
     "server-dev": "tsc -p server && node server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
     "server-build": "tsc -p server"
@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/JesBrian/Curriculum-Vitae-Inline#readme",
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@types/node": "^10.12.18",
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
+    "babel-loader": "^7.1.5",
+    "babel-preset-latest": "^6.24.1",
     "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
@@ -31,6 +33,7 @@
     "style-loader": "^0.21.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2",
+    "url-loader": "^1.1.2",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.21",
     "webpack": "^4.28.1",
@@ -50,7 +53,7 @@
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.21",
     "vue-draggable-resizable": "^1.7.5",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.0.2",
     "vuex": "^3.0.1"
   }
 }

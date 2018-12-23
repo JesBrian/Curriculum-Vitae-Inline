@@ -10,17 +10,13 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import(/* webpackChunkName: "about" */ './views/Home.vue')
+      component: (resolve) => require(['./views/Home.vue'], resolve)
     },
     {
       path: '/ChooseTemplate',
       name: 'ChooseTemplate',
-      component: () => import(/* webpackChunkName: "about" */ './views/ChooseTemplate.vue')
-    },
-    {
-      path: '/ChooseFormat',
-      name: 'ChooseFormat',
-      component: () => import(/* webpackChunkName: "about" */ './views/ChooseFormat.vue')
+      // component: () => import('./views/ChooseTemplate.vue')
+      component: (resolve) => require(['./views/ChooseTemplate.vue'], resolve)
     },
   ]
 })
