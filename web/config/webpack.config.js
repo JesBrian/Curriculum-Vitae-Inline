@@ -15,10 +15,13 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loaders: ["style-loader", "css-loader"]
+      loaders: ['style-loader', 'css-loader']
+    }, {
+      test: /\.scss$/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader']
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
+      loader: 'url-loader?name=img/[name].[ext]',
       options: {
         limit: 10000,
         // name: utils.assetsPath('img/[name].[ext]')
@@ -32,7 +35,7 @@ module.exports = {
       }
     }, {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      loader: 'url-loader',
+      loader: 'url-loader?name=fonts/[name].[ext]',
       options: {
         limit: 10000,
         // name: utils.assetsPath('fonts/[name].[ext]')
