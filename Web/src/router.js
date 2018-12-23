@@ -4,38 +4,38 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  mode: 'hash', // history
+
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: () => import('./views/Home/Home.vue'),
+      component: resolve => require(['./views/Home/Home.vue'], resolve),
       children: [
         {
           path: '/Home/CreateResume',
           name: 'CreateResume',
-          component: () => import('./views/Home/SubPages/CreateResume.vue')
+          component: resolve => require(['./views/Home/SubPages/CreateResume.vue'], resolve)
         },
         {
           path: '/Home/SelfWeb',
           name: 'SelfWeb',
-          component: () => import('./views/Home/SubPages/SelfWeb.vue')
+          component: resolve => require(['./views/Home/SubPages/SelfWeb.vue'], resolve)
         },
         {
           path: '/Home/UploadLocal',
           name: 'UploadLocal',
-          component: () => import('./views/Home/SubPages/UploadLocal.vue')
+          component: resolve => require(['./views/Home/SubPages/UploadLocal.vue'], resolve)
         },
         {
           path: '/Home/UserSetting',
           name: 'UserSetting',
-          component: () => import('./views/Home/SubPages/UserSetting/UserSetting.vue')
+          component: resolve => require(['./views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
         },
         {
           path: '/Home/SystemConfig',
           name: 'SystemConfig',
-          component: () => import('./views/Home/SubPages/SystemConfig/SystemConfig.vue')
+          component: resolve => require(['./views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
         },
       ]
     },
@@ -46,7 +46,7 @@ export default new Router({
     {
       path: '/EditResume',
       name: 'EditResume',
-      component: () => import('./views/EditResume/EditResume.vue')
+      component: resolve => require(['./views/EditResume/EditResume.vue'], resolve)
     },
   ]
 })
