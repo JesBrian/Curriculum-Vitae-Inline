@@ -4,7 +4,7 @@
   "description": "inline cv web system",
   "main": "index.js",
   "scripts": {
-    "web-dev": "webpack-dev-server --hot --config ./web/config/webpack.dev.js",
+    "web-dev": "webpack-dev-server --config ./web/config/webpack.dev.js",
     "web-build": "webpack --config ./web/config/webpack.prod.js",
     "server-dev": "tsc -p server && node server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
@@ -41,7 +41,7 @@
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.21",
-    "webpack": "^4.28.1",
+    "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.3"
