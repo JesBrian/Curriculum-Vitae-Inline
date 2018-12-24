@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <RouterView />
-
     <ModalFrame v-if="$store.state.showModal !== ''" />
     <TipsProcess v-if="$store.state.showTips" />
   </div>

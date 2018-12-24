@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "web-dev": "webpack-dev-server --hot --config ./web/config/webpack.dev.js",
+    "web-build": "webpack --config ./web/config/webpack.prod.js",
     "server-dev": "tsc -p server && node server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
     "server-build": "tsc -p server"

@@ -18,4 +18,6 @@ app.use(async (ctx: any, next: any) => {
 });
 
 app.use(registerRouter());
-app.listen(3000);
+app.listen(3000, () => {
+    console.log('Koa2 API 服务 dev 启动完成 ！');
+});
