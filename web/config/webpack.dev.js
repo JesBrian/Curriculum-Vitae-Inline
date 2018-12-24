@@ -11,9 +11,9 @@ module.exports = merge(common, {
   devServer: { // webpack-server的配置
     host: 'localhost', // 服务显示的地址 localhsot  127.0.0.1  本机的ip地址都可以
     port: 8080, // 服务的端口号
-    // open: true, // 服务启动是否打开浏览器，打开的都是默认的浏览器
-    contentBase: './web/src', // 服务器加载的目录，会自动找到该目录下的index.html文件进行页面展示
+    open: true, // 服务启动是否打开浏览器，打开的都是默认的浏览器
     inline: true, // 页面刷新方式
+    contentBase: '/web/src', // 服务器加载的目录，会自动找到该目录下的index.html文件进行页面展示
   },
   plugins: [
     new HtmlWebpackPlugin({

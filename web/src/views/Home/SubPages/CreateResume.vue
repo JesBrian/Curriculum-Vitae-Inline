@@ -11,7 +11,7 @@
           </Card>
           <span @dblclick="selfEdit">自定义格式</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempFormat(n + 1)" class="resume-cell" :class="{active: tempFormat === n+1}">
+        <div v-for="n in 10" @click="chooseTempFormat(n + 1)" :key="n + '12'" class="resume-cell" :class="{active: tempFormat === n+1}">
           <Card @dblclick.native="nextStep" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -32,7 +32,7 @@
           </Card>
           <span @dblclick="selfEdit">自定义模板</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" class="resume-cell" :class="{active: tempTemplate === n+1}">
+        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" :key="n + '15'" class="resume-cell" :class="{active: tempTemplate === n+1}">
           <Card @dblclick.native="nextStep" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
