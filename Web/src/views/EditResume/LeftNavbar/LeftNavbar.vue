@@ -6,7 +6,7 @@
       </template>
       <div :name="`${categoryItem}${index}`">
         <div v-if="categoryItem.cell.length" style="padding:13px 10px 5px;">
-          <Tooltip v-for="(cellItem, cellItemIndex) in categoryItem.cell" :key="cellItemIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
+          <Tooltip v-for="cellItem in categoryItem.cell" :key="index + '05'" :content="cellItem.name" theme="light" placement="right-start">
             <div class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
