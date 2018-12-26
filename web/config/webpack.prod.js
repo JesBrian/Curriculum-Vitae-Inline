@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
   output: {
-    path: __dirname + "/dist",
-    filename: "[name].js" // 打包后输出的文件名，[name]就是使用入口文件的key做名称
+    path: __dirname + '/../dist',
+    filename: '[name].js' // 打包后输出的文件名，[name]就是使用入口文件的key做名称
   },
   plugins: [
     new HtmlWebpackPlugin({
