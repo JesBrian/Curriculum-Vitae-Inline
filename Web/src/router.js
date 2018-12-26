@@ -15,7 +15,7 @@ export default new Router({
         {
           path: '/Home/CreateResume',
           name: 'CreateResume',
-          component: resolve => require(['./views/Home/SubPages/CreateResume.vue'], resolve)
+          component: resolve => require(['./views/Home/SubPages/CreateResume/CreateResume.vue'], resolve)
         },
         {
           path: '/Home/SelfWeb',
