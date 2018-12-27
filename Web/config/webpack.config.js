@@ -1,4 +1,5 @@
 const { VueLoaderPlugin } = require('vue-loader');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -14,10 +15,36 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader']
+      use: ExtractTextPlugin.extract({
+        fallback: {
+          loader: 'style-loader',
+          options: {
+            singleton: true // 表示将页面上的所有css都放到一个style标签内
+          }
+        },
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        }]
+      })
     }, {
       test: /\.scss$/,
-      loaders: ['style-loader', 'css-loader', 'sass-loader']
+      use: ExtractTextPlugin.extract({
+        fallback: {
+          loader: 'style-loader',
+          options: {
+            singleton: true // 表示将页面上的所有css都放到一个style标签内
+          }
+        },
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        }  , 'sass-loader']
+      })
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader?name=img/[name].[ext]',
@@ -43,6 +70,13 @@ module.exports = {
   },
   plugins: [
     // 添加VueLoaderPlugin，以响应vue-loader
-    new VueLoaderPlugin()
-  ]
+    new VueLoaderPlugin(),
+    new ExtractTextPlugin('index.css')
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    },
+    runtimeChunk: true
+  }
 };

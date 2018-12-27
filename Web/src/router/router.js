@@ -10,32 +10,32 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: resolve => require(['./views/Home/Home.vue'], resolve),
+      component: resolve => require(['../views/Home/Home.vue'], resolve),
       children: [
         {
           path: '/Home/CreateResume',
           name: 'CreateResume',
-          component: resolve => require(['./views/Home/SubPages/CreateResume/CreateResume.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/CreateResume/CreateResume.vue'], resolve)
         },
         {
           path: '/Home/SelfWeb',
           name: 'SelfWeb',
-          component: resolve => require(['./views/Home/SubPages/SelfWeb.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/SelfWeb.vue'], resolve)
         },
         {
           path: '/Home/UploadLocal',
           name: 'UploadLocal',
-          component: resolve => require(['./views/Home/SubPages/UploadLocal.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/UploadLocal.vue'], resolve)
         },
         {
           path: '/Home/UserSetting',
           name: 'UserSetting',
-          component: resolve => require(['./views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
         },
         {
           path: '/Home/SystemConfig',
           name: 'SystemConfig',
-          component: resolve => require(['./views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
         },
       ]
     },
@@ -46,7 +46,7 @@ export default new Router({
     {
       path: '/EditResume',
       name: 'EditResume',
-      component: resolve => require(['./views/EditResume/EditResume.vue'], resolve)
+      component: resolve => require(['../views/EditResume/EditResume.vue'], resolve)
     },
   ]
 })
