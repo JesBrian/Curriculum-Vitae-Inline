@@ -1,5 +1,4 @@
 const { VueLoaderPlugin } = require('vue-loader');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -15,36 +14,10 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: {
-          loader: 'style-loader',
-          options: {
-            singleton: true // 表示将页面上的所有css都放到一个style标签内
-          }
-        },
-        use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
-          }
-        }]
-      })
+      loaders: ['style-loader', 'css-loader']
     }, {
       test: /\.scss$/,
-      use: ExtractTextPlugin.extract({
-        fallback: {
-          loader: 'style-loader',
-          options: {
-            singleton: true // 表示将页面上的所有css都放到一个style标签内
-          }
-        },
-        use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
-          }
-        }  , 'sass-loader']
-      })
+      loaders: ['style-loader', 'css-loader', 'sass-loader']
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader?name=img/[name].[ext]',
@@ -70,8 +43,7 @@ module.exports = {
   },
   plugins: [
     // 添加VueLoaderPlugin，以响应vue-loader
-    new VueLoaderPlugin(),
-    new ExtractTextPlugin('index.css')
+    new VueLoaderPlugin()
   ],
   optimization: {
     splitChunks: {
