@@ -44,5 +44,11 @@ module.exports = {
   plugins: [
     // 添加VueLoaderPlugin，以响应vue-loader
     new VueLoaderPlugin()
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    },
+    runtimeChunk: true
+  }
 };
