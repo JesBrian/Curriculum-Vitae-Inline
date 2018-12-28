@@ -3,37 +3,37 @@
     <div v-if="step === 0">
       选择格式
       <div>
-        <div @click="chooseTempFormat(0)" class="resume-cell" :class="{active: tempFormat === 0}">
-          <Card @dblclick.native="selfEdit" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
+        <div @click="chooseTempFormat(0)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempFormat === 0}">
+          <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span @dblclick="selfEdit">自定义格式</span>
+          <span>自定义格式</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempFormat(n + 1)" :key="n + '12'" class="resume-cell" :class="{active: tempFormat === n+1}">
-          <Card @dblclick.native="nextStep" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
+        <div v-for="n in 10" @click="chooseTempFormat(n + 1)" @dblclick="nextStep" :key="n + '12'" class="resume-cell" :class="{active: tempFormat === n+1}">
+          <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span @dblclick="nextStep">选择模板</span>
+          <span>选择模板</span>
         </div>
       </div>
     </div>
     <div v-else>
       选择模板
       <div>
-        <div @click="chooseTempTemplate(0)" class="resume-cell" :class="{active: tempTemplate === 0}">
-          <Card @dblclick.native="selfEdit" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
+        <div @click="chooseTempTemplate(0)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempTemplate === 0}">
+          <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
           <span @dblclick="selfEdit">自定义模板</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" :key="n + '15'" class="resume-cell" :class="{active: tempTemplate === n+1}">
-          <Card @dblclick.native="nextStep" shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
+        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" @dblclick="nextStep" :key="n + '15'" class="resume-cell" :class="{active: tempTemplate === n+1}">
+          <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
@@ -80,7 +80,7 @@
 <style lang="scss" scoped>
   .resume-cell {
     width: 180px; height: 195px; margin: 0 0 28px 38px; padding: 5px; display: inline-block;
-    text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px;
+    text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
