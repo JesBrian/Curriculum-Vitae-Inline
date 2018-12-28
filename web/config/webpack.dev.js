@@ -15,6 +15,9 @@ module.exports = merge(common, {
     inline: true, // 页面刷新方式
     contentBase: '/web/src/index.html', // 服务器加载的目录，会自动找到该目录下的index.html文件进行页面展示
     disableHostCheck: true,
+    overlay: {
+      errors: true//当webpack编译过程中出现任何错误,让它显示在网页上面
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
