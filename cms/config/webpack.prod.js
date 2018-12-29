@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
@@ -9,6 +10,12 @@ module.exports = merge(common, {
     filename: '[name].js' // 打包后输出的文件名，[name]就是使用入口文件的key做名称
   },
   plugins: [
+    new CleanWebpackPlugin(
+      [__dirname + '/../dist'], {
+        root: '/',
+        verbose: true
+      }
+    ),
     new HtmlWebpackPlugin({
       title: '在线简历制作系统管理后台',
       template: './cms/src/index.html',

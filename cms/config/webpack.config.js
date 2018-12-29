@@ -1,5 +1,6 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const Jarvis = require("webpack-jarvis");
 
 module.exports = {
   entry: {
@@ -44,7 +45,10 @@ module.exports = {
   },
   plugins: [
     // 添加VueLoaderPlugin，以响应vue-loader
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new Jarvis({
+      port: 9191 // optional: set a port
+    })
   ],
   // optimization: {
   //   splitChunks: {
