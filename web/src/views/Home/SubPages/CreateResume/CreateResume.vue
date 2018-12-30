@@ -24,13 +24,21 @@
     <div v-else>
       选择模板
       <div>
-        <div @click="chooseTempTemplate(0)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempTemplate === 0}">
+        <div @click="chooseTempTemplate(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempTemplate === -1}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span @dblclick="selfEdit">自定义模板</span>
+          <span>自定义模板</span>
+        </div>
+        <div @click="chooseTempTemplate(0)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: tempTemplate === 0}">
+          <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
+            <p>Content of card</p>
+            <p>Content of card</p>
+            <p>Content of card</p>
+          </Card>
+          <span>网络模板</span>
         </div>
         <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" @dblclick="nextStep" :key="n + '15'" class="resume-cell" :class="{active: tempTemplate === n+1}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
@@ -38,7 +46,7 @@
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span @dblclick="nextStep">编辑</span>
+          <span>编辑</span>
         </div>
       </div>
     </div>
@@ -60,6 +68,10 @@
     methods: {
       selfEdit () {
         alert('打钱或许就会开通这功能了');
+      },
+
+      selectNetTemplate () {
+        this.$store.commit('changeShowModal', 'NetTemplateModal');
       },
 
       chooseTempFormat (n) {
