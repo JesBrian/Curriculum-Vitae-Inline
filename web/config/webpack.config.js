@@ -1,5 +1,5 @@
 const { VueLoaderPlugin } = require('vue-loader');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Jarvis = require("webpack-jarvis");
 
 module.exports = {
@@ -16,10 +16,16 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader']
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
     }, {
       test: /\.scss$/,
-      loaders: ['style-loader', 'css-loader', 'sass-loader']
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader', 'sass-loader'
+      ]
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader?name=img/[name].[ext]',
@@ -46,6 +52,10 @@ module.exports = {
   plugins: [
     // 添加VueLoaderPlugin，以响应vue-loader
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash:8].css',
+      chunkFilename: '[id].css'
+    }),
     new Jarvis({
       port: 8181 // optional: set a port
     })
