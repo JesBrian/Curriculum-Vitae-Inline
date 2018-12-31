@@ -112,7 +112,7 @@ export const getRelativeTime = timeStamp => {
   // 传入的时间戳可以是数值或字符串类型，这里统一转为数值类型
   timeStamp = Number(timeStamp)
   // 获取当前时间时间戳
-  const currentTime = Math.floor(Date.parse(new Date()) / 1000)
+  const currentTime = Math.floor(Date.now() / 1000)
   // 判断传入时间戳是否早于当前时间戳
   const IS_EARLY = isEarly(timeStamp, currentTime)
   // 获取两个时间戳差值

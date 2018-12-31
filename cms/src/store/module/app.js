@@ -99,7 +99,7 @@ export default {
       const { user: { token, userId, userName } } = rootState
       let data = {
         ...info,
-        time: Date.parse(new Date()),
+        time: Date.now(),
         token,
         userId,
         userName

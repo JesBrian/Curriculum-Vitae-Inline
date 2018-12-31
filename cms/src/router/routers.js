@@ -24,7 +24,7 @@ export default [
       title: 'Login - 登录',
       hideInMenu: true
     },
-    component: () => import('@/view/login/login.vue')
+    component: resolve => require(['@/view/login/login.vue'], resolve)
   },
   {
     path: '/',
@@ -45,7 +45,7 @@ export default [
           notCache: true,
           icon: 'md-home'
         },
-        component: () => import('@/view/single-page/home')
+        component: resolve => require(['@/view/single-page/home'], resolve)
       }
     ]
   },
@@ -74,7 +74,7 @@ export default [
           icon: 'md-funnel',
           title: '二级-1'
         },
-        component: () => import('@/view/multilevel/level-2-1.vue')
+        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
       },
       {
         path: 'level_2_2',
@@ -94,7 +94,7 @@ export default [
               icon: 'md-funnel',
               title: '三级'
             },
-            component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
+            component: resolve => require(['@/view/multilevel/level-2-2/level-3-1.vue'], resolve)
           }
         ]
       },
@@ -105,7 +105,7 @@ export default [
           icon: 'md-funnel',
           title: '二级-3'
         },
-        component: () => import('@/view/multilevel/level-2-3.vue')
+        component: resolve => require(['@/view/multilevel/level-2-3.vue'], resolve)
       }
     ]
   },
@@ -115,7 +115,7 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/401.vue')
+    component: resolve => require(['@/view/error-page/401.vue'], resolve)
   },
   {
     path: '/500',
@@ -123,7 +123,7 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/500.vue')
+    component: resolve => require(['@/view/error-page/500.vue'], resolve)
   },
   {
     path: '*',
@@ -131,6 +131,6 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/404.vue')
+    component: resolve => require(['@/view/error-page/404.vue'], resolve)
   }
 ]

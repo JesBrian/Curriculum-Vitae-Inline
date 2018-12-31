@@ -21,6 +21,9 @@ module.exports = merge(common, {
       template: './web/src/index.html',
       filename: 'index.html',
       hash: true,
+      minify: {
+        collapseWhitespace: true //折叠空白区域 也就是压缩代码
+      },
       chunks: ['index'],
       chunksSortMode: 'manual' // 排序方式
     })

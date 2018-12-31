@@ -1,6 +1,12 @@
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Jarvis = require("webpack-jarvis");
+
+const path = require('path');
+
+const resolve = dir => {
+  return path.join(__dirname, dir)
+};
 
 module.exports = {
   entry: {
@@ -12,7 +18,12 @@ module.exports = {
       use: ['vue-loader']
     }, {
       test: /\.js$/,
-      use: ['babel-loader'],
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      },
       exclude: /node_modules/
     }, {
       test: /\.css$/,
@@ -50,6 +61,14 @@ module.exports = {
       port: 9191 // optional: set a port
     })
   ],
+  resolve: {
+    //配置别名，在项目中可缩减引用路径
+    alias: {
+      '@': resolve('../src'),
+      '_c': resolve('../src/components')
+    },
+    extensions: [' ', '.js', '.json', '.vue', '.scss', '.css']
+  },
   // optimization: {
   //   splitChunks: {
   //     chunks: "all"
