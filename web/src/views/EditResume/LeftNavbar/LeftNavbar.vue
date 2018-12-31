@@ -1,12 +1,12 @@
 <template>
   <Menu ref="cellComponentBox" theme="dark" width="auto" :class="menuitemClasses">
-    <Submenu v-for="(categoryItem, index) in componentCell" :key="index + '12'" :name="categoryItem.ch">
+    <Submenu v-for="(categoryItem, categoryIndex) in componentCell" :key="categoryIndex + '12'" :name="categoryItem.ch">
       <template slot="title">
         <Icon :type="categoryItem.icon" />{{categoryItem.ch}}
       </template>
-      <div :name="`${categoryItem}${index}`">
+      <div :name="`${categoryItem}${categoryIndex}`">
         <div v-if="categoryItem.cell.length" style="padding:13px 10px 5px;">
-          <Tooltip v-for="cellItem in categoryItem.cell" :key="index + '05'" :content="cellItem.name" theme="light" placement="right-start">
+          <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
             <div class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>

@@ -20,12 +20,17 @@ export default new Router({
         {
           path: '/Home/SelfWeb',
           name: 'SelfWeb',
-          component: resolve => require(['../views/Home/SubPages/SelfWeb.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/SelfWeb/SelfWeb.vue'], resolve)
         },
         {
           path: '/Home/UploadLocal',
           name: 'UploadLocal',
-          component: resolve => require(['../views/Home/SubPages/UploadLocal.vue'], resolve)
+          component: resolve => require(['../views/Home/SubPages/UploadLocal/UploadLocal.vue'], resolve)
+        },
+        {
+          path: '/Home/CellManagement',
+          name: 'UploadLocal',
+          component: resolve => require(['../views/Home/SubPages/CellManagement/CellManagement.vue'], resolve)
         },
         {
           path: '/Home/UserSetting',
