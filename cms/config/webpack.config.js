@@ -1,10 +1,16 @@
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Jarvis = require("webpack-jarvis");
 
+const path = require('path');
+
+const resolve = dir => {
+  return path.join(__dirname, dir)
+};
+
 module.exports = {
   entry: {
-    index: './web/src/main.js'  //webpack的入口文件，指定将哪个文件进行打包
+    index: './cms/src/main.js'  //webpack的入口文件，指定将哪个文件进行打包
   },
   module: {
     rules: [{
@@ -12,14 +18,19 @@ module.exports = {
       use: ['vue-loader']
     }, {
       test: /\.js$/,
-      use: ['babel-loader'],
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      },
       exclude: /node_modules/
     }, {
       test: /\.css$/,
       loaders: ['style-loader', 'css-loader']
     }, {
-      test: /\.scss$/,
-      loaders: ['style-loader', 'css-loader', 'sass-loader']
+      test: /\.less$/,
+      loaders: ['style-loader', 'css-loader', 'less-loader']
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader?name=img/[name].[ext]',
@@ -47,9 +58,17 @@ module.exports = {
     // 添加VueLoaderPlugin，以响应vue-loader
     new VueLoaderPlugin(),
     new Jarvis({
-      port: 8181 // optional: set a port
+      port: 9191 // optional: set a port
     })
   ],
+  resolve: {
+    //配置别名，在项目中可缩减引用路径
+    alias: {
+      '@': resolve('../src'),
+      '_c': resolve('../src/components')
+    },
+    extensions: [' ', '.js', '.json', '.vue', '.scss', '.css']
+  },
   // optimization: {
   //   splitChunks: {
   //     chunks: "all"

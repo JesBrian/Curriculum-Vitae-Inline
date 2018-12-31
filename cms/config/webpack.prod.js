@@ -17,13 +17,10 @@ module.exports = merge(common, {
       }
     ),
     new HtmlWebpackPlugin({
-      title: '在线简历制作',
-      template: './web/src/index.html',
+      title: '在线简历制作系统管理后台',
+      template: './cms/src/index.html',
       filename: 'index.html',
       hash: true,
-      minify: {
-        collapseWhitespace: true //折叠空白区域 也就是压缩代码
-      },
       chunks: ['index'],
       chunksSortMode: 'manual' // 排序方式
     })
