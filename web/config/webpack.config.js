@@ -1,4 +1,7 @@
+const glob = require('glob');
+const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
+const PurifyCssPlugin = require('purifycss-webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Jarvis = require("webpack-jarvis");
 
@@ -55,6 +58,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[hash:8].css',
       chunkFilename: '[id].css'
+    }),
+    new PurifyCssPlugin({
+      paths: glob.sync(path.join(__dirname, '../src/*.html')),
     }),
     new Jarvis({
       port: 8181 // optional: set a port
