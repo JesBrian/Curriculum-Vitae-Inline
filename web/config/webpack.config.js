@@ -1,5 +1,6 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const Jarvis = require("webpack-jarvis");
 
 module.exports = {
@@ -56,6 +57,7 @@ module.exports = {
       filename: '[name].[hash:8].css',
       chunkFilename: '[id].css'
     }),
+    new OptimizeCssAssetsPlugin(),
     new Jarvis({
       port: 8181 // optional: set a port
     })
