@@ -91,7 +91,7 @@
 
 <style lang="scss" scoped>
   .resume-cell {
-    width: 180px; height: 195px; margin: 0 0 28px 38px; padding: 5px; display: inline-block;
+    width: 180px; height: 195px; margin: 0 0 28px 38px; padding: 5px 5.5px; display: inline-block;
     text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer;
     &:hover {
       text-decoration: underline;

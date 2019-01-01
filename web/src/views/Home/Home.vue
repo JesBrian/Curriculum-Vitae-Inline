@@ -57,7 +57,7 @@ export default {
 
   methods: {
     showLoginModal () {
-      this.$store.commit('changeShowModal', 'LoginModal');
+      this.$store.commit('changeShowModal', 'LoginRegisterModal');
     }
   }
 }
