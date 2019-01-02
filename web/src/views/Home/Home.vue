@@ -79,7 +79,7 @@ export default {
       &-user {
         float: right;
         &-avatar {
-          width:35px; height:35px; margin-top:13px; border-radius:50%; box-shadow:0 0 6px #282828;
+          width:35px; height:35px; margin-top:13px; border-radius:50%; box-shadow:0 0 6px #282828; cursor: pointer;
         }
       }
     }
@@ -89,7 +89,7 @@ export default {
       &-user {
         text-align: center;
         &-avatar {
-          width: 43px; height: 43px; margin: 8px auto; border-radius: 50%; box-shadow:0.5px 0.5px 10px #282828;
+          width: 43px; height: 43px; margin: 8px auto; border-radius: 50%; box-shadow:0.5px 0.5px 10px #282828; cursor: pointer;
         }
       }
 

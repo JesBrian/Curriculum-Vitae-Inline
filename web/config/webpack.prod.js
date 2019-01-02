@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: __dirname + '/../dist',
-    filename: '[name].js' // 打包后输出的文件名，[name]就是使用入口文件的key做名称
+    filename: '[name].[chunkhash].js' // 打包后输出的文件名，[name]就是使用入口文件的key做名称
   },
   plugins: [
     new CleanWebpackPlugin(
