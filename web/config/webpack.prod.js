@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DropConsoleWebpackPlugin = require('drop-console-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -26,6 +27,12 @@ module.exports = merge(common, {
       },
       chunks: ['index'],
       chunksSortMode: 'manual' // 排序方式
+    }),
+    new DropConsoleWebpackPlugin({
+      drop_log: true,
+      drop_info: true,
+      drop_warn: false,
+      drop_error: false
     })
   ]
 });
