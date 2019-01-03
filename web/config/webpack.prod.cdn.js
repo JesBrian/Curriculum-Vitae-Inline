@@ -9,6 +9,10 @@ module.exports = merge(common, {
     path: __dirname + '/../dist',
     filename: '[name].js' // 打包后输出的文件名，[name]就是使用入口文件的key做名称
   },
+  externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter'
+  },
   plugins: [
     new CleanWebpackPlugin(
       [__dirname + '/../dist'], {
@@ -17,10 +21,13 @@ module.exports = merge(common, {
       }
     ),
     new HtmlWebpackPlugin({
-      title: '在线简历制作系统管理后台',
-      template: './cms/src/index.html',
+      title: '在线简历制作',
+      template: './web/public/index-cdn.html',
       filename: 'index.html',
       hash: true,
+      minify: {
+        collapseWhitespace: true //折叠空白区域 也就是压缩代码
+      },
       chunks: ['index'],
       chunksSortMode: 'manual' // 排序方式
     })

@@ -7,6 +7,7 @@
   "scripts": {
     "web-dev": "webpack-dev-server --hot --config ./web/config/webpack.dev.js",
     "web-build": "webpack --config ./web/config/webpack.prod.js",
+    "web-build-cdn": "webpack --config ./web/config/webpack.prod.cdn.js",
     "cms-dev": "webpack-dev-server --hot --config ./cms/config/webpack.dev.js",
     "cms-build": "webpack --config ./cms/config/webpack.prod.js",
     "server-dev": "tsc -p server && node server/dist/index.js",

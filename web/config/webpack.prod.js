@@ -18,7 +18,7 @@ module.exports = merge(common, {
     ),
     new HtmlWebpackPlugin({
       title: '在线简历制作',
-      template: './web/src/index.html',
+      template: './web/public/index.html',
       filename: 'index.html',
       hash: true,
       minify: {
@@ -27,6 +27,5 @@ module.exports = merge(common, {
       chunks: ['index'],
       chunksSortMode: 'manual' // 排序方式
     })
-  ],
-  devtool: 'inline-source-map' // 开启控制台输出错误信息具体在哪行
+  ]
 });

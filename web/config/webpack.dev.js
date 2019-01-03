@@ -13,7 +13,7 @@ module.exports = merge(common, {
     port: 8080, // 服务的端口号
     open: true, // 服务启动是否打开浏览器，打开的都是默认的浏览器
     inline: true, // 页面刷新方式
-    contentBase: '/web/src/index.html', // 服务器加载的目录，会自动找到该目录下的index.html文件进行页面展示
+    contentBase: '/web/public/index.html', // 服务器加载的目录，会自动找到该目录下的index.html文件进行页面展示
     disableHostCheck: true,
     overlay: {
       errors: true//当webpack编译过程中出现任何错误,让它显示在网页上面
@@ -22,12 +22,12 @@ module.exports = merge(common, {
   plugins: [
     new HtmlWebpackPlugin({
       title: '在线简历制作',
-      template: './web/src/index.html',
+      template: './web/public/index.html',
       filename: 'index.html',
       inject: true,
       chunks: ['index'],
       chunksSortMode: 'manual'
     })
   ],
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map' // 开启控制台输出错误信息具体在哪行
 });

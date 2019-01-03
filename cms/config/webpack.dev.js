@@ -29,5 +29,5 @@ module.exports = merge(common, {
       chunksSortMode: 'manual'
     })
   ],
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map' // 开启控制台输出错误信息具体在哪行
 });
