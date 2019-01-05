@@ -1,7 +1,7 @@
 <template>
-  <Card shadow style="width:635px; position:relative;">
-    <div ref="editContainer" style="width:600px; height:888px; background:lightblue;"></div>
-  </Card>
+  <div ref="editContainer" style="padding:1px; border:1px dashed #666;">
+    <div style="width:1600px; height:800px; margin:0 auto; overflow:hidden; background:lightblue;"></div>
+  </div>
 </template>
 
 <script>

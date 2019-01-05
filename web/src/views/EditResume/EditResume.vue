@@ -12,8 +12,10 @@
       <Content class="page-layout" style="padding:50px 20px 18px;">
         <PathNavbar />
 
-        <Layout style="padding:20px; background:#EEE; overflow:auto;">
-          <EditContainer />
+        <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
+          <div style="width:100%; height:100%; position:relative; overflow:auto; text-align:center; ">
+            <EditContainer />
+          </div>
         </Layout>
       </Content>
     </Layout>
