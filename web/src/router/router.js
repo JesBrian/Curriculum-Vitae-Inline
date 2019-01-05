@@ -29,7 +29,7 @@ export default new Router({
         },
         {
           path: '/Home/CellManagement',
-          name: 'UploadLocal',
+          name: 'CellManagement',
           component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/CellManagement/CellManagement.vue'], resolve)
         },
         {

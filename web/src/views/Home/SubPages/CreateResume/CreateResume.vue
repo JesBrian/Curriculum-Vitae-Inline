@@ -11,13 +11,13 @@
           </Card>
           <span>自定义格式</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempFormat(n + 1)" @dblclick="nextStep" :key="n + '12'" class="resume-cell" :class="{active: tempFormat === n+1}">
+        <div v-for="formatItem in formatList" @click="chooseTempFormat(formatItem.id)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: tempFormat === formatItem.id}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span>选择模板</span>
+          <span>{{ formatItem.name }}</span>
         </div>
       </div>
     </div>
@@ -61,7 +61,13 @@
       return {
         step: 0,
         tempFormat: -1,
-        tempTemplate: -1
+        tempTemplate: -2,
+
+        formatList: [
+          {id: 111, name: '名片卡片', size: [600, 380]},
+          {id: 112, name: '个人简历', size: [600, 850]},
+          {id: 113, name: '宣传海报', size: [600, 850]}
+        ]
       }
     },
 

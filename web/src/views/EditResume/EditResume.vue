@@ -6,15 +6,25 @@
       <!-- 左侧菜单 -->
       <Sider v-model="isCollapsed" breakpoint="md" collapsible collapsed-width="78" class="left-navbar">
         <LeftNavbar :is-collapsed="isCollapsed" />
-        <div slot="trigger"></div>
       </Sider>
 
       <Content class="page-layout" style="padding:50px 20px 18px;">
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
-          <div style="width:100%; height:100%; position:relative; overflow:auto; text-align:center; ">
-            <EditContainer />
+          <div style="width:97%; height:38px; margin:6px auto 0;">
+            <Button @click="changeZoomRate(false)" icon="md-remove" type="info" shape="circle" size="small" ghost style="float:left;"></Button>
+            <div style="width:200px; display:inline-block;">
+              <Slider v-model="zoomRate" show-input></Slider>
+            </div>
+            <Button @click="changeZoomRate(false, 0, true)" icon="md-list" type="info" size="small" ghost style="margin:0 0 0 12px; float:right;">重置</Button>
+            <Button @click="changeZoomRate(true)" icon="md-add" type="info" shape="circle" size="small" ghost style="float:right;"></Button>
+          </div>
+
+          <div style="width:100%; height:100%; padding:6px; box-sizing:border-box; overflow:auto; text-align:center; ">
+            <div style="margin:0 auto; display:inline-block; box-shadow:0 0 6px #383838;">
+              <EditContainer :style="`zoom:${(zoomRate + 30) * 1.25}%`" />
+            </div>
           </div>
         </Layout>
       </Content>
@@ -46,13 +56,26 @@
     data () {
       return {
         isCollapsed: false,
-        showRightNavbar: false
+        showRightNavbar: false,
+
+        zoomRate: 50,
       }
     },
 
     methods: {
       changeRightNavbar () {
         this.showRightNavbar = !this.showRightNavbar;
+      },
+
+      changeZoomRate (category = true, step = 10, reset = false) {
+        if (reset) {
+          this.zoomRate = 50; return;
+        }
+        if (category) {
+          this.zoomRate += step;
+        } else {
+          this.zoomRate -= step;
+        }
       }
     }
   }
@@ -60,43 +83,29 @@
 
 <style lang="scss" scoped>
   .layout{
-    background: #f5f7f9;
-    position: relative;
-    overflow: hidden;
+    background: #f5f7f9; position: relative; overflow: hidden;
   }
   .menu-item span{
-    display: inline-block;
-    overflow: hidden;
-    width: 69px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: bottom;
-    transition: width .2s ease .2s;
+    display: inline-block; overflow: hidden; width: 69px; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; transition: width .2s ease .2s;
   }
   .menu-item i{
-    transform: translateX(0px);
-    transition: font-size .2s ease, transform .2s ease;
-    vertical-align: middle;
-    font-size: 16px;
+    transform: translateX(0px); transition: font-size .2s ease, transform .2s ease; vertical-align: middle; font-size: 16px;
   }
   .collapsed-menu span{
-    width: 0;
-    transition: width .2s ease;
+    width: 0; transition: width .2s ease;
   }
   .collapsed-menu i{
-    transform: translateX(5px);
-    transition: font-size .2s ease .2s, transform .2s ease .2s;
-    vertical-align: middle;
-    font-size: 22px;
+    transform: translateX(5px); transition: font-size .2s ease .2s, transform .2s ease .2s; vertical-align: middle; font-size: 22px;
   }
 
   .left-navbar {
-    border-right:1px solid #555;
-    box-shadow:0 0 18px #000;
+    border-right:1px solid #555; box-shadow:0 0 18px #000;
+    /deep/ .ivu-layout-sider-zero-width-trigger {
+      margin-top:-6px;
+    }
   }
 
   .page-layout {
-    padding-top:30px;
-    position:relative;
+    padding-top:30px; position:relative;
   }
 </style>
