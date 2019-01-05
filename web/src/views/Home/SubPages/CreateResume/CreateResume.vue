@@ -30,7 +30,7 @@
             <p>Content of card</p>
             <p>Content of card</p>
           </Card>
-          <span>自定义模板</span>
+          <span>空白</span>
         </div>
         <div @click="chooseTempTemplate(0)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: tempTemplate === 0}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
@@ -91,8 +91,8 @@
 
 <style lang="scss" scoped>
   .resume-cell {
-    width: 180px; height: 195px; margin: 0 0 28px 38px; padding: 5px; display: inline-block;
-    text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer;
+    width: 180px; height: 195px; margin: 0 0 28px 38px; padding: 5px 5.5px; display: inline-block;
+    text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer; user-select: none;
     &:hover {
       text-decoration: underline;
     }

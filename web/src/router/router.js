@@ -15,32 +15,32 @@ export default new Router({
         {
           path: '/Home/CreateResume',
           name: 'CreateResume',
-          component: resolve => require(['../views/Home/SubPages/CreateResume/CreateResume.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/CreateResume/CreateResume.vue'], resolve)
         },
         {
           path: '/Home/SelfWeb',
           name: 'SelfWeb',
-          component: resolve => require(['../views/Home/SubPages/SelfWeb/SelfWeb.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SelfWeb/SelfWeb.vue'], resolve)
         },
         {
           path: '/Home/UploadLocal',
           name: 'UploadLocal',
-          component: resolve => require(['../views/Home/SubPages/UploadLocal/UploadLocal.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/UploadLocal/UploadLocal.vue'], resolve)
         },
         {
           path: '/Home/CellManagement',
           name: 'UploadLocal',
-          component: resolve => require(['../views/Home/SubPages/CellManagement/CellManagement.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/CellManagement/CellManagement.vue'], resolve)
         },
         {
           path: '/Home/UserSetting',
           name: 'UserSetting',
-          component: resolve => require(['../views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
         },
         {
           path: '/Home/SystemConfig',
           name: 'SystemConfig',
-          component: resolve => require(['../views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
         },
       ]
     },

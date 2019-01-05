@@ -51,6 +51,10 @@
     padding:0 88px 0 68px;
     position:relative;
     box-shadow:0 0 18px #000;
+
+    .ivu-menu-horizontal {
+      background: transparent;
+    }
   }
 
   .layout-logo {
