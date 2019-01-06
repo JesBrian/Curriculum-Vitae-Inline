@@ -12,7 +12,8 @@
     "cms-build": "webpack --config cms/config/webpack.prod.js",
     "server-dev": "npm run server-build && node server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
-    "server-build": "tsc -p server"
+    "server-build": "tsc -p server",
+    "project-dev": ""
   },
   "repository": {
     "type": "git",
