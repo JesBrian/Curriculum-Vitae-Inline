@@ -5,6 +5,7 @@
   "description": "inline cv web system",
   "main": "index.js",
   "scripts": {
+    "project-dev": "npm run web-dev & npm run cms-dev & npm run server-dev-watch",
     "web-dev": "webpack-dev-server --hot --config web/config/webpack.dev.js",
     "web-build": "webpack --config web/config/webpack.prod.js",
     "web-build-cdn": "webpack --config web/config/webpack.prod.cdn.js",
@@ -12,8 +13,7 @@
     "cms-build": "webpack --config cms/config/webpack.prod.js",
     "server-dev": "npm run server-build && node server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
-    "server-build": "tsc -p server",
-    "project-dev": ""
+    "server-build": "tsc -p server"
   },
   "repository": {
     "type": "git",
