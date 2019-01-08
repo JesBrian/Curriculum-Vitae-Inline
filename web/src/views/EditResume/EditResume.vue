@@ -62,6 +62,12 @@
       }
     },
 
+    beforeCreate () {
+      if (this.$store.state.resumeConfig.length === 0) {
+        this.$router.push('/');
+      }
+    },
+
     methods: {
       changeRightNavbar () {
         this.showRightNavbar = !this.showRightNavbar;

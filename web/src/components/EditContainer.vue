@@ -1,5 +1,5 @@
 <template>
-  <div ref="editContainer" style="width:1600px; height:800px; overflow:hidden; background:lightblue;"></div>
+  <div ref="editContainer" :style="`width:${$store.state.resumeConfig[0]}px; height:${$store.state.resumeConfig[1]}px;`" style="overflow:hidden; background:lightblue;"></div>
 </template>
 
 <script>
@@ -18,8 +18,8 @@
     },
 
     beforeDestroy () {
-      this.$refs.editContainer.removeEventListener('drop');
-      this.$refs.editContainer.addEventListener('dragover');
+      this.$refs.editContainer.removeEventListener('drop', null);
+      this.$refs.editContainer.addEventListener('dragover', null);
     }
   }
 </script>

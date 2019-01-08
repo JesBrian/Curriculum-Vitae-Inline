@@ -3,7 +3,7 @@
     <div v-if="step === 0">
       选择格式
       <div>
-        <div @click="chooseTempFormat(0)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempFormat === 0}">
+        <div @click="chooseTempFormat(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: formatIndex === -1}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -11,7 +11,7 @@
           </Card>
           <span>自定义格式</span>
         </div>
-        <div v-for="formatItem in formatList" @click="chooseTempFormat(formatItem.id)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: tempFormat === formatItem.id}">
+        <div v-for="(formatItem, index) in formatList" @click="chooseTempFormat(index)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: formatIndex === index}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -24,7 +24,7 @@
     <div v-else>
       选择模板
       <div>
-        <div @click="chooseTempTemplate(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: tempTemplate === -1}">
+        <div @click="chooseTempTemplate(-2)" @dblclick="selfEdit" class="resume-cell" :class="{active: templateIndex === -2}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -32,7 +32,7 @@
           </Card>
           <span>空白</span>
         </div>
-        <div @click="chooseTempTemplate(0)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: tempTemplate === 0}">
+        <div @click="chooseTempTemplate(-1)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: templateIndex === -1}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -40,7 +40,7 @@
           </Card>
           <span>网络模板</span>
         </div>
-        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" @dblclick="nextStep" :key="n + '15'" class="resume-cell" :class="{active: tempTemplate === n+1}">
+        <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" @dblclick="nextStep" :key="n + '15'" class="resume-cell" :class="{active: templateIndex === n+1}">
           <Card shadow style="height: 158px; box-shadow: 0 0 3px #282828; ">
             <p>Content of card</p>
             <p>Content of card</p>
@@ -60,8 +60,8 @@
     data () {
       return {
         step: 0,
-        tempFormat: -1,
-        tempTemplate: -2,
+        formatIndex: -100,
+        templateIndex: -100,
 
         formatList: [
           {id: 111, name: '名片卡片', size: [600, 380]},
@@ -81,15 +81,22 @@
       },
 
       chooseTempFormat (n) {
-        this.tempFormat = n;
+        this.formatIndex = n;
       },
 
       chooseTempTemplate (n) {
-        this.tempTemplate = n;
+        this.templateIndex = n;
       },
 
       nextStep () {
-        this.step ? this.$router.push('/EditResume') : this.step++;
+        if (this.step) {
+          this.$store.commit('changeResumeConfig', this.formatList[this.formatIndex].size);
+          this.$nextTick(() => {
+            this.$router.push('/EditResume');
+          })
+        } else {
+          this.step++;
+        }
       }
     }
   }

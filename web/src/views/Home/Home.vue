@@ -55,11 +55,8 @@
 export default {
   name: 'home',
 
-  mounted () {
-    this.$http.put('userRegister').then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
+  create () {
+    this.$localForage.getItem('user', (err, value) => {
     });
   },
 

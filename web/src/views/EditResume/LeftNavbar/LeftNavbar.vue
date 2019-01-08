@@ -94,8 +94,8 @@
     },
 
     beforeDestroy() {
-      this.nowDragCellDom.removeEventListener('dragstart');
-      this.nowDragCellDom.removeEventListener('dragend');
+      this.nowDragCellDom.removeEventListener('dragstart', null);
+      this.nowDragCellDom.removeEventListener('dragend', null);
     }
   }
 </script>
