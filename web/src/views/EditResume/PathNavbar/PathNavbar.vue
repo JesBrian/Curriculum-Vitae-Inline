@@ -1,13 +1,12 @@
 <template>
   <div>
     <Breadcrumb class="path-navbar">
-      <BreadcrumbItem>
-        <RouterLink to="/">Home</RouterLink>
+      <BreadcrumbItem to="/">
+        <Icon type="ios-home" /> 首页
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <RouterLink to="/">Components</RouterLink>
+        <Icon type="ios-create" /> 编辑
       </BreadcrumbItem>
-      <BreadcrumbItem>Layout</BreadcrumbItem>
     </Breadcrumb>
 
     <div style="margin-top:-36px; float:right">

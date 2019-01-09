@@ -22,7 +22,7 @@
           </div>
 
           <div style="width:100%; height:100%; padding:6px; box-sizing:border-box; overflow:auto; text-align:center; ">
-            <div style="margin:0 auto; display:inline-block; box-shadow:0 0 6px #383838;">
+            <div style="margin:0 auto; display:inline-block; box-shadow:0 0 6px #383838; border-radius:3px;">
               <EditContainer :style="`zoom:${(zoomRate + 30) * 1.25}%`" />
             </div>
           </div>
@@ -66,6 +66,10 @@
       if (this.$store.state.resumeConfig.length === 0) {
         this.$router.push('/');
       }
+    },
+
+    beforeDestroy () {
+      this.$store.commit('changeResumeConfig');
     },
 
     methods: {
