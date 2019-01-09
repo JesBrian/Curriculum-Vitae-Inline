@@ -1,16 +1,13 @@
 <template>
-  <div ref="createResume" style="padding-top: 28px;">
-    <Breadcrumb class="" style="margin:0 0 18px 43px;">
+  <div>
+    <PathNavbar>
       <BreadcrumbItem to="/">
-        <Icon type="ios-home" /> 首页
-      </BreadcrumbItem>
-      <BreadcrumbItem to="/">
-        <Icon type="ios-list-box" /> 选择格式
+        <Icon type="ios-clipboard" /> 选择格式
       </BreadcrumbItem>
       <BreadcrumbItem v-if="step === 1">
         <Icon type="logo-buffer" /> 选择模板
       </BreadcrumbItem>
-    </Breadcrumb>
+    </PathNavbar>
 
     <div v-if="step === 0">
       <div @click="chooseTempFormat(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: formatIndex === -1}">
@@ -50,8 +47,14 @@
 </template>
 
 <script>
+  import PathNavbar from '../../PathNavbar.vue'
+
   export default {
     name: 'CreateResume',
+
+    components: {
+      PathNavbar
+    },
 
     data () {
       return {
