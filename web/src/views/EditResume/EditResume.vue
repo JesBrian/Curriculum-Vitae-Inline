@@ -61,7 +61,6 @@
       return {
         isCollapsed: false,
         showRightNavbar: false,
-
         zoomRate: 50,
       }
     },

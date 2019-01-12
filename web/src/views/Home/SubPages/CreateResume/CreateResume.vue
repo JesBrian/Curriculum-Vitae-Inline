@@ -72,7 +72,7 @@
 
     methods: {
       selfEdit () {
-        alert('打钱或许就会开通这功能了');
+        this.$store.commit('changeShowModal', 'SelfDefineFormatModal');
       },
 
       selectNetTemplate () {

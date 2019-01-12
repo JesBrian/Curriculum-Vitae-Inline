@@ -41,7 +41,7 @@
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->
           </FormItem>
           <FormItem prop="mail">
-            <Input type="text" placeholder="输入邮箱" style="text-align:center">
+            <Input type="email" placeholder="输入邮箱" style="text-align:center">
               <Icon type="ios-mail-outline" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->

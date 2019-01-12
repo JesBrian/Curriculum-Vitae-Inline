@@ -13,8 +13,9 @@
 
     components: {
       BlackCover,
-      TempShowModal: resolve => require(['./TempShowModal/TempShowModal.vue'], resolve),
       LoginRegisterModal: resolve => require(['./LoginRegisterModal/LoginRegisterModal.vue'], resolve),
+      TempShowModal: resolve => require(['./TempShowModal/TempShowModal.vue'], resolve),
+      SelfDefineFormatModal: resolve => require(['./SelfDefineFormatModal/SelfDefineFormatModal.vue'], resolve),
       NetTemplateModal: resolve => require(['./NetTemplateModal/NetTemplateModal.vue'], resolve)
     },
 
