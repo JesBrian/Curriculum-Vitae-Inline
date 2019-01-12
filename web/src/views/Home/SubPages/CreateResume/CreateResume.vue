@@ -92,7 +92,7 @@
           this.$store.commit('changeResumeConfig', this.formatList[this.formatIndex].size);
           this.$nextTick(() => {
             this.$router.push('/EditResume');
-          })
+          });
         } else {
           this.step++;
         }
