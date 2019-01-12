@@ -10,6 +10,9 @@
     </Breadcrumb>
 
     <div style="margin-top:-36px; float:right">
+      <InputNumber :min="1" size="small" style="width:68px;" />
+      <span style="margin:2px 5px;">x</span>
+      <InputNumber :min="1" size="small" style="width:68px; margin-right:28px;" />
       <Button @click="showTempResume" type="success" icon="logo-buffer" size="small" ghost style="margin:0 3px;">预览</Button>
       <Button @click="exportResume" type="primary" icon="md-code-download" size="small" ghost style="margin:0 3px;">导出</Button>
       <Button @click="saveResume" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">保存</Button>

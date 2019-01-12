@@ -10,7 +10,7 @@
             <div class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
-        <div v-else>
+        <div v-else style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
           请登录账号同步组件信息
         </div>
       </div>

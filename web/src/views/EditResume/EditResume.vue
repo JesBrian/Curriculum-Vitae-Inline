@@ -12,16 +12,20 @@
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
-          <div style="width:97%; height:38px; margin:6px auto 0;">
-            <Button @click="changeZoomRate(false)" icon="md-remove" type="info" shape="circle" size="small" ghost style="float:left;"></Button>
-            <div style="width:200px; display:inline-block;">
-              <Slider v-model="zoomRate" show-input></Slider>
+          <div style="width:98%; margin:6px auto 0; padding:0 138px 13px 58px; position:relative; box-sizing:border-box;">
+            <div style="left:3px; top:0; position:absolute;">
+              <Button @click="changeZoomRate(false)" icon="md-remove" type="info" shape="circle" size="small" ghost style="margin-right:18px;"></Button>
             </div>
-            <Button @click="changeZoomRate(false, 0, true)" icon="md-list" type="info" size="small" ghost style="margin:0 0 0 12px; float:right;">重置</Button>
-            <Button @click="changeZoomRate(true)" icon="md-add" type="info" shape="circle" size="small" ghost style="float:right;"></Button>
+            <div style="width:100%; margin-top:-6px;">
+              <Slider v-model="zoomRate" show-input ></Slider>
+            </div>
+            <div style="right:0; top:0; position:absolute;">
+              <Button @click="changeZoomRate(true)" icon="md-add" type="info" shape="circle" size="small" ghost></Button>
+              <Button @click="changeZoomRate(false, 0, true)" icon="md-list" type="info" size="small" ghost style="margin:0 0 0 12px;">重置</Button>
+            </div>
           </div>
 
-          <div style="width:100%; height:100%; padding:6px; box-sizing:border-box; overflow:auto; text-align:center; ">
+          <div style="width:100%; height:100%; padding:6px 6px 1px 6px; box-sizing:border-box; overflow:auto; text-align:center; box-shadow:0 0 3px #999;">
             <div style="margin:0 auto; display:inline-block; box-shadow:0 0 6px #383838; border-radius:3px;">
               <EditContainer :style="`zoom:${(zoomRate + 30) * 1.25}%`" />
             </div>
@@ -64,7 +68,7 @@
 
     beforeCreate () {
       if (this.$store.state.resumeConfig.length === 0) {
-        this.$router.push('/');
+        // this.$router.push('/');
       }
     },
 
