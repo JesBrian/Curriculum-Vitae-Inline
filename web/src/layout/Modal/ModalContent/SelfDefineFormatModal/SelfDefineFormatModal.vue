@@ -1,5 +1,5 @@
 <template>
-  <Card shadow style="width: 428px; height: 238px;">
+  <ModalFrame style="width: 428px; height: 238px;">
     <Form style="margin:28px 18px 0;">
       <FormItem prop="mobile">
         <Input v-model="width" type="number" placeholder="请输入宽度">
@@ -18,12 +18,18 @@
         <Button @click="goEditResume" type="primary" style="width:38%; float:right; font-size:16px">确定</Button>
       </FormItem>
     </Form>
-  </Card>
+  </ModalFrame>
 </template>
 
 <script>
+  import ModalFrame from '../../ModalFrame/ModalFrame.vue'
+
   export default {
     name: 'SelfDefineFormatModal',
+
+    components: {
+      ModalFrame
+    },
 
     data () {
       return {

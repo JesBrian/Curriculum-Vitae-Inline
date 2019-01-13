@@ -1,5 +1,5 @@
 <template>
-  <Card shadow style="width: 468px; height: 368px;">
+  <ModalFrame title="用户登录 / 注册" style="width: 468px; height: 368px;">
     <Tabs>
       <TabPane label="登录">
         <Form ref="Login" class="signin" style="margin:8px 18px 0;">
@@ -72,12 +72,18 @@
         </Form>
       </TabPane>
     </Tabs>
-  </Card>
+  </ModalFrame>
 </template>
 
 <script>
+  import ModalFrame from '../../ModalFrame/ModalFrame.vue'
+
   export default {
     name: 'LoginRegisterModal',
+
+    components: {
+      ModalFrame
+    },
 
     data () {
       return {

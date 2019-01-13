@@ -24,7 +24,7 @@
       </div>
     </div>
     <div v-else>
-      <div @click="chooseTempTemplate(-2)" @dblclick="selfEdit" class="resume-cell" :class="{active: templateIndex === -2}">
+      <div @click="chooseTempTemplate(-2)" @dblclick="nextStep" class="resume-cell" :class="{active: templateIndex === -2}">
         <Card shadow class="cell-logo">
           <p>Content of card</p>
         </Card>
