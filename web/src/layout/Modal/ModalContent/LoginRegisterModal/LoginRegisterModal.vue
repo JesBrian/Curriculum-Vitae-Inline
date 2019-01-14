@@ -1,5 +1,5 @@
 <template>
-  <ModalFrame title="用户登录 / 注册" style="width: 468px; height: 368px;">
+  <ModalFrame title="用户登录 / 注册" style="width: 468px; height: 398px;">
     <Tabs>
       <TabPane label="登录">
         <Form ref="Login" class="signin" style="margin:8px 18px 0;">
@@ -16,8 +16,8 @@
             <!--<p class="error-text" v-show="Login.error.password">{{Login.error.password}}</p>-->
           </FormItem>
           <FormItem style="text-align:center">
-            <!--<p class="error-text" v-show="Login.error.all">{{Login.error.all}}</p>-->
-            <Button @click="userLogin" type="primary" style="width:60%; font-size:16px">登录</Button>
+            <Button @click="closeModal" type="primary" style="width:38%; float:left; font-size:16px">取消返回</Button>
+            <Button @click="userLogin" type="primary" style="width:38%; float:right; font-size:16px">用户登录</Button>
           </FormItem>
         </Form>
 
@@ -66,8 +66,8 @@
             <!--<p class="error-text marb8" v-show="Register.error.password">{{Register.error.password}}</p>-->
           </FormItem>
           <FormItem style="text-align:center">
-            <!--<p class="error-text marb8" v-show="Register.error.error">{{Register.error.error}}</p>-->
-            <Button @click="userRegister" type="primary" style="width:60%; font-size:16px">注册</Button>
+            <Button @click="closeModal" type="primary" style="width:38%; float:left; font-size:16px">取消返回</Button>
+            <Button @click="userRegister" type="primary" style="width:38%; float:right; font-size:16px">用户注册</Button>
           </FormItem>
         </Form>
       </TabPane>
@@ -95,6 +95,10 @@
       },
 
       userRegister () {
+      },
+
+      closeModal () {
+        this.$parent.closeModal();
       }
     }
   }

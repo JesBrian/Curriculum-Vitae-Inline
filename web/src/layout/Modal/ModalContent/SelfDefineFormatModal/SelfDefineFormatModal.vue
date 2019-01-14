@@ -1,5 +1,5 @@
 <template>
-  <ModalFrame style="width: 428px; height: 238px;">
+  <ModalFrame title="自定义格式" style="width: 428px; height: 248px;">
     <Form style="margin:28px 18px 0;">
       <FormItem prop="mobile">
         <Input v-model="width" type="number" placeholder="请输入宽度">
@@ -13,7 +13,7 @@
         </Input>
         <!--<p class="error-text" v-show="Login.error.password">{{Login.error.password}}</p>-->
       </FormItem>
-      <FormItem style="margin-top:30px; text-align:center">
+      <FormItem style="text-align:center">
         <Button @click="closeModal" type="primary" style="width:38%; float:left; font-size:16px">取消</Button>
         <Button @click="goEditResume" type="primary" style="width:38%; float:right; font-size:16px">确定</Button>
       </FormItem>
