@@ -26,7 +26,7 @@
           <Icon type="md-planet" class="icon" />网络
         </RouterLink>
         <RouterLink class="home-left-navbar-link" to="/Home/UploadLocal">
-          <Icon type="ios-analytics" class="icon" />本地
+          <Icon type="md-calendar" class="icon" />历史
         </RouterLink>
         <RouterLink class="home-left-navbar-link" to="/Home/CellManagement">
           <Icon type="logo-buffer" class="icon" />组件

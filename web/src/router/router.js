@@ -53,5 +53,10 @@ export default new Router({
       name: 'EditResume',
       component: resolve => require(['../views/EditResume/EditResume.vue'], resolve)
     },
+    {
+      path: '/EditComponent',
+      name: 'EditResume',
+      component: resolve => require(['../views/EditComponent/EditComponent.vue'], resolve)
+    },
   ]
 })
