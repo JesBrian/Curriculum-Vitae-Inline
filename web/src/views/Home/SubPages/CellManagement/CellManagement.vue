@@ -9,7 +9,14 @@
         <Button @click="createComponent" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">创建组件</Button>
       </div>
     </PathNavbar>
-    组件管理
+
+    <div style="padding:0 18px 0 38px;">
+      <Tabs type="card">
+        <TabPane label="标签一">标签一的内容</TabPane>
+        <TabPane label="标签二">标签二的内容</TabPane>
+        <TabPane label="标签三">标签三的内容</TabPane>
+      </Tabs>
+    </div>
   </div>
 </template>
 

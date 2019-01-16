@@ -6,7 +6,9 @@
       </BreadcrumbItem>
     </PathNavbar>
 
-    账户网络储存
+    <div style="padding:0 18px 0 38px;">
+      123
+    </div>
   </div>
 </template>
 
