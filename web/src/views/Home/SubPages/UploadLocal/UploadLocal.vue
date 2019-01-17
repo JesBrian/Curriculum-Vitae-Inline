@@ -14,19 +14,47 @@
       <Collapse v-model="openCollapse">
         <Panel name="1">
           最近三天
-          <div slot="content">123</div>
+          <div slot="content">
+            <CellGroup>
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+            </CellGroup>
+          </div>
         </Panel>
         <Panel name="2">
           最近一周
-          <div slot="content">456</div>
+          <div slot="content">
+            <CellGroup>
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+            </CellGroup>
+          </div>
         </Panel>
         <Panel name="3">
           最近一月
-          <div slot="content">789</div>
+          <div slot="content">
+            <CellGroup>
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+            </CellGroup>
+          </div>
         </Panel>
-        <Panel name="3">
+        <Panel name="4">
           更久以前
-          <div slot="content">101112</div>
+          <div slot="content">
+            <CellGroup>
+              <Cell title="Display label content" label="label content" extra="details" />
+            </CellGroup>
+          </div>
         </Panel>
       </Collapse>
     </div>
@@ -56,6 +84,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .cell-divider {
+    margin: 8px auto;
+  }
 </style>

@@ -36,10 +36,8 @@
         </RouterLink>
       </Sider>
 
-      <Layout style="padding-bottom: 53px;">
-        <Content>
-          <RouterView />
-        </Content>
+      <Layout style="padding-bottom: 78px;">
+        <RouterView />
       </Layout>
 
       <Footer class="home-footer">
