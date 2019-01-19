@@ -6,7 +6,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 router.get('/getAllFormat', async (ctx: any, next: any) => {
-  require('../model/FormatModule')
+  require('../model/FormatModule/FormatModule')
 });
 
 module.exports = router;
