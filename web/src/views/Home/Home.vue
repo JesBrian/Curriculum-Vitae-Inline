@@ -31,9 +31,14 @@
         <RouterLink class="home-left-navbar-link" to="/Home/CellManagement">
           <Icon type="logo-buffer" class="icon" />组件
         </RouterLink>
-        <RouterLink class="home-left-navbar-link" to="/Home/SystemConfig">
-          <Icon type="md-build" class="icon" />配置
+        <RouterLink class="home-left-navbar-link" to="/Home/TestFunctions">
+          <Icon type="ios-flask" class="icon" />趣味
         </RouterLink>
+        <RouterLink class="home-left-navbar-link" to="/Home/SystemConfig">
+          <Icon type="ios-construct" class="icon" />配置
+        </RouterLink>
+
+        <div style="height:58px;"></div>
       </Sider>
 
       <Layout style="padding-bottom: 78px;">
@@ -88,7 +93,7 @@ export default {
     }
 
     &-left-navbar {
-      width: 88px!important; min-width: 88px!important; max-width: 88px!important; padding: 8px 0 8px 1px; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
+      width: 88px!important; min-width: 88px!important; max-width: 88px!important; padding: 8px 0 8px 1px; overflow:auto; background: #515a6e; border-right:1px solid #555; box-shadow:0 0 18px #000;
       &-user {
         text-align: center;
         &-avatar {
