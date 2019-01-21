@@ -154,20 +154,20 @@ export default [
     component: Main,
     children: [
       {
-        path: 'level_2_1',
-        name: 'level_2_1',
+        path: 'formatList',
+        name: 'formatList',
         meta: {
           icon: 'md-funnel',
-          title: '二级-1'
+          title: '格式列表'
         },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
+        component: resolve => require(['@/view/format/FormatList.vue'], resolve)
       },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'addFormat',
+        name: 'addFormat',
         meta: {
           icon: 'md-funnel',
-          title: '二级-2'
+          title: '添加格式'
         },
         component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
       }
