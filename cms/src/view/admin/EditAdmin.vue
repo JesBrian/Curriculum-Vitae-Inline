@@ -1,12 +1,12 @@
 <template>
   <div>
-    AddAdmin
+    EditAdmin
   </div>
 </template>
 
 <script>
   export default {
-    name: 'AddAdmin'
+    name: 'EditAdmin'
   }
 </script>
 

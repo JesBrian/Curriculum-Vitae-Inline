@@ -67,22 +67,22 @@ export default [
     component: Main,
     children: [
       {
-        path: 'level_2_1',
-        name: 'level_2_1',
+        path: 'userList',
+        name: 'userList',
         meta: {
           icon: 'md-funnel',
-          title: '二级-1'
+          title: '用户列表'
         },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
+        component: resolve => require(['@/view/user/UserList.vue'], resolve)
       },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'editUser',
+        name: 'editUser',
         meta: {
+          title: '添加用户',
           icon: 'md-funnel',
-          title: '二级-2'
         },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
+        component: resolve => require(['@/view/user/EditUser.vue'], resolve)
       }
     ]
   },
@@ -96,22 +96,22 @@ export default [
     component: Main,
     children: [
       {
-        path: 'level_2_1',
-        name: 'level_2_1',
+        path: 'adminList',
+        name: 'adminList',
         meta: {
           icon: 'md-funnel',
-          title: '二级-1'
+          title: '管理员列表'
         },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
+        component: resolve => require(['@/view/admin/AdminList.vue'], resolve)
       },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'editAdmin',
+        name: 'editAdmin',
         meta: {
           icon: 'md-funnel',
-          title: '二级-2'
+          title: '添加管理员'
         },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
+        component: resolve => require(['@/view/admin/EditAdmin.vue'], resolve)
       }
     ]
   },
@@ -124,24 +124,6 @@ export default [
     },
     component: Main,
     children: [
-      {
-        path: 'level_2_1',
-        name: 'level_2_1',
-        meta: {
-          icon: 'md-funnel',
-          title: '二级-1'
-        },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
-      },
-      {
-        path: 'level_2_2',
-        name: 'level_2_2',
-        meta: {
-          icon: 'md-funnel',
-          title: '二级-2'
-        },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
-      }
     ]
   },
   {
@@ -163,13 +145,13 @@ export default [
         component: resolve => require(['@/view/format/FormatList.vue'], resolve)
       },
       {
-        path: 'addFormat',
-        name: 'addFormat',
+        path: 'editFormat',
+        name: 'editFormat',
         meta: {
           icon: 'md-funnel',
           title: '添加格式'
         },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
+        component: resolve => require(['@/view/format/EditFormat.vue'], resolve)
       }
     ]
   },
@@ -183,22 +165,22 @@ export default [
     component: Main,
     children: [
       {
-        path: 'level_2_1',
-        name: 'level_2_1',
+        path: 'templateList',
+        name: 'templateList',
         meta: {
           icon: 'md-funnel',
-          title: '二级-1'
+          title: '模板列表'
         },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
+        component: resolve => require(['@/view/template/TemplateList.vue'], resolve)
       },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'editTemplate',
+        name: 'editTemplate',
         meta: {
           icon: 'md-funnel',
-          title: '二级-2'
+          title: '添加模板'
         },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
+        component: resolve => require(['@/view/template/EditTemplate.vue'], resolve)
       }
     ]
   },
@@ -212,22 +194,22 @@ export default [
     component: Main,
     children: [
       {
-        path: 'level_2_1',
-        name: 'level_2_1',
+        path: 'componentList',
+        name: 'componentList',
         meta: {
           icon: 'md-funnel',
-          title: '二级-1'
+          title: '组件列表'
         },
-        component: resolve => require(['@/view/multilevel/level-1.vue'], resolve)
+        component: resolve => require(['@/view/component/ComponentList.vue'], resolve)
       },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'editComponent',
+        name: 'editComponent',
         meta: {
           icon: 'md-funnel',
-          title: '二级-2'
+          title: '添加组件'
         },
-        component: resolve => require(['@/view/multilevel/level-2-1.vue'], resolve)
+        component: resolve => require(['@/view/component/EditComponent.vue'], resolve)
       }
     ]
   },

@@ -1,12 +1,12 @@
 <template>
   <div>
-    AddTemplate
+    EditUser
   </div>
 </template>
 
 <script>
   export default {
-    name: 'AddTemplate'
+    name: 'EditUser'
   }
 </script>
 
