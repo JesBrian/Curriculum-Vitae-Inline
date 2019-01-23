@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <Card>
     EditTemplate
-  </div>
+  </Card>
 </template>
 
 <script>
