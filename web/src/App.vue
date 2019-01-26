@@ -13,6 +13,14 @@
   export default {
     components: {
       ModalTotal, TipsProcess
+    },
+
+    mounted () {
+      this.$http.get('/apiTest').then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 </script>
