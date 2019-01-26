@@ -28,6 +28,7 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
+    "@types/koa": "^2.0.48",
     "@types/node": "^10.12.18",
     "babel-loader": "^8.0.4",
     "babel-preset-latest": "^6.24.1",
