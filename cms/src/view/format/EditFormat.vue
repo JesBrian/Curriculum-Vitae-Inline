@@ -1,7 +1,6 @@
 <template>
   <Card>
-    EditFormat
-    <Divider />
+    <PageTitle icon="ios-appstore" title="EditFormat" />
 
     <Row style="margin-bottom:23px;">
       <Col span="8" style="line-height:30px; text-align:center;">格式名称：</Col>
@@ -38,8 +37,14 @@
 </template>
 
 <script>
+  import PageTitle from '_c/page-title/page-title.vue'
+
   export default {
-    name: 'EditFormat'
+    name: 'EditFormat',
+
+    components: {
+      PageTitle
+    }
   }
 </script>
 

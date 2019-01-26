@@ -1,5 +1,7 @@
 <template>
   <Card>
+    <PageTitle icon="md-backspace" title="FormatList" />
+
     <DragableTable
         v-model="tableData"
         :columns-list="columnsList"
@@ -10,13 +12,14 @@
 </template>
 
 <script>
-  import DragableTable from '@/components/dragable-table/DragableTable.vue';
+  import PageTitle from '_c/page-title/page-title.vue';
+  import DragableTable from '_c/dragable-table/DragableTable.vue';
 
   export default {
     name: 'FormatList',
 
     components: {
-      DragableTable
+      PageTitle, DragableTable
     },
 
     data () {
