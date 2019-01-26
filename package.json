@@ -11,7 +11,7 @@
     "web-build-cdn": "webpack --config web/config/webpack.prod.cdn.js",
     "cms-dev": "webpack-dev-server --hot --config cms/config/webpack.dev.js",
     "cms-build": "webpack --config cms/config/webpack.prod.js",
-    "server-dev": "npm run server-build && node server/dist/index.js",
+    "server-dev": "npm run server-build && node --inspect server/dist/index.js",
     "server-dev-watch": "nodemon --watch 'server/**/*' -e ts,tsx --exec 'npm run server-dev'",
     "server-build": "tsc -p server"
   },
