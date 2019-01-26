@@ -1,6 +1,6 @@
 # Curriculum-Vitae-Inline
 
-True My Graduation Design -_-
+True My Graduation Design
 
 ## 适用平台
 
@@ -15,11 +15,11 @@ True My Graduation Design -_-
 
 ## 技术栈
 
-    微信小程序：MpVue + iView
+    微信小程序：wepy + iView
     web端：
         用户端：Vue + iView
         后台管理端：Vue + iView Admin
     桌面端：Electron + Vue + iView
 
-    服务端：Nginx + Koa2(Node.js) + MySQL ? + MongoDB ?
+    服务端：Nginx + Koa2(Node.js) + MongoDB + Redis
 
