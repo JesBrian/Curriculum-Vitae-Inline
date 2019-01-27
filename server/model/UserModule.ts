@@ -8,8 +8,8 @@ const UserSchema: Schema = new Schema({
   avatar: String,
   phone: String,
   mail: String,
-  c_time: Date,
-  l_time: Date,
+  cTime: Date,
+  lTime: Date,
   status: Boolean
 }, {versionKey: false});
 

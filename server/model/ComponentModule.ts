@@ -8,8 +8,8 @@ const ComponentSchema = new mongoose.Schema({
   logo: String,
   tag: String,
   config: Object,
-  c_time: Date,
-  p_time: Date,
+  cTime: Date,
+  pTime: Date,
   status: Boolean
 }, {versionKey: false});
 
