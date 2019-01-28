@@ -13,5 +13,5 @@ const registerRouter = require('./router/index.js');
 app.use(registerRouter());
 
 app.listen(3000, () => {
-    console.log('Koa2 API 服务 dev 启动完成 ！');
+    console.log('Koa2 API 服务 dev 启动完成 ！\r\n');
 });
