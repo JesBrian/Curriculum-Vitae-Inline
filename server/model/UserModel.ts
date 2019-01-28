@@ -13,4 +13,6 @@ const UserSchema: Schema = new Schema({
   status: Boolean
 }, {versionKey: false});
 
-export const User: Model<IUser> = model<IUser>('User', UserSchema);
+const User: Model<IUser> = model<IUser>('User', UserSchema);
+
+export default User;

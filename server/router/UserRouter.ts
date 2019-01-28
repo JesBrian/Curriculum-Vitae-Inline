@@ -1,4 +1,4 @@
-import { User } from '../model/UserModule'
+import User from '../model/UserModel'
 
 // @ts-ignore
 const Router = require('koa-router');
