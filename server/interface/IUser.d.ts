@@ -1,6 +1,9 @@
 import { Document } from 'mongoose'
 
-export interface IUser extends Document {
+/**
+ * 用户
+ */
+export default interface IUser extends Document {
   name: string;       // 用户名
   avatar: string;     // 头像
   phone: string;      // 手机

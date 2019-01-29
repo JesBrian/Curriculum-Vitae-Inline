@@ -1,11 +1,17 @@
 import { Document } from 'mongoose'
+import IContent from './IContent'
 
-export interface ITemplate extends Document {
-  name: string;         // 模板名
-  img: string;          // 模板缩略图
-  formatId: string;     // 格式ID
-  conf: Array<string>;  // 模板组成 [组件ID]
-  cTime: Date;          // 模板创建时间
-  pTime: Date;          // 模板发布时间
-  status: boolean;      // 模板状态
+/**
+ * 模板
+ */
+export default interface ITemplate extends Document {
+  name: string;             // 模板名
+  logo: string;             // 模板图标
+  formatId: string;         // 格式ID
+  author: string;       // 组件作者
+  tags: Array<string>;  // 组件标签
+  content: Array<IContent>; // 模板组成
+  cTime: Date;              // 创建时间
+  pTime: Date;              // 发布时间
+  status: boolean;          // 模板状态
 }

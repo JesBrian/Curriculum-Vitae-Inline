@@ -1,6 +1,9 @@
 import { Document } from 'mongoose'
 
-export interface IFormat extends Document {
+/**
+ * 格式
+ */
+export default interface IFormat extends Document {
   name: string;           // 格式简称
   logo: string;           // 图标
   size: Array<number>;    // 大小 - [w, h]

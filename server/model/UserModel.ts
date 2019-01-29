@@ -1,7 +1,7 @@
 import '../helper/MongodbHelper'
 
 import { Schema, Model, model } from 'mongoose'
-import { IUser } from '../interface/IUser'
+import IUser from '../interface/IUser'
 
 const UserSchema: Schema = new Schema({
   name: String,
