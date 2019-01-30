@@ -1,4 +1,4 @@
-import User from '../model/UserModel'
+import UserController from '../controller/UserController'
 
 // @ts-ignore
 const Router = require('koa-router');
@@ -17,9 +17,7 @@ router.get('/userLogin', async (ctx: any, next: any) => {
 });
 
 router.get('/userList', async (ctx: any, next: any) => {
-  User.find((err, res) => {
-    console.log(res[0]);
-  });
+  UserController.controllerFun()
 });
 
 module.exports = router;
