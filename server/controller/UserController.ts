@@ -1,7 +1,22 @@
-import UserService from '../service/UserService'
+const { userLoginSer } = require('../service/UserService')
 
-export default class UserController {
-	static async controllerFun () {
-		UserService.test();
-	}
-}
+/**
+ *
+ * @param ctx
+ * @param next
+ */
+exports.userRegisterCtr = async (ctx: any, next: any) => {
+  console.log(ctx);
+};
+
+/**
+ *
+ * @param ctx
+ * @param next
+ */
+exports.userLoginCtr = (ctx: any, next: any) => {
+  userLoginSer();
+};
+
+exports.getUserListCtr = async (ctx: any, next: any) => {
+};
