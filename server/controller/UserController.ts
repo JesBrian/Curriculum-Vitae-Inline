@@ -6,7 +6,7 @@ const { userLoginSer } = require('../service/UserService')
  * @param next
  */
 exports.userRegisterCtr = async (ctx: any, next: any) => {
-  console.log(ctx);
+  console.log(ctx.request.body);
 };
 
 /**

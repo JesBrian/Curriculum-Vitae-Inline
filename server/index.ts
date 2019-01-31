@@ -5,6 +5,10 @@ const app = new Koa();
 const corsMiddleware = require('./middleware/CorsMiddleware');
 app.use(corsMiddleware);
 
+// FormDataMiddleware
+const bodyParser = require('koa-bodyparser');
+app.use(bodyParser());
+
 // const historyApiFallback = require('koa2-history-api-fallback');
 // app.use(historyApiFallback());
 
