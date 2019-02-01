@@ -101,7 +101,13 @@
       userLogin () {
         let errTips = this.checkInputComplete();
         if (errTips === '') {
-          // this.$http.
+          this.$http.post('userLogin', {
+            phone: this.phone,
+            password: this.password
+          }).then(res => {
+          }).catch(err => {
+            console.log(err);
+          })
         } else {
           alert(errTips);
         }

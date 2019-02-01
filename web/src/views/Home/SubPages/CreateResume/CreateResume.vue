@@ -70,6 +70,15 @@
       }
     },
 
+    created () {
+      this.$http.get('formatList?test=666', {
+        test: 666
+      }).then(res => {
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+
     methods: {
       selfEdit () {
         this.$store.commit('changeShowModal', 'SelfDefineFormatModal');

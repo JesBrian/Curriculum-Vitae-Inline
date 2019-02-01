@@ -5,7 +5,7 @@ const Router = require('koa-router');
 // @ts-ignore
 const router = new Router();
 
-router.get('/userLogin', userLoginCtr);
+router.post('/userLogin', userLoginCtr);
 router.put('/userRegister', userRegisterCtr);
 router.get('/userList', getUserListCtr);
 
