@@ -1,20 +1,17 @@
-require('../helper/MongodbHelper');
+import '../helper/MongodbHelper'
 
-// @ts-ignore
-const mongoose = require('mongoose');
+import { Schema, Model, model } from 'mongoose'
+import IFormat from '../interface/IFormat'
 
-const FormatSchema = new mongoose.Schema({
+const FormatSchema: Schema = new Schema({
   name: String,
-  size: [Number, Number]
+  logo: String,
+  size: Array,
+  cTime: Date,
+  try: Boolean,
+  status: Boolean
 }, {versionKey: false});
 
-const Format = mongoose.model('Format', FormatSchema);
+const Format: Model<IFormat> = model<IFormat>('Format', FormatSchema);
 
-Format.find((err: any, res: any) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(res);
-  }
-});
-
+export default Format;

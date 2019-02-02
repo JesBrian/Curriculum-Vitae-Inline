@@ -1,5 +1,10 @@
-// const { userLoginSer } = require('../service/UserService')
+const { getFormatListSer } = require('../service/FormatService')
 
 exports.getFormatListCtr = async (ctx: any, next: any) => {
-  console.log(ctx.query.test)
+  const isTry = ctx.query.try;
+  const data = await getFormatListSer(isTry);
+  ctx.body = {
+    status: 200,
+    data: data
+  };
 };
