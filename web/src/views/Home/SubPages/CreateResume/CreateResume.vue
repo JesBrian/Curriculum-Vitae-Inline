@@ -62,18 +62,16 @@
         formatIndex: -100,
         templateIndex: -100,
 
-        formatList: [
-          {id: 111, name: '名片卡片', size: [600, 380]},
-          {id: 112, name: '个人简历', size: [600, 850]},
-          {id: 113, name: '宣传海报', size: [600, 850]}
-        ]
+        formatList: []
       }
     },
 
     created () {
-      this.$http.get('formatList?test=666', {
-        test: 666
-      }).then(res => {
+      this.$http.get('formatList?try=false').then(res => {
+        const result = res.data
+        if (result.status === 200) {
+          this.formatList = result.data;
+        }
       }).catch(err => {
         console.log(err);
       })
