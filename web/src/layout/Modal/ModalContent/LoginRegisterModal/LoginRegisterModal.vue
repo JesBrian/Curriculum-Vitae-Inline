@@ -4,7 +4,7 @@
       <TabPane label="登录">
         <Form ref="Login" class="signin" style="margin:8px 18px 0;">
           <FormItem prop="mobile">
-            <Input v-model="phone" type="text" placeholder="输入手机号">
+            <Input v-model="name" type="text" placeholder="输入用户名">
               <Icon type="ios-contact" slot="prepend" size="22" />
             </Input>
             <!--<p class="error-text" v-show="Login.error.mobile">{{Login.error.mobile}}</p>-->
@@ -35,7 +35,7 @@
       <TabPane label="注册">
         <Form ref="Register" class="signup" style="margin:8px 18px 0;">
           <FormItem prop="mobile">
-            <Input v-model="phone" type="text" placeholder="输入手机号" style="text-align:center">
+            <Input v-model="name" type="text" placeholder="输入用户名" style="text-align:center">
               <Icon type="ios-contact" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->
@@ -87,7 +87,7 @@
 
     data () {
       return {
-        phone: '',
+        name: '',
         mail: '',
         code: '',
         password: ''
@@ -102,9 +102,10 @@
         let errTips = this.checkInputComplete();
         if (errTips === '') {
           this.$http.post('userLogin', {
-            phone: this.phone,
+            name: this.name,
             password: this.password
           }).then(res => {
+            console.log(res)
           }).catch(err => {
             console.log(err);
           })
@@ -117,7 +118,7 @@
         let errTips = this.checkInputComplete('register');
         if (errTips === '') {
           this.$http.put('userRegister', {
-            phone: this.phone,
+            name: this.name,
             mail: this.mail,
             password: this.password
           }).then(res => {
@@ -131,8 +132,8 @@
       },
 
       checkInputComplete (category = 'login') {
-        if (this.phone === '') {
-          return '请输入手机号'
+        if (this.name === '') {
+          return '请输入用户名'
         }
         if (category === 'register') {
           if (this.mail === '') {

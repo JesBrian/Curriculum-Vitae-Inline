@@ -6,8 +6,9 @@ import IUser from '../interface/IUser'
 const UserSchema: Schema = new Schema({
   name: String,
   avatar: String,
-  phone: String,
   mail: String,
+  salt: String,
+  password: String,
   cTime: Date,
   lTime: Date,
   status: Boolean

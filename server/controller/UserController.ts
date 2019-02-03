@@ -1,4 +1,4 @@
-const { userLoginSer } = require('../service/UserService')
+const { userLoginSer, userRegisterSer } = require('../service/UserService')
 
 /**
  *
@@ -6,7 +6,11 @@ const { userLoginSer } = require('../service/UserService')
  * @param next
  */
 exports.userRegisterCtr = async (ctx: any, next: any) => {
-  console.log(ctx.request.body);
+  const username = ctx.request.body.name;
+  const mail = ctx.request.body.mail;
+  const password = ctx.request.body.password;
+
+  const result = await userRegisterSer(username, mail, password);
 };
 
 /**
@@ -14,8 +18,16 @@ exports.userRegisterCtr = async (ctx: any, next: any) => {
  * @param ctx
  * @param next
  */
-exports.userLoginCtr = (ctx: any, next: any) => {
-  userLoginSer();
+exports.userLoginCtr = async (ctx: any, next: any) => {
+  const username = ctx.request.body.name;
+  const password = ctx.request.body.password;
+
+  const result = await userLoginSer(username, password);
+  const status = 200;
+  ctx.body = {
+    status: status,
+    msg: result
+  }
 };
 
 exports.getUserListCtr = async (ctx: any, next: any) => {
