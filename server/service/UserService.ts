@@ -58,3 +58,7 @@ exports.userRegisterSer = async (username = '', mail = '', password = '') => {
   }
   return true;
 };
+
+exports.allUserListSer = async (page = 1, limit = 15) => {
+  return await UserModel.find();
+};

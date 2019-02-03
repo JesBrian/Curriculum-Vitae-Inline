@@ -35,6 +35,38 @@ Vue.prototype.$config = config
  */
 importDirective(Vue)
 
+
+// 引入 axios
+import axios from 'axios'
+import qs from 'qs'
+axios.defaults.withCredentials = false;
+axios.defaults.headers['Accept'] = '*/*';
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.baseURL = 'http://localhost:3000/'; // 配置 API 路径
+// 添加请求拦截器
+axios.interceptors.request.use(config => {
+  // 在发送请求之前做些什么
+  config.data = qs.stringify(config.data);
+  return config;
+}, error => {
+  // 对请求错误做些什么
+  return Promise.reject(error);
+});
+Vue.prototype.$http = axios;
+
+// 引入 localForage
+import localForage from 'localforage'
+localForage.config({
+  driver: localForage.INDEXEDDB, // Force WebSQL; same as using setDriver()
+  name: 'Inline Curriculum Vitae',
+  version: 1.0,
+  size: 4980736, // Size of database, in bytes. WebSQL-only for now.
+  storeName: 'cv-localforage', // Should be alphanumeric, with underscores.
+  description: 'Inline Curriculum Vitae'
+});
+Vue.prototype.$localForage = localForage;
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

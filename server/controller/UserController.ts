@@ -1,4 +1,4 @@
-const { userLoginSer, userRegisterSer } = require('../service/UserService')
+const { userLoginSer, userRegisterSer, allUserListSer } = require('../service/UserService')
 
 /**
  *
@@ -37,8 +37,21 @@ exports.userLoginCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: status,
     msg: result
-  }
+  };
+  await next();
 };
 
 exports.getUserListCtr = async (ctx: any, next: any) => {
+};
+
+exports.allUserListCtr = async (ctx: any, next: any) => {
+  const pageNum = ctx.query.page;
+  const limitNum = ctx.query.limit;
+
+  const result = await allUserListSer(pageNum, limitNum);
+
+  ctx.body = {
+    status: 200,
+    data: result
+  };
 };

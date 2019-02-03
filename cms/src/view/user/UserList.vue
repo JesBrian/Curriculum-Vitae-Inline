@@ -1,16 +1,12 @@
 <template>
   <Card>
-    <Tabs type="card">
-      <TabPane label="所有用户">
+    <Tabs v-model="tabsValue" type="card">
+      <TabPane name="all" label="所有用户">
         标签一的内容
         <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
       </TabPane>
-      <TabPane label="异常用户">
+      <TabPane name="back" label="用户黑名单">
         标签二的内容
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
-      </TabPane>
-      <TabPane label="用户黑名单">
-        标签三的内容
         <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
       </TabPane>
     </Tabs>
@@ -19,10 +15,36 @@
 
 <script>
   export default {
-    name: 'UserList'
+    name: 'UserList',
+
+    data () {
+      return {
+        tabsValue: 'all',
+        userList: []
+      }
+    },
+
+    watch: {
+      tabsValue: {
+        handler: function(nVal) {
+          this.getUserListData()
+        },
+        immediate: true
+      }
+    },
+
+    methods: {
+      getUserListData () {
+        this.$http.get('allUserList').then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

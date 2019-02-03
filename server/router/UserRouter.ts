@@ -1,4 +1,9 @@
-const { userRegisterCtr, userLoginCtr, getUserListCtr } = require('../controller/UserController')
+const {
+  userRegisterCtr,
+  userLoginCtr,
+  getUserListCtr,
+  allUserListCtr
+} = require('../controller/UserController')
 
 // @ts-ignore
 const Router = require('koa-router');
@@ -8,5 +13,6 @@ const router = new Router();
 router.post('/userLogin', userLoginCtr);
 router.put('/userRegister', userRegisterCtr);
 router.get('/userList', getUserListCtr);
+router.get('/allUserList', allUserListCtr);
 
 module.exports = router;
