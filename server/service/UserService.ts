@@ -26,9 +26,11 @@ const generateMixed = (n: number = 4): string => {
  * @param password
  */
 exports.userLoginSer = async (username = '', password = '') => {
-  const user = await UserModel.findOne({'name': username});
+  const user = await UserModel.findOne({'name': username}, 'name avatar salt password status');
   if (user) {
-    if (md5(user.salt + password) === user.password) {
+    if (user.status && (md5(user.salt + password) === user.password)) {
+      user.lTime = new Date();
+      user.save();
       return '用户登录成功';
     }
     return '用户密码错误';
@@ -51,4 +53,8 @@ exports.userRegisterSer = async (username = '', mail = '', password = '') => {
     password: md5(salt + password)
   });
   const result = await user.save();
+  if (result.errors) {
+    return false;
+  }
+  return true;
 };

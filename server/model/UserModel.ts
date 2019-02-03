@@ -5,13 +5,25 @@ import IUser from '../interface/IUser'
 
 const UserSchema: Schema = new Schema({
   name: String,
-  avatar: String,
+  avatar: {
+    type: String,
+    default: ''
+  },
   mail: String,
   salt: String,
   password: String,
-  cTime: Date,
-  lTime: Date,
-  status: Boolean
+  cTime: {
+    type: Date,
+    default: Date
+  },
+  lTime: {
+    type: Date,
+    default: Date
+  },
+  status: {
+    type: Boolean,
+    default: true
+  }
 }, {versionKey: false});
 
 const User: Model<IUser> = model<IUser>('User', UserSchema);
