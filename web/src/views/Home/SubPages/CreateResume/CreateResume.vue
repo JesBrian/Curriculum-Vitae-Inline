@@ -67,7 +67,7 @@
     },
 
     created () {
-      this.$http.get('formatList?try=false').then(res => {
+      this.$http.get('formatList').then(res => {
         const result = res.data
         if (result.status === 200) {
           this.formatList = result.data;

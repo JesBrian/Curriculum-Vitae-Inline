@@ -8,7 +8,6 @@ const FormatSchema: Schema = new Schema({
   logo: String,
   size: Array,
   cTime: Date,
-  try: Boolean,
   status: Boolean
 }, {versionKey: false});
 
