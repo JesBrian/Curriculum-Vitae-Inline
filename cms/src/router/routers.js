@@ -176,6 +176,35 @@ export default [
     ]
   },
   {
+    path: '/componentConf',
+    name: 'componentConf',
+    meta: {
+      icon: 'ios-book',
+      title: '组件配置模块'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'componentConfList',
+        name: 'componentConfList',
+        meta: {
+          icon: 'md-funnel',
+          title: '组件配置列表'
+        },
+        component: resolve => require(['@/view/componentConf/ComponentListConf.vue'], resolve)
+      },
+      {
+        path: 'editComponentConf',
+        name: 'editComponentConf',
+        meta: {
+          icon: 'md-funnel',
+          title: '添加组件配置'
+        },
+        component: resolve => require(['@/view/componentConf/EditComponentConf.vue'], resolve)
+      }
+    ]
+  },
+  {
     path: '/component',
     name: 'component',
     meta: {
