@@ -54,18 +54,6 @@ axios.interceptors.request.use(config => {
 });
 Vue.prototype.$http = axios;
 
-// 引入 localForage
-import localForage from 'localforage'
-localForage.config({
-  driver: localForage.INDEXEDDB, // Force WebSQL; same as using setDriver()
-  name: 'Inline Curriculum Vitae',
-  version: 1.0,
-  size: 4980736, // Size of database, in bytes. WebSQL-only for now.
-  storeName: 'cv-localforage', // Should be alphanumeric, with underscores.
-  description: 'Inline Curriculum Vitae'
-});
-Vue.prototype.$localForage = localForage;
-
 
 /* eslint-disable no-new */
 new Vue({
