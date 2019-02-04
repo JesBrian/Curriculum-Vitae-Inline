@@ -1,8 +1,8 @@
 <template>
   <Layout class="layout">
     <TopNavbar @changeRightNavbar="changeRightNavbar" />
-    <Layout>
 
+    <Layout>
       <!-- 左侧菜单 -->
       <Sider v-model="isCollapsed" breakpoint="md" collapsible collapsed-width="78" class="left-navbar">
         <LeftNavbar :is-collapsed="isCollapsed" />
@@ -13,7 +13,7 @@
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
           <div style="width:98%; margin:6px auto 0; padding:0 138px 13px 58px; position:relative; box-sizing:border-box;">
-            <div style="left:3px; top:0; position:absolute;">
+            <div style="left:16px; top:0; position:absolute;">
               <Button @click="changeZoomRate(false)" icon="md-remove" type="info" shape="circle" size="small" ghost style="margin-right:18px;"></Button>
             </div>
             <div style="width:100%; margin-top:-6px;">
@@ -21,7 +21,7 @@
             </div>
             <div style="right:0; top:0; position:absolute;">
               <Button @click="changeZoomRate(true)" icon="md-add" type="info" shape="circle" size="small" ghost></Button>
-              <Button @click="changeZoomRate(false, 0, true)" icon="md-list" type="info" size="small" ghost style="margin:0 0 0 12px;">重置</Button>
+              <Button @click="changeZoomRate(false, 0, true)" icon="md-list" type="info" size="small" ghost style="margin:0 0 0 12px;">重置缩放</Button>
             </div>
           </div>
 
