@@ -21,12 +21,12 @@
     },
 
     created () {
-      this.getComponentListConfData(1);
+      this.getComponentListConfData();
     },
 
     methods: {
-      getComponentListConfData (page = 1) {
-        this.$http.get('').then(res => {
+      getComponentListConfData () {
+        this.$http.get('componentConf').then(res => {
           console.log(res);
         }).catch(err => {
           console.log(err);

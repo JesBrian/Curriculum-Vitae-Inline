@@ -11,9 +11,11 @@ export default interface IComponentConf extends Document {
 }
 
 interface ISpecial {
+  name: string
 }
 
 interface IFormat {
+  name: string,
   position: {
     axis: Array<number>,
     drag: boolean
@@ -25,6 +27,7 @@ interface IFormat {
 }
 
 interface IInput {
+  name: string,
   text: {
     val: string
   },
@@ -33,6 +36,7 @@ interface IInput {
   },
   type: string,
   use: boolean,
+  title: string,
   size: number,
   color: number,
   align: Array<string>,
@@ -40,6 +44,7 @@ interface IInput {
 }
 
 interface IStyle {
+  name: string,
   bgColor: string,
   opacity: number
 }
