@@ -1,5 +1,8 @@
 {
-	"description": "A WePY project",
+	"miniprogramRoot": "dist/",
+	"projectname": "inline-curriculum-vitae-mp",
+	"description": "inline-curriculum-vitae-mp",
+	"appid": "wxa3a9d68e040ea88c",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
@@ -8,8 +11,5 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"appid": "wxa3a9d68e040ea88c",
-	"projectname": "666",
-	"miniprogramRoot": "dist/",
 	"condition": {}
 }
