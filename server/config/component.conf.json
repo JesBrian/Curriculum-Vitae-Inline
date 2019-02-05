@@ -1,0 +1,31 @@
+{
+	"special": {
+	},
+	"format": {
+		"position": {
+			"axis": [0, 0],
+			"drag": true
+		},
+		"size": {
+			"size": [0, 0],
+			"drag": true
+		}
+	},
+	"input": {
+		"text": {
+			"val": ""
+		},
+		"number": {
+			"val": 0
+		},
+		"use": false,
+		"size": 14,
+		"color": 14,
+		"align": ["center", "center"],
+		"underline": false
+	},
+	"style": {
+		"bgColor": "transparent",
+		"opacity": 1
+	}
+}

@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const logger = require('pomelo-logger').getLogger('mongodb-log');
 
 // @ts-ignore
-const DB_CONF = require('../config/mongodb.conf');
+const DB_CONF = require('mongodb.conf.json');
 const DB_URL = "mongodb://" + DB_CONF.USER + ":" + DB_CONF.PASSWORD + "@" + DB_CONF.HOST + ":" + DB_CONF.PORT + "/" + DB_CONF.DB_NAME;
 
 mongoose.connect(DB_URL);

@@ -70,7 +70,7 @@ export default [
         path: 'editUser',
         name: 'editUser',
         meta: {
-          title: '添加用户',
+          title: '用户管理',
           icon: 'md-funnel',
         },
         component: resolve => require(['@/view/user/EditUser.vue'], resolve)
@@ -100,7 +100,7 @@ export default [
         name: 'editAdmin',
         meta: {
           icon: 'md-funnel',
-          title: '添加管理员'
+          title: '管理员管理'
         },
         component: resolve => require(['@/view/admin/EditAdmin.vue'], resolve)
       }
@@ -140,7 +140,7 @@ export default [
         name: 'editFormat',
         meta: {
           icon: 'md-funnel',
-          title: '添加格式'
+          title: '格式管理'
         },
         component: resolve => require(['@/view/format/EditFormat.vue'], resolve)
       }
@@ -169,7 +169,7 @@ export default [
         name: 'editTemplate',
         meta: {
           icon: 'md-funnel',
-          title: '添加模板'
+          title: '模板管理'
         },
         component: resolve => require(['@/view/template/EditTemplate.vue'], resolve)
       }
@@ -185,22 +185,13 @@ export default [
     component: Main,
     children: [
       {
-        path: 'componentConfList',
-        name: 'componentConfList',
+        path: 'componentConf',
+        name: 'componentConf',
         meta: {
           icon: 'md-funnel',
-          title: '组件配置列表'
+          title: '组件配置管理'
         },
-        component: resolve => require(['@/view/componentConf/ComponentListConf.vue'], resolve)
-      },
-      {
-        path: 'editComponentConf',
-        name: 'editComponentConf',
-        meta: {
-          icon: 'md-funnel',
-          title: '添加组件配置'
-        },
-        component: resolve => require(['@/view/componentConf/EditComponentConf.vue'], resolve)
+        component: resolve => require(['@/view/componentConf/ComponentConf.vue'], resolve)
       }
     ]
   },
@@ -227,7 +218,7 @@ export default [
         name: 'editComponent',
         meta: {
           icon: 'md-funnel',
-          title: '添加组件'
+          title: '组件管理'
         },
         component: resolve => require(['@/view/component/EditComponent.vue'], resolve)
       }
