@@ -1,24 +1,6 @@
 import UserModel from '../model/UserModel'
 
-const crypto = require('crypto');
-const md5 = (str: string) => {
-  const crypto_md5 = crypto.createHash('md5');
-  crypto_md5.update(str, 'utf8'); // 加入编码
-  return crypto_md5.digest('hex');
-};
-const getRandomNum = (Min: number = 0, Max: number = 1): number => {
-  return(Min + Math.round(Math.random() * Max - Min));
-};
-const generateMixed = (n: number = 4): string => {
-  const chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-  let res = "";
-  for(let i = 0; i < n ; i ++) {
-    let id = Math.ceil(Math.random()*35);
-    res += chars[id];
-  }
-  return res;
-};
-
+const { md5, generateRandomString } = require('../helper/FunctionHelper')
 
 /**
  * 用户登录
@@ -45,7 +27,7 @@ exports.userLoginSer = async (username = '', password = '') => {
  * @param password
  */
 exports.userRegisterSer = async (username = '', mail = '', password = '') => {
-  const salt = generateMixed(4);
+  const salt = generateRandomString(4);
   let user = new UserModel({
     name: username,
     mail: mail,

@@ -15,13 +15,16 @@
     <div class="component-conf-container" style="width:100%; height:100%; position:relative;">
       <Tabs value="name1" style="z-index: 5;">
         <TabPane label="标签一" name="name1">
-          <div v-show="isShowComponentConfArea" ></div>
+          <div class="component-conf-content" v-show="isShowComponentConfArea" >
+          </div>
         </TabPane>
         <TabPane label="标签二" name="name2">
-          <div v-show="isShowComponentConfArea" ></div>
+          <div class="component-conf-content" v-show="isShowComponentConfArea" >
+          </div>
         </TabPane>
         <TabPane label="标签三" name="name3">
-          <div v-show="isShowComponentConfArea" ></div>
+          <div class="component-conf-content" v-show="isShowComponentConfArea" >
+          </div>
         </TabPane>
       </Tabs>
 
@@ -80,25 +83,37 @@
       }
     }
 
-    .component-conf-container {
-      /deep/ {
-        .ivu-tabs-nav-wrap {
-          margin:0 68px 0 58px;
-        }
-        .ivu-tabs-bar {
-          margin: 0 0 4px;
-          border: none;
-          box-shadow: 0 2px 6px -1px #282828;
-        }
-        .ivu-tabs-tab {
-          color: #AAA;
-          &:hover {
-            color: #57a3f3;
+    .component-conf {
+      &-container {
+        /deep/ {
+          .ivu-tabs {
+            &-nav-wrap {
+              margin:0 68px 0 58px;
+            }
+            &-ink-bar {
+              background: #00C3FF;
+              border-radius: 2px;
+            }
+            &-bar {
+              margin: 0 0 4px;
+              border: none;
+              box-shadow: 0 2px 6px -2px #383838;
+            }
+            &-tab {
+              color: #AAA;
+              &:hover {
+                color: #57a3f3;
+              }
+              &-active {
+                color: #00C3FF!important;
+              }
+            }
           }
-          &-active {
-            color: #2d8cf0;
-          }
         }
+      }
+
+      &-content {
+        color: #BBB;
       }
     }
   }
