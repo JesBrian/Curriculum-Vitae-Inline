@@ -19,6 +19,7 @@
 			"val": 0
 		},
 		"use": false,
+		"type": "text",
 		"size": 14,
 		"color": 14,
 		"align": ["center", "center"],
