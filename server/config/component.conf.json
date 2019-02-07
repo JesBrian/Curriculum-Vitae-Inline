@@ -22,10 +22,11 @@
 			"val": 0
 		},
 		"use": false,
+		"edit": true,
 		"type": "text",
 		"title": "",
 		"size": 14,
-		"color": 14,
+		"color": "#000",
 		"align": ["center", "center"],
 		"underline": false
 	},

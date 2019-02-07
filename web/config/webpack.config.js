@@ -10,7 +10,15 @@ module.exports = {
   module: {
     rules: [{
       test: /\.vue$/,
-      use: ['vue-loader']
+      use: [
+        'vue-loader',
+        {
+          loader: 'iview-loader',
+          options: {
+            prefix: false
+          }
+        }
+      ]
     }, {
       test: /\.js$/,
       use: ['babel-loader'],
