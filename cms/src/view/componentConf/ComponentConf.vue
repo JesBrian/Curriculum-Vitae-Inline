@@ -21,13 +21,24 @@
     },
 
     created () {
-      this.getComponentListConfData();
+      this.$localForage.getItem('componentConf').then(val => {
+        if (val) {
+          this.componentConf = val;
+        } else {
+          this.getComponentListConfData();
+        }
+      }).catch(err => {
+        console.log(err);
+      })
     },
 
     methods: {
       getComponentListConfData () {
         this.$http.get('componentConf').then(res => {
-          console.log(res);
+          const result = res.data;
+          if (result.status === 200) {
+            this.$localForage.setItem('componentConf', result.data);
+          }
         }).catch(err => {
           console.log(err);
         })
