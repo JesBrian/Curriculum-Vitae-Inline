@@ -15,12 +15,12 @@
     <div class="component-conf-container" style="width:100%; height:100%; position:relative;">
       <Tabs value="special" style="line-height: 35px; z-index: 5;">
         <TabPane label="特殊" name="special" style="padding-top:6px; ">
-          <Row class="component-conf-content" v-show="isShowComponentConfArea" >
-          </Row>
+          <div class="component-conf-content" v-show="isShowComponentConfArea" >
+          </div>
         </TabPane>
         <TabPane label="规格" name="format" style="padding-top:6px; ">
-          <template v-show="isShowComponentConfArea" >
-            <Row class="component-conf-content" :gutter="32" >
+          <div v-show="isShowComponentConfArea" class="component-conf-content" >
+            <Row :gutter="32" >
               <Col span="8">
                 <Row>
                   <Col span="4">定位:</Col>
@@ -50,28 +50,84 @@
                 </Row>
               </Col>
             </Row>
-          </template>
+          </div>
         </TabPane>
         <TabPane label="输入" name="input" style="padding-top:6px; ">
-          <Row class="component-conf-content" v-show="isShowComponentConfArea" >
-          </Row>
-        </TabPane>
-        <TabPane label="样式" name="style" style="padding-top:6px; ">
-          <template v-show="isShowComponentConfArea" >
-            <Row class="component-conf-content" >
+          <div v-show="isShowComponentConfArea" class="component-conf-content" >
+            <Row :gutter="16" >
+              <Col span="5">
+                <Row>
+                  <Col span="6">{{componentConf.input.title}}:</Col>
+                  <Col span="17">
+                    <Input v-if="componentConf.input.type === 'text'" v-model="componentConf.input.text.val" size="small" />
+                    <InputNumber v-if="componentConf.input.type === 'number'" v-model="componentConf.input.number.val" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="7">
+                <Row>
+                  <Col span="7">对齐方式:</Col>
+                  <Col span="8">
+                    <Select v-model="componentConf.input.align[0]" size="small" style="width:60px">
+                      <Option value="left">靠左</Option>
+                      <Option value="center">居中</Option>
+                      <Option value="bottom">靠右</Option>
+                    </Select>
+                  </Col>
+                  <Col span="8">
+                    <Select v-model="componentConf.input.align[1]" size="small" style="width:60px">
+                      <Option value="top">顶部</Option>
+                      <Option value="center">中间</Option>
+                      <Option value="bottom">底部</Option>
+                    </Select>
+                  </Col>
+                </Row>
+              </Col>
               <Col span="6">
                 <Row>
-                  <Col span="15">边界线宽度:</Col>
-                  <Col span="9">
+                  <Col span="8">字体大小:</Col>
+                  <Col span="16">
+                    <InputNumber v-model="componentConf.input.size" :min="12" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="8">字体颜色:</Col>
+                  <Col span="16">
+                    <ColorPicker v-model="componentConf.input.color" alpha size="small" />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row :gutter="16" >
+              <Col span="5">
+                <Row>
+                  <Col span="8">下划线:</Col>
+                  <Col span="16">
+                    <Switch v-model="componentConf.input.underline" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </div>
+        </TabPane>
+        <TabPane label="样式" name="style" style="padding-top:6px; ">
+          <div v-show="isShowComponentConfArea" class="component-conf-content" >
+            <Row :gutter="16" >
+              <Col span="6">
+                <Row>
+                  <Col span="10">边界线宽度:</Col>
+                  <Col span="14">
                     <InputNumber v-model="componentConf.style.border[1]" :min="0" size="small" />
                   </Col>
                 </Row>
               </Col>
               <Col span="6">
                 <Row>
-                  <Col span="15">边界线形式:</Col>
-                  <Col span="9">
-                    <Select v-model="componentConf.style.border[2]" size="small">
+                  <Col span="10">边界线形式:</Col>
+                  <Col span="14">
+                    <Select v-model="componentConf.style.border[2]" size="small" style="width: 80px;">
                       <Option value="solid">实线</Option>
                       <Option value="double">双实线</Option>
                       <Option value="dotted">点状</Option>
@@ -82,48 +138,48 @@
               </Col>
               <Col span="6">
                 <Row>
-                  <Col span="15">边界线颜色:</Col>
-                  <Col span="9">
+                  <Col span="10">边界线颜色:</Col>
+                  <Col span="14">
                     <ColorPicker v-model="componentConf.style.border[3]" alpha size="small" />
                   </Col>
                 </Row>
               </Col>
               <Col span="6">
                 <Row>
-                  <Col span="12">背景色:</Col>
-                  <Col span="12">
+                  <Col span="8">背景色:</Col>
+                  <Col span="16">
                     <ColorPicker v-model="componentConf.style.bgColor" alpha size="small" />
                   </Col>
                 </Row>
               </Col>
             </Row>
-            <Row class="component-conf-content" :gutter="16" >
+            <Row :gutter="16" >
               <Col span="6">
                 <Row>
-                  <Col span="8">阴影宽度:</Col>
-                  <Col span="11">
+                  <Col span="9">阴影宽度:</Col>
+                  <Col span="15">
                     <InputNumber v-model="componentConf.style.shadow[1]" :min="0" size="small" />
                   </Col>
                 </Row>
               </Col>
               <Col span="6">
                 <Row>
-                  <Col span="13">阴影颜色:</Col>
-                  <Col span="11">
+                  <Col span="9">阴影颜色:</Col>
+                  <Col span="15">
                     <ColorPicker v-model="componentConf.style.shadow[2]" alpha size="small" />
                   </Col>
                 </Row>
               </Col>
               <Col span="6">
                 <Row>
-                  <Col span="15">组件透明度:</Col>
-                  <Col span="9">
-                    <ColorPicker v-model="componentConf.style.opacity" alpha size="small" />
+                  <Col span="10">组件透明度:</Col>
+                  <Col span="14">
+                    <InputNumber v-model="componentConf.style.opacity" :min="0" :max="1" :step="0.1" size="small" />
                   </Col>
                 </Row>
               </Col>
             </Row>
-          </template>
+          </div>
         </TabPane>
       </Tabs>
 
@@ -183,7 +239,6 @@
 <style lang="scss" scoped>
   .top-navbar {
     height: 37px;
-    margin-bottom: 18px;
     padding:0;
     position:relative;
     box-shadow:0 0 18px #000;
@@ -238,6 +293,8 @@
       }
 
       &-content {
+        min-width: 800px;
+        max-width: 800px;
         padding: 0 18px 0;
         box-sizing: border-box;
         color: #BBB;

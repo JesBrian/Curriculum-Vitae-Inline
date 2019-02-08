@@ -8,7 +8,7 @@
         <LeftNavbar :is-collapsed="isCollapsed" />
       </Sider>
 
-      <Content class="page-layout" style="padding:50px 20px 18px;">
+      <Content class="page-layout" style="margin-top:18px; padding:50px 20px 18px;">
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
