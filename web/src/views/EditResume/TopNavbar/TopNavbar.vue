@@ -13,19 +13,117 @@
     </Menu>
 
     <div class="component-conf-container" style="width:100%; height:100%; position:relative;">
-      <Tabs value="name1" style="z-index: 5;">
-        <TabPane label="标签一" name="name1">
-          <div class="component-conf-content" v-show="isShowComponentConfArea" >
-            <ColorPicker v-model="color" alpha size="small" />
-          </div>
+      <Tabs value="special" style="line-height: 35px; z-index: 5;">
+        <TabPane label="特殊" name="special" style="padding-top:6px; ">
+          <Row class="component-conf-content" v-show="isShowComponentConfArea" >
+          </Row>
         </TabPane>
-        <TabPane label="标签二" name="name2">
-          <div class="component-conf-content" v-show="isShowComponentConfArea" >
-          </div>
+        <TabPane label="规格" name="format" style="padding-top:6px; ">
+          <template v-show="isShowComponentConfArea" >
+            <Row class="component-conf-content" :gutter="32" >
+              <Col span="8">
+                <Row>
+                  <Col span="4">定位:</Col>
+                  <Col span="20">
+                    <InputNumber v-model="componentConf.format.position.axis[0]" :min="0" size="small" />
+                    <span>X</span>
+                    <InputNumber v-model="componentConf.format.position.axis[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="8">
+                <Row>
+                  <Col span="4">长宽:</Col>
+                  <Col span="20">
+                    <InputNumber v-model="componentConf.format.position.axis[0]" :min="0" size="small" />
+                    <span>X</span>
+                    <InputNumber v-model="componentConf.format.position.axis[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="8">
+                <Row>
+                  <Col span="4">层级:</Col>
+                  <Col span="20">
+                    <InputNumber :min="1" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </template>
         </TabPane>
-        <TabPane label="标签三" name="name3">
-          <div class="component-conf-content" v-show="isShowComponentConfArea" >
-          </div>
+        <TabPane label="输入" name="input" style="padding-top:6px; ">
+          <Row class="component-conf-content" v-show="isShowComponentConfArea" >
+          </Row>
+        </TabPane>
+        <TabPane label="样式" name="style" style="padding-top:6px; ">
+          <template v-show="isShowComponentConfArea" >
+            <Row class="component-conf-content" >
+              <Col span="6">
+                <Row>
+                  <Col span="15">边界线宽度:</Col>
+                  <Col span="9">
+                    <InputNumber v-model="componentConf.style.border[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="15">边界线形式:</Col>
+                  <Col span="9">
+                    <Select v-model="componentConf.style.border[2]" size="small">
+                      <Option value="solid">实线</Option>
+                      <Option value="double">双实线</Option>
+                      <Option value="dotted">点状</Option>
+                      <Option value="dashed">虚线</Option>
+                    </Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="15">边界线颜色:</Col>
+                  <Col span="9">
+                    <ColorPicker v-model="componentConf.style.border[3]" alpha size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="12">背景色:</Col>
+                  <Col span="12">
+                    <ColorPicker v-model="componentConf.style.bgColor" alpha size="small" />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row class="component-conf-content" :gutter="16" >
+              <Col span="6">
+                <Row>
+                  <Col span="8">阴影宽度:</Col>
+                  <Col span="11">
+                    <InputNumber v-model="componentConf.style.shadow[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="13">阴影颜色:</Col>
+                  <Col span="11">
+                    <ColorPicker v-model="componentConf.style.shadow[2]" alpha size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="15">组件透明度:</Col>
+                  <Col span="9">
+                    <ColorPicker v-model="componentConf.style.opacity" alpha size="small" />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </template>
         </TabPane>
       </Tabs>
 
@@ -43,11 +141,34 @@
     data () {
       return {
         isShowComponentConfArea: true,
-        color: '#000'
+        componentConf: null
       }
     },
 
+    created () {
+      this.$localForage.getItem('componentConf').then(val => {
+        if (val) {
+          this.componentConf = val;
+        } else {
+          this.getComponentListConfData();
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+
     methods: {
+      getComponentListConfData () {
+        this.$http.get('componentConf').then(res => {
+          const result = res.data;
+          if (result.status === 200) {
+            this.$localForage.setItem('componentConf', result.data);
+          }
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+
       changeRightNavbar () {
         this.$emit('changeRightNavbar')
       },
@@ -68,7 +189,7 @@
     box-shadow:0 0 18px #000;
 
     &.active {
-      height: 108px;
+      height: 128px;
     }
 
     .layout-logo {
@@ -117,6 +238,8 @@
       }
 
       &-content {
+        padding: 0 18px 0;
+        box-sizing: border-box;
         color: #BBB;
       }
     }

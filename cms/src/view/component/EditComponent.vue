@@ -4,7 +4,7 @@
 
     <Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>
 
-    <Tabs v-model="nowMainTab" type="card" class="edit-config">
+    <Tabs v-if="componentConf !== null" v-model="nowMainTab" type="card" class="edit-config">
       <TabPane name="base" label="基本配置">
         <div v-show="nowMainTab === 'base'" style="margin: 0 18px 28px 28px;">
           <Row style="margin-bottom:23px; line-height:33px;">
@@ -261,9 +261,12 @@
                 <Row style="margin-bottom:23px; line-height:33px;">
                   <Col span="8" style="text-align:left;">边界线形式：</Col>
                   <Col span="16">
-                    <!--<Select v-model="model2" size="small" style="width:100px">-->
-                      <!--<Option value=""></Option>-->
-                    <!--</Select>-->
+                    <Select v-model="componentConf.style.border[2]" size="small" style="width:100px">
+                      <Option value="solid">实线</Option>
+                      <Option value="double">双实线</Option>
+                      <Option value="dotted">点状</Option>
+                      <Option value="dashed">虚线</Option>
+                    </Select>
                   </Col>
                 </Row>
                 <Row style="margin-bottom:23px; line-height:33px;">
@@ -326,48 +329,9 @@
 
     data () {
       return {
-        nowMainTab: 'detail',
-        nowSecondTab: 'style',
-        componentConf: {
-          special: {
-            name: '特殊'
-          },
-          format: {
-            name: '规格',
-            position: {
-              axis: [0, 0],
-              drag: true
-            },
-            size: {
-              size: [0, 0],
-              drag: true
-            }
-          },
-          input: {
-            name: '输入',
-            text: {
-              val: ''
-            },
-            number: {
-              val: 0
-            },
-            use: true,
-            edit: true,
-            type: 'text',
-            title: '输入',
-            size: 14,
-            color: '#000',
-            align: ['center', 'center'],
-            underline: false
-          },
-          style: {
-            name: '样式',
-            bgColor: 'transparent',
-            border: [false, 0, '', '#000'],
-            shadow: [false, 0, '#000'],
-            opacity: 1
-          }
-        },
+        nowMainTab: 'base',
+        nowSecondTab: 'special',
+        componentConf: null,
         name: '',
         logo: '',
         tags: [],
@@ -376,15 +340,15 @@
     },
 
     created () {
-      // this.$localForage.getItem('componentConf').then(val => {
-      //   if (val) {
-      //     this.componentConf = val;
-      //   } else {
-      //     this.getComponentListConfData();
-      //   }
-      // }).catch(err => {
-      //   console.log(err);
-      // })
+      this.$localForage.getItem('componentConf').then(val => {
+        if (val) {
+          this.componentConf = val;
+        } else {
+          this.getComponentListConfData();
+        }
+      }).catch(err => {
+        console.log(err);
+      })
     },
 
     methods: {

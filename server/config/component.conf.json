@@ -33,7 +33,7 @@
 	"style": {
 		"name": "样式",
 		"bgColor": "transparent",
-		"border": [false, 0, "", "#000"],
+		"border": [false, 0, "solid", "#000"],
 		"shadow": [false, 0, "#000"],
 		"opacity": 1
 	}
