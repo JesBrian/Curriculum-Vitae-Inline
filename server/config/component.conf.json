@@ -24,7 +24,7 @@
 		"use": false,
 		"edit": true,
 		"type": "text",
-		"title": "",
+		"title": "输入",
 		"size": 14,
 		"color": "#000",
 		"align": ["center", "center"],
@@ -33,6 +33,8 @@
 	"style": {
 		"name": "样式",
 		"bgColor": "transparent",
+		"border": [false, 0, "", "#000"],
+		"shadow": [false, 0, "#000"],
 		"opacity": 1
 	}
 }

@@ -2,16 +2,16 @@
   <div>
     <Row>
       <Col span="15">
-        <Input v-model="tag" placeholder="Enter some tags ..." />
+        <Input v-model="tag" @keyup.native.enter="createTag" placeholder="Enter tag ..." />
       </Col>
       <Col span="9" style="text-align:center">
         <Button @click="clearTagInput" type="warning" ghost>清除</Button>
         <Button @click="createTag" type="info" ghost>保存</Button>
       </Col>
     </Row>
-    <div v-if="tags.length !== 0" style="margin-top: 8px;">
-      <Tag v-for="(tagItem, index) in tags" @on-close="tagClose(index)" color="primary" type="dot" closable>{{tagItem}}</Tag>
-      <Button @click="clearTags" type="error" ghost size="small">清除已有标签</Button>
+    <div v-if="value.length !== 0" style="margin-top: 8px;">
+      <Tag v-for="(tagItem, index) in value" @on-close="tagClose(index)" color="primary" type="dot" closable>{{tagItem}}</Tag>
+      <Button @click="clearTags" type="error" ghost size="small" style="margin-top:2px;">清除已有标签</Button>
     </div>
   </div>
 </template>
@@ -20,12 +20,37 @@
   export default {
     name: 'InputTag',
 
+    props: {
+      value: {
+        type: Array,
+        default: () => {
+          return [];
+        }
+      },
+      max: {
+        type: Number,
+        default: 3
+      }
+    },
+
     data () {
       return {
         tag: '',
-        tags: [
-          '标签1', '标签2', '标签3'
-        ]
+        tags: this.value
+      }
+    },
+
+    watch: {
+      'value.length': {
+        handler (nVal) {
+          if (nVal > this.max) {
+            this.tags.splice(this.max, nVal);
+          }
+        },
+        immediate: true
+      },
+      tags (nVal) {
+        this.$emit('input', nVal);
       }
     },
 
@@ -35,6 +60,7 @@
       },
 
       createTag () {
+        if (this.tag === '') return;
         this.tags.push(this.tag);
         this.tag = '';
       },

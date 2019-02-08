@@ -16,6 +16,7 @@
       <Tabs value="name1" style="z-index: 5;">
         <TabPane label="标签一" name="name1">
           <div class="component-conf-content" v-show="isShowComponentConfArea" >
+            <ColorPicker v-model="color" alpha size="small" />
           </div>
         </TabPane>
         <TabPane label="标签二" name="name2">
@@ -41,7 +42,8 @@
 
     data () {
       return {
-        isShowComponentConfArea: true
+        isShowComponentConfArea: true,
+        color: '#000'
       }
     },
 
@@ -87,6 +89,8 @@
       &-container {
         /deep/ {
           .ivu-tabs {
+            overflow: visible;
+
             &-nav-wrap {
               margin:0 68px 0 58px;
             }
