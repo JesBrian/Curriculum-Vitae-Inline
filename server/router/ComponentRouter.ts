@@ -16,14 +16,9 @@ const router = new Router();
 router.get('/componentConf', getComponentConfCtr);
 
 /**
- * 创建新组件
+ * 创建/更新组件
  */
-router.put('/createComponent', saveComponentCtr);
-
-/**
- * 更新组件信息
- */
-router.put('/updateComponent', saveComponentCtr);
+router.put('/saveComponent', saveComponentCtr);
 
 /**
  * 获取组件列表

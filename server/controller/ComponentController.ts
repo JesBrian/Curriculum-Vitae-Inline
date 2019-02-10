@@ -18,19 +18,7 @@ exports.getComponentConfCtr = async (ctx: any, next: any) => {
 };
 
 /**
- * 创建新组件
- * @param ctx
- * @param next
- */
-exports.createComponentCtr = async (ctx: any, next: any) => {
-  ctx.body = {
-    status: 200,
-    msg: '创建组件成功'
-  };
-};
-
-/**
- * 更新组件信息
+ * 创建/更新组件信息
  * @param ctx
  * @param next
  */
@@ -38,15 +26,22 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
   const operation = ctx.body.oper;
   const componentData = ctx.body.componentData;
 
+  let result, status = 200, msg = '组件信息保存成功';
+
   if (operation === 'up') {
-    updateComponentSer(componentData);
+    result = await updateComponentSer(componentData);
   } else {
-    createComponentSer(componentData);
+    result = await createComponentSer(componentData);
+  }
+
+  if (!result) {
+    status = 555;
+    msg = '组件信息保存失败';
   }
 
   ctx.body = {
-    status: 200,
-    msg: '组件信息更新成功'
+    status: status,
+    msg: msg
   };
 };
 
