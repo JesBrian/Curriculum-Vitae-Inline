@@ -7,8 +7,9 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
   const param = ctx.request.body;
   const adminId = param.id;
   let adminData = {
-    name: param.name,
-    powers: param.powers,
+    trueName: param.trueName,
+    userId: param.userId,
+    roleId: param.roleId,
     status: param.status
   };
 

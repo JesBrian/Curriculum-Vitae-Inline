@@ -91,6 +91,38 @@
 
     methods: {
       saveAdmin () {
+        if (this.trueName === '') {
+          this.$Notice.error({
+            title: '请输入真实姓名',
+            desc: ''
+          });
+          return false;
+        }
+        if (this.roleId === '') {
+          this.$Notice.error({
+            title: '请选择账户所属角色',
+            desc: ''
+          });
+          return false;
+        }
+
+        let adminData = {
+          trueName: this.trueName,
+          userId: this.userId,
+          roleId: this.roleId,
+          status: this.status
+        };
+
+        const id = this.$route.query.id;
+        if (id) {
+          adminData.id = id;
+        }
+
+        this.$http.put('saveAdmin', adminData).then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        });
       }
     }
   }
