@@ -13,26 +13,35 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">已注册用户：</Col>
         <Col span="16">
-          <RadioGroup v-model="hasRegisterUser">
-            <Radio label="是" style="margin-right:20px;" />
-            <Radio label="否" style="margin-right:20px;" />
-          </RadioGroup>
+          <Switch v-model="hasRegisterUser">
+            <span slot="open">是</span>
+            <span slot="close">否</span>
+          </Switch>
         </Col>
       </Row>
 
-      <Row v-show="hasRegisterUser === '是'" style="margin-bottom:23px; line-height:33px;">
+      <Row v-show="hasRegisterUser" style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">对应用户：</Col>
         <Col span="16">
         </Col>
       </Row>
 
       <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">所属角色：</Col>
+        <Col span="16">
+          <Select v-model="roleId" style="width:200px">
+            <Option v-for="item in roleList" :value="item._id" :key="item._id">{{ item.name }}</Option>
+          </Select>
+        </Col>
+      </Row>
+
+      <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">是否启用：</Col>
         <Col span="16" style="line-height:33px;">
-          <RadioGroup v-model="status">
-            <Radio label="启用" style="margin-right:20px;" />
-            <Radio label="禁用" style="margin-right:20px;" />
-          </RadioGroup>
+          <Switch v-model="status" size="large">
+            <span slot="open">ON</span>
+            <span slot="close">OFF</span>
+          </Switch>
         </Col>
       </Row>
 
@@ -60,25 +69,33 @@
 
     data () {
       return {
+        roleList: [],
         trueName: '',
-        hasRegisterUser: '否',
-        status: '启用'
+        hasRegisterUser: false,
+        userId: '',
+        roleId: '',
+        status: true
       }
+    },
+
+    created () {
+      this.$http.get('getRoleList?status=true').then(res => {
+        const result = res.data;
+        if (result.status === 200) {
+          this.roleList = result.data;
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     },
 
     methods: {
       saveAdmin () {
-      },
-
-      createAdmin () {
-      },
-
-      updateAdmin () {
       }
     }
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>
