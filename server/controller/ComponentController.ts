@@ -23,12 +23,11 @@ exports.getComponentConfCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.saveComponentCtr = async (ctx: any, next: any) => {
-  const operation = ctx.body.oper;
-  const componentData = ctx.body.componentData;
+  const componentData = ctx.request.body;
 
   let result, status = 200, msg = '组件信息保存成功';
 
-  if (operation === 'up') {
+  if (componentData.id) {
     result = await updateComponentSer(componentData);
   } else {
     result = await createComponentSer(componentData);

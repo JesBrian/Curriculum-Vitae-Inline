@@ -1,4 +1,5 @@
 import ComponentConfModel from '../model/ComponentConfModel'
+import ComponentModel from '../model/ComponentModel'
 
 /**
  * 获取组件配置信息
@@ -12,7 +13,7 @@ exports.getComponentConfSer = async () => {
  * @param componentData
  */
 exports.createComponentSer = async (componentData: Object = null) => {
-  let component = new ComponentConfModel(componentData);
+  let component = new ComponentModel(componentData);
   const result = await component.save();
   if (result.errors) {
     return false;

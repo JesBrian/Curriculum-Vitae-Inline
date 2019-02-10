@@ -1,21 +1,19 @@
-require('../helper/MongodbHelper');
+import '../helper/MongodbHelper'
 
-// @ts-ignore
-const mongoose = require('mongoose');
+import {Schema, Model, model} from 'mongoose'
+import IComponent from '../interface/IComponent'
 
-const ComponentSchema = new mongoose.Schema({
+const ComponentSchema: Schema = new Schema({
   name: String,
-  logo: String,
-  tag: String,
-  config: Object,
-  cTime: Date,
-  pTime: Date,
+  logo: {
+    type: String,
+    default: ''
+  },
+  tags: Array,
+  conf: Object,
   status: Boolean
 }, {versionKey: false});
 
-const Component = mongoose.model('Admin', ComponentSchema);
+const Component: Model<IComponent> = model<IComponent>('Component', ComponentSchema);
 
-const component = new Component({
-});
-
-admin.save();
+export default Component;

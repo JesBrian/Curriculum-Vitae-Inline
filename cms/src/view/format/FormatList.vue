@@ -3,7 +3,7 @@
     <PageTitle icon="ios-grid" title="格式列表" />
 
     <DragableTable
-        v-model="tableData"
+        v-model="formatData"
         :columns-list="columnsList"
         @on-start="handleOnstart"
         @on-end="handleOnend"
@@ -44,15 +44,11 @@
             key: 'size'
           },
           {
-            title: '是否实验性功能',
-            key: 'try'
-          },
-          {
             title: '状态',
             key: 'status'
           }
         ],
-        tableData: [],
+        formatData: [],
         table1: {
           hasDragged: false,
           isDragging: false,
@@ -64,11 +60,14 @@
     },
 
     created () {
-      this.$http.get('').then(res => {
-        console.log(res);
+      this.$http.get('allFormatList').then(res => {
+        const result = res.data;
+        if (result.status === 200) {
+          this.formatData = result.data;
+        }
       }).catch(err => {
         console.log(err);
-      })
+      });
     },
 
     methods: {

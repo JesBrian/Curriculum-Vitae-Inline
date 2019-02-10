@@ -56,10 +56,10 @@
           <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">是否发布：</Col>
             <Col span="16" style="line-height:33px;">
-              <RadioGroup v-model="status">
-                <Radio label="发布" style="margin-right:20px;" />
-                <Radio label="待发布" style="margin-right:20px;" />
-              </RadioGroup>
+              <Switch v-model="status" size="large">
+                <span slot="open">ON</span>
+                <span slot="close">OFF</span>
+              </Switch>
             </Col>
           </Row>
         </div>
@@ -331,11 +331,12 @@
       return {
         nowMainTab: 'base',
         nowSecondTab: 'special',
+        componentId: '',
         componentConf: null,
         name: '',
         logo: '',
         tags: [],
-        status: '待发布',
+        status: false,
       }
     },
 
@@ -348,7 +349,11 @@
         }
       }).catch(err => {
         console.log(err);
-      })
+      });
+      const id = this.$route.query.id;
+      if (id) {
+        this.componentId = id;
+      }
     },
 
     methods: {
@@ -364,16 +369,31 @@
       },
 
       saveComponent () {
-        if (this.checkComponentDataFill() !== '') {
+        const errTip = this.checkComponentDataFill();
+        if (errTip !== '') {
+          this.$Notice.error({
+            title: errTip,
+            desc: ''
+          });
           return false;
         }
-        const componentData = {
+        let componentData = {
           name: this.name,
           logo: this.logo,
           tags: this.tags,
-          status: this.status === '发布' ? true : false,
+          status: this.status,
           conf: this.componentConf
         };
+        if (this.componentId !== '') {
+          componentData.id = this.componentId;
+        }
+        this.$http.put('saveComponent', componentData).then(res => {
+          const result = res.data;
+          if (result.status === 200) {
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       },
 
       /**

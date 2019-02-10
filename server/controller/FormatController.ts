@@ -6,7 +6,7 @@ const { getFormatListSer } = require('../service/FormatService')
  * @param next
  */
 exports.getFormatListCtr = async (ctx: any, next: any) => {
-  const data = await getFormatListSer();
+  const data = await getFormatListSer(true);
   ctx.body = {
     status: 200,
     data: data
@@ -19,6 +19,11 @@ exports.getFormatListCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.allFormatListCtr = async (ctx: any, next: any) => {
+  const data = await getFormatListSer();
+  ctx.body = {
+    status: 200,
+    data: data
+  };
 };
 
 /**
