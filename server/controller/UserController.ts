@@ -1,4 +1,8 @@
-const { userLoginSer, userRegisterSer, allUserListSer } = require('../service/UserService')
+const {
+  userLoginSer,
+  userRegisterSer,
+  allUserListSer
+} = require('../service/UserService')
 
 /**
  *

@@ -115,6 +115,24 @@ export default [
     },
     component: Main,
     children: [
+      {
+        path: 'roleList',
+        name: 'roleList',
+        meta: {
+          icon: 'md-funnel',
+          title: '角色列表'
+        },
+        component: resolve => require(['@/view/auth/RoleList.vue'], resolve)
+      },
+      {
+        path: 'editRole',
+        name: 'editRole',
+        meta: {
+          icon: 'md-funnel',
+          title: '角色管理'
+        },
+        component: resolve => require(['@/view/auth/EditRole.vue'], resolve)
+      }
     ]
   },
   {
