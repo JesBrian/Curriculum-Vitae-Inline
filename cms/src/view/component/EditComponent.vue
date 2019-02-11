@@ -48,6 +48,17 @@
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
+            <Col span="8" style="text-align:left;">组件类型：</Col>
+            <Col span="16">
+              <Select v-model="category" style="width:200px">
+                <Option value="prevent">预设</Option>
+                <Option value="base">基本</Option>
+                <Option value="advance">高级</Option>
+                <Option value="extend">扩展</Option>
+              </Select>
+            </Col>
+          </Row>
+          <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">组件标签：</Col>
             <Col span="16">
               <input-tag v-model="tags"></input-tag>
@@ -335,6 +346,7 @@
         componentConf: null,
         name: '',
         logo: '',
+        category: 'prevent',
         tags: [],
         status: false,
       }
@@ -362,6 +374,7 @@
           const result = res.data;
           if (result.status === 200) {
             this.$localForage.setItem('componentConf', result.data);
+            this.componentConf = result.data;
           }
         }).catch(err => {
           console.log(err);
@@ -380,6 +393,7 @@
         let componentData = {
           name: this.name,
           logo: this.logo,
+          category: this.category,
           tags: this.tags,
           status: this.status,
           conf: this.componentConf

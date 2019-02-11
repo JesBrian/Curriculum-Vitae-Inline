@@ -1,10 +1,10 @@
 <template>
   <div>
     <Row>
-      <Col span="15">
+      <Col span="14">
         <Input v-model="tag" @keyup.native.enter="createTag" placeholder="Enter tag ..." />
       </Col>
-      <Col span="9" style="text-align:center">
+      <Col span="10" style="text-align:center">
         <Button @click="clearTagInput" type="warning" ghost>清除</Button>
         <Button @click="createTag" type="info" ghost>保存</Button>
       </Col>

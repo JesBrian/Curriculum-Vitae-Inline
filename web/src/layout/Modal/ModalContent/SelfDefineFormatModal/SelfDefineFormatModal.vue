@@ -40,7 +40,7 @@
 
     methods: {
       goEditResume () {
-        this.$store.commit('changeResumeConfig', [this.width, this.height]);
+        this.$store.commit('changedesignConf', [this.width, this.height]);
         this.closeModal();
         this.$nextTick(() => {
           this.$router.push('/EditResume');

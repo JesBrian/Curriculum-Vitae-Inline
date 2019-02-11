@@ -66,13 +66,13 @@
     },
 
     beforeCreate () {
-      if (this.$store.state.resumeConfig.length === 0) {
+      if (this.$store.state.designConf.length === 0) {
         // this.$router.push('/');
       }
     },
 
     beforeDestroy () {
-      this.$store.commit('changeResumeConfig');
+      this.$store.commit('changedesignConf');
     },
 
     methods: {

@@ -9,6 +9,10 @@ const ComponentSchema: Schema = new Schema({
     type: String,
     default: ''
   },
+  category: {
+    type: String,
+    default: 'extend'
+  },
   tags: Array,
   conf: Object,
   status: Boolean

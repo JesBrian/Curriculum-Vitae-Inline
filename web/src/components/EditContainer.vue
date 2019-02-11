@@ -1,5 +1,5 @@
 <template>
-  <div ref="editContainer" :style="`width:${$store.state.resumeConfig[0]}px; height:${$store.state.resumeConfig[1]}px;`" style="overflow:hidden; background:lightblue;"></div>
+  <div ref="editContainer" :style="`width:${$store.state.designConf[0]}px; height:${$store.state.designConf[1]}px;`" style="overflow:hidden; background:lightblue;"></div>
 </template>
 
 <script>

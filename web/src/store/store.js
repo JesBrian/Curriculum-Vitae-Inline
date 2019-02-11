@@ -9,7 +9,7 @@ export default new Vuex.Store({
     showModal: '',
     showTips: false,
 
-    resumeConfig: []
+    designConf: []
   },
   mutations: {
     changeNowCell (state, cell) {
@@ -24,8 +24,8 @@ export default new Vuex.Store({
       state.showTips = status;
     },
 
-    changeResumeConfig (state, config = []) {
-      state.resumeConfig = config;
+    changedesignConf (state, config = []) {
+      state.designConf = config;
     }
   },
   actions: {

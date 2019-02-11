@@ -1,5 +1,5 @@
 <template>
-  <Header class="top-navbar" :class="{'active': isShowComponentConfArea}">
+  <Header class="top-navbar" :class="{'active': isShowComponentConfArea && componentConf !== null}">
     <Menu mode="horizontal" theme="dark" active-name="1" style="height:0;">
       <div class="layout-logo">
         <router-link to="/" >
@@ -12,7 +12,7 @@
       </div>
     </Menu>
 
-    <div class="component-conf-container" style="width:100%; height:100%; position:relative;">
+    <div v-if="componentConf !== null" class="component-conf-container" style="width:100%; height:100%; position:relative;">
       <Tabs value="special" style="line-height: 35px; z-index: 5;">
         <TabPane label="特殊" name="special" style="padding-top:6px; ">
           <div class="component-conf-content" v-show="isShowComponentConfArea" >
@@ -196,7 +196,7 @@
 
     data () {
       return {
-        isShowComponentConfArea: true,
+        isShowComponentConfArea: false,
         componentConf: null
       }
     },
