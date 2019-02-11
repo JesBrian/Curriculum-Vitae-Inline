@@ -13,6 +13,10 @@ const ComponentSchema: Schema = new Schema({
     type: String,
     default: 'extend'
   },
+  graphics: {
+    type: String,
+    default: true
+  },
   tags: Array,
   conf: Object,
   status: Boolean

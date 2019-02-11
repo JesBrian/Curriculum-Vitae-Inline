@@ -59,6 +59,15 @@
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
+            <Col span="8" style="text-align:left;">是否图形类：</Col>
+            <Col span="16">
+              <Switch v-model="graphics">
+                <Icon type="md-checkmark" slot="open"></Icon>
+                <Icon type="md-close" slot="close"></Icon>
+              </Switch>
+            </Col>
+          </Row>
+          <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">组件标签：</Col>
             <Col span="16">
               <input-tag v-model="tags"></input-tag>
@@ -347,6 +356,7 @@
         name: '',
         logo: '',
         category: 'prevent',
+        graphics: true,
         tags: [],
         status: false,
       }
@@ -394,6 +404,7 @@
           name: this.name,
           logo: this.logo,
           category: this.category,
+          graphics: this.graphics,
           tags: this.tags,
           status: this.status,
           conf: this.componentConf

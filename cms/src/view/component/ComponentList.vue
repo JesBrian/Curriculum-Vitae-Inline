@@ -4,11 +4,11 @@
 
     <Tabs type="card">
       <TabPane label="系统配置">
-        标签一的内容
+        <Table border ref="selection" :columns="columns" :data="componentList" stripe />
         <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
       </TabPane>
       <TabPane label="用户上传">
-        标签二的内容
+        <Table border ref="selection" :columns="columns" :data="componentList" stripe />
         <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
       </TabPane>
     </Tabs>
@@ -23,6 +23,47 @@
 
     components: {
       PageTitle
+    },
+
+    data () {
+      return {
+        componentList: [],
+        columns: [
+          {
+            type: 'selection',
+            width: 60,
+            align: 'center'
+          },
+          {
+            title: 'Name',
+            key: 'name',
+            sortable: true
+          },
+          {
+            title: '状态',
+            key: 'status',
+            sortable: true
+          }
+        ]
+      }
+    },
+
+    created () {
+      this.getComponentListData();
+    },
+
+    methods: {
+      getComponentListData () {
+        this.$http.get('allComponentList').then(res => {
+          console.log(res);
+          const result = res.data;
+          if (result.status === 200) {
+            this.componentList = result.data;
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
   }
 </script>

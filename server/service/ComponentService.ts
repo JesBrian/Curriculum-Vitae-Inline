@@ -12,7 +12,7 @@ exports.getComponentConfSer = async () => {
  * 创建新组件
  * @param componentData
  */
-exports.createComponentSer = async (componentData: Object = null) => {
+exports.createComponentSer = async (componentData: object = null) => {
   let component = new ComponentModel(componentData);
   const result = await component.save();
   if (result.errors) {
@@ -26,5 +26,13 @@ exports.createComponentSer = async (componentData: Object = null) => {
  * @param componentId
  * @param componentData
  */
-exports.updateComponentSer = async (componentId: String = '', componentData: Object = null) => {
+exports.updateComponentSer = async (componentId: string = '', componentData: object = null) => {
+};
+
+/**
+ *
+ * @param condition
+ */
+exports.allComponentListSer = async (condition: object) => {
+  return await ComponentModel.find(condition);
 };

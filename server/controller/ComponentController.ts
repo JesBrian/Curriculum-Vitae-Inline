@@ -1,7 +1,8 @@
 const {
   getComponentConfSer,
   createComponentSer,
-  updateComponentSer
+  updateComponentSer,
+  allComponentListSer
 } = require('../service/ComponentService');
 
 /**
@@ -49,5 +50,12 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
  * @param ctx
  * @param next
  */
-exports.getComponentListCtr = async (ctx: any, next: any) => {
+exports.allComponentListCtr = async (ctx: any, next: any) => {
+  const condition = ctx.query;
+  const componentList = await allComponentListSer(condition);
+
+  ctx.body = {
+    status: 200,
+    data: componentList
+  }
 };

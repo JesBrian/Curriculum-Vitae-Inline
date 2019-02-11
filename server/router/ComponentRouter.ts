@@ -1,7 +1,7 @@
 const {
   getComponentConfCtr,
   saveComponentCtr,
-  getComponentListCtr
+  allComponentListCtr
 } = require('../controller/ComponentController');
 
 // @ts-ignore
@@ -21,8 +21,8 @@ router.get('/componentConf', getComponentConfCtr);
 router.put('/saveComponent', saveComponentCtr);
 
 /**
- * 获取组件列表
+ * 获取组件列表 - 后台管理使用
  */
-router.get('/componentList', getComponentListCtr);
+router.get('/allComponentList', allComponentListCtr);
 
 module.exports = router;
