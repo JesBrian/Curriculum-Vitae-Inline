@@ -11,3 +11,7 @@ exports.createAdminSer = async (adminData: object = null) => {
 
 exports.updateAdminSer = async (adminId: string = '', adminData: object = null) => {
 };
+
+exports.adminListSer = async (page: number = 1, limit: number = 15) => {
+  return await AdminModel.find();
+};

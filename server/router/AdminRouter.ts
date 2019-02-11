@@ -1,5 +1,6 @@
 const {
-  saveAdminCtr
+  saveAdminCtr,
+  adminListCtr
 } = require('../controller/AdminController')
 
 // @ts-ignore
@@ -10,7 +11,9 @@ const router = new Router();
 
 router.put('/saveAdmin', saveAdminCtr);
 
-router.get('/adminLogin', async (ctx: any, next: any) => {
+router.post('/adminLogin', async (ctx: any, next: any) => {
 });
+
+router.get('/adminList', adminListCtr);
 
 module.exports = router;

@@ -1,8 +1,14 @@
 const {
   createAdminSer,
-  updateAdminSer
+  updateAdminSer,
+  adminListSer
 } = require('../service/AdminService');
 
+/**
+ * 创建/更新管理员信息
+ * @param ctx
+ * @param next
+ */
 exports.saveAdminCtr = async (ctx: any, next: any) => {
   const param = ctx.request.body;
   const adminId = param.id;
@@ -28,5 +34,22 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: status,
     msg: msg
+  };
+};
+
+/**
+ * 获取管理员列表
+ * @param ctx
+ * @param next
+ */
+exports.adminListCtr = async (ctx: any, next: any) => {
+  const pageNum = ctx.query.page;
+  const limitNum = ctx.query.limit;
+
+  const result = await adminListSer(pageNum, limitNum);
+
+  ctx.body = {
+    status: 200,
+    data: result
   };
 };
