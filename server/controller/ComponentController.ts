@@ -51,11 +51,14 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.allComponentListCtr = async (ctx: any, next: any) => {
-  const condition = ctx.query;
-  const componentList = await allComponentListSer(condition);
+  const param = ctx.query;
+  const page = parseInt(param.page);
+  const limit = parseInt(param.limit);
+  const condition = {};
+  const result = await allComponentListSer(condition, page, limit);
 
   ctx.body = {
     status: 200,
-    data: componentList
+    data: result
   }
 };

@@ -5,11 +5,11 @@
     <Tabs type="card">
       <TabPane label="系统配置">
         <Table border ref="selection" :columns="columns" :data="componentList" stripe />
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
+        <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
       </TabPane>
       <TabPane label="用户上传">
         <Table border ref="selection" :columns="columns" :data="componentList" stripe />
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
+        <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
       </TabPane>
     </Tabs>
   </Card>
@@ -44,25 +44,32 @@
             key: 'status',
             sortable: true
           }
-        ]
+        ],
+
+        page: 1,
+        totalNum: 0
       }
     },
 
     created () {
-      this.getComponentListData();
+      this.getComponentListData(this.page);
     },
 
     methods: {
-      getComponentListData () {
-        this.$http.get('allComponentList').then(res => {
-          console.log(res);
+      getComponentListData (page = 1, limit = 10) {
+        this.$http.get(`allComponentList?page=${page}&limit=${limit}`).then(res => {
           const result = res.data;
           if (result.status === 200) {
-            this.componentList = result.data;
+            this.componentList = result.data.componentList;
+            this.totalNum = result.data.totalNum;
           }
         }).catch(err => {
           console.log(err);
         });
+      },
+
+      changeNowPage (page = 1) {
+        this.getComponentListData(page);
       }
     }
   }
