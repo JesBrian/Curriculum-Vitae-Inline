@@ -47,8 +47,8 @@ exports.userLoginCtr = async (ctx: any, next: any) => {
 
 exports.allUserListCtr = async (ctx: any, next: any) => {
   const param = ctx.query;
-  const page = param.page;
-  const limit = param.limit;
+  const page = parseInt(param.page);
+  const limit = parseInt(param.limit);
   const condition = {
   };
   const result = await allUserListSer(condition, page, limit);

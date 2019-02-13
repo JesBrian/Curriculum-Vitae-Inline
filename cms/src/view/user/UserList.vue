@@ -2,7 +2,7 @@
   <Card>
     <PageTitle icon="ios-people" title="用户列表" />
     <Table border ref="selection" :columns="columns" :data="userList" stripe />
-    <Page :total="100" show-elevator style="margin:23px auto 8px; text-align:center;" />
+    <Page @on-change="changeNowPage" :total="total" show-elevator style="margin:23px auto 8px; text-align:center;" />
   </Card>
 </template>
 
@@ -54,7 +54,8 @@
             sortable: true
           }
         ],
-        userList: []
+        userList: [],
+        total: 0
       }
     },
 
@@ -63,16 +64,21 @@
     },
 
     methods: {
-      getUserListData () {
-        this.$http.get('allUserList').then(res => {
+      getUserListData (page = 1, limit = 10) {
+        this.$http.get(`allUserList?page=${page}&limit=${limit}`).then(res => {
           console.log(res);
           const result = res.data;
           if (result.status === 200) {
-            this.userList = result.data;
+            this.userList = result.data.userList;
+            this.total = result.data.total;
           }
         }).catch(err => {
           console.log(err);
         });
+      },
+
+      changeNowPage (page = 1) {
+        this.getUserListData(page);
       }
     }
   }
