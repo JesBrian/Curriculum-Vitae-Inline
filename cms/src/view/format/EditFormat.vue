@@ -51,7 +51,7 @@
         name: '',
         size: [1, 1],
         logo: '',
-        status: '禁用'
+        status: false
       }
     },
 
@@ -69,7 +69,7 @@
         const formatData = {
           name: this.name,
           size: this.size,
-          log: this.logo,
+          logo: this.logo,
           status: this.status
         };
         this.$http.put('saveFormat', formatData).then(res => {

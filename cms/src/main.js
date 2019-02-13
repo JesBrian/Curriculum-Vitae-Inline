@@ -38,20 +38,10 @@ importDirective(Vue)
 
 // 引入 axios
 import axios from 'axios'
-import qs from 'qs'
 axios.defaults.withCredentials = false;
 axios.defaults.headers['Accept'] = '*/*';
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.baseURL = 'http://localhost:3000/'; // 配置 API 路径
-// 添加请求拦截器
-axios.interceptors.request.use(config => {
-  // 在发送请求之前做些什么
-  config.data = qs.stringify(config.data);
-  return config;
-}, error => {
-  // 对请求错误做些什么
-  return Promise.reject(error);
-});
 Vue.prototype.$http = axios;
 
 // 引入 localForage

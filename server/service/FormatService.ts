@@ -9,8 +9,6 @@ exports.getFormatListSer = async (status: Boolean) => {
 };
 
 exports.createFormatSer = async (formatData: any = null) => {
-  formatData.size[0] = Number(formatData.size[0]);
-  formatData.size[1] = Number(formatData.size[1]);
   let format = new FormatModel(formatData);
   const result = await format.save();
   if (result.errors) {
