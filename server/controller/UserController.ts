@@ -2,7 +2,7 @@ const {
   userLoginSer,
   userRegisterSer,
   allUserListSer
-} = require('../service/UserService')
+} = require('../service/UserService');
 
 /**
  *
@@ -45,14 +45,13 @@ exports.userLoginCtr = async (ctx: any, next: any) => {
   await next();
 };
 
-exports.getUserListCtr = async (ctx: any, next: any) => {
-};
-
 exports.allUserListCtr = async (ctx: any, next: any) => {
-  const pageNum = ctx.query.page;
-  const limitNum = ctx.query.limit;
-
-  const result = await allUserListSer(pageNum, limitNum);
+  const param = ctx.query;
+  const page = param.page;
+  const limit = param.limit;
+  const condition = {
+  };
+  const result = await allUserListSer(condition, page, limit);
 
   ctx.body = {
     status: 200,

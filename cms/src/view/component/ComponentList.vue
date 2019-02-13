@@ -46,13 +46,12 @@
           }
         ],
 
-        page: 1,
         totalNum: 0
       }
     },
 
     created () {
-      this.getComponentListData(this.page);
+      this.getComponentListData();
     },
 
     methods: {
@@ -61,7 +60,7 @@
           const result = res.data;
           if (result.status === 200) {
             this.componentList = result.data.componentList;
-            this.totalNum = result.data.totalNum;
+            this.totalNum = result.data.total;
           }
         }).catch(err => {
           console.log(err);

@@ -41,6 +41,10 @@ exports.userRegisterSer = async (username = '', mail = '', password = '') => {
   return true;
 };
 
-exports.allUserListSer = async (page = 1, limit = 15) => {
-  return await UserModel.find();
+exports.allUserListSer = async (condition: object = null, page:  number = 1, limit: number = 10) => {
+  const userList = await UserModel.find(condition).skip((page - 1) * limit).limit(limit);
+  const total = await UserModel.find(condition).count();
+  return {
+    userList, total
+  }
 };

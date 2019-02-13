@@ -1,7 +1,6 @@
 const {
   userRegisterCtr,
   userLoginCtr,
-  getUserListCtr,
   allUserListCtr
 } = require('../controller/UserController')
 
@@ -12,7 +11,6 @@ const router = new Router();
 
 router.post('/userLogin', userLoginCtr);
 router.put('/userRegister', userRegisterCtr);
-router.get('/userList', getUserListCtr);
 router.get('/allUserList', allUserListCtr);
 
 module.exports = router;

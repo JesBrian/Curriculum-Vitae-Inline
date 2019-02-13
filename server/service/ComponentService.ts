@@ -36,10 +36,9 @@ exports.updateComponentSer = async (componentId: string = '', componentData: obj
  * @param limit
  */
 exports.allComponentListSer = async (condition: object = null, page: number = 1, limit: number = 10) => {
-  const data = await ComponentModel.find(condition).skip((page - 1) * limit).limit(limit);
-  const totalNum = await ComponentModel.find(condition).count();
+  const componentList = await ComponentModel.find(condition).skip((page - 1) * limit).limit(limit);
+  const total = await ComponentModel.find(condition).count();
   return {
-    componentList: data,
-    totalNum
+    componentList, total
   };
 };
