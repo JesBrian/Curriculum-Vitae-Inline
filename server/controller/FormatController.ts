@@ -1,4 +1,8 @@
-const { getFormatListSer } = require('../service/FormatService')
+const {
+  getFormatListSer,
+  createFormatSer,
+  updateFormatSer
+} = require('../service/FormatService');
 
 /**
  * 获取格式列表数据 - 前台使用
@@ -27,17 +31,34 @@ exports.allFormatListCtr = async (ctx: any, next: any) => {
 };
 
 /**
- * 添加格式
+ * 添加/修改格式信息
  * @param ctx
  * @param next
  */
-exports.addFormatCtr = async (ctx: any, next: any) => {
-};
+exports.saveFormatCtr = async (ctx: any, next: any) => {
+  const param = ctx.request.body;
+  const formatId = param.id;
+  const formatData = {
+    name: param.name,
+    size: param.size,
+    logo: param.logo,
+    status: param.status
+  };
 
-/**
- * 修改格式
- * @param ctx
- * @param next
- */
-exports.modifyFormatCtr = async (ctx: any, next: any) => {
+  let result, status = 200, msg = '格式信息保存成功';
+  if (formatId) {
+    result = await updateFormatSer(formatId, formatData);
+  } else {
+    result = await createFormatSer(formatData);
+  }
+
+  if (!result) {
+    status = 555;
+    msg = '格式信息保存失败';
+  }
+
+  ctx.body = {
+    status: status,
+    msg: msg
+  };
 };

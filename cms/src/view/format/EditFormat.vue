@@ -11,18 +11,18 @@
     <Row style="margin-bottom:23px;">
       <Col span="8" style="line-height:30px; text-align:center;">格式宽高：</Col>
       <Col span="16">
-        <InputNumber :min="1"></InputNumber>
+        <InputNumber v-model="size[0]" :min="1"></InputNumber>
         <span style="margin:0 12px;">X</span>
-        <InputNumber :min="1"></InputNumber>
+        <InputNumber v-model="size[1]" :min="1"></InputNumber>
       </Col>
     </Row>
     <Row style="margin-bottom:23px;">
       <Col span="8" style="line-height:30px; text-align:center;">是否启用：</Col>
       <Col span="16" style="line-height:30px;">
-        <RadioGroup v-model="status">
-          <Radio label="启用" style="margin-right:20px;" />
-          <Radio label="禁用" style="margin-right:20px;" />
-        </RadioGroup>
+        <Switch v-model="status" size="large">
+          <span slot="open">ON</span>
+          <span slot="close">OFF</span>
+        </Switch>
       </Col>
     </Row>
     <Row style="margin-top:23px;">
@@ -57,9 +57,26 @@
 
     methods: {
       saveFormat () {
-      },
+        let errTips = '';
+        if (this.name === '') {
+          this.$Notice.error({
+            title: '请输入格式名称',
+            desc: ''
+          });
+          return false;
+        }
 
-      createFormat () {
+        const formatData = {
+          name: this.name,
+          size: this.size,
+          log: this.logo,
+          status: this.status
+        };
+        this.$http.put('saveFormat', formatData).then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        })
       }
     }
   }

@@ -7,7 +7,10 @@ const FormatSchema: Schema = new Schema({
   name: String,
   logo: String,
   size: Array,
-  cTime: Date,
+  cTime: {
+    type: Date,
+    default: Date
+  },
   status: Boolean
 }, {versionKey: false});
 

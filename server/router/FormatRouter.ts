@@ -1,4 +1,8 @@
-const { getFormatListCtr, allFormatListCtr, addFormatCtr, modifyFormatCtr } = require('../controller/FormatController')
+const {
+  getFormatListCtr,
+  allFormatListCtr,
+  saveFormatCtr,
+} = require('../controller/FormatController');
 
 // @ts-ignore
 const Router = require('koa-router');
@@ -9,7 +13,6 @@ const router = new Router();
 router.get('/formatList', getFormatListCtr);
 router.get('/allFormatList', allFormatListCtr);
 
-router.put('/addFormat', addFormatCtr);
-router.put('/modifyFormatCtr', modifyFormatCtr);
+router.put('/saveFormat', saveFormatCtr);
 
 module.exports = router;
