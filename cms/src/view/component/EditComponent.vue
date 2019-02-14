@@ -54,7 +54,7 @@
                 <Option value="prevent">预设</Option>
                 <Option value="base">基本</Option>
                 <Option value="advance">高级</Option>
-                <Option value="extend">扩展</Option>
+                <!--<Option value="extend">扩展</Option>-->
               </Select>
             </Col>
           </Row>

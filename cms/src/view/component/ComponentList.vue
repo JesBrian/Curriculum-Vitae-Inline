@@ -2,12 +2,12 @@
   <Card>
     <PageTitle icon="md-backspace" title="组件列表" />
 
-    <Tabs type="card">
-      <TabPane label="系统配置">
+    <Tabs @on-click="changeComponentCategory" type="card">
+      <TabPane name="System" label="系统配置">
         <Table border ref="selection" :columns="columns" :data="componentList" stripe />
         <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
       </TabPane>
-      <TabPane label="用户上传">
+      <TabPane name="Extend" label="用户上传">
         <Table border ref="selection" :columns="columns" :data="componentList" stripe />
         <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
       </TabPane>
@@ -46,7 +46,14 @@
           }
         ],
 
+        category: 'System',
         totalNum: 0
+      }
+    },
+
+    watch: {
+      category (nVal) {
+        this.getComponentListData();
       }
     },
 
@@ -56,11 +63,11 @@
 
     methods: {
       getComponentListData (page = 1, limit = 10) {
-        this.$http.get(`allComponentList?page=${page}&limit=${limit}`).then(res => {
-          const result = res.data;
-          if (result.status === 200) {
-            this.componentList = result.data.componentList;
-            this.totalNum = result.data.total;
+        this.$http.get(`all${this.category}ComponentList?page=${page}&limit=${limit}`).then(({data}) => {
+          console.log(data)
+          if (data.status === 200) {
+            this.componentList = data.data.componentList;
+            this.totalNum = data.data.total;
           }
         }).catch(err => {
           console.log(err);
@@ -69,6 +76,10 @@
 
       changeNowPage (page = 1) {
         this.getComponentListData(page);
+      },
+
+      changeComponentCategory (category = 'System') {
+        this.category = category;
       }
     }
   }

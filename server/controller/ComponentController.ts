@@ -50,11 +50,35 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
  * @param ctx
  * @param next
  */
-exports.allComponentListCtr = async (ctx: any, next: any) => {
+exports.allSystemComponentListCtr = async (ctx: any, next: any) => {
   const param = ctx.query;
   const page = parseInt(param.page);
   const limit = parseInt(param.limit);
-  const condition = {};
+  const condition = {
+    'category': {
+      $ne: 'extend'
+    }
+  };
+  const result = await allComponentListSer(condition, page, limit);
+
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+/**
+ *
+ * @param ctx
+ * @param next
+ */
+exports.allExtendComponentListCtr = async (ctx: any, next: any) => {
+  const param = ctx.query;
+  const page = parseInt(param.page);
+  const limit = parseInt(param.limit);
+  const condition = {
+    category: 'extend'
+  };
   const result = await allComponentListSer(condition, page, limit);
 
   ctx.body = {
