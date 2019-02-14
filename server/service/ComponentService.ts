@@ -42,3 +42,13 @@ exports.allComponentListSer = async (condition: object = null, page: number = 1,
     componentList, total
   };
 };
+
+
+exports.systemComponentListSer = async () => {
+};
+
+exports.selfComponentListSer = async () => {
+};
+
+exports.collectionComponentListSer = async () => {
+};

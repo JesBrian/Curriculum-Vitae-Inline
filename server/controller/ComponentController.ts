@@ -2,7 +2,10 @@ const {
   getComponentConfSer,
   createComponentSer,
   updateComponentSer,
-  allComponentListSer
+  allComponentListSer,
+  systemComponentListSer,
+  selfComponentListSer,
+  collectionComponentListSer
 } = require('../service/ComponentService');
 
 /**
@@ -81,6 +84,31 @@ exports.allExtendComponentListCtr = async (ctx: any, next: any) => {
   };
   const result = await allComponentListSer(condition, page, limit);
 
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+
+exports.systemComponentListCtr = async (ctx: any, next: any) => {
+  const result = await systemComponentListSer();
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+exports.selfComponentListCtr = async (ctx: any, next: any) => {
+  const result = await selfComponentListSer();
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+exports.collectionComponentListCtr = async (ctx: any, next: any) => {
+  const result = await collectionComponentListSer();
   ctx.body = {
     status: 200,
     data: result
