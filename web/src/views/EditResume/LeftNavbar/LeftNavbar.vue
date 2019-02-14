@@ -37,23 +37,17 @@
           PreventCell: {
             ch: '预设组件',
             icon: 'md-list',
-            cell: [
-              {id: 1, name: '姓名'}, {id: 2, name: '头像'}, {id: 3, name: '手机'}, {id: 4, name: '邮箱'}, {id: 5, name: '地址'}, {id: 6, name: '职位'}, {id: 7, name: '薪酬'}
-            ]
+            cell: []
           },
           BaseCell:{
             ch: '基本组件',
             icon: 'ios-browsers',
-            cell: [
-              {id: 8, name: '文本'}, {id: 9, name: '线条'}, {id: 10, name: '图片'}, {id: 11, name: '三角形'}, {id: 12, name: '矩形'}, {id: 13, name: '圆形'}
-            ]
+            cell: []
           },
           AdvanceCell:{
             ch: '高级组件',
             icon: 'logo-dropbox',
-            cell: [
-              {id: 14, name: '星星'}, {id: 15, name: '心形'}
-            ]
+            cell: []
           },
           SelfCell: {
             ch: '个人组件',
@@ -77,6 +71,10 @@
       }
     },
 
+    created () {
+      this.initComponent();
+    },
+
     mounted () {
       this.nowDragCellDom = this.$refs.cellComponentBox.$el;
       this.tempCellBoxDom = document.querySelector('#tempDragBox');
@@ -96,6 +94,38 @@
     beforeDestroy() {
       this.nowDragCellDom.removeEventListener('dragstart', null);
       this.nowDragCellDom.removeEventListener('dragend', null);
+    },
+
+    methods: {
+      initComponent () {
+        this.initSystemComponent();
+        this.initSelfComponent();
+        this.initCollectionComponent();
+      },
+
+      initSystemComponent () {
+        this.$http.get('systemComponentList').then(({data}) => {
+          console.log(data);
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+
+      initSelfComponent () {
+        this.$http.get('selfComponentList').then(({data}) => {
+          console.log(data);
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+
+      initCollectionComponent () {
+        this.$http.get('collectionComponentList').then(({data}) => {
+          console.log(data);
+        }).catch(err => {
+          console.log(err);
+        })
+      }
     }
   }
 </script>
