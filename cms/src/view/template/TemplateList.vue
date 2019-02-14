@@ -1,16 +1,8 @@
 <template>
   <Card>
-    <Tabs type="card">
-      <TabPane label="标签一">
+    <Tabs @on-click="changeTemplateType" type="card">
+      <TabPane v-for="formatItem in formatData" :name="formatItem._id" :label="formatItem.name">
         标签一的内容
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
-      </TabPane>
-      <TabPane label="标签二">
-        标签二的内容
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
-      </TabPane>
-      <TabPane label="标签三">
-        标签三的内容
         <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
       </TabPane>
     </Tabs>
@@ -19,7 +11,28 @@
 
 <script>
   export default {
-    name: 'TemplateList'
+    name: 'TemplateList',
+
+    data () {
+      return {
+        formatData: []
+      }
+    },
+
+    created () {
+      this.$http.get('formatList').then(({data}) => {
+        if (data.status === 200) {
+          this.formatData = data.data;
+        }
+      }).catch(err => {
+        console.log(err);
+      });
+    },
+
+    methods: {
+      changeTemplateType (formatId) {
+      }
+    }
   }
 </script>
 

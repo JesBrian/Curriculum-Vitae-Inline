@@ -60,10 +60,10 @@
     },
 
     created () {
-      this.$http.get('allFormatList').then(res => {
-        const result = res.data;
-        if (result.status === 200) {
-          this.formatData = result.data;
+      this.$http.get('allFormatList').then(({data}) => {
+        if (data.status === 200) {
+          this.formatData = data.data;
+          this.$localForage.setItem('formatList', data.data)
         }
       }).catch(err => {
         console.log(err);

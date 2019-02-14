@@ -67,10 +67,9 @@
     },
 
     created () {
-      this.$http.get('formatList').then(res => {
-        const result = res.data
-        if (result.status === 200) {
-          this.formatList = result.data;
+      this.$http.get('formatList').then(({data}) => {
+        if (data.status === 200) {
+          this.formatList = data.data;
         }
       }).catch(err => {
         console.log(err);
