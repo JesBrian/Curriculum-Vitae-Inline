@@ -8,16 +8,28 @@ const { md5, generateRandomString } = require('../helper/FunctionHelper')
  * @param password
  */
 exports.userLoginSer = async (username = '', password = '') => {
-  const user = await UserModel.findOne({'name': username}, 'name avatar salt password status');
+  const user = await UserModel.findOne({'name': username}, '_id name avatar salt password status');
+  let msg = '', data = null;
   if (user) {
     if (user.status && (md5(user.salt + password) === user.password)) {
       user.lTime = new Date();
       user.save();
-      return '用户登录成功';
+      data = {
+        id: user._id,
+        name: user.name,
+        avatar: user.avatar
+      };
+      msg = '用户登录成功';
+    } else {
+      msg = '用户密码错误';
     }
-    return '用户密码错误';
+  } else {
+    msg = '用户不存在';
   }
-  return '用户不存在';
+  return {
+    msg: msg,
+    data: data
+  }
 };
 
 /**
@@ -38,7 +50,7 @@ exports.userRegisterSer = async (username = '', mail = '', password = '') => {
   if (result.errors) {
     return false;
   }
-  return true;
+  return user._id;
 };
 
 exports.allUserListSer = async (condition: object = null, page:  number = 1, limit: number = 10) => {

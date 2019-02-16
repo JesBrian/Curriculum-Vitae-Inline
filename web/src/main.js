@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 import axios from 'axios'
 axios.defaults.withCredentials = false;
 axios.defaults.headers['Accept'] = '*/*';
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.baseURL = 'http://localhost:3000/'; // 配置 API 路径
 Vue.prototype.$http = axios;
 

@@ -9,14 +9,14 @@
       </div>
 
       <div class="home-header-user">
-        <img @click="showLoginModal" class="home-header-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+        <Avatar @click.native="showLoginModal" class="home-header-user-avatar" icon="md-person" title="请登录" />
       </div>
     </Header>
 
     <Layout>
       <Sider hide-trigger class="home-left-navbar">
         <div class="home-left-navbar-user">
-          <img @click="showLoginModal" class="home-left-navbar-user-avatar" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+          <Avatar @click.native="showLoginModal" class="home-left-navbar-user-avatar" icon="md-person" title="请登录" />
         </div>
 
         <RouterLink class="home-left-navbar-link" to="/Home/CreateResume">
@@ -87,7 +87,7 @@ export default {
       &-user {
         float: right;
         &-avatar {
-          width:35px; height:35px; margin-top:13px; border-radius:50%; box-shadow:0 0 6px #282828; cursor: pointer;
+          width:35px; height:35px; border-radius:50%; box-shadow:0 0 6px #282828; font-size: 18px; cursor: pointer;
         }
       }
     }
@@ -97,7 +97,7 @@ export default {
       &-user {
         text-align: center;
         &-avatar {
-          width: 43px; height: 43px; margin: 8px auto; border-radius: 50%; box-shadow:0.5px 0.5px 10px #282828; cursor: pointer;
+          width: 43px; height: 43px; margin: 8px auto 16px; border-radius: 50%; box-shadow:0.5px 0.5px 10px #282828; line-height: 43px; text-align: center; font-size: 26px; cursor: pointer;
         }
       }
 

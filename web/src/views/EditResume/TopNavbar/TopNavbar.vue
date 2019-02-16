@@ -8,7 +8,7 @@
       </div>
 
       <div class="layout-user">
-        <img @click="changeRightNavbar" class="user" src="http://p1.music.126.net/kaISxJU3yP0Qvw6H_vUyAQ==/18984167765401316.jpg?param=80y80" />
+        <Avatar @click.native="changeRightNavbar" class="user" shape="square" icon="md-person" size="small" title="请登录" />
       </div>
     </Menu>
 
@@ -255,9 +255,9 @@
     }
 
     .layout-user {
-      top: -5px; right: 18px; position: absolute;
+      top: -12px; right: 18px; position: absolute;
       .user {
-        width: 23px; height: 23px; border-radius:50%; box-shadow:0 0 6px #282828;
+        box-shadow:0 0 6px #282828;
       }
     }
 

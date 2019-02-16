@@ -1,6 +1,6 @@
 <template>
   <ModalFrame title="用户登录 / 注册" style="width: 468px; height: 398px;">
-    <Tabs>
+    <Tabs @on-click="resetInput" >
       <TabPane label="登录">
         <Form ref="Login" class="signin" style="margin:8px 18px 0;">
           <FormItem prop="mobile">
@@ -96,16 +96,22 @@
 
     methods: {
       resetInput () {
+        this.name = '';
+        this.mail = '';
+        this.code = '';
+        this.password = '';
       },
 
       userLogin () {
         let errTips = this.checkInputComplete();
         if (errTips === '') {
           this.$http.post('userLogin', {
-            name: this.name,
-            password: this.password
-          }).then(res => {
-            console.log(res)
+            'name': this.name,
+            'password': this.password
+          }).then(({data}) => {
+            if (data.status === 200) {
+              this.saveUserInfo(data.data);
+            }
           }).catch(err => {
             console.log(err);
           })
@@ -121,8 +127,15 @@
             name: this.name,
             mail: this.mail,
             password: this.password
-          }).then(res => {
-            console.log(res)
+          }).then(({data}) => {
+            if (data.status === 200) {
+              let userInfo = {
+                id: data.data,
+                name: this.name,
+                avatar: ''
+              };
+              this.saveUserInfo(userInfo);
+            }
           }).catch(err => {
             console.log(err);
           })
@@ -147,6 +160,11 @@
           return '请输入密码'
         }
         return '';
+      },
+
+      saveUserInfo (userInfo) {
+        this.$store.commit('changeUserInfo', userInfo);
+        this.$localForage.setItem('userInfo', userInfo);
       },
 
       closeModal () {

@@ -14,16 +14,17 @@ exports.userRegisterCtr = async (ctx: any, next: any) => {
   const mail = ctx.request.body.mail;
   const password = ctx.request.body.password;
 
-  let result = '';
-  if (await userRegisterSer(username, mail, password)) {
-    result = '用户注册成功';
+  let msg = '', userId = await userRegisterSer(username, mail, password);
+  if (userId) {
+    msg = '用户注册成功';
   } else {
-    result = '用户注册失败';
+    msg = '用户注册失败';
   }
 
   ctx.body = {
     status: 200,
-    msg: result
+    data: userId,
+    msg: msg
   };
 };
 
@@ -40,7 +41,7 @@ exports.userLoginCtr = async (ctx: any, next: any) => {
   const status = 200;
   ctx.body = {
     status: status,
-    msg: result
+    ...result
   };
   await next();
 };
