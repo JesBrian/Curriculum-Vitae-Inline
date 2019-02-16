@@ -40,7 +40,7 @@
       <p>Some contents...</p>
     </Drawer>
 
-    <div id="tempDragBox" style="top: 100%; left: 100%; position: fixed; z-index: -999;"></div>
+    <HiddenComponentContainer />
   </Layout>
 </template>
 
@@ -49,12 +49,13 @@
   import LeftNavbar from './LeftNavbar/LeftNavbar.vue'
   import PathNavbar from './PathNavbar/PathNavbar.vue'
   import EditContainer from '../../components/EditContainer.vue'
+  import HiddenComponentContainer from '../../components/HiddenComponentContainer/HiddenComponentContainer.vue'
 
   export default {
     name: 'EditResume',
 
     components: {
-      TopNavbar, PathNavbar, LeftNavbar, EditContainer
+      TopNavbar, PathNavbar, LeftNavbar, EditContainer, HiddenComponentContainer
     },
 
     data () {

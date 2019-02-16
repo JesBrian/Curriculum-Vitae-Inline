@@ -5,13 +5,16 @@
         <Icon :type="categoryItem.icon" />{{categoryItem.ch}}
       </template>
       <div :name="`${categoryItem}${categoryIndex}`">
-        <div v-if="categoryItem.cell.length" style="padding:13px 10px 5px;">
+        <div @click="showModal('LoginRegisterModal')" v-if="$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
+          请登录账号同步组件信息
+        </div>
+        <div v-else-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
             <div class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
         <div v-else style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
-          请登录账号同步组件信息
+          该分类暂无组件
         </div>
       </div>
     </Submenu>
@@ -32,7 +35,7 @@
     data () {
       return {
         nowDragCellDom: null,
-        tempCellBoxDom: null,
+        hiddenComponentContainer: null,
         componentCell: {
           PreventCell: {
             ch: '预设组件',
@@ -77,17 +80,17 @@
 
     mounted () {
       this.nowDragCellDom = this.$refs.cellComponentBox.$el;
-      this.tempCellBoxDom = document.querySelector('#tempDragBox');
+      this.hiddenComponentContainer = document.querySelector('#hiddenComponentContainer');
 
       this.nowDragCellDom.addEventListener('dragstart', (event) => {
         let cellDom = event.target.cloneNode(true);
-        cellDom.style.background = 'red';
+        cellDom.style.background = 'lightblue';
         cellDom.id = 'tempCellComponent';
-        this.tempCellBoxDom.appendChild(cellDom);
+        this.hiddenComponentContainer.appendChild(cellDom);
         event.dataTransfer.setDragImage(cellDom, 16, 16);
       }, false);
       this.nowDragCellDom.addEventListener('dragend', () => {
-        this.tempCellBoxDom.removeChild(this.tempCellBoxDom.childNodes[0]);
+        this.hiddenComponentContainer.removeChild(this.hiddenComponentContainer.childNodes[0]);
       }, false);
     },
 
@@ -130,6 +133,10 @@
         }).catch(err => {
           console.log(err);
         })
+      },
+
+      showModal (modalType = '') {
+        this.$store.commit('changeShowModal', modalType);
       }
     }
   }

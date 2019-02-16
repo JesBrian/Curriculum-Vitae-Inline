@@ -74,6 +74,15 @@
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
+            <Col span="8" style="text-align:left;">是否特殊组件：</Col>
+            <Col span="16">
+              <Switch v-model="special" size="large">
+                <span slot="open">ON</span>
+                <span slot="close">OFF</span>
+              </Switch>
+            </Col>
+          </Row>
+          <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">是否发布：</Col>
             <Col span="16" style="line-height:33px;">
               <Switch v-model="status" size="large">
@@ -358,6 +367,7 @@
         category: 'prevent',
         graphics: true,
         tags: [],
+        special: false,
         status: false,
       }
     },

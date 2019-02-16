@@ -1,13 +1,14 @@
 <template>
-  
+  <div>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'RectCell'
+    name: 'NormalCell'
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
