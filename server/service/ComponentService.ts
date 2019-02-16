@@ -45,6 +45,26 @@ exports.allComponentListSer = async (condition: object = null, page: number = 1,
 
 
 exports.systemComponentListSer = async () => {
+  let data = {
+    prevent: new Array(),
+    base: new Array(),
+    advance: new Array()
+  };
+  const systemComponent = await ComponentModel.find({category: {$ne: 'extend'}, status: true});
+  systemComponent.forEach((component) => {
+    switch (component.category) {
+      case 'prevent':
+        data.prevent.push(component);
+        break;
+      case 'base':
+        data.base.push(component);
+        break;
+      case 'advance':
+        data.advance.push(component);
+        break;
+    }
+  });
+  return data;
 };
 
 exports.selfComponentListSer = async () => {

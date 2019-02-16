@@ -105,7 +105,12 @@
 
       initSystemComponent () {
         this.$http.get('systemComponentList').then(({data}) => {
-          console.log(data);
+          if (data.status === 200) {
+            const systemComponent = data.data;
+            this.componentCell.PreventCell.cell = systemComponent.prevent;
+            this.componentCell.BaseCell.cell = systemComponent.base;
+            this.componentCell.AdvanceCell.cell = systemComponent.advance;
+          }
         }).catch(err => {
           console.log(err);
         })
