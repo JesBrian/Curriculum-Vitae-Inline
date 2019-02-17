@@ -1,6 +1,6 @@
 <template>
   <div :id="data._id" >
-    123
+    {{data.name}}
   </div>
 </template>
 
