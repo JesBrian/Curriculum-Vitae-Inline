@@ -56,6 +56,10 @@ localForage.config({
 });
 Vue.prototype.$localForage = localForage;
 
+// 垃圾组件只能这样子使用 - 等待以后改造
+import TreeView from 'vue-json-tree-view'
+Vue.use(TreeView);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

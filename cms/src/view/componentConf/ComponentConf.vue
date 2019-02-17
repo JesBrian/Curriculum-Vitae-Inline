@@ -1,6 +1,8 @@
 <template>
   <Card>
     <PageTitle icon="md-backspace" title="组件配置列表" />
+
+    <tree-view :data="conf" />
   </Card>
 </template>
 
@@ -16,14 +18,14 @@
 
     data () {
       return {
-        confList: []
+        conf: null
       }
     },
 
     created () {
       this.$localForage.getItem('componentConf').then(val => {
         if (val) {
-          this.componentConf = val;
+          this.conf = val;
         } else {
           this.getComponentListConfData();
         }
@@ -34,10 +36,10 @@
 
     methods: {
       getComponentListConfData () {
-        this.$http.get('componentConf').then(res => {
-          const result = res.data;
-          if (result.status === 200) {
-            this.$localForage.setItem('componentConf', result.data);
+        this.$http.get('componentConf').then(({data}) => {
+          if (data.status === 200) {
+            this.conf = data.data;
+            this.$localForage.setItem('componentConf', data.data);
           }
         }).catch(err => {
           console.log(err);
