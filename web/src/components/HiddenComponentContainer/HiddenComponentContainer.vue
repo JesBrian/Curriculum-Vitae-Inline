@@ -1,10 +1,34 @@
 <template>
-  <div id="hiddenComponentContainer"></div>
+  <div id="hiddenComponentContainer">
+    <div v-for="categoryItem in cellList" >
+      <NormalCell v-for="cellItem in categoryItem.cell" />
+    </div>
+  </div>
 </template>
 
 <script>
+  import NormalCell from '../Cell/NormalCell/NormalCell.vue'
+
   export default {
-    name: 'HiddenComponentContainer'
+    name: 'HiddenComponentContainer',
+
+    components: {
+      NormalCell
+    },
+
+    props: {
+      cellList: {
+        type: Object,
+        default () {
+          return {}
+        }
+      }
+    },
+
+    data () {
+      return {
+      }
+    }
   }
 </script>
 

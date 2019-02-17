@@ -18,12 +18,20 @@
         </div>
       </div>
     </Submenu>
+
+    <HiddenComponentContainer :cell-list="componentCell" />
   </Menu>
 </template>
 
 <script>
+  import HiddenComponentContainer from '../../../components/HiddenComponentContainer/HiddenComponentContainer.vue'
+
   export default {
     name: 'LeftNavbar',
+
+    components: {
+      HiddenComponentContainer
+    },
 
     props: {
       isCollapsed: {

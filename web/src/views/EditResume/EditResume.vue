@@ -39,8 +39,6 @@
       <p>Some contents...</p>
       <p>Some contents...</p>
     </Drawer>
-
-    <HiddenComponentContainer />
   </Layout>
 </template>
 
@@ -49,13 +47,12 @@
   import LeftNavbar from './LeftNavbar/LeftNavbar.vue'
   import PathNavbar from './PathNavbar/PathNavbar.vue'
   import EditContainer from '../../components/EditContainer.vue'
-  import HiddenComponentContainer from '../../components/HiddenComponentContainer/HiddenComponentContainer.vue'
 
   export default {
     name: 'EditResume',
 
     components: {
-      TopNavbar, PathNavbar, LeftNavbar, EditContainer, HiddenComponentContainer
+      TopNavbar, PathNavbar, LeftNavbar, EditContainer
     },
 
     data () {
