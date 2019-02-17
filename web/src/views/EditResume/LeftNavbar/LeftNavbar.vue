@@ -5,13 +5,13 @@
         <Icon :type="categoryItem.icon" />{{categoryItem.ch}}
       </template>
       <div :name="`${categoryItem}${categoryIndex}`">
-        <div @click="showModal('LoginRegisterModal')" v-if="$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
-          请登录账号同步组件信息
-        </div>
-        <div v-else-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
+        <div v-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
             <div class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
+        </div>
+        <div @click="showModal('LoginRegisterModal')" v-else-if="!$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
+          请登录账号同步组件信息
         </div>
         <div v-else style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
           该分类暂无组件

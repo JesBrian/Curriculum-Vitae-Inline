@@ -34,7 +34,7 @@
       </Content>
     </Layout>
 
-    <Drawer title="Basic Drawer" :closable="false" v-model="showRightNavbar">
+    <Drawer v-if="$store.state.userInfo" v-model="showRightNavbar" title="Basic Drawer" :closable="false">
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>
@@ -78,7 +78,11 @@
 
     methods: {
       changeRightNavbar () {
-        this.showRightNavbar = !this.showRightNavbar;
+        if (this.$store.state.userInfo) {
+          this.showRightNavbar = !this.showRightNavbar;
+          return true;
+        }
+        this.$store.commit('changeShowModal', 'LoginRegisterModal');
       },
 
       changeZoomRate (category = true, step = 10, reset = false) {

@@ -15,7 +15,12 @@
       ModalTotal, TipsProcess
     },
 
-    mounted () {
+    created () {
+      this.$localForage.getItem('userInfo', (err, val) => {
+        if (val) {
+          this.$store.commit('changeUserInfo', val);
+        }
+      });
     }
   }
 </script>
