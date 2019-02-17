@@ -109,38 +109,55 @@
 
     methods: {
       initComponent () {
-        this.initSystemComponent();
-        this.initSelfComponent();
-        this.initCollectionComponent();
+        Promise.all([
+          this.initSystemComponent(),
+          this.initSelfComponent(),
+          this.initCollectionComponent()
+        ]).then(res => {
+          this.saveComponentDataForLocal();
+        });
       },
 
       initSystemComponent () {
-        this.$http.get('systemComponentList').then(({data}) => {
-          if (data.status === 200) {
-            const systemComponent = data.data;
-            this.componentCell.PreventCell.cell = systemComponent.prevent;
-            this.componentCell.BaseCell.cell = systemComponent.base;
-            this.componentCell.AdvanceCell.cell = systemComponent.advance;
-          }
-        }).catch(err => {
-          console.log(err);
+        return new Promise((resolve, reject) => {
+          this.$http.get('systemComponentList').then(({data}) => {
+            if (data.status === 200) {
+              const systemComponent = data.data;
+              this.componentCell.PreventCell.cell = systemComponent.prevent;
+              this.componentCell.BaseCell.cell = systemComponent.base;
+              this.componentCell.AdvanceCell.cell = systemComponent.advance;
+              resolve();
+            }
+          }).catch(err => {
+            console.log(err);
+          })
         })
       },
 
       initSelfComponent () {
-        this.$http.get('selfComponentList').then(({data}) => {
-          console.log(data);
-        }).catch(err => {
-          console.log(err);
+        return new Promise((resolve, reject) => {
+          this.$http.get('selfComponentList').then(({data}) => {
+            console.log(data);
+            resolve();
+          }).catch(err => {
+            console.log(err);
+          })
         })
       },
 
       initCollectionComponent () {
-        this.$http.get('collectionComponentList').then(({data}) => {
-          console.log(data);
-        }).catch(err => {
-          console.log(err);
+        return new Promise((resolve, reject) => {
+          this.$http.get('collectionComponentList').then(({data}) => {
+            console.log(data);
+            resolve();
+          }).catch(err => {
+            console.log(err);
+          })
         })
+      },
+
+      saveComponentDataForLocal () {
+        this.$localForage.setItem('componentList', this.componentCell)
       },
 
       showModal (modalType = '') {

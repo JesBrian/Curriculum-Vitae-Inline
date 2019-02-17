@@ -12,6 +12,20 @@
 
     <div style="padding:0 18px 0 38px;">
       <Collapse v-model="openCollapse">
+        <Panel name="0">
+          今天
+          <div slot="content">
+            <CellGroup>
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+              <Divider class="cell-divider" />
+              <Cell title="Display label content" label="label content" extra="details" />
+            </CellGroup>
+          </div>
+        </Panel>
         <Panel name="1">
           最近三天
           <div slot="content">
@@ -73,7 +87,7 @@
 
     data () {
       return {
-        openCollapse: '1'
+        openCollapse: ['0', '1']
       }
     },
 

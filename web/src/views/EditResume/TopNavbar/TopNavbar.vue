@@ -184,7 +184,7 @@
       </Tabs>
 
       <div @click="changeShowComponentConfArea" style="line-height:23px; text-align:center; width: 188px; height:23px; top: 98%; left: 50%; position:absolute; transform: translateX(-50%); border-radius: 0 0 8px 8px; background:#50596E; box-shadow: 0 8px 18px -6px #000;">
-        <Icon type="ios-arrow-up" size="22" color="#FFF" />
+        <Icon :type="isShowComponentConfArea ? 'ios-arrow-up' : 'ios-arrow-down'" size="22" color="#FFF" />
       </div>
     </div>
   </Header>
