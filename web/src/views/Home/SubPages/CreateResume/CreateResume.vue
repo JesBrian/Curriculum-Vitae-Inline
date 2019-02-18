@@ -67,13 +67,7 @@
     },
 
     created () {
-      this.$http.get('formatList').then(({data}) => {
-        if (data.status === 200) {
-          this.formatList = data.data;
-        }
-      }).catch(err => {
-        console.log(err);
-      })
+      this.initFormatList();
     },
 
     methods: {
@@ -102,6 +96,22 @@
         } else {
           this.step++;
         }
+      },
+
+      initFormatList () {
+        this.$localForage.getItem('formatList').then(val => {
+          if (val) {
+            this.formatList = val;
+          }
+          this.$http.get('formatList').then(({data}) => {
+            if (data.status === 200) {
+              this.formatList = data.data;
+              this.$localForage.setItem('formatList', data.data);
+            }
+          }).catch(err => {
+            console.log(err);
+          })
+        })
       }
     }
   }
