@@ -102,15 +102,16 @@
         this.$localForage.getItem('formatList').then(val => {
           if (val) {
             this.formatList = val;
+          } else {
+            this.$http.get('formatList').then(({data}) => {
+              if (data.status === 200) {
+                this.formatList = data.data;
+                this.$localForage.setItem('formatList', data.data);
+              }
+            }).catch(err => {
+              console.log(err);
+            })
           }
-          this.$http.get('formatList').then(({data}) => {
-            if (data.status === 200) {
-              this.formatList = data.data;
-              this.$localForage.setItem('formatList', data.data);
-            }
-          }).catch(err => {
-            console.log(err);
-          })
         })
       }
     }
