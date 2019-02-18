@@ -14,7 +14,11 @@ const ComponentSchema: Schema = new Schema({
     default: 'extend'
   },
   graphics: {
-    type: String,
+    type: Boolean,
+    default: true
+  },
+  special: {
+    type: Boolean,
     default: true
   },
   tags: Array,
