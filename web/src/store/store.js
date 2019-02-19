@@ -10,7 +10,11 @@ export default new Vuex.Store({
     showModal: '',
     showTips: false,
 
-    designConf: []
+    designConf: {
+      size: [], // [长,宽]
+      bg: '#FFF',
+      cell: []
+    }
   },
   mutations: {
     changeUserInfo (state, userInfo = null) {
@@ -29,8 +33,32 @@ export default new Vuex.Store({
       state.showTips = status;
     },
 
-    changedesignConf (state, config = []) {
-      state.designConf = config;
+    changeDesignConf (state, conf = {
+      size: [],
+      bg: '#FFF',
+      cell: []
+    }) {
+      state.designConf = conf;
+    },
+
+    changeDesignConfSize (state, size = [0, 0]) {
+      state.designConf.size = size;
+    },
+
+    changeDesignConfBg (state, bg = '#FFF') {
+      state.designConf.bg = bg;
+    },
+
+    changeDesignConfCell (state, data = {
+      op: '',
+      index: -1,
+      cell: {}
+    }) {
+      if (data.op === 'del') {
+        state.designConf.cell.splice(data.index, 1);
+      } else if (data.op === 'add') {
+        state.designConf.cell.push(data.cell);
+      }
     }
   },
   actions: {

@@ -70,6 +70,7 @@ export default [
         path: 'editUser',
         name: 'editUser',
         meta: {
+          access: ['super_admin'],
           title: '用户管理',
           icon: 'md-funnel',
         },
@@ -99,6 +100,7 @@ export default [
         path: 'editAdmin',
         name: 'editAdmin',
         meta: {
+          access: ['super_admin'],
           icon: 'md-funnel',
           title: '管理员管理'
         },
@@ -110,6 +112,7 @@ export default [
     path: '/auth',
     name: 'auth',
     meta: {
+      access: ['super_admin'],
       icon: 'ios-book',
       title: '权限模块'
     },

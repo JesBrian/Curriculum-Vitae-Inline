@@ -64,13 +64,13 @@
     },
 
     beforeCreate () {
-      if (this.$store.state.designConf.length === 0) {
-        // this.$router.push('/');
+      if (this.$store.state.designConf.size.length === 0) {
+        this.$router.push('/');
       }
     },
 
     beforeDestroy () {
-      this.$store.commit('changedesignConf');
+      this.$store.commit('changeDesignConf');
     },
 
     methods: {

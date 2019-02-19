@@ -34,4 +34,8 @@
   .ivu-layout-sider-zero-width-trigger {
     z-index:9;
   }
+
+  .base-cell {
+    position: absolute;
+  }
 </style>

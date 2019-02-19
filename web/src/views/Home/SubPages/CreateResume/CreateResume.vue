@@ -89,7 +89,7 @@
 
       nextStep () {
         if (this.step) {
-          this.$store.commit('changedesignConf', this.formatList[this.formatIndex].size);
+          this.$store.commit('changeDesignConfSize', this.formatList[this.formatIndex].size);
           this.$nextTick(() => {
             this.$router.push('/EditResume');
           });

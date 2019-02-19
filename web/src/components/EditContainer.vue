@@ -1,5 +1,6 @@
 <template>
-  <div ref="editContainer" :style="`width:${$store.state.designConf[0]}px; height:${$store.state.designConf[1]}px;`" style="overflow:hidden; background:lightblue;"></div>
+  <div ref="editContainer" :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px;`" style="position: relative; overflow:hidden; background:lightblue;">
+  </div>
 </template>
 
 <script>

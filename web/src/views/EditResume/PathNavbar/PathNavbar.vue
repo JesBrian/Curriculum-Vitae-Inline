@@ -10,9 +10,9 @@
     </Breadcrumb>
 
     <div style="margin-top:-36px; float:right">
-      <InputNumber v-model="$store.state.designConf[0]" :min="1" size="small" style="width:68px;" />
+      <InputNumber v-model="$store.state.designConf.size[0]" :min="1" size="small" style="width:68px;" />
       <span style="margin:2px 5px;">x</span>
-      <InputNumber v-model="$store.state.designConf[1]" :min="1" size="small" style="width:68px; margin-right:28px;" />
+      <InputNumber v-model="$store.state.designConf.size[1]" :min="1" size="small" style="width:68px; margin-right:28px;" />
 
       <Button @click="showTempResume" type="success" icon="logo-buffer" size="small" ghost style="margin:0 3px;">预览</Button>
       <Button @click="exportResume" type="primary" icon="md-code-download" size="small" ghost style="margin:0 3px;">导出</Button>
