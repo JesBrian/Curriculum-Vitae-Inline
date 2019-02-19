@@ -1,5 +1,5 @@
 <template>
-  <div :id="data._id" >
+  <div :id="data._id" style="width: 88px; height: 18px; background: lightcoral">
     {{data.name}}
   </div>
 </template>

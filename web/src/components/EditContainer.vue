@@ -8,9 +8,9 @@
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
-        // let tempCellDom = document.querySelector('#tempCellComponent');
-        // tempCellDom.removeAttribute('id');
-        // event.target.appendChild(tempCellDom);
+        let tempCellDom = document.querySelector('#nowNewDrag');
+        tempCellDom.removeAttribute('id');
+        event.target.appendChild(tempCellDom);
       });
       this.$refs.editContainer.addEventListener('dragover', (event) => {
         event.preventDefault();

@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div id="cell5c655bcfbd1c2c2a2c4ed247">
+    SpecialCellSixStar
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SixStarCell'
+    name: 'SpecialCellSixStar'
   }
 </script>
 

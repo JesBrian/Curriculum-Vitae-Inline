@@ -7,7 +7,7 @@
       <div :name="`${categoryItem}${categoryIndex}`">
         <div v-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
-            <div class="cell-item" draggable="true">{{cellItem.id}}</div>
+            <div :data-id="cellItem._id" class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
         <div @click="showModal('LoginRegisterModal')" v-else-if="!$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
@@ -43,7 +43,6 @@
     data () {
       return {
         nowDragCellDom: null,
-        hiddenComponentContainer: null,
         componentCell: {
           PreventCell: {
             ch: '预设组件',
@@ -88,17 +87,20 @@
 
     mounted () {
       this.nowDragCellDom = this.$refs.cellComponentBox.$el;
-      this.hiddenComponentContainer = document.querySelector('#hiddenComponentContainer');
+      let hiddenComponentContainer = document.querySelector('#hiddenComponentContainer');
 
+      let cellDom = null;
       this.nowDragCellDom.addEventListener('dragstart', (event) => {
-        let cellDom = event.target.cloneNode(true);
-        cellDom.style.background = 'lightblue';
-        cellDom.id = 'tempCellComponent';
-        this.hiddenComponentContainer.appendChild(cellDom);
-        event.dataTransfer.setDragImage(cellDom, 16, 16);
+        cellDom = hiddenComponentContainer.querySelector(`#cell${event.target.dataset.id}`).cloneNode(true);
+        cellDom.id = 'nowNewDrag';
+        hiddenComponentContainer.appendChild(cellDom);
+        event.dataTransfer.setDragImage(cellDom, 0, 0);
       }, false);
       this.nowDragCellDom.addEventListener('dragend', () => {
-        this.hiddenComponentContainer.removeChild(this.hiddenComponentContainer.childNodes[0]);
+        const removeCellDom = hiddenComponentContainer.querySelector('#nowNewDrag');
+        if (removeCellDom) {
+          hiddenComponentContainer.removeChild(removeCellDom);
+        }
       }, false);
     },
 

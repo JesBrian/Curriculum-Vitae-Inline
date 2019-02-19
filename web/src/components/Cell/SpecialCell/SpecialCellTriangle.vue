@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div id="cell5c655b7bbd1c2c2a2c4ed243">
+    SpecialCellTriangle
   </div>
 </template>
 
 <script>
   export default {
-    name: 'CircleCell'
+    name: 'SpecialCellTriangle'
   }
 </script>
 
