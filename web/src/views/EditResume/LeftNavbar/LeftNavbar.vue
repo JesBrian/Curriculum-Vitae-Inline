@@ -179,7 +179,21 @@
         this.$localForage.setItem('componentList', data);
       },
 
-      createCell (cellDomId = '') {
+      createCell (cellId = '') {
+        let flag = false;
+        for (let key in this.componentCell) {
+          for (let i = 0, len = this.componentCell[key].cell.length; i < len; i++) {
+            if (this.componentCell[key].cell[i]._id === cellId) {
+              this.$store.commit('changeDesignConfCell', {
+                op: 'add',
+                cell: this.componentCell[key].cell[i]
+              });
+              flag = true;
+              break;
+            }
+          }
+          if (flag) break;
+        }
       },
 
       showModal (modalType = '') {

@@ -76,10 +76,16 @@
           <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">是否特殊组件：</Col>
             <Col span="16">
-              <Switch v-model="special" size="large">
+              <Switch v-model="specialStatus" size="large">
                 <span slot="open">ON</span>
                 <span slot="close">OFF</span>
               </Switch>
+            </Col>
+          </Row>
+          <Row v-if="specialStatus" style="margin-bottom:23px; line-height:33px;">
+            <Col span="8" style="text-align:left;">特殊组件名称：</Col>
+            <Col span="16">
+              <Input v-model="special" placeholder="Enter something..." />
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
@@ -367,7 +373,8 @@
         category: 'prevent',
         graphics: true,
         tags: [],
-        special: false,
+        specialStatus: false,
+        special: '',
         status: false,
       }
     },

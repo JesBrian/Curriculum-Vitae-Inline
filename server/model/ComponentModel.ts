@@ -17,10 +17,7 @@ const ComponentSchema: Schema = new Schema({
     type: Boolean,
     default: true
   },
-  special: {
-    type: Boolean,
-    default: true
-  },
+  special: String,
   tags: Array,
   conf: Object,
   status: Boolean

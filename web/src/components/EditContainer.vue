@@ -4,8 +4,24 @@
 </template>
 
 <script>
+  import NormalCell from './Cell/NormalCell/NormalCell.vue'
+  import SpecialCellCircle from './Cell/SpecialCell/SpecialCellCircle.vue'
+  import SpecialCellTriangle from './Cell/SpecialCell/SpecialCellTriangle.vue'
+  import SpecialCellFiveStar from './Cell/SpecialCell/SpecialCellFiveStar.vue'
+  import SpecialCellSixStar from './Cell/SpecialCell/SpecialCellSixStar.vue'
+  import SpecialCellHeart from './Cell/SpecialCell/SpecialCellHeart.vue'
+
   export default {
     name: 'EditContainer',
+
+    components: {
+      NormalCell,
+      SpecialCellHeart,
+      SpecialCellSixStar,
+      SpecialCellFiveStar,
+      SpecialCellTriangle,
+      SpecialCellCircle
+    },
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
