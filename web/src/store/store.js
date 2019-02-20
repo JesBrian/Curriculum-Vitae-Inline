@@ -8,8 +8,8 @@ export default new Vuex.Store({
     userInfo: null,
     nowCell: null,
     showModal: '',
-    showTips: false,
-
+  
+    nowComponent: null,
     designConf: {
       size: [], // [长,宽]
       bg: '#FFF',
@@ -29,8 +29,8 @@ export default new Vuex.Store({
       state.showModal = modalType;
     },
 
-    changeShowTips (state, status = false) {
-      state.showTips = status;
+    changeNowComponent (state, component = null) {
+      state.nowComponent = component;
     },
 
     changeDesignConf (state, conf = {

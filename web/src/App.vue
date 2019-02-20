@@ -2,17 +2,15 @@
   <div id="app">
     <RouterView />
     <ModalTotal v-if="$store.state.showModal !== ''" />
-    <TipsProcess v-if="$store.state.showTips" />
   </div>
 </template>
 
 <script>
   import ModalTotal from './layout/Modal/ModalTotal.vue'
-  import TipsProcess from './layout/Tips/TipsProcess.vue'
 
   export default {
     components: {
-      ModalTotal, TipsProcess
+      ModalTotal
     },
 
     created () {

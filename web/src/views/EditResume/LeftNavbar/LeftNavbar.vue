@@ -7,7 +7,7 @@
       <div :name="`${categoryItem}${categoryIndex}`">
         <div v-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
-            <div :data-id="cellItem._id" class="cell-item" draggable="true">{{cellItem.id}}</div>
+            <div @dblclick="createCell(cellItem._id)" :data-id="cellItem._id" class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
         <div @click="showModal('LoginRegisterModal')" v-else-if="!$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
@@ -177,6 +177,9 @@
           collection: this.componentCell.CollectionCell.cell
         };
         this.$localForage.setItem('componentList', data);
+      },
+
+      createCell (cellDomId = '') {
       },
 
       showModal (modalType = '') {

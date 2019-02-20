@@ -65,7 +65,7 @@
 
     beforeCreate () {
       if (this.$store.state.designConf.size.length === 0) {
-        this.$router.push('/');
+        // this.$router.push('/');
       }
     },
 
