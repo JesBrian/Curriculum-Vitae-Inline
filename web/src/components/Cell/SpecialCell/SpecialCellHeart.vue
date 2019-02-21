@@ -1,5 +1,5 @@
 <template>
-  <div id="cell5c655bdabd1c2c2a2c4ed248" class="base-cell">
+  <div class="base-cell">
     SpecialCellHeart
   </div>
 </template>

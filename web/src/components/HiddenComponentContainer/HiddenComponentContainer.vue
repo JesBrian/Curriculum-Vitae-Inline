@@ -1,14 +1,12 @@
 <template>
   <div id="hiddenComponentContainer">
-    <div v-for="categoryItem in cellList" >
-      <NormalCell :id="`cell${cellItem._id}`" v-for="cellItem in categoryItem.cell" v-if="!cellItem.special" :data="cellItem" />
-    </div>
-
-    <SpecialCellCircle />
-    <SpecialCellTriangle />
-    <SpecialCellFiveStar />
-    <SpecialCellSixStar />
-    <SpecialCellHeart />
+    <template v-for="categoryItem in cellList" >
+      <template v-for="cellItem in categoryItem.cell">
+        <component :is="cellItem.special ? cellItem.special : 'NormalCell'"
+                   :id="`cell${cellItem._id}`"
+                   :data="cellItem" />
+      </template>
+    </template>
   </div>
 </template>
 
@@ -45,7 +43,6 @@
 
 <style lang="scss" scoped>
   #hiddenComponentContainer {
-    top: 0; right: 0; position: fixed; z-index: 999;
-    /*top: 100%; left: 100%; position: fixed; z-index: -999; background: #FFF;*/
+    top: 100%; left: 100%; position: fixed; z-index: -999;
   }
 </style>

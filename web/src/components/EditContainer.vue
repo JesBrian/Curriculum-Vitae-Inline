@@ -1,5 +1,9 @@
 <template>
   <div ref="editContainer" :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px;`" style="position: relative; overflow:hidden; background:lightblue;">
+    <component v-for="cellItem in $store.state.designConf.cell"
+               :is="cellItem.special ? cellItem.special : 'NormalCell'"
+               :id="`cell${cellItem._id}`"
+               :data="cellItem" />
   </div>
 </template>
 
