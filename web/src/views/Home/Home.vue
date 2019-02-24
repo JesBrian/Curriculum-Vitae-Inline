@@ -31,11 +31,11 @@
         <RouterLink class="home-left-navbar-link" to="/Home/CellManagement">
           <Icon type="logo-buffer" class="icon" />组件
         </RouterLink>
-        <RouterLink class="home-left-navbar-link" to="/Home/TestFunctions">
-          <Icon type="ios-flask" class="icon" />趣味
-        </RouterLink>
-        <RouterLink class="home-left-navbar-link" to="/Home/SystemConfig">
-          <Icon type="ios-construct" class="icon" />配置
+        <!--<RouterLink class="home-left-navbar-link" to="/Home/TestFunctions">-->
+          <!--<Icon type="ios-flask" class="icon" />趣味-->
+        <!--</RouterLink>-->
+        <RouterLink class="home-left-navbar-link" to="/Home/SettingConfig">
+          <Icon type="ios-construct" class="icon" />设置
         </RouterLink>
 
         <div style="height:58px;"></div>
@@ -46,9 +46,9 @@
       </Layout>
 
       <Footer class="home-footer">
-        <Button icon="md-list" ghost style="margin:0 6px;">取消</Button>
-        <Button icon="md-list" ghost style="margin:0 6px;">上一步</Button>
-        <Button icon="md-list" ghost style="margin:0 6px;">下一步</Button>
+        <!--<Button icon="md-list" ghost style="margin:0 6px;">取消</Button>-->
+        <!--<Button icon="md-list" ghost style="margin:0 6px;">上一步</Button>-->
+        <!--<Button icon="md-list" ghost style="margin:0 6px;">下一步</Button>-->
       </Footer>
     </Layout>
   </Layout>
@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'SettingConfig',
 
   create () {
     this.$localForage.getItem('user', (err, value) => {

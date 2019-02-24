@@ -32,20 +32,15 @@ export default new Router({
           name: 'CellManagement',
           component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/CellManagement/CellManagement.vue'], resolve)
         },
+        // {
+        //   path: '/Home/TestFunctions',
+        //   name: 'UserSetting',
+        //   component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/TestFunctions/TestFunctions.vue'], resolve)
+        // },
         {
-          path: '/Home/UserSetting',
-          name: 'UserSetting',
-          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/UserSetting/UserSetting.vue'], resolve)
-        },
-        {
-          path: '/Home/TestFunctions',
-          name: 'UserSetting',
-          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/TestFunctions/TestFunctions.vue'], resolve)
-        },
-        {
-          path: '/Home/SystemConfig',
-          name: 'SystemConfig',
-          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SystemConfig/SystemConfig.vue'], resolve)
+          path: '/Home/SettingConfig',
+          name: 'SettingConfig',
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SettingConfig/SettingConfig.vue'], resolve)
         },
       ]
     },
