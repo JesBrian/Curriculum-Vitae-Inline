@@ -1,7 +1,9 @@
 const {
   userLoginSer,
   userRegisterSer,
-  allUserListSer
+  allUserListSer,
+  getUserByIdSer,
+  updateUserSer
 } = require('../service/UserService');
 
 /**
@@ -57,5 +59,26 @@ exports.allUserListCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: 200,
     data: result
+  };
+};
+
+exports.getUserByIdCtr = async (ctx: any, next: any) => {
+  const userId = ctx.query.id;
+  const result = await getUserByIdSer(userId);
+
+  ctx.body = {
+    status: 200,
+    data: result
+  };
+};
+
+exports.updateUserCtr = async (ctx: any, next: any) => {
+  const userId = ctx.request.body.id;
+  const userInfo = ctx.request.body.userInfo;
+
+  const result = await updateUserSer(userId, userInfo);
+
+  ctx.body = {
+    status: 200
   };
 };
