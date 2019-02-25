@@ -11,7 +11,13 @@
     props: {
       data: {
         type: Object,
-        default: {}
+        default: () => {
+          return {}
+        }
+      },
+      graphics: {
+        type: Boolean,
+        default: false
       }
     }
   }
