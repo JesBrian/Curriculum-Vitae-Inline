@@ -68,14 +68,44 @@
     data () {
       return {
         name: '',
+        avatar: '',
         mail: '',
         password: '',
         rePassword: ''
       }
     },
 
+    created () {
+      this.$http.get(`getUserById?id=${this.$store.state.userInfo.id}`).then(({data}) => {
+        if (data.status === 200) {
+          const userInfo = data.data;
+          this.name = userInfo.name;
+          this.avatar = userInfo.avatar;
+          this.mail = userInfo.mail;
+        }
+      }).catch(err => {
+        console.log(err);
+      });
+    },
+
     methods: {
       saveUserInfo () {
+        let saveData = {
+          id: this.$store.state.userInfo.id,
+          userInfo: {
+            name: this.name,
+            mail: this.mail
+          }
+        };
+        if (this.password === '') saveData.password = this.password;
+        if (this.avatar === '') saveData.avatar = this.avatar;
+        this.$http.put('updateUser', saveData).then(({data}) => {
+          if (data === 200) {
+            // 修改 vuex && localForage
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       }
     }
   }

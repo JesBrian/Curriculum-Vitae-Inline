@@ -70,6 +70,10 @@ exports.updateUserSer = async (id: string = '', userInfo: any = null) => {
   user.name = userInfo.name;
   user.avatar = userInfo.avatar;
   user.mail = userInfo.mail;
-  user.password = md5(user.salt + userInfo.password);
+
+  if (userInfo.password) {
+    user.password = md5(user.salt + userInfo.password);
+  }
+
   await user.save();
 };
