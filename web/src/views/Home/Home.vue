@@ -65,7 +65,10 @@ export default {
 
   methods: {
     showLoginModal () {
-      this.$store.commit('changeShowModal', 'LoginRegisterModal');
+      if (this.$store.state.userInfo === null) {
+        return this.$store.commit('changeShowModal', 'LoginRegisterModal');
+      }
+      this.$router.push('/Home/SettingConfig');
     }
   }
 }

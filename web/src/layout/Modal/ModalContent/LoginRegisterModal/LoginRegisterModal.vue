@@ -4,13 +4,13 @@
       <TabPane label="登录">
         <Form ref="Login" class="signin" style="margin:8px 18px 0;">
           <FormItem prop="mobile">
-            <Input v-model="name" type="text" placeholder="输入用户名">
+            <Input v-model="name" type="text" placeholder="请输入用户名">
               <Icon type="ios-contact" slot="prepend" size="22" />
             </Input>
             <!--<p class="error-text" v-show="Login.error.mobile">{{Login.error.mobile}}</p>-->
           </FormItem>
           <FormItem prop="password">
-            <Input v-model="password" type="password" placeholder="输入密码">
+            <Input v-model="password" type="password" placeholder="请输入密码">
               <Icon type="ios-key" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text" v-show="Login.error.password">{{Login.error.password}}</p>-->
@@ -35,13 +35,13 @@
       <TabPane label="注册">
         <Form ref="Register" class="signup" style="margin:8px 18px 0;">
           <FormItem prop="mobile">
-            <Input v-model="name" type="text" placeholder="输入用户名" style="text-align:center">
+            <Input v-model="name" type="text" placeholder="请输入用户名" style="text-align:center">
               <Icon type="ios-contact" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->
           </FormItem>
           <FormItem prop="mail">
-            <Input v-model="mail" type="email" placeholder="输入邮箱" style="text-align:center">
+            <Input v-model="mail" type="email" placeholder="请输入邮箱地址" style="text-align:center">
               <Icon type="ios-mail-outline" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->
@@ -49,7 +49,7 @@
           <FormItem prop="code">
             <Row>
               <Col span="16">
-                <Input v-model="code" type="text" placeholder="输入获取的验证码" style="text-align:center;">
+                <Input v-model="code" type="text" placeholder="请输入获取的验证码" style="text-align:center;">
                   <Icon type="md-code-working" slot="prepend" size="22"/>
                 </Input>
               </Col>
@@ -60,7 +60,7 @@
             <!--<p class="error-text marb8" v-show="Register.error.code">{{Register.error.code}}</p>-->
           </FormItem>
           <FormItem prop="password">
-            <Input v-model="password" type="password" placeholder="输入密码">
+            <Input v-model="password" type="password" placeholder="请输入密码">
               <Icon type="ios-key" slot="prepend" size="22"/>
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.password">{{Register.error.password}}</p>-->
@@ -103,45 +103,50 @@
       },
 
       userLogin () {
-        let errTips = this.checkInputComplete();
-        if (errTips === '') {
-          this.$http.post('userLogin', {
-            'name': this.name,
-            'password': this.password
-          }).then(({data}) => {
-            if (data.status === 200) {
-              this.saveUserInfo(data.data);
-            }
-          }).catch(err => {
-            console.log(err);
-          })
-        } else {
-          alert(errTips);
+        const errTips = this.checkInputComplete();
+        if (errTips) {
+          return this.$Notice.error({
+            title: errTips
+          });
         }
+        this.$http.post('userLogin', {
+          'name': this.name,
+          'password': this.password
+        }).then(({data}) => {
+          console.log(data)
+          if (data.status === 200) {
+            this.saveUserInfo(data.data, '用户登录成功');
+          } else {
+            this.$Message.success(data.data.msg);
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       },
 
       userRegister () {
-        let errTips = this.checkInputComplete('register');
-        if (errTips === '') {
-          this.$http.put('userRegister', {
-            name: this.name,
-            mail: this.mail,
-            password: this.password
-          }).then(({data}) => {
-            if (data.status === 200) {
-              let userInfo = {
-                id: data.data,
-                name: this.name,
-                avatar: ''
-              };
-              this.saveUserInfo(userInfo);
-            }
-          }).catch(err => {
-            console.log(err);
-          })
-        } else {
-          alert(errTips);
+        const errTips = this.checkInputComplete('register');
+        if (errTips) {
+          return this.$Notice.error({
+            title: errTips
+          });
         }
+        this.$http.put('userRegister', {
+          name: this.name,
+          mail: this.mail,
+          password: this.password
+        }).then(({data}) => {
+          if (data.status === 200) {
+            let userInfo = {
+              id: data.data,
+              name: this.name,
+              avatar: ''
+            };
+            this.saveUserInfo(userInfo, '用户注册成功');
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       },
 
       checkInputComplete (category = 'login') {
@@ -162,9 +167,11 @@
         return '';
       },
 
-      saveUserInfo (userInfo) {
+      saveUserInfo (userInfo, tips = '') {
         this.$store.commit('changeUserInfo', userInfo);
         this.$localForage.setItem('userInfo', userInfo);
+        this.closeModal();
+        this.$Message.success(tips);
       },
 
       closeModal () {

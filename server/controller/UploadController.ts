@@ -1,6 +1,6 @@
 const {
   uploadAvatarSer
-} = require('');
+} = require('../service/UploadService');
 
 exports.uploadAvatarCtr = async (ctx: any, next: any) => {
   await uploadAvatarSer();
