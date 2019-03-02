@@ -24,6 +24,10 @@ app.use(koaBody({
 const registerRouter = require('./router/index.js');
 app.use(registerRouter());
 
+// ResponseMiddleware - 统一处理 ajax api 返回
+const responseMiddleware = require('./middleware/ResponseMiddleware');
+app.use(responseMiddleware);
+
 // ResponseMiddleware - 请求响应
 // const responseMiddleware = require('./middleware/ResponseMiddleware');
 // app.use(responseMiddleware);

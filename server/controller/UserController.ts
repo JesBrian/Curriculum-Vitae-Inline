@@ -45,7 +45,6 @@ exports.userLoginCtr = async (ctx: any, next: any) => {
     status: status,
     ...result
   };
-  await next();
 };
 
 exports.allUserListCtr = async (ctx: any, next: any) => {
