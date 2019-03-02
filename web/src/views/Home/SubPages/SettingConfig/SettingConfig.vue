@@ -7,45 +7,84 @@
     </PathNavbar>
 
     <div style="padding:8px 18px 0 38px; position:relative;">
+      <Button v-if="$store.state.userInfo" @click="userLogout" type="primary" style="top:8px; right:18px; position:absolute; z-index: 9;" >退出登录</Button>
       <Card>
         <Tabs type="card">
           <TabPane label="账户设置" style="padding:0 38px;">
-            <Row style="margin-bottom:23px; line-height:33px;">
-              <Col span="8" style="text-align:left;">用户名：</Col>
-              <Col span="16">
-                <Input v-model="name" placeholder="Enter something..." />
-              </Col>
-            </Row>
+            <template v-if="$store.state.userInfo">
+              <Row style="margin-bottom:23px; line-height:33px;">
+                <Col span="8" style="text-align:left;">用户名：</Col>
+                <Col span="16">
+                  <Input v-model="name" placeholder="Enter something..." />
+                </Col>
+              </Row>
 
-            <Row style="margin-bottom:23px; line-height:33px;">
-              <Col span="8" style="text-align:left;">用户密码：</Col>
-              <Col span="16">
-                <Input v-model="password" type="password" placeholder="Enter something..." />
-              </Col>
-            </Row>
+              <Row style="margin-bottom:23px; line-height:33px;">
+                <Col span="8" style="text-align:left;">用户头像：</Col>
+                <Col span="16">
 
-            <Row style="margin-bottom:23px; line-height:33px;">
-              <Col span="8" style="text-align:left;">确认密码：</Col>
-              <Col span="16">
-                <Input v-model="rePassword" type="password" placeholder="Enter something..." />
-              </Col>
-            </Row>
+                  <div class="demo-upload-list" v-for="item in uploadList">
+                    <template v-if="item.status === 'finished'">
+                      <img :src="item.url">
+                      <div class="demo-upload-list-cover">
+                        <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                    </template>
+                  </div>
+                  <Upload
+                      ref="upload"
+                      :show-upload-list="false"
+                      :default-file-list="defaultList"
+                      :on-success="handleSuccess"
+                      :format="['jpg','jpeg','png']"
+                      :max-size="2048"
+                      :on-format-error="handleFormatError"
+                      :on-exceeded-size="handleMaxSize"
+                      :before-upload="handleBeforeUpload"
+                      multiple
+                      type="drag"
+                      action="//jsonplaceholder.typicode.com/posts/"
+                      style="display: inline-block;width:58px;">
+                    <div style="width: 58px;height:58px;line-height: 58px;">
+                      <Icon type="ios-camera" size="20"></Icon>
+                    </div>
+                  </Upload>
+                </Col>
+              </Row>
 
-            <Row style="margin-bottom:23px; line-height:33px;">
-              <Col span="8" style="text-align:left;">邮件地址：</Col>
-              <Col span="16">
-                <Input v-model="mail" placeholder="Enter something..." />
-              </Col>
-            </Row>
+              <Row style="margin-bottom:23px; line-height:33px;">
+                <Col span="8" style="text-align:left;">用户密码：</Col>
+                <Col span="16">
+                  <Input v-model="password" type="password" placeholder="Enter something..." />
+                </Col>
+              </Row>
 
-            <Row style="margin:23px 0 8px;">
-              <Col span="12" style="text-align:center;">
-                <Button type="primary">取消返回</Button>
-              </Col>
-              <Col span="12" style="text-align:center;">
-                <Button @click="saveUserInfo" type="primary">确定保存</Button>
-              </Col>
-            </Row>
+              <Row style="margin-bottom:23px; line-height:33px;">
+                <Col span="8" style="text-align:left;">确认密码：</Col>
+                <Col span="16">
+                  <Input v-model="rePassword" type="password" placeholder="Enter something..." />
+                </Col>
+              </Row>
+
+              <Row style="margin-bottom:23px; line-height:33px;">
+                <Col span="8" style="text-align:left;">邮件地址：</Col>
+                <Col span="16">
+                  <Input v-model="mail" placeholder="Enter something..." />
+                </Col>
+              </Row>
+
+              <Row style="margin:23px 0 8px;">
+                <Col span="12" style="text-align:center;">
+                  <Button type="primary">取消返回</Button>
+                </Col>
+                <Col span="12" style="text-align:center;">
+                  <Button @click="saveUserInfo" type="primary">确定保存</Button>
+                </Col>
+              </Row>
+            </template>
           </TabPane>
           <TabPane label="系统配置">
           </TabPane>
@@ -71,21 +110,36 @@
         avatar: '',
         mail: '',
         password: '',
-        rePassword: ''
+        rePassword: '',
+
+        defaultList: [{
+          url: 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
+        }],
+        imgName: '',
+        visible: false,
+        uploadList: []
       }
     },
 
     created () {
-      this.$http.get(`getUserById?id=${this.$store.state.userInfo.id}`).then(({data}) => {
-        if (data.status === 200) {
-          const userInfo = data.data;
-          this.name = userInfo.name;
-          this.avatar = userInfo.avatar;
-          this.mail = userInfo.mail;
-        }
-      }).catch(err => {
-        console.log(err);
-      });
+      if (this.$store.state.userInfo) {
+        this.$http.get(`getUserById?id=${this.$store.state.userInfo.id}`).then(({data}) => {
+          if (data.status === 200) {
+            const userInfo = data.data;
+            this.name = userInfo.name;
+            this.avatar = userInfo.avatar;
+            this.mail = userInfo.mail;
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    },
+
+    mounted () {
+      if (this.$store.state.userInfo) {
+        this.uploadList = this.$refs.upload.fileList;
+      }
     },
 
     methods: {
@@ -106,11 +160,87 @@
         }).catch(err => {
           console.log(err);
         })
+      },
+
+
+      handleView (name) {
+        this.imgName = name;
+        this.visible = true;
+      },
+      handleRemove (file) {
+        const fileList = this.$refs.upload.fileList;
+        this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+      },
+      handleSuccess (res, file) {
+        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
+        file.name = '7eb99afb9d5f317c912f08b5212fd69a';
+      },
+      handleFormatError (file) {
+        this.$Notice.warning({
+          title: 'The file format is incorrect',
+          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+        });
+      },
+      handleMaxSize (file) {
+        this.$Notice.warning({
+          title: 'Exceeding file size limit',
+          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+        });
+      },
+      handleBeforeUpload () {
+        const check = this.uploadList.length < 5;
+        if (!check) {
+          this.$Notice.warning({
+            title: 'Up to five pictures can be uploaded.'
+          });
+        }
+        return check;
+      },
+
+      userLogout () {
+        this.$localForage.setItem('userInfo', null);
+        this.$store.commit('changeUserInfo');
+        this.$router.push('/')
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
+  .demo-upload-list{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    margin-right: 4px;
+  }
+  .demo-upload-list img{
+    width: 100%;
+    height: 100%;
+  }
+  .demo-upload-list-cover{
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+  }
+  .demo-upload-list:hover .demo-upload-list-cover{
+    display: block;
+  }
+  .demo-upload-list-cover i{
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 2px;
+  }
 </style>
