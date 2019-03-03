@@ -9,7 +9,8 @@ export default new Vuex.Store({
     nowCell: null,
     showModal: '',
   
-    nowComponent: null,
+    dragComponent: null, // 拖拽创建
+    nowComponentIndex: -1, // 当前选中
     designConf: {
       size: [], // [长,宽]
       bg: '#FFF',
@@ -28,9 +29,13 @@ export default new Vuex.Store({
     changeShowModal (state, modalType = '') {
       state.showModal = modalType;
     },
+  
+    changeDragComponent (state, component = null) {
+      state.dragComponent = component;
+    },
 
-    changeNowComponent (state, component = null) {
-      state.nowComponent = component;
+    changeNowComponentIndex (state, index = null) {
+      state.nowComponentIndex = index;
     },
 
     changeDesignConf (state, conf = {

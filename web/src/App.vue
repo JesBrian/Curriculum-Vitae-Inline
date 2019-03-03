@@ -34,10 +34,13 @@
   }
 
   .base-cell {
-    position: absolute; overflow: hidden;
-  }
+    display: inline-block;
+    position: absolute;
+    overflow: hidden;
 
-  .base-cell.hide {
-    position: relative;
+    &.hide {
+      margin: 30px;
+      position: relative;
+    }
   }
 </style>

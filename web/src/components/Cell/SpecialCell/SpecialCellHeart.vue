@@ -18,6 +18,10 @@
       position: {
         type: Boolean,
         default: false
+      },
+      graphics: {
+        type: Boolean,
+        default: false
       }
     }
   }

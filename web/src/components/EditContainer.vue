@@ -3,7 +3,7 @@
     <component v-for="cellItem in $store.state.designConf.cell"
                :is="cellItem.special ? cellItem.special : 'NormalCell'"
                :id="`cell${cellItem._id}`"
-               :data="cellItem" />
+               :data="cellItem.conf" />
   </div>
 </template>
 
@@ -29,9 +29,13 @@
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
-        let tempCellDom = document.querySelector('#nowNewDrag');
-        tempCellDom.removeAttribute('id');
-        event.target.appendChild(tempCellDom);
+        // let tempCellDom = document.querySelector('#nowNewDrag');
+        // tempCellDom.removeAttribute('id');
+        // event.target.appendChild(tempCellDom);
+        this.$store.commit('changeDesignConfCell', {
+          op: 'add',
+          cell: this.$store.state.dragComponent
+        });
       });
       this.$refs.editContainer.addEventListener('dragover', (event) => {
         event.preventDefault();

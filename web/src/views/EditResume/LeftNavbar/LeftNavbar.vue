@@ -10,11 +10,11 @@
             <div @dblclick="createCell(cellItem._id)" :data-id="cellItem._id" class="cell-item" draggable="true">{{cellItem.id}}</div>
           </Tooltip>
         </div>
-        <div @click="showModal('LoginRegisterModal')" v-else-if="!$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
-          请登录账号同步组件信息
-        </div>
-        <div v-else style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
+        <div v-else-if="$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
           该分类暂无组件
+        </div>
+        <div @click="showModal('LoginRegisterModal')" v-else style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px; cursor: pointer;">
+          请登录账号同步组件信息
         </div>
       </div>
     </Submenu>
@@ -91,15 +91,18 @@
 
       let cellDom = null;
       this.nowDragCellDom.addEventListener('dragstart', (event) => {
-        cellDom = hiddenComponentContainer.querySelector(`#cell${event.target.dataset.id}`).cloneNode(true);
+        const cellId = event.target.dataset.id;
+        const component = this.getComponentDataById(cellId);
+        this.$store.commit('changeDragComponent', component);
+        cellDom = hiddenComponentContainer.querySelector(`#cell${cellId}`).cloneNode(true);
         cellDom.id = 'nowNewDrag';
         hiddenComponentContainer.appendChild(cellDom);
-        event.dataTransfer.setDragImage(cellDom, 0, 0);
+        event.dataTransfer.setDragImage(cellDom, component.conf.format.size.size[0] / 2, component.conf.format.size.size[0] / 2);
       }, false);
       this.nowDragCellDom.addEventListener('dragend', () => {
-        const removeCellDom = hiddenComponentContainer.querySelector('#nowNewDrag');
-        if (removeCellDom) {
-          hiddenComponentContainer.removeChild(removeCellDom);
+        if (cellDom) {
+          hiddenComponentContainer.removeChild(cellDom);
+          this.$store.commit('changeDragComponent');
         }
       }, false);
     },
@@ -180,19 +183,19 @@
       },
 
       createCell (cellId = '') {
-        let flag = false;
-        for (let key in this.componentCell) {
+        this.$store.commit('changeDesignConfCell', {
+          op: 'add',
+          cell: this.getComponentDataById(cellId)
+        });
+      },
+
+      getComponentDataById (id = '') {
+        for (const key in this.componentCell) {
           for (let i = 0, len = this.componentCell[key].cell.length; i < len; i++) {
-            if (this.componentCell[key].cell[i]._id === cellId) {
-              this.$store.commit('changeDesignConfCell', {
-                op: 'add',
-                cell: this.componentCell[key].cell[i]
-              });
-              flag = true;
-              break;
+            if (this.componentCell[key].cell[i]._id === id) {
+              return this.componentCell[key].cell[i];
             }
           }
-          if (flag) break;
         }
       },
 
