@@ -34,6 +34,10 @@
   }
 
   .base-cell {
-    position: absolute;
+    position: absolute; overflow: hidden;
+  }
+
+  .base-cell.hide {
+    position: relative;
   }
 </style>

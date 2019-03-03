@@ -1,12 +1,25 @@
 <template>
-  <div class="base-cell">
-    SpecialCellSixStar
+  <div :class="['base-cell', position ? 'hide' : '']">
+    SixStar
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SpecialCellSixStar'
+    name: 'SpecialCellSixStar',
+
+    props: {
+      data: {
+        type: Object,
+        default: () => {
+          return null
+        }
+      },
+      position: {
+        type: Boolean,
+        default: false
+      }
+    }
   }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="base-cell special-cell-circle"
+  <div :class="['base-cell', 'special-cell-circle', position ? 'hide' : '']"
        :style="`width: ${data.format.size.size[0]}; height: ${data.format.size.size[1]};
                 top: ${data.format.position.axis[0]}; left: ${data.format.position.axis[1]};
                 border: ${data.style.border[1]}px ${data.style.border[2]} ${data.style.border[3]};
@@ -18,6 +18,10 @@
         default: () => {
           return null
         }
+      },
+      position: {
+        type: Boolean,
+        default: false
       }
     }
   }

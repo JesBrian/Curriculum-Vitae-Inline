@@ -7,11 +7,12 @@
     </PathNavbar>
 
     <div style="padding:8px 18px 0 38px; position:relative;">
-      <Button v-if="$store.state.userInfo" @click="userLogout" type="primary" style="top:8px; right:18px; position:absolute; z-index: 9;" >退出登录</Button>
+      <Button v-if="$store.state.userInfo" @click="userLogout" type="primary" style="top:16px; right:26px; position:absolute; z-index: 9;" >退出登录</Button>
       <Card>
         <Tabs type="card">
-          <TabPane label="账户设置" style="padding:0 38px;">
-            <template v-if="$store.state.userInfo">
+          <TabPane label="账户设置" style="padding:0 38px; position: relative;">
+            <div v-if="!$store.state.userInfo" style="width: 100%; height: 100%; position: absolute; background: rgba(255, 255, 255, 0.5); z-index: 9;">
+            </div>
               <Row style="margin-bottom:23px; line-height:33px;">
                 <Col span="8" style="text-align:left;">用户名：</Col>
                 <Col span="16">
@@ -46,7 +47,7 @@
                       :before-upload="handleBeforeUpload"
                       multiple
                       type="drag"
-                      action="//jsonplaceholder.typicode.com/posts/"
+                      action="//localhost:3000/uploadAvatar"
                       style="display: inline-block;width:58px;">
                     <div style="width: 58px;height:58px;line-height: 58px;">
                       <Icon type="ios-camera" size="20"></Icon>
@@ -84,7 +85,6 @@
                   <Button @click="saveUserInfo" type="primary">确定保存</Button>
                 </Col>
               </Row>
-            </template>
           </TabPane>
           <TabPane label="系统配置">
           </TabPane>
@@ -112,9 +112,7 @@
         password: '',
         rePassword: '',
 
-        defaultList: [{
-          url: 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
-        }],
+        defaultList: [],
         imgName: '',
         visible: false,
         uploadList: []
