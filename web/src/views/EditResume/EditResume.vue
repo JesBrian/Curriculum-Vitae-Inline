@@ -8,7 +8,7 @@
         <LeftNavbar :is-collapsed="isCollapsed" />
       </Sider>
 
-      <Content class="page-layout" :style="`padding:50px ${showNodePanel ? 200 : 40}px 18px 15px; position: relative;`">
+      <Content class="page-layout" :style="`padding:50px ${showNodePanel ? 200 : 45}px 18px 15px; position: relative;`">
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
@@ -43,11 +43,21 @@
           </div>
         </Layout>
 
-        <Layout @click.native="switchShowNodePanel" :style="`width:${showNodePanel ? 180 : 20}px; height:100%; top: 0; right: 0; position: absolute; background: #50596E; box-shadow: 0 0 8px #282828; color: #FFF;`">
-          <div v-if="showNodePanel" style="overflow: auto;">
+        <Layout :style="`width:${showNodePanel ? 180 : 25}px; height:100%; top: 0; right: 0; box-sizing: border-box; position: absolute; background: #50596E; box-shadow: 0 0 8px #282828; color: #FFF;`">
+          <div v-if="showNodePanel" style="width: 100%; height: 100%; padding: 18px 10px; overflow: auto;">
+            <template v-if="$store.state.designConf.cell.length" >
+              <div v-for="(item, index) in $store.state.designConf.cell" class="nodeCell">
+                {{index + 1}}
+                <Icon @click="delNode(index)" type="md-trash" size="18" style="margin-left: auto;" />
+              </div>
+            </template>
+            <div v-else style="width: 100%; height: 100%;">暂无任何节点</div>
+            <div @click="switchShowNodePanel" style="width: 23px; height: 168px; left: -23px; top: 50%; position: absolute; transform: translateY(-50%); background: #50596E; box-shadow: -6px 0 18px -6px #000; border-radius: 8px 0 0 8px; line-height: 168px; text-align: center;">
+              <Icon type="ios-arrow-forward" size="22" color="#FFF" />
+            </div>
           </div>
-          <div v-else style="text-align: center;">
-            层级节点面板
+          <div @click="switchShowNodePanel" v-else style="width: 100%; height: 100%; padding: 15px 2px; box-sizing: border-box; text-align: center;">
+            节点层级面板
           </div>
         </Layout>
       </Content>
@@ -117,6 +127,12 @@
         this.showNodePanel = !this.showNodePanel;
       },
 
+      delNode (index) {
+        this.$store.commit('changeDesignConfCell', {
+          op: 'del', index: index
+        });
+      },
+
       showTempResume () {
         this.$store.commit('changeShowModal', 'TempShowModal');
       },
@@ -162,5 +178,13 @@
 
   .page-layout {
     padding-top:30px; position:relative;
+  }
+
+
+  .nodeCell {
+    width: 100%; height: 28px; padding: 0 8px 0 12px; display: flex; flex-direction: row; align-items: center; border-radius: 14px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.08); box-shadow: 1px 1px 8px -2px #000;
+    }
   }
 </style>
