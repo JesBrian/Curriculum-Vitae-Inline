@@ -2,7 +2,7 @@
   <div>
     <PathNavbar>
       <BreadcrumbItem>
-        <Icon type="ios-clipboard" /> 本地存储
+        <Icon type="ios-clipboard" /> 本地历史
       </BreadcrumbItem>
 
       <div slot="right">
@@ -79,7 +79,7 @@
   import PathNavbar from '../../PathNavbar.vue'
 
   export default {
-    name: 'UploadLocal',
+    name: 'LocalHistory',
 
     components: {
       PathNavbar
@@ -87,8 +87,18 @@
 
     data () {
       return {
-        openCollapse: ['0', '1']
+        openCollapse: ['0', '1'],
+        historyRecord: {
+        }
       }
+    },
+
+    created () {
+      this.$localForage.getItem('designHistory').then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
     },
 
     methods: {

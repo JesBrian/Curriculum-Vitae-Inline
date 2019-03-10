@@ -33,6 +33,11 @@ import 'iview/dist/styles/iview.css'
 Vue.use(iView);
 
 
+import VueDraggableResizable from 'vue-draggable-resizable'
+// optionally import default styles
+// import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+Vue.component('vue-draggable-resizable', VueDraggableResizable);
+
 // import COMPONENT_CELL from './conf/COMPONENT_CELL_CONF.js';
 // Vue.prototype.$COMPONENT_CELL = COMPONENT_CELL;
 

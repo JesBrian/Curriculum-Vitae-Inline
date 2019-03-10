@@ -23,9 +23,9 @@ export default new Router({
           component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SelfWeb/SelfWeb.vue'], resolve)
         },
         {
-          path: '/Home/UploadLocal',
-          name: 'UploadLocal',
-          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/UploadLocal/UploadLocal.vue'], resolve)
+          path: '/Home/LocalHistory',
+          name: 'LocalHistory',
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/LocalHistory/LocalHistory.vue'], resolve)
         },
         {
           path: '/Home/CellManagement',

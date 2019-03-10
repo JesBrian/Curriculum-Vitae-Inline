@@ -25,7 +25,7 @@
         <RouterLink class="home-left-navbar-link" to="/Home/SelfWeb">
           <Icon type="md-planet" class="icon" />网络
         </RouterLink>
-        <RouterLink class="home-left-navbar-link" to="/Home/UploadLocal">
+        <RouterLink class="home-left-navbar-link" to="/Home/LocalHistory">
           <Icon type="md-calendar" class="icon" />历史
         </RouterLink>
         <RouterLink class="home-left-navbar-link" to="/Home/CellManagement">

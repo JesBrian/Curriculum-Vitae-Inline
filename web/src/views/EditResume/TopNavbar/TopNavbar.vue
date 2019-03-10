@@ -242,6 +242,7 @@
     padding:0;
     position:relative;
     box-shadow:0 0 18px #000;
+    z-index: 10;
 
     &.active {
       height: 128px;

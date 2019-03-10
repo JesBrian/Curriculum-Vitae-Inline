@@ -8,7 +8,7 @@
         <LeftNavbar :is-collapsed="isCollapsed" />
       </Sider>
 
-      <Content class="page-layout" style="margin-top:18px; padding:50px 20px 18px;">
+      <Content class="page-layout" :style="`padding:50px ${showNodePanel ? 200 : 40}px 18px 15px; position: relative;`">
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
@@ -26,9 +26,28 @@
           </div>
 
           <div style="width:100%; height:100%; padding:6px 6px 1px 6px; box-sizing:border-box; overflow:auto; text-align:center; box-shadow:0 0 3px #999;">
-            <div style="margin:0 auto; display:inline-block; box-shadow:0 0 6px #383838; border-radius:3px;">
-              <EditContainer :style="`zoom:${(zoomRate + 30) * 1.25}%`" />
+            <EditContainer :style="`zoom:${(zoomRate + 30) * 1.25}%`" />
+          </div>
+
+          <div style="padding-top: 13px;">
+            <InputNumber v-model="$store.state.designConf.size[0]" :min="1" size="small" style="width:68px;" />
+            <span style="margin:2px 5px;">x</span>
+            <InputNumber v-model="$store.state.designConf.size[1]" :min="1" size="small" style="width:68px; margin-right:28px;" />
+
+            <div style="float: right;">
+              <Button @click="showTempResume" type="success" icon="logo-buffer" size="small" ghost style="margin:0 0 0 6px;">预览</Button>
+              <Button @click="exportResume" type="primary" icon="md-code-download" size="small" ghost style="margin:0 0 0 6px;">导出</Button>
+              <Button @click="saveResume" type="info" icon="md-list" size="small" ghost style="margin:0 0 0 6px;">保存</Button>
+              <Button @click="delNowCurriculumVitae" type="error" icon="md-trash" size="small" ghost style="margin:0 0 0 6px;">删除</Button>
             </div>
+          </div>
+        </Layout>
+
+        <Layout @click.native="switchShowNodePanel" :style="`width:${showNodePanel ? 180 : 20}px; height:100%; top: 0; right: 0; position: absolute; background: #50596E; box-shadow: 0 0 8px #282828; color: #FFF;`">
+          <div v-if="showNodePanel" style="overflow: auto;">
+          </div>
+          <div v-else style="text-align: center;">
+            层级节点面板
           </div>
         </Layout>
       </Content>
@@ -59,6 +78,7 @@
       return {
         isCollapsed: false,
         showRightNavbar: false,
+        showNodePanel: false,
         zoomRate: 50,
       }
     },
@@ -91,6 +111,26 @@
         } else {
           this.zoomRate -= step;
         }
+      },
+
+      switchShowNodePanel () {
+        this.showNodePanel = !this.showNodePanel;
+      },
+
+      showTempResume () {
+        this.$store.commit('changeShowModal', 'TempShowModal');
+      },
+
+      exportResume () {
+        alert('给钱也不会给你开通这功能！');
+      },
+
+      saveResume () {
+        alert('往我账号里打钱立马给你开通该功能！');
+      },
+
+      delNowCurriculumVitae () {
+        confirm('确认要删除该编辑中的简历/名片');
       }
     }
   }

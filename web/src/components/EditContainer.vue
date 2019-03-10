@@ -1,37 +1,23 @@
 <template>
-  <div ref="editContainer" :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px;`" style="position: relative; overflow:hidden; background:lightblue;">
-    <component v-for="cellItem in $store.state.designConf.cell"
-               :is="cellItem.special ? cellItem.special : 'NormalCell'"
-               :id="`cell${cellItem._id}`"
-               :data="cellItem.conf" />
+  <div ref="editContainer" :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px;`" style="margin:0 auto; display:inline-block; position: relative; overflow:hidden; box-shadow:0 0 6px #383838; border-radius:3px; background:lightblue;">
+    <DraggableResizableCell v-for="cellItem in $store.state.designConf.cell"
+                            :id="`cell${cellItem._id}`"
+                            :cell-data="cellItem" />
   </div>
 </template>
 
 <script>
-  import NormalCell from './Cell/NormalCell/NormalCell.vue'
-  import SpecialCellCircle from './Cell/SpecialCell/SpecialCellCircle.vue'
-  import SpecialCellTriangle from './Cell/SpecialCell/SpecialCellTriangle.vue'
-  import SpecialCellFiveStar from './Cell/SpecialCell/SpecialCellFiveStar.vue'
-  import SpecialCellSixStar from './Cell/SpecialCell/SpecialCellSixStar.vue'
-  import SpecialCellHeart from './Cell/SpecialCell/SpecialCellHeart.vue'
+  import DraggableResizableCell from './Cell/DraggableResizableCell/DraggableResizableCell.vue'
 
   export default {
     name: 'EditContainer',
 
     components: {
-      NormalCell,
-      SpecialCellHeart,
-      SpecialCellSixStar,
-      SpecialCellFiveStar,
-      SpecialCellTriangle,
-      SpecialCellCircle
+      DraggableResizableCell
     },
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
-        // let tempCellDom = document.querySelector('#nowNewDrag');
-        // tempCellDom.removeAttribute('id');
-        // event.target.appendChild(tempCellDom);
         this.$store.commit('changeDesignConfCell', {
           op: 'add',
           cell: this.$store.state.dragComponent
