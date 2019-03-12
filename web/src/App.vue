@@ -35,12 +35,7 @@
 
   .base-cell {
     display: inline-block;
-    position: absolute;
+    position: relative;
     overflow: hidden;
-
-    &.hide {
-      margin: 30px;
-      position: relative;
-    }
   }
 </style>

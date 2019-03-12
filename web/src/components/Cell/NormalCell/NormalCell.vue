@@ -1,5 +1,5 @@
 <template>
-  <div :id="data._id" :class="['base-cell', position ? 'hide' : '']" style="width: 88px; height: 18px; top: 50px; left: 100px; background: lightcoral">
+  <div :id="data._id" class="base-cell" style="width: 88px; height: 18px; top: 50px; left: 100px; background: lightcoral">
     {{data.name}}
   </div>
 </template>
@@ -14,10 +14,6 @@
         default: () => {
           return {}
         }
-      },
-      position: {
-        type: Boolean,
-        default: false
       },
       graphics: {
         type: Boolean,

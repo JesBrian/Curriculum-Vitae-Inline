@@ -18,9 +18,12 @@
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
+        let cellData = JSON.parse(JSON.stringify(this.$store.state.dragComponent));
+        const size = cellData.conf.format.size.size;
+        cellData.conf.format.position.axis = [event.offsetX - size[0] / 2, event.offsetY - size[1] / 2];
         this.$store.commit('changeDesignConfCell', {
           op: 'add',
-          cell: this.$store.state.dragComponent
+          cell: cellData
         });
       });
       this.$refs.editContainer.addEventListener('dragover', (event) => {

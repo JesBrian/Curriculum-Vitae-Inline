@@ -1,5 +1,5 @@
 <template>
-  <div :class="['base-cell', position ? 'hide' : '']">
+  <div class="base-cell">
     FiveStar
   </div>
 </template>
@@ -14,10 +14,6 @@
         default: () => {
           return null
         }
-      },
-      position: {
-        type: Boolean,
-        default: false
       },
       graphics: {
         type: Boolean,

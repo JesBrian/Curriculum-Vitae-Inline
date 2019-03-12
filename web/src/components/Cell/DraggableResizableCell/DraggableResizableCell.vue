@@ -1,5 +1,11 @@
 <template>
-  <vue-draggable-resizable :w="cellData.conf.format.size.size[0]" :h="cellData.conf.format.size.size[1]" :minw="0" :minh="0" @dragging="onDrag" @resizing="onResize" :parent="true">
+  <vue-draggable-resizable :w="cellData.conf.format.size.size[0]"
+                           :h="cellData.conf.format.size.size[1]"
+                           :x="cellData.conf.format.position.axis[0]"
+                           :y="cellData.conf.format.position.axis[1]"
+                           :minw="0" :minh="0" :parent="true"
+                           class="draggable-cell"
+                           @dragging="onDrag" @resizing="onResize" >
     <component :is="cellData.special ? cellData.special : 'NormalCell'"
                :data="cellData.conf" />
   </vue-draggable-resizable>
@@ -60,6 +66,10 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .draggable-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
