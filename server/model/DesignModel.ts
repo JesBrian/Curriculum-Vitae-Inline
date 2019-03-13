@@ -8,6 +8,7 @@ const DesignSchema: Schema = new Schema({
   logo: String,
   author: String,
   tags: Array,
+  bg: String,
   size: Array,
   cell: Array,
   cTime: {
@@ -18,7 +19,10 @@ const DesignSchema: Schema = new Schema({
     type: Date,
     default: Date
   },
-  status: Boolean
+  status: {
+    type: Boolean,
+    default: true
+  },
 }, {versionKey: false});
 
 const Design: Model<IDesign> = model<IDesign>('Design', DesignSchema);

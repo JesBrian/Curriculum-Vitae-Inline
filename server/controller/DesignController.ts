@@ -29,13 +29,14 @@ exports.saveDesignCtr = async (ctx: any, next: any) => {
 
   let result;
   if (designId) {
-    result = await updateDesignSer();
+    result = await updateDesignSer(param);
   } else {
-    result = await createDesignSer();
+    result = await createDesignSer(param);
   }
 
   ctx.body = {
     status: 200,
-    msg: '保存成功'
+    msg: '保存成功',
+    data: result
   }
 };

@@ -1,7 +1,8 @@
 <template>
   <div ref="editContainer" :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px;`" style="margin:0 auto; display:inline-block; position: relative; overflow:hidden; box-shadow:0 0 6px #383838; border-radius:3px; background:lightblue;">
-    <DraggableResizableCell v-for="cellItem in $store.state.designConf.cell"
+    <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
                             :id="`cell${cellItem._id}`"
+                            :key="`${cellItem._id}${index}`"
                             :cell-data="cellItem" />
   </div>
 </template>

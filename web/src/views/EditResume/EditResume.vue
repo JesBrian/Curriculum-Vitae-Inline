@@ -143,7 +143,11 @@
 
       saveResume () {
         let designData = {
-          conf: this.$store.state.designConf
+          name: '',
+          logo: '',
+          author: this.$store.state.userInfo.id,
+          tags: [],
+          ...this.$store.state.designConf
         };
         if (this.id) {
           designData.id = this.id
