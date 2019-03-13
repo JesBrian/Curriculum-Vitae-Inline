@@ -142,7 +142,17 @@
       },
 
       saveResume () {
-        alert('往我账号里打钱立马给你开通该功能！');
+        let designData = {
+          conf: this.$store.state.designConf
+        };
+        if (this.id) {
+          designData.id = this.id
+        }
+        this.$http.put('saveDesign', designData).then(({data}) => {
+          console.log(data)
+        }).catch(err => {
+          console.log(err);
+        });
       },
 
       delNowCurriculumVitae () {

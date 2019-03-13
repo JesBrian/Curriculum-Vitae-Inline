@@ -7,6 +7,5 @@ import { Document } from 'mongoose'
  *  的 content 字段当中
  */
 export default interface IContent extends Document {
-  componentId: string,
-  componentConf: Array<any>
+  componentConf: Object
 }
