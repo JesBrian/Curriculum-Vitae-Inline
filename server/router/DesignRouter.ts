@@ -1,5 +1,6 @@
 const {
   getDesignByIdCtr,
+  getDesignListByUserCtr,
   saveDesignCtr
 } = require('../controller/DesignController');
 
@@ -9,6 +10,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 router.get('/getDesignById', getDesignByIdCtr);
+router.get('/getDesignListByUser', getDesignListByUserCtr);
 router.put('/saveDesign', saveDesignCtr);
 
 module.exports = router;

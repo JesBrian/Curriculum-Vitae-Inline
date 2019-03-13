@@ -9,6 +9,15 @@ exports.getDesignByIdSer = async (designId: string = '') => {
 };
 
 /**
+ * 获取设计列表
+ * @param userId
+ * @param status
+ */
+exports.getDesignListByUserSer = async (userId: string = '', status: boolean = true) => {
+  return await DesignModel.findOne({author: userId, status});
+};
+
+/**
  * 创建设计
  */
 exports.createDesignSer = async (designData: object = null) => {

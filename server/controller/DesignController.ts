@@ -1,5 +1,6 @@
 const {
   getDesignByIdSer,
+  getDesignListByUserSer,
   createDesignSer,
   updateDesignSer
 } = require('../service/DesignService');
@@ -10,7 +11,23 @@ const {
  * @param next
  */
 exports.getDesignByIdCtr = async (ctx: any, next: any) => {
-  const result = await getDesignByIdSer();
+  const id = ctx.query.id;
+  const result = await getDesignByIdSer(id);
+
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+/**
+ * 根据 用户ID 获取设计列表
+ * @param ctx
+ * @param next
+ */
+exports.getDesignListByUserCtr = async (ctx: any, next: any) => {
+  const { userId, status } = ctx.query;
+  const result = await getDesignListByUserSer(userId, status);
 
   ctx.body = {
     status: 200,
