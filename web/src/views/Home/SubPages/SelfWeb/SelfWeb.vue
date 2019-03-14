@@ -22,8 +22,8 @@
           </TabPane>
           <TabPane name="false" label="回收站">
             <template v-if="nowTab === 'false'">
-              <Table border ref="selection" :columns="columns" :data="designListTrash" stripe />
-              <Page @on-change="changeNowPage" :total="designTrashTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Table border ref="selection" :columns="columns" :data="designList" stripe />
+              <Page @on-change="changeNowPage" :total="designTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
         </Tabs>
@@ -88,9 +88,7 @@
         ],
         nowTab: 'true',
         designList: [],
-        designTotal: 0,
-        designListTrash: [],
-        designTrashTotal: 0
+        designTotal: 0
       }
     },
 
@@ -121,14 +119,8 @@
       getPersonalDesign (page = 1, limit = 10) {
         const status = (this.nowTab === 'true');
         this.$http.get(`getDesignListByUser?userId=${this.$store.state.userInfo.id}&status=${status}`).then(({data}) => {
-          console.log(data);
-          if (status) {
-            this.designList = data.data.designList;
-            this.designTotal = data.data.total;
-          } else {
-            this.designListTrash = data.data.designList;
-            this.designTrashTotal = data.data.total;
-          }
+          this.designList = data.data.designList;
+          this.designTotal = data.data.total;
         }).catch(err => {
           console.log(err);
         })
