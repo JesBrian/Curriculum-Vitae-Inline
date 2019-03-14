@@ -26,8 +26,10 @@ exports.getDesignByIdCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.getDesignListByUserCtr = async (ctx: any, next: any) => {
-  const { userId, status } = ctx.query;
-  const result = await getDesignListByUserSer(userId, status);
+  const { userId, status, page, limit } = ctx.query;
+  const condition = {
+  };
+  const result = await getDesignListByUserSer(userId, status, page, limit);
 
   ctx.body = {
     status: 200,

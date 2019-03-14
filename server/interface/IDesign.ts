@@ -12,6 +12,6 @@ export default interface IDesign extends Document {
   size: Array<number>;      // 设计规格大小
   cell: Array<IContent>;    // 设计内容
   cTime: Date;              // 创建时间
-  pTime: Date;              // 发布时间
+  mTime: Date;              // 修改时间
   status: boolean;          // 状态
 }

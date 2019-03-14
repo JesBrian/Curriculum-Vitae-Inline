@@ -12,9 +12,15 @@ exports.getDesignByIdSer = async (designId: string = '') => {
  * 获取设计列表
  * @param userId
  * @param status
+ * @param page
+ * @param limit
  */
-exports.getDesignListByUserSer = async (userId: string = '', status: boolean = true) => {
-  return await DesignModel.findOne({author: userId, status});
+exports.getDesignListByUserSer = async (userId: string = '', status: boolean = true, page: number = 1, limit: number = 10) => {
+  const designList = await DesignModel.find({author: userId, status}).skip((page - 1) * limit).limit(limit);
+  const total = await DesignModel.find({author: userId, status}).count();
+  return {
+    designList, total
+  };
 };
 
 /**

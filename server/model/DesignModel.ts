@@ -15,7 +15,7 @@ const DesignSchema: Schema = new Schema({
     type: Date,
     default: Date
   },
-  pTime: {
+  mTime: {
     type: Date,
     default: Date
   },

@@ -53,6 +53,12 @@ exports.userRegisterSer = async (username = '', mail = '', password = '') => {
   return user._id;
 };
 
+/**
+ *
+ * @param condition
+ * @param page
+ * @param limit
+ */
 exports.allUserListSer = async (condition: object = null, page: number = 1, limit: number = 10) => {
   const userList = await UserModel.find(condition).skip((page - 1) * limit).limit(limit);
   const total = await UserModel.find(condition).count();
@@ -61,10 +67,19 @@ exports.allUserListSer = async (condition: object = null, page: number = 1, limi
   }
 };
 
+/**
+ *
+ * @param id
+ */
 exports.getUserByIdSer = async (id = '') => {
   return await UserModel.findById(id, 'name avatar mail cTime lTime status');
 };
 
+/**
+ *
+ * @param id
+ * @param userInfo
+ */
 exports.updateUserSer = async (id: string = '', userInfo: any = null) => {
   const user = await UserModel.findOne({_id: id});
   user.name = userInfo.name;
