@@ -48,7 +48,7 @@ exports.saveDesignCtr = async (ctx: any, next: any) => {
 
   let result;
   if (designId) {
-    result = await updateDesignSer(param);
+    result = await updateDesignSer(designId, param);
   } else {
     result = await createDesignSer(param);
   }

@@ -1,4 +1,5 @@
 import DesignModel from '../model/DesignModel'
+import UserModel from "../model/UserModel";
 
 /**
  * 获取单个设计
@@ -25,6 +26,7 @@ exports.getDesignListByUserSer = async (userId: string = '', status: boolean = t
 
 /**
  * 创建设计
+ * @param designData
  */
 exports.createDesignSer = async (designData: object = null) => {
   let design = new DesignModel(designData);
@@ -37,6 +39,12 @@ exports.createDesignSer = async (designData: object = null) => {
 
 /**
  * 更新设计
+ * @param designId
+ * @param designData
  */
-exports.updateDesignSer = async () => {
+exports.updateDesignSer = async (designId: string = '', designData: object = null) => {
+  const design = await DesignModel.findOne({_id: designId});
+  Object.assign(design, designData);
+  await design.save();
+  return designId;
 };

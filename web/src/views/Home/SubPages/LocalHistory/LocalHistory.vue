@@ -6,67 +6,23 @@
       </BreadcrumbItem>
 
       <div slot="right">
-        <Button @click="uploadLocal" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">本地打开</Button>
+        <Button @click="openLocalDesign" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">本地打开</Button>
       </div>
     </PathNavbar>
 
     <div style="padding:0 18px 0 38px;">
       <Collapse v-model="openCollapse">
-        <Panel name="0">
-          今天
+        <Panel v-for="item in historyRecord" :name="item.label">
+          {{item.label}}
           <div slot="content">
             <CellGroup>
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-            </CellGroup>
-          </div>
-        </Panel>
-        <Panel name="1">
-          最近三天
-          <div slot="content">
-            <CellGroup>
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-            </CellGroup>
-          </div>
-        </Panel>
-        <Panel name="2">
-          最近一周
-          <div slot="content">
-            <CellGroup>
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-            </CellGroup>
-          </div>
-        </Panel>
-        <Panel name="3">
-          最近一月
-          <div slot="content">
-            <CellGroup>
-              <Cell title="Display label content" label="label content" extra="details" />
-              <Divider class="cell-divider" />
-              <Cell title="Display label content" label="label content" extra="details" />
-            </CellGroup>
-          </div>
-        </Panel>
-        <Panel name="4">
-          更久以前
-          <div slot="content">
-            <CellGroup>
-              <Cell title="Display label content" label="label content" extra="details" />
+              <template v-if="item.list.length === 0" >
+                暂无历史纪录
+              </template>
+              <template v-else v-for="design in item.list">
+                <Cell @dblclick.native="openDesign(design.id)" title="Display label content" :label="design.time" extra="details" />
+                <Divider class="cell-divider" />
+              </template>
             </CellGroup>
           </div>
         </Panel>
@@ -87,23 +43,71 @@
 
     data () {
       return {
-        openCollapse: ['0', '1'],
-        historyRecord: {
-        }
+        openCollapse: ['今天', '最近三天'],
+        historyRecord: [
+          {label: '今天', list: []},
+          {label: '最近三天', list: []},
+          {label: '最近一周', list: []},
+          {label: '最近一月', list: []},
+          {label: '更久以前', list: []}
+        ]
       }
     },
 
     created () {
       this.$localForage.getItem('designHistory').then(res => {
-        console.log(res);
+        this.handleHistoryRecord(res);
       }).catch(err => {
         console.log(err);
-      })
+      });
     },
 
     methods: {
-      uploadLocal () {
-      }
+      openLocalDesign () {
+      },
+
+      openDesign (designId = '') {
+        console.log(designId);
+      },
+
+      /**
+       * 处理历史纪录
+       * @param records
+       */
+      handleHistoryRecord (records = []) {
+        const toDayTimestamp = new Date().setHours(0, 0, 0, 0);
+        const dateLine = [
+          9999999999999,
+          toDayTimestamp,
+          toDayTimestamp - 86400000 * 3,
+          toDayTimestamp - 86400000 * 7,
+          toDayTimestamp - 86400000 * 30,
+          0
+        ];
+        for (let i = dateLine.length - 2; i >= 0; i--) {
+          const endTime = dateLine[i], startTime = dateLine[i + 1];
+          for (let record of records) {
+            if ((record.time > startTime) && (record.time < endTime)) {
+              record.time = this.timestampToStr(record.time);
+              this.historyRecord[i].list.push(record);
+            }
+          }
+        }
+      },
+
+      /**
+       * 时间戳转日期字符串
+       * @param timestamp
+       */
+      timestampToStr(timestamp) {
+        const date = new Date(timestamp);
+        const y = date.getFullYear();
+        const m = date.getMonth() + 1;
+        const d = date.getDate();
+        const h = date.getHours();
+        const minutes = date.getMinutes();
+        return y + '-' + (m > 10 ? m : '0' + m) + '-' + (d > 10 ? d : '0' + d) + ' ' + (h > 10 ? h : '0' + h) + ':' + (minutes > 10 ? minutes : '0' + minutes);
+      },
     }
   }
 </script>

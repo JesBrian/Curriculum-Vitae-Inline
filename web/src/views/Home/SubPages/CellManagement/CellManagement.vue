@@ -17,13 +17,13 @@
           <TabPane name="self" label="个人组件">
             <template v-if="nowTab === 'self'">
               <Table border ref="selection" :columns="columns" :data="selfCellList" stripe />
-              <Page @on-change="changeNowPage" :total="selfCellTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Page @on-change="changeNowPage" :total="selfTotal" :current="selfCurrent" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
           <TabPane name="collection" label="收藏组件">
             <template v-if="nowTab === 'collection'">
               <Table border ref="selection" :columns="columns" :data="collectionCellList" stripe />
-              <Page @on-change="changeNowPage" :total="collectionCellTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Page @on-change="changeNowPage" :total="collectionTotal" :current="collectionCurrent" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
           <TabPane name="extend" label="网络组件">
@@ -88,11 +88,14 @@
           }
         ],
         selfCellList: [],
-        selfCellTotal: 0,
+        selfTotal: 0,
+        selfCurrent: 1,
         collectionCellList: [],
-        collectionCellTotal: 0,
+        collectionTotal: 0,
+        collectionCurrent: 1,
         extendCellList: [],
-        extendCellTotal: 0,
+        extendTotal: 0,
+        extendCurrent: 1,
       }
     },
 
@@ -106,10 +109,11 @@
       },
 
       changeNowPage (page = 1) {
-        this.getCellListData(page);
+        this[`${this.nowTab}Current`] = page;
+        this.getCellListData();
       },
 
-      getCellListData (page = 1, limit = 10) {
+      getCellListData () {
         this.$http.get(``).then(({data}) => {
         }).catch(err => {
           console.log(err);

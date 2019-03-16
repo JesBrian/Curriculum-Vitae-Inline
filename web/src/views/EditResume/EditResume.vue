@@ -94,9 +94,13 @@
     },
 
     beforeCreate () {
-      if (this.$store.state.designConf.size.length === 0) {
+      if ((this.$store.state.designConf.size.length === 0) || (this.$route.id === '')) {
         // this.$router.push('/');
       }
+    },
+
+    mounted () {
+      // this.updateLocalHistory();
     },
 
     beforeDestroy () {
@@ -153,7 +157,37 @@
           designData.id = this.id
         }
         this.$http.put('saveDesign', designData).then(({data}) => {
-          console.log(data)
+          if (data.status === 200) {
+            this.id = data.data;
+            this.updateLocalHistory();
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      },
+
+      updateLocalHistory () {
+        this.$localForage.getItem('designHistory').then(res => {
+          const designId = this.id;
+          let history = [], flag = true;
+          if (res) {
+            history = res;
+          }
+          for (let i = 0, len = history.length; i < len; i++) {
+            if (history[i].id === designId) {
+              history[i].time = Date.now();
+              flag = false;
+              break;
+            }
+          }
+          if (flag) {
+            history.push({
+              id: this.id,
+              name: '',
+              time: Date.now()
+            });
+          }
+          this.$localForage.setItem('designHistory', history);
         }).catch(err => {
           console.log(err);
         });
