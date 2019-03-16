@@ -14,21 +14,21 @@
       <Input search placeholder="请输入关键字..." style="width:238px; top:16px; right:26px; position:absolute; z-index: 9;" />
       <Card>
         <Tabs @on-click="switchTabs" type="card">
-          <TabPane name="personal" label="个人组件">
-            <template v-if="nowTab === 'personal'">
-              <Table border ref="selection" :columns="columns" :data="componentList" stripe />
-              <Page @on-change="changeNowPage" :total="componentTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
+          <TabPane name="self" label="个人组件">
+            <template v-if="nowTab === 'self'">
+              <Table border ref="selection" :columns="columns" :data="selfCellList" stripe />
+              <Page @on-change="changeNowPage" :total="selfCellTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
           <TabPane name="collection" label="收藏组件">
             <template v-if="nowTab === 'collection'">
-              <Table border ref="selection" :columns="columns" :data="componentList" stripe />
-              <Page @on-change="changeNowPage" :total="componentTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Table border ref="selection" :columns="columns" :data="collectionCellList" stripe />
+              <Page @on-change="changeNowPage" :total="collectionCellTotal" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
-          <TabPane name="net" label="网络组件">
-            <template v-if="nowTab === 'net'">
-              这里可能会使用瀑布流 [ 错了，是一定会，也是必须使用 ]
+          <TabPane name="extend" label="网络组件">
+            <template v-if="nowTab === 'extend'">
+              <!--这里可能会使用瀑布流 [ 错了，是一定会，也是必须使用 ]-->
             </template>
           </TabPane>
         </Tabs>
@@ -49,7 +49,7 @@
 
     data () {
       return {
-        nowTab: 'personal',
+        nowTab: 'self',
         columns: [
           {
             type: 'selection',
@@ -87,8 +87,12 @@
             sortable: true
           }
         ],
-        componentList: [],
-        componentTotal: 0
+        selfCellList: [],
+        selfCellTotal: 0,
+        collectionCellList: [],
+        collectionCellTotal: 0,
+        extendCellList: [],
+        extendCellTotal: 0,
       }
     },
 
@@ -97,11 +101,19 @@
         this.$router.push('/EditComponent');
       },
 
-      switchTabs (nowTab = 'personal') {
+      switchTabs (nowTab = 'self') {
         this.nowTab = nowTab;
       },
 
       changeNowPage (page = 1) {
+        this.getCellListData(page);
+      },
+
+      getCellListData (page = 1, limit = 10) {
+        this.$http.get(``).then(({data}) => {
+        }).catch(err => {
+          console.log(err);
+        })
       }
     }
   }

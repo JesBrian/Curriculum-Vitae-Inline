@@ -5,7 +5,8 @@ const {
   allComponentListSer,
   systemComponentListSer,
   selfComponentListSer,
-  collectionComponentListSer
+  collectionComponentListSer,
+  extendComponentListSer
 } = require('../service/ComponentService');
 
 /**
@@ -109,6 +110,14 @@ exports.selfComponentListCtr = async (ctx: any, next: any) => {
 
 exports.collectionComponentListCtr = async (ctx: any, next: any) => {
   const result = await collectionComponentListSer();
+  ctx.body = {
+    status: 200,
+    data: result
+  }
+};
+
+exports.extendComponentListCtr = async (ctx: any, next: any) => {
+  const result = await extendComponentListSer();
   ctx.body = {
     status: 200,
     data: result

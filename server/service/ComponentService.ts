@@ -45,30 +45,31 @@ exports.allComponentListSer = async (condition: object = null, page: number = 1,
 
 
 exports.systemComponentListSer = async () => {
-  let data = {
-    prevent: new Array(),
-    base: new Array(),
-    advance: new Array()
-  };
+  let prevent: Array<any> = [], base: Array<any>  = [], advance: Array<any>  = [];
   const systemComponent = await ComponentModel.find({category: {$ne: 'extend'}, status: true});
   systemComponent.forEach((component) => {
     switch (component.category) {
       case 'prevent':
-        data.prevent.push(component);
+        prevent.push(component);
         break;
       case 'base':
-        data.base.push(component);
+        base.push(component);
         break;
       case 'advance':
-        data.advance.push(component);
+        advance.push(component);
         break;
     }
   });
-  return data;
+  return {
+    prevent, base, advance
+  };
 };
 
 exports.selfComponentListSer = async () => {
 };
 
 exports.collectionComponentListSer = async () => {
+};
+
+exports.extendComponentListSer = async () => {
 };
