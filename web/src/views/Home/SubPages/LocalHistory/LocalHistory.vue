@@ -20,7 +20,9 @@
                 暂无历史纪录
               </template>
               <template v-else v-for="design in item.list">
-                <Cell @dblclick.native="openDesign(design.id)" title="Display label content" :label="design.time" extra="details" />
+                <Cell @dblclick.native="openDesign(design.id)" title="Display label content" :label="design.time" >
+                  <Icon @click="" type="md-trash" size="20" slot="extra" />
+                </Cell>
                 <Divider class="cell-divider" />
               </template>
             </CellGroup>
@@ -84,12 +86,13 @@
           toDayTimestamp - 86400000 * 30,
           0
         ];
-        for (let i = dateLine.length - 2; i >= 0; i--) {
-          const endTime = dateLine[i], startTime = dateLine[i + 1];
-          for (let record of records) {
-            if ((record.time > startTime) && (record.time < endTime)) {
+
+        for (let record of records) {
+          for (let i = dateLine.length - 2; i >= 0; i--) {
+            if ((record.time > dateLine[i + 1]) && (record.time < dateLine[i])) {
               record.time = this.timestampToStr(record.time);
               this.historyRecord[i].list.push(record);
+              break;
             }
           }
         }

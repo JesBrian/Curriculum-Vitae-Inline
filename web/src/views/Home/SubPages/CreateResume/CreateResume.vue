@@ -122,8 +122,10 @@
   .resume-cell {
     width: 180px; height: 198px; margin: 0 0 26px 38px; padding: 6px 6px; display: inline-block;
     text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer; user-select: none;
+    transition: all 600ms;
+
     .cell-logo {
-      height:158px; box-shadow:0 0 3px #282828;
+      height:158px; box-shadow:0 0 6px -1px #282828; transition: all 200ms;
     }
     &:hover {
       box-shadow: 0 0 8px #888;

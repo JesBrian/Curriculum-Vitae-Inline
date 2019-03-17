@@ -68,6 +68,8 @@
       <p>Some contents...</p>
       <p>Some contents...</p>
     </Drawer>
+
+    <LoginTips />
   </Layout>
 </template>
 
@@ -76,12 +78,13 @@
   import LeftNavbar from './LeftNavbar/LeftNavbar.vue'
   import PathNavbar from './PathNavbar/PathNavbar.vue'
   import EditContainer from '../../components/EditContainer.vue'
+  import LoginTips from '../../components/LoginTips/LoginTips.vue'
 
   export default {
     name: 'EditResume',
 
     components: {
-      TopNavbar, PathNavbar, LeftNavbar, EditContainer
+      TopNavbar, PathNavbar, LeftNavbar, EditContainer, LoginTips
     },
 
     data () {
