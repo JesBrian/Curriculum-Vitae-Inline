@@ -97,13 +97,35 @@
     },
 
     beforeCreate () {
-      if ((this.$store.state.designConf.size.length === 0) || (this.$route.id === '')) {
+      this.id = this.$route.query.id;
+      if ((this.$store.state.designConf.size.length === 0) || (this.id === '')) {
         // this.$router.push('/');
+      }
+      if (this.id) {
+        this.$http.get(`getDesignById?id=${this.id}`).then(({data}) => {
+          const confData = data.data;
+          const designConf = {
+            name: confData.name,
+            logo: confData.logo,
+            bg: confData.bg,
+            status: confData.status,
+            size: confData.size, // [长,宽]
+            cell: confData.cell,
+            tags: confData.tags
+          };
+          this.$store.commit('changeDesignConf', designConf);
+          this.$nextTick(() => {
+            this.updateLocalHistory();
+          });
+        }).catch(err => {
+          console.log(err);
+        });
       }
     },
 
-    mounted () {
-      // this.updateLocalHistory();
+    created () {
+
+      console.log(this.$store.state)
     },
 
     beforeDestroy () {
@@ -186,7 +208,7 @@
           if (flag) {
             history.push({
               id: this.id,
-              name: '',
+              name: this.$store.state.designConf.name,
               time: Date.now()
             });
           }

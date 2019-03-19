@@ -58,7 +58,16 @@
           {
             title: '名称',
             key: 'name',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('div', {
+                on: {
+                  click: () => {
+                    this.$router.push(`/EditResume?id=${this.designList[params.index]._id}`);
+                  }
+                }
+              }, 'View');
+            }
           },
           {
             title: '格式大小',

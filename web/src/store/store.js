@@ -12,9 +12,13 @@ export default new Vuex.Store({
     dragComponent: null, // 拖拽创建
     nowComponentIndex: -1, // 当前选中
     designConf: {
-      size: [], // [长,宽]
+      name: '',
+      logo: '',
       bg: '#FFF',
-      cell: []
+      status: true,
+      size: [], // [长,宽]
+      cell: [],
+      tags: []
     }
   },
   mutations: {
@@ -34,14 +38,18 @@ export default new Vuex.Store({
       state.dragComponent = component;
     },
 
-    changeNowComponentIndex (state, index = null) {
+    changeNowComponentIndex (state, index = -1) {
       state.nowComponentIndex = index;
     },
 
     changeDesignConf (state, conf = {
-      size: [],
+      name: '',
+      logo: '',
       bg: '#FFF',
-      cell: []
+      status: true,
+      size: [], // [长,宽]
+      cell: [],
+      tags: []
     }) {
       state.designConf = conf;
     },

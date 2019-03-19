@@ -6,6 +6,7 @@
       </BreadcrumbItem>
 
       <div slot="right">
+        <Button @click="emptyRecords" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">清空记录</Button>
         <Button @click="openLocalDesign" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">本地打开</Button>
       </div>
     </PathNavbar>
@@ -20,7 +21,7 @@
                 暂无历史纪录
               </template>
               <template v-else v-for="design in item.list">
-                <Cell @dblclick.native="openDesign(design.id)" title="Display label content" :label="design.time" >
+                <Cell @dblclick.native="openDesign(design.id)" :title="design.name" :label="design.time" >
                   <Icon @click="" type="md-trash" size="20" slot="extra" />
                 </Cell>
                 <Divider class="cell-divider" />
@@ -111,6 +112,16 @@
         const minutes = date.getMinutes();
         return y + '-' + (m > 10 ? m : '0' + m) + '-' + (d > 10 ? d : '0' + d) + ' ' + (h > 10 ? h : '0' + h) + ':' + (minutes > 10 ? minutes : '0' + minutes);
       },
+
+      /**
+       * 清空记录
+       */
+      emptyRecords () {
+        for (let category of this.historyRecord) {
+          category.list = [];
+        }
+        this.$localForage.setItem('designHistory', []);
+      }
     }
   }
 </script>
