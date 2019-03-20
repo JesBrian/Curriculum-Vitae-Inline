@@ -21,7 +21,7 @@
                 暂无历史纪录
               </template>
               <template v-else v-for="design in item.list">
-                <Cell @dblclick.native="openDesign(design.id)" :title="design.name" :label="design.time" >
+                <Cell @dblclick.native="openDesign(design.id)" :title="design.name ? design.name : '未命名'" :label="design.time" >
                   <Icon @click="" type="md-trash" size="20" slot="extra" />
                 </Cell>
                 <Divider class="cell-divider" />
@@ -70,7 +70,7 @@
       },
 
       openDesign (designId = '') {
-        console.log(designId);
+        this.$router.push(`/EditResume?id=${designId}`);
       },
 
       /**

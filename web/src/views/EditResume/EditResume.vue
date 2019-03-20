@@ -123,11 +123,6 @@
       }
     },
 
-    created () {
-
-      console.log(this.$store.state)
-    },
-
     beforeDestroy () {
       this.$store.commit('changeDesignConf');
     },
