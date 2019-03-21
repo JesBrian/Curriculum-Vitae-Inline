@@ -11,14 +11,20 @@
 
     <div style="margin-top:-36px; float:right">
       <Button type="primary" icon="md-settings" size="small" ghost style="margin:0 0 0 6px;" >面板设置</Button>
-      <Button type="info" icon="md-bookmarks" size="small" ghost style="margin:0 0 0 6px;" >设计配置</Button>
+      <Button @click="showModal('DesignBaseConfModal')" type="info" icon="md-bookmarks" size="small" ghost style="margin:0 0 0 6px;" >设计配置</Button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'PathNavbar'
+    name: 'PathNavbar',
+
+    methods: {
+      showModal (modalType = '') {
+        this.$store.commit('changeShowModal', modalType)
+      }
+    }
   }
 </script>
 

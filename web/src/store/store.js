@@ -12,7 +12,7 @@ export default new Vuex.Store({
     dragComponent: null, // 拖拽创建
     nowComponentIndex: -1, // 当前选中
     designConf: {
-      name: '',
+      name: '未命名',
       logo: '',
       bg: '#FFF',
       status: true,

@@ -101,10 +101,10 @@
       </TabPane>
       <TabPane name="detail" label="详细配置" class="edit-config-detail">
         <Tabs v-model="nowSecondTab">
-          <TabPane name="special" label="特殊">
-            <div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'special')" style="margin: 0 18px 28px 28px;">
-            </div>
-          </TabPane>
+          <!--<TabPane name="special" label="特殊">-->
+            <!--<div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'special')" style="margin: 0 18px 28px 28px;">-->
+            <!--</div>-->
+          <!--</TabPane>-->
           <TabPane name="format" label="规格">
             <div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'format')" style="margin: 0 18px 28px 28px;">
               <Row style="margin-bottom:23px; line-height:33px;">

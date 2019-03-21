@@ -13,11 +13,7 @@
     </Menu>
 
     <div v-if="componentConf !== null" class="component-conf-container" style="width:100%; height:100%; position:relative;">
-      <Tabs value="special" style="line-height: 35px; z-index: 5;">
-        <TabPane label="特殊" name="special" style="padding-top:6px; ">
-          <div class="component-conf-content" v-show="isShowComponentConfArea" >
-          </div>
-        </TabPane>
+      <Tabs value="format" style="line-height: 35px; z-index: 5;">
         <TabPane label="规格" name="format" style="padding-top:6px; ">
           <div v-show="isShowComponentConfArea" class="component-conf-content" >
             <Row :gutter="32" >
@@ -181,6 +177,10 @@
             </Row>
           </div>
         </TabPane>
+        <TabPane label="特殊" name="special" style="padding-top:6px; ">
+          <div class="component-conf-content" v-show="isShowComponentConfArea">
+          </div>
+        </TabPane>
       </Tabs>
 
       <div @click="changeShowComponentConfArea" style="width: 188px; height:25px; top: 98%; left: 50%; position:absolute; transform: translateX(-50%); border-radius: 0 0 8px 8px; background:#50596E; box-shadow: 0 8px 18px -6px #000; line-height:25px; text-align:center; ">
@@ -242,7 +242,7 @@
     padding:0;
     position:relative;
     box-shadow:0 0 18px #000;
-    z-index: 10;
+    z-index: 15;
 
     &.active {
       height: 128px;
