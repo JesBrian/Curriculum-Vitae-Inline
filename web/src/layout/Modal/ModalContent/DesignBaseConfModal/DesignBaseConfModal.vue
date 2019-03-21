@@ -65,6 +65,7 @@
     data () {
       return {
         name: this.$store.state.designConf.name,
+        defaultList: [],
         uploadList: [],
         tags: this.$store.state.designConf.tags,
         status: this.$store.state.designConf.status
