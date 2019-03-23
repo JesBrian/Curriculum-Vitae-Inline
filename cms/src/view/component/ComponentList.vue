@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-backspace" title="组件列表" />
+    <PageTitle icon="logo-buffer" title="组件列表" />
 
     <Tabs @on-click="changeComponentCategory" type="card">
       <TabPane name="System" label="系统配置">

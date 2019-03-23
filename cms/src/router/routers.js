@@ -52,7 +52,7 @@ export default [
     path: '/user',
     name: 'user',
     meta: {
-      icon: 'ios-book',
+      icon: 'md-contacts',
       title: '用户模块'
     },
     component: Main,
@@ -61,7 +61,7 @@ export default [
         path: 'userList',
         name: 'userList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-contact',
           title: '用户列表'
         },
         component: resolve => require(['@/view/user/UserList.vue'], resolve)
@@ -72,7 +72,7 @@ export default [
         meta: {
           access: ['super_admin'],
           title: '用户管理',
-          icon: 'md-funnel',
+          icon: 'md-construct',
         },
         component: resolve => require(['@/view/user/EditUser.vue'], resolve)
       }
@@ -82,7 +82,7 @@ export default [
     path: '/admin',
     name: 'admin',
     meta: {
-      icon: 'ios-book',
+      icon: 'ios-people',
       title: '管理员模块'
     },
     component: Main,
@@ -91,7 +91,7 @@ export default [
         path: 'adminList',
         name: 'adminList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-person',
           title: '管理员列表'
         },
         component: resolve => require(['@/view/admin/AdminList.vue'], resolve)
@@ -101,7 +101,7 @@ export default [
         name: 'editAdmin',
         meta: {
           access: ['super_admin'],
-          icon: 'md-funnel',
+          icon: 'md-construct',
           title: '管理员管理'
         },
         component: resolve => require(['@/view/admin/EditAdmin.vue'], resolve)
@@ -113,7 +113,7 @@ export default [
     name: 'auth',
     meta: {
       access: ['super_admin'],
-      icon: 'ios-book',
+      icon: 'ios-ribbon',
       title: '权限模块'
     },
     component: Main,
@@ -122,7 +122,7 @@ export default [
         path: 'roleList',
         name: 'roleList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-school',
           title: '角色列表'
         },
         component: resolve => require(['@/view/auth/RoleList.vue'], resolve)
@@ -131,7 +131,7 @@ export default [
         path: 'editRole',
         name: 'editRole',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-construct',
           title: '角色管理'
         },
         component: resolve => require(['@/view/auth/EditRole.vue'], resolve)
@@ -142,7 +142,7 @@ export default [
     path: '/format',
     name: 'format',
     meta: {
-      icon: 'ios-book',
+      icon: 'ios-apps',
       title: '格式模块'
     },
     component: Main,
@@ -151,7 +151,7 @@ export default [
         path: 'formatList',
         name: 'formatList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'ios-browsers',
           title: '格式列表'
         },
         component: resolve => require(['@/view/format/FormatList.vue'], resolve)
@@ -160,7 +160,7 @@ export default [
         path: 'editFormat',
         name: 'editFormat',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-construct',
           title: '格式管理'
         },
         component: resolve => require(['@/view/format/EditFormat.vue'], resolve)
@@ -171,7 +171,7 @@ export default [
     path: '/template',
     name: 'template',
     meta: {
-      icon: 'ios-book',
+      icon: 'ios-clipboard',
       title: '模板模块'
     },
     component: Main,
@@ -180,7 +180,7 @@ export default [
         path: 'templateList',
         name: 'templateList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-code-working',
           title: '模板列表'
         },
         component: resolve => require(['@/view/template/TemplateList.vue'], resolve)
@@ -189,7 +189,7 @@ export default [
         path: 'editTemplate',
         name: 'editTemplate',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-construct',
           title: '模板管理'
         },
         component: resolve => require(['@/view/template/EditTemplate.vue'], resolve)
@@ -200,7 +200,7 @@ export default [
     path: '/component',
     name: 'component',
     meta: {
-      icon: 'ios-book',
+      icon: 'md-calendar',
       title: '组件模块'
     },
     component: Main,
@@ -209,7 +209,7 @@ export default [
         path: 'componentList',
         name: 'componentList',
         meta: {
-          icon: 'md-funnel',
+          icon: 'logo-buffer',
           title: '组件列表'
         },
         component: resolve => require(['@/view/component/ComponentList.vue'], resolve)
@@ -218,7 +218,7 @@ export default [
         path: 'editComponent',
         name: 'editComponent',
         meta: {
-          icon: 'md-funnel',
+          icon: 'md-construct',
           title: '组件管理'
         },
         component: resolve => require(['@/view/component/EditComponent.vue'], resolve)
@@ -229,7 +229,7 @@ export default [
     path: '/componentConf',
     name: 'componentConf',
     meta: {
-      icon: 'ios-book',
+      icon: 'ios-cog-outline',
       title: '组件配置模块'
     },
     component: Main,
@@ -238,7 +238,7 @@ export default [
         path: 'componentConfView',
         name: 'componentConfView',
         meta: {
-          icon: 'md-funnel',
+          icon: 'ios-cog-outline',
           title: '组件配置浏览'
         },
         component: resolve => require(['@/view/componentConf/ComponentConf.vue'], resolve)
@@ -254,7 +254,7 @@ export default [
         path: 'operationLog',
         name: 'operationLog',
         meta: {
-          icon: 'ios-book',
+          icon: 'md-speedometer',
           title: '操作日志'
         },
         component: resolve => require(['@/view/log/OperationLog.vue'], resolve)

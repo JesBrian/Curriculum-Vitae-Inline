@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-people" title="管理员角色列表" />
+    <PageTitle icon="md-school" title="管理员角色列表" />
     <Table border ref="selection" :columns="columns" :data="roleList" stripe />
   </Card>
 </template>

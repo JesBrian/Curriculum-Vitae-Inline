@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-grid-outline" title="EditFormat" />
+    <PageTitle icon="md-construct" title="EditFormat" />
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">

@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-people" title="管理员列表" />
+    <PageTitle icon="md-person" title="管理员列表" />
     <Table border ref="selection" :columns="columns" :data="adminList" stripe />
     <Page :total="100" show-elevator style="margin:23px auto 8px; text-align:center;" />
   </Card>

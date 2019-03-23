@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-people" title="操作日志" />
+    <PageTitle icon="md-speedometer" title="操作日志" />
 
     <Table border :columns="columns6" :data="data5"></Table>
     <Page :total="totalCount" show-elevator style="margin:23px auto 8px; text-align:center;" />

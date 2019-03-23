@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-people" title="用户列表" />
+    <PageTitle icon="md-contact" title="用户列表" />
     <Table border ref="selection" :columns="columns" :data="userList" stripe />
     <Page @on-change="changeNowPage" :total="total" show-elevator style="margin:23px auto 8px; text-align:center;" />
   </Card>

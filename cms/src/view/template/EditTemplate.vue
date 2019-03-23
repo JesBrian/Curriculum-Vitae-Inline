@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-backspace" title="EditTemplate" />
+    <PageTitle icon="md-construct" title="EditTemplate" />
   </Card>
 </template>
 

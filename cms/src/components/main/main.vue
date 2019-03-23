@@ -4,8 +4,8 @@
       <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
         <!-- 需要放在菜单上面的内容，如Logo，写在side-menu标签内部，如下 -->
         <div class="logo-con">
-          <img v-show="!collapsed" :src="maxLogo" key="max-logo" />
-          <img v-show="collapsed" :src="minLogo" key="min-logo" />
+          <img src="../../../public/img/logo.png" />
+          <span v-show="!collapsed" style="margin: 4px 20px 0 0; font-size: 23px; color: #FFF">后台管理</span>
         </div>
       </side-menu>
     </Sider>
@@ -43,8 +43,7 @@ import Language from './components/language'
 import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
-import minLogo from '@/assets/images/logo-min.jpg'
-import maxLogo from '@/assets/images/logo.jpg'
+
 import './main.less'
 export default {
   name: 'Main',
@@ -60,8 +59,6 @@ export default {
   data () {
     return {
       collapsed: false,
-      minLogo,
-      maxLogo,
       isFullscreen: false
     }
   },

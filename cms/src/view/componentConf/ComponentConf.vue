@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-backspace" title="组件配置列表" />
+    <PageTitle icon="ios-cog-outline" title="组件配置列表" />
 
     <tree-view :data="conf" />
   </Card>

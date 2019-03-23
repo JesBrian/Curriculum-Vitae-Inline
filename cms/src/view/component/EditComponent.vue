@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-backspace" title="EditComponent" />
+    <PageTitle icon="md-construct" title="EditComponent" />
 
     <Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>
 

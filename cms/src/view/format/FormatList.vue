@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-grid" title="格式列表" />
+    <PageTitle icon="ios-browsers" title="格式列表" />
 
     <DragableTable
         v-model="formatData"

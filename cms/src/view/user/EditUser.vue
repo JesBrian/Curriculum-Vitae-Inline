@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="ios-grid-outline" title="创建用户" />
+    <PageTitle icon="md-construct" title="创建用户" />
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
