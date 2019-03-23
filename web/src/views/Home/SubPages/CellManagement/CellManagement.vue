@@ -58,8 +58,7 @@
           },
           {
             title: '缩略图',
-            key: 'logo',
-            sortable: true
+            key: 'logo'
           },
           {
             title: '名称',
@@ -68,8 +67,7 @@
           },
           {
             title: '标签',
-            key: 'tags',
-            sortable: true
+            key: 'tags'
           },
           {
             title: '创建时间',

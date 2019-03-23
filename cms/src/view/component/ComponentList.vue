@@ -35,6 +35,10 @@
             align: 'center'
           },
           {
+            title: '缩略图',
+            key: 'logo'
+          },
+          {
             title: 'Name',
             key: 'name',
             sortable: true

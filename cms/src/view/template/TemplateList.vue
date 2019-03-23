@@ -1,11 +1,13 @@
 <template>
   <Card>
-    <PageTitle icon="md-code-working" title="格式列表" />
+    <PageTitle icon="md-code-working" title="模板列表" />
 
     <Tabs @on-click="changeTemplateType" type="card">
-      <TabPane v-for="formatItem in formatData" :name="formatItem._id" :label="formatItem.name">
-        标签一的内容
-        <Page :total="100" show-elevator style="margin:8px auto; text-align:center;" />
+      <TabPane v-for="(formatItem, categoryIndex) in formatCategory" :name="formatItem._id" :label="formatItem.name">
+        <template v-if="nowTabIndex === categoryIndex">
+          <Table border ref="selection" :columns="columns" :data="formatData[nowTabIndex]" stripe />
+          <Page :total="100" show-elevator style="margin:23px auto 8px; text-align:center;" />
+        </template>
       </TabPane>
     </Tabs>
   </Card>
@@ -13,6 +15,8 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue'
+
+  import { formatDateTime } from '_u/time.js'
 
   export default {
     name: 'TemplateList',
@@ -23,14 +27,69 @@
 
     data () {
       return {
-        formatData: []
+        nowTabIndex: 0,
+        formatCategory: [],
+        formatData: [],
+        columns: [
+          {
+            type: 'selection',
+            width: 60,
+            align: 'center'
+          },
+          {
+            title: '缩略图',
+            key: 'logo'
+          },
+          {
+            title: '名称',
+            key: 'name',
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+                on: {
+                  click: () => {
+                    this.$router.push(`/EditResume?id=${params.row._id}`);
+                  }
+                }
+              }, params.row.name);
+            }
+          },
+          {
+            title: '创建时间',
+            key: 'cTime',
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.cTime));
+            }
+          },
+          {
+            title: '最后修改时间',
+            key: 'mTime',
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.mTime));
+            }
+          },
+          {
+            title: '类型',
+            key: 'type',
+            sortable: true
+          },
+          {
+            title: '状态',
+            key: 'status',
+            sortable: true
+          }
+        ],
       }
     },
 
     created () {
       this.$http.get('formatList').then(({data}) => {
         if (data.status === 200) {
-          this.formatData = data.data;
+          this.formatCategory = data.data;
         }
       }).catch(err => {
         console.log(err);
@@ -38,7 +97,13 @@
     },
 
     methods: {
-      changeTemplateType (formatId) {
+      changeTemplateType (formatCategoryId) {
+        for (let i = this.formatCategory.length - 1; i >= 0; i--) {
+          if (this.formatCategory[i]._id === formatCategoryId) {
+            this.nowTabIndex = i;
+            break;
+          }
+        }
       }
     }
   }
