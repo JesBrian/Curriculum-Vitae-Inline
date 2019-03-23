@@ -84,7 +84,8 @@ module.exports = {
     //配置别名，在项目中可缩减引用路径
     alias: {
       '@': resolve('../src'),
-      '_c': resolve('../src/components')
+      '_c': resolve('../src/components'),
+      '_u': resolve('../src/util')
     },
     extensions: [' ', '.js', '.json', '.vue', '.scss', '.css']
   },

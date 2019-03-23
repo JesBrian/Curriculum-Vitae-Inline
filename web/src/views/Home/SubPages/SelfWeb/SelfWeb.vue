@@ -35,6 +35,8 @@
 <script>
   import PathNavbar from '../../PathNavbar.vue'
 
+  import { formatDateTime } from '../../../../util/time.js'
+
   export default {
     name: 'SelfWeb',
 
@@ -52,42 +54,67 @@
           },
           {
             title: '缩略图',
-            key: 'logo',
-            sortable: true
+            key: 'logo'
           },
           {
             title: '名称',
             key: 'name',
             sortable: true,
             render: (h, params) => {
-              return h('div', {
+              return h('span', {
                 on: {
                   click: () => {
-                    this.$router.push(`/EditResume?id=${this.designList[params.index]._id}`);
+                    this.$router.push(`/EditResume?id=${params.row._id}`);
                   }
                 }
-              }, 'View');
+              }, params.row.name);
             }
           },
           {
             title: '格式大小',
             key: 'size',
-            sortable: true
+            render: (h, params) => {
+              return h('span', {
+              }, `${params.row.size[0]} x ${params.row.size[1]}`);
+            }
           },
           {
             title: '标签',
             key: 'tags',
-            sortable: true
+            render: (h, params) => {
+              const tagsLen = params.row.tags.length - 1;
+              return h('div', params.row.tags.map((tag, index) => {
+                let renderArr = [
+                  h('span', {
+                  }, tag)
+                ];
+                if (tagsLen !== index) {
+                  renderArr.push(
+                    h('span', {
+                    }, ',')
+                  );
+                }
+                return renderArr;
+              }));
+            }
           },
           {
             title: '创建时间',
             key: 'cTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.cTime));
+            }
           },
           {
             title: '最后修改时间',
             key: 'mTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.mTime));
+            }
           },
           {
             title: '状态',

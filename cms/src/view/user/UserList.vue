@@ -8,6 +8,7 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'UserList',
@@ -25,28 +26,35 @@
             align: 'center'
           },
           {
+            title: 'Avatar',
+            key: 'avatar'
+          },
+          {
             title: 'Name',
             key: 'name',
             sortable: true
           },
           {
-            title: 'Avatar',
-            key: 'avatar'
-          },
-          {
             title: 'Mail',
-            key: 'mail',
-            sortable: true
+            key: 'mail'
           },
           {
             title: '创建时间',
             key: 'cTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.cTime));
+            }
           },
           {
             title: '最后登录时间',
             key: 'lTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.lTime));
+            }
           },
           {
             title: '状态',

@@ -7,6 +7,7 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'RoleList',
@@ -31,7 +32,11 @@
           {
             title: '创建时间',
             key: 'cTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.cTime));
+            }
           },
           {
             title: '状态',
