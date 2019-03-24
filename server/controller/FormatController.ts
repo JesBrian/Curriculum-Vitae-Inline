@@ -1,5 +1,6 @@
 const {
   getFormatListSer,
+  getFormatByIdSer,
   createFormatSer,
   updateFormatSer
 } = require('../service/FormatService');
@@ -27,6 +28,16 @@ exports.allFormatListCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: 200,
     data: data
+  };
+};
+
+exports.getFormatByIdCtr = async (ctx: any, next: any) => {
+  const formatId = ctx.query.id;
+  const result = await getFormatByIdSer(formatId);
+
+  ctx.body = {
+    status: 200,
+    data: result
   };
 };
 

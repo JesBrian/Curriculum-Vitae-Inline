@@ -1,5 +1,9 @@
 import FormatModel from '../model/FormatModel'
 
+/**
+ * 获取格式列表
+ * @param status
+ */
 exports.getFormatListSer = async (status: Boolean) => {
   let condition = Object.create({});
   if (status) {
@@ -8,15 +12,22 @@ exports.getFormatListSer = async (status: Boolean) => {
   return await FormatModel.find(condition);
 };
 
-exports.createFormatSer = async (formatData: any = null) => {
-  let format = new FormatModel(formatData);
-  const result = await format.save();
-  if (result.errors) {
-    return false;
-  }
-  return true;
+/**
+ * 根据ID获取单个格式信息
+ * @param id
+ */
+exports.getFormatByIdSer = async (id: string = '') => {
+  return await FormatModel.findById(id);
 };
 
-exports.updateFormatSer = async () => {
+exports.createFormatSer = async (formatData: any = null) => {
+  let format = new FormatModel(formatData);
+  // @ts-ignore
+  return !await format.save().errors;
+};
 
+exports.updateFormatSer = async (id: string = '', data: object = null) => {
+  const format = await this.getFormatByIdSer(id);
+  Object.assign(format, data);
+  return !await format.save().errors;
 };

@@ -82,6 +82,7 @@
 
     data () {
       return {
+        id: '',
         name: '',
         size: [1, 1],
         logo: '',
@@ -91,6 +92,30 @@
         visible: false,
         defaultList: [],
         uploadList: []
+      }
+    },
+
+    created () {
+      const id = this.$route.query.id;
+      this.id = id ? id : '';
+      if (id) {
+        this.$http.get(`getFormatById?id=${id}`).then(({data}) => {
+          console.log(data);
+          if (data.status === 200) {
+            const formatData = data.data;
+            this.name = formatData.name;
+            this.size = formatData.size;
+            this.logo = formatData.logo;
+            this.status = formatData.status;
+            this.uploadList.push({
+              name: formatData.logo,
+              url: `http://localhost:3000/img/format/${formatData.logo}`,
+              status: 'finished'
+            });
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       }
     },
 
@@ -109,9 +134,10 @@
       },
       handleSuccess (res, file) {
         if (res.status === 200) {
-          console.log(res);
-          file.name = res.data;
-          file.url = `http://localhost:3000/img/format/${file.name}`;
+          const fileName = res.data;
+          file.name = fileName;
+          this.logo = fileName;
+          file.url = `http://localhost:3000/img/format/${fileName}`;
         }
       },
       handleFormatError (file) {
@@ -153,6 +179,10 @@
           logo: this.logo,
           status: this.status
         };
+
+        if (this.id) {
+          formatData.id = this.id;
+        }
         this.$http.put('saveFormat', formatData).then(res => {
           console.log(res);
         }).catch(err => {
