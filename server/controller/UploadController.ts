@@ -2,8 +2,12 @@ const {
   uploadAvatarSer
 } = require('../service/UploadService');
 
-exports.uploadAvatarCtr = async (ctx: any, next: any) => {
+exports.uploadImgCtr = async (ctx: any, next: any) => {
+  const type = ctx.request.body.type; // 上传图片的类型
   const file = ctx.request.files.file; // 获取上传文件
 
-  await uploadAvatarSer(file);
+  ctx.body = {
+    status: 200,
+    data: await eval(`upload${type}Ser(file)`)
+  };
 };

@@ -45,9 +45,9 @@
                       :on-format-error="handleFormatError"
                       :on-exceeded-size="handleMaxSize"
                       :before-upload="handleBeforeUpload"
-                      multiple
+                      :data="{type: 'Avatar'}"
                       type="drag"
-                      action="//localhost:3000/uploadAvatar"
+                      action="//localhost:3000/uploadImg"
                       style="display: inline-block;width:58px;">
                     <div style="width: 58px;height:58px;line-height: 58px;">
                       <Icon type="ios-camera" size="20"></Icon>

@@ -23,11 +23,12 @@ const generateRandomNumber = (min: number = 0, max: number = 1): number => {
  * 生成随机字符串
  * @param length
  */
+// @ts-ignore
 const generateRandomString = (length: number = 4): string => {
-  let random13chars = function () {
+  const random13chars = function () {
     return Math.random().toString(16).substring(2, 15)
   };
-  let loops = Math.ceil(length / 13);
+  const loops = Math.ceil(length / 13);
   return new Array(loops).fill(random13chars).reduce((string, func) => {
     return string + func()
   }, '').substring(0, length)

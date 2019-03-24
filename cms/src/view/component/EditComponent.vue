@@ -37,7 +37,6 @@
                   <!--:on-format-error="handleFormatError"-->
                   <!--:on-exceeded-size="handleMaxSize"-->
                   <!--:before-upload="handleBeforeUpload"-->
-                  <!--multiple-->
                   <!--type="drag"-->
                   <!--action="//jsonplaceholder.typicode.com/posts/"-->
                   <!--style="display: inline-block;width:58px;">-->
