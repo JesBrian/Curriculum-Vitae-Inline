@@ -10,7 +10,7 @@ const path = require('path');
  * @param ctx
  * @param next
  */
-exports.getImgCtr = async (ctx: any, next: any) => {
+exports.getImgCtr = async (ctx: any) => {
   const file = path.join(__dirname, '../../upload') + ctx.request.url.substring(4);
 
   ctx.type = 'html';

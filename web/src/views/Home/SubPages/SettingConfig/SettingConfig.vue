@@ -41,7 +41,7 @@
                       :default-file-list="defaultList"
                       :on-success="handleSuccess"
                       :format="['jpg','jpeg','png']"
-                      :max-size="2048"
+                      :max-size="1024"
                       :on-format-error="handleFormatError"
                       :on-exceeded-size="handleMaxSize"
                       :before-upload="handleBeforeUpload"
@@ -191,7 +191,7 @@
       handleMaxSize (file) {
         this.$Notice.warning({
           title: 'Exceeding file size limit',
-          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+          desc: 'File  ' + file.name + ' is too large, no more than 1M.'
         });
       },
       handleBeforeUpload () {
