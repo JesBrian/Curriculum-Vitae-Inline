@@ -112,9 +112,9 @@
         password: '',
         rePassword: '',
 
-        defaultList: [],
         imgName: '',
         visible: false,
+        defaultList: [],
         uploadList: []
       }
     },
@@ -126,6 +126,11 @@
             const userInfo = data.data;
             this.name = userInfo.name;
             this.avatar = userInfo.avatar;
+            this.uploadList.push({
+              name: userInfo.avatar,
+              url: `http://localhost:3000/img/avatar/${userInfo.avatar}`,
+              status: 'finished'
+            });
             this.mail = userInfo.mail;
           }
         }).catch(err => {
@@ -149,8 +154,8 @@
             mail: this.mail
           }
         };
-        if (this.password === '') saveData.password = this.password;
-        if (this.avatar === '') saveData.avatar = this.avatar;
+        if (this.password !== '') saveData.userInfo.password = this.password;
+        if (this.avatar !== '') saveData.userInfo.avatar = this.avatar;
         this.$http.put('updateUser', saveData).then(({data}) => {
           if (data === 200) {
             // 修改 vuex && localForage
@@ -170,8 +175,12 @@
         this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
       },
       handleSuccess (res, file) {
-        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
-        file.name = '7eb99afb9d5f317c912f08b5212fd69a';
+        console.log(res);
+        if (res.status === 200) {
+          this.avatar = res.data;
+          file.name = res.data;
+          file.url = `http://localhost:3000/img/avatar/${file.name}`;
+        }
       },
       handleFormatError (file) {
         this.$Notice.warning({
@@ -186,10 +195,10 @@
         });
       },
       handleBeforeUpload () {
-        const check = this.uploadList.length < 5;
+        const check = this.uploadList.length < 1;
         if (!check) {
           this.$Notice.warning({
-            title: 'Up to five pictures can be uploaded.'
+            title: 'Up to one pictures can be uploaded.'
           });
         }
         return check;

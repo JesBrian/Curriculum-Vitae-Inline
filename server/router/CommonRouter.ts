@@ -1,3 +1,7 @@
+const {
+  getImgCtr
+} = require('../controller/CommonController');
+
 // @ts-ignore
 const Router = require('koa-router');
 
@@ -11,5 +15,7 @@ router.get('/mailCode', async (ctx: any, next: any) => {
 		status: 200
 	};
 });
+
+router.get('/img/*', getImgCtr);
 
 module.exports = router;

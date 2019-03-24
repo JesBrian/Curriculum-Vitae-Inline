@@ -34,6 +34,8 @@
             <span style="margin:2px 5px;">x</span>
             <InputNumber v-model="$store.state.designConf.size[1]" :min="1" size="small" style="width:68px; margin-right:28px;" />
 
+            <ColorPicker @on-change="changeBg" :value="$store.state.designConf.bg" alpha size="small" />
+
             <div style="float: right;">
               <Button @click="showTempResume" type="success" icon="logo-buffer" size="small" ghost style="margin:0 0 0 6px;">预览</Button>
               <Button @click="exportResume" type="primary" icon="md-code-download" size="small" ghost style="margin:0 0 0 6px;">导出</Button>
@@ -145,6 +147,10 @@
         } else {
           this.zoomRate -= step;
         }
+      },
+
+      changeBg (color = '') {
+        this.$store.commit('changeDesignConfBg', color);
       },
 
       switchShowNodePanel () {
