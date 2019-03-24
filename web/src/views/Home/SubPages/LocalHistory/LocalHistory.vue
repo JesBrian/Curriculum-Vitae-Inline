@@ -20,11 +20,11 @@
               <template v-if="item.list.length === 0" >
                 暂无历史纪录
               </template>
-              <template v-else v-for="design in item.list">
+              <template v-else v-for="(design, designIndex) in item.list">
                 <Cell @dblclick.native="openDesign(design.id)" :title="design.name ? design.name : '未命名'" :label="design.time" >
                   <Icon @click="" type="md-trash" size="20" slot="extra" />
                 </Cell>
-                <Divider class="cell-divider" />
+                <Divider v-if="designIndex !== item.list.length - 1" class="cell-divider" />
               </template>
             </CellGroup>
           </div>

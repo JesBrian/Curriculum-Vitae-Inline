@@ -1,12 +1,14 @@
 <template>
-  <ModalFrame title="基本配置" style="width: 500px; position: relative;">
-    <Form style="margin:38px 18px 0;">
-      <FormItem>
-        <Input v-model="name" type="text" placeholder="请输入名称">
-          <Icon type="ios-contact" slot="prepend" size="22" />
-        </Input>
-      </FormItem>
-      <FormItem>
+  <ModalFrame title="基本配置" style="width: 500px; padding-right: 28px; position: relative;">
+    <Row style="margin:28px 0 23px;">
+      <Col span="7" style="line-height:30px; text-align:center;">名称：</Col>
+      <Col span="17" >
+        <Input v-model="name" placeholder="Enter something..." />
+      </Col>
+    </Row>
+    <Row style="margin-bottom:23px;">
+      <Col span="7" style="line-height:30px; text-align:center;">缩略图：</Col>
+      <Col span="17" >
         <div class="demo-upload-list" v-for="item in uploadList">
           <template v-if="item.status === 'finished'">
             <img :src="item.url">
@@ -36,18 +38,29 @@
             <Icon type="ios-camera" size="20"></Icon>
           </div>
         </Upload>
-      </FormItem>
-      <FormItem>
+      </Col>
+    </Row>
+    <Row style="margin-bottom:23px;">
+      <Col span="7" style="line-height:30px; text-align:center;">标签：</Col>
+      <Col span="17" >
         <InputTag v-model="tags" />
-      </FormItem>
-      <FormItem>
-        <Switch v-model="status" />
-      </FormItem>
-      <FormItem style="padding-top: 28px; text-align:center;">
+      </Col>
+    </Row>
+    <Row style="margin-bottom:23px;">
+      <Col span="7" style="line-height:30px; text-align:center;">状态：</Col>
+      <Col span="17" >
+        <Switch v-model="status" size="large">
+          <span slot="open">ON</span>
+          <span slot="close">OFF</span>
+        </Switch>
+      </Col>
+    </Row>
+    <Row style="margin:18px 0 8px;">
+      <Col span="24" style="padding:0 0 0 28px; text-align:center;">
         <Button @click="closeModal" type="primary" style="width:38%; float:left; font-size:16px">取消关闭</Button>
         <Button @click="saveInfo" type="primary" style="width:38%; float:right; font-size:16px">确认修改</Button>
-      </FormItem>
-    </Form>
+      </Col>
+    </Row>
   </ModalFrame>
 </template>
 
@@ -112,6 +125,12 @@
       },
 
       saveInfo () {
+        this.$store.commit('changeDesignConfBase', {
+          name: this.name,
+          logo: '',
+          tags: this.tags,
+          status: this.status
+        });
         this.closeModal();
       },
 

@@ -178,6 +178,7 @@
         }
         this.$http.put('saveDesign', designData).then(({data}) => {
           if (data.status === 200) {
+            console.log(data);
             this.id = data.data;
             this.updateLocalHistory();
           }
@@ -195,6 +196,7 @@
           }
           for (let i = 0, len = history.length; i < len; i++) {
             if (history[i].id === designId) {
+              history[i].name =this.$store.state.designConf.name;
               history[i].time = Date.now();
               flag = false;
               break;
