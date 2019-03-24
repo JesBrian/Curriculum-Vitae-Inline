@@ -14,26 +14,34 @@
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
   import DragableTable from '_c/dragable-table/DragableTable.vue';
+  import Links from '_c/links/links.vue';
 
   export default {
     name: 'FormatList',
 
     components: {
-      PageTitle, DragableTable
+      PageTitle, DragableTable, Links
     },
 
     data () {
       return {
         columnsList: [
           {
-            title: '序号',
-            type: 'index',
+            type: 'selection',
             width: 60,
             align: 'center'
           },
           {
-            title: '格式简称',
-            key: 'name'
+            title: '格式名',
+            key: 'name',
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/format/editFormat?id=${params.row._id}`
+                }
+              }, params.row.name);
+            }
           },
           {
             title: '格式图标',
@@ -45,6 +53,7 @@
           },
           {
             title: '状态',
+            sortable: true,
             key: 'status'
           }
         ],

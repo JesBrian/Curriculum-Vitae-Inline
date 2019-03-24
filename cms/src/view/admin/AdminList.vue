@@ -8,13 +8,14 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import Links from '_c/links/links.vue';
   import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'AdminList',
 
     components: {
-      PageTitle
+      PageTitle, Links
     },
 
     data () {
@@ -28,7 +29,14 @@
           {
             title: '真实名称',
             key: 'trueName',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/admin/editAdmin?id=${params.row._id}`
+                }
+              }, params.row.trueName);
+            }
           },
           {
             title: '创建时间',
@@ -65,7 +73,6 @@
     methods: {
       getAdminListData () {
         this.$http.get('adminList').then(res => {
-          console.log(res);
           const result = res.data;
           if (result.status === 200) {
             this.adminList = result.data;

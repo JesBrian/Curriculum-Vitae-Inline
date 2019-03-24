@@ -34,6 +34,7 @@
 
 <script>
   import PathNavbar from '../../PathNavbar.vue'
+  import Links from '../../../../components/Links/Links.vue'
 
   import { formatDateTime } from '../../../../util/time.js'
 
@@ -41,7 +42,7 @@
     name: 'SelfWeb',
 
     components: {
-      PathNavbar
+      PathNavbar, Links
     },
 
     data () {
@@ -61,11 +62,9 @@
             key: 'name',
             sortable: true,
             render: (h, params) => {
-              return h('span', {
-                on: {
-                  click: () => {
-                    this.$router.push(`/EditResume?id=${params.row._id}`);
-                  }
+              return h(Links, {
+                props: {
+                  url: `/EditResume?id=${params.row._id}`
                 }
               }, params.row.name);
             }

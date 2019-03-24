@@ -113,7 +113,6 @@
           'name': this.name,
           'password': this.password
         }).then(({data}) => {
-          console.log(data)
           if (data.status === 200) {
             this.saveUserInfo(data.data, '用户登录成功');
           } else {

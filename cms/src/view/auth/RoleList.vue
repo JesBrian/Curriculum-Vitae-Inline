@@ -7,13 +7,14 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import Links from '_c/links/links.vue';
   import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'RoleList',
 
     components: {
-      PageTitle
+      PageTitle, Links
     },
 
     data () {
@@ -25,9 +26,16 @@
             align: 'center'
           },
           {
-            title: 'Name',
+            title: '角色名',
             key: 'name',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/auth/editRole?id=${params.row._id}`
+                }
+              }, params.row.name);
+            }
           },
           {
             title: '创建时间',

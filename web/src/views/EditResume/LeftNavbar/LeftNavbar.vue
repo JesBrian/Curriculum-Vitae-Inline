@@ -152,7 +152,6 @@
       initSelfComponent () {
         return new Promise((resolve, reject) => {
           this.$http.get('selfComponentList').then(({data}) => {
-            console.log(data);
             resolve();
           }).catch(err => {
             console.log(err);
@@ -163,7 +162,6 @@
       initCollectionComponent () {
         return new Promise((resolve, reject) => {
           this.$http.get('collectionComponentList').then(({data}) => {
-            console.log(data);
             resolve();
           }).catch(err => {
             console.log(err);

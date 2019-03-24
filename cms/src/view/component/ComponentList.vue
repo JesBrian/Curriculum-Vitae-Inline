@@ -17,12 +17,13 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import Links from '_c/links/links.vue';
 
   export default {
     name: 'ComponentList',
 
     components: {
-      PageTitle
+      PageTitle, Links
     },
 
     data () {
@@ -35,13 +36,20 @@
             align: 'center'
           },
           {
-            title: '缩略图',
-            key: 'logo'
+            title: '组件名',
+            key: 'name',
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/component/editComponent?id=${params.row._id}`
+                }
+              }, params.row.name);
+            }
           },
           {
-            title: 'Name',
-            key: 'name',
-            sortable: true
+            title: '缩略图',
+            key: 'logo'
           },
           {
             title: '状态',
@@ -68,7 +76,6 @@
     methods: {
       getComponentListData (page = 1, limit = 10) {
         this.$http.get(`all${this.category}ComponentList?page=${page}&limit=${limit}`).then(({data}) => {
-          console.log(data)
           if (data.status === 200) {
             this.componentList = data.data.componentList;
             this.totalNum = data.data.total;

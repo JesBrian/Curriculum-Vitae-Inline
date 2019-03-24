@@ -184,7 +184,6 @@
         }
         this.$http.put('saveDesign', designData).then(({data}) => {
           if (data.status === 200) {
-            console.log(data);
             this.id = data.data;
             this.updateLocalHistory();
           }

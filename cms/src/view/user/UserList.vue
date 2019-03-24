@@ -8,13 +8,14 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
+  import Links from '_c/links/links.vue';
   import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'UserList',
 
     components: {
-      PageTitle
+      PageTitle, Links
     },
 
     data () {
@@ -30,12 +31,19 @@
             key: 'avatar'
           },
           {
-            title: 'Name',
+            title: '昵称',
             key: 'name',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/user/editUser?id=${params.row._id}`
+                }
+              }, params.row.name);
+            }
           },
           {
-            title: 'Mail',
+            title: '邮箱',
             key: 'mail'
           },
           {
@@ -74,7 +82,6 @@
     methods: {
       getUserListData (page = 1, limit = 10) {
         this.$http.get(`allUserList?page=${page}&limit=${limit}`).then(res => {
-          console.log(res);
           const result = res.data;
           if (result.status === 200) {
             this.userList = result.data.userList;
