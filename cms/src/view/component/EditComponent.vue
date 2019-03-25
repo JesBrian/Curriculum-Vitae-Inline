@@ -2,11 +2,11 @@
   <Card>
     <PageTitle icon="md-construct" title="EditComponent" />
 
-    <Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>
+    <!--<Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>-->
 
     <Tabs v-if="componentConf !== null" v-model="nowMainTab" type="card" class="edit-config">
       <TabPane name="base" label="基本配置">
-        <div v-show="nowMainTab === 'base'" style="margin: 0 18px 28px 28px;">
+        <div v-if="nowMainTab === 'base'" style="margin: 0 18px 28px 28px;">
           <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">组件名称：</Col>
             <Col span="16">
@@ -14,7 +14,7 @@
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
-            <Col span="8" style="text-align:left;">组件Logo：</Col>
+            <Col span="8" style="text-align:left;">组件缩略图：</Col>
             <Col span="16">
               <!--<div class="demo-upload-list" v-for="item in uploadList">-->
                 <!--<template v-if="item.status === 'finished'">-->
@@ -99,13 +99,13 @@
         </div>
       </TabPane>
       <TabPane name="detail" label="详细配置" class="edit-config-detail">
-        <Tabs v-model="nowSecondTab">
+        <Tabs v-if="nowMainTab === 'detail'" v-model="nowSecondTab">
           <!--<TabPane name="special" label="特殊">-->
-            <!--<div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'special')" style="margin: 0 18px 28px 28px;">-->
-            <!--</div>-->
+          <!--<div v-show="nowSecondTab === 'special'" style="margin: 0 18px 28px 28px;">-->
+          <!--</div>-->
           <!--</TabPane>-->
           <TabPane name="format" label="规格">
-            <div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'format')" style="margin: 0 18px 28px 28px;">
+            <div v-show="nowSecondTab === 'format'" style="margin: 0 18px 28px 28px;">
               <Row style="margin-bottom:23px; line-height:33px;">
                 <Col span="8" style="text-align:left;">组件定位拖拽：</Col>
                 <Col span="16">
@@ -165,7 +165,7 @@
             </div>
           </TabPane>
           <TabPane name="input" label="输入">
-            <div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'input')" style="margin: 0 18px 28px 28px;">
+            <div v-show="nowSecondTab === 'input'" style="margin: 0 18px 28px 28px;">
               <Row style="margin-bottom:23px; line-height:33px;">
                 <Col span="8" style="text-align:left;">组件是否有输入：</Col>
                 <Col span="16">
@@ -263,7 +263,7 @@
             </div>
           </TabPane>
           <TabPane name="style" label="样式">
-            <div v-show="(nowMainTab === 'detail') && (nowSecondTab === 'style')" style="margin: 0 18px 28px 28px;">
+            <div v-show="nowSecondTab === 'style'" style="margin: 0 18px 28px 28px;">
               <Row style="margin-bottom:23px; line-height:33px;">
                 <Col span="8" style="text-align:left;">组件背景色：</Col>
                 <Col span="16">
@@ -364,9 +364,10 @@
     data () {
       return {
         nowMainTab: 'base',
-        nowSecondTab: 'special',
+        nowSecondTab: 'format',
         componentId: '',
         componentConf: null,
+        id: '',
         name: '',
         logo: '',
         category: 'prevent',
@@ -388,9 +389,26 @@
       }).catch(err => {
         console.log(err);
       });
+
       const id = this.$route.query.id;
       if (id) {
-        this.componentId = id;
+        this.$http.get(`getComponentById?id=${id}`).then(({data}) => {
+          if (data.status === 200) {
+            const componentData = data.data;
+            console.log(componentData);
+            this.id = componentData._id;
+            this.name = componentData.name;
+            this.category = componentData.category;
+            this.graphics = componentData.graphics;
+            this.tags = componentData.tags;
+            this.special = componentData.special;
+            this.specialStatus = !!componentData.special;
+            this.status = componentData.status;
+            this.componentConf = componentData.conf;
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       }
     },
 
@@ -425,8 +443,8 @@
           status: this.status,
           conf: this.componentConf
         };
-        if (this.componentId !== '') {
-          componentData.id = this.componentId;
+        if (this.id !== '') {
+          componentData.id = this.id;
         }
         this.$http.put('saveComponent', componentData).then(res => {
           const result = res.data;

@@ -63,7 +63,6 @@
     methods: {
       getRoleListData () {
         this.$http.get('getRoleList').then(res => {
-          console.log(res);
           const result = res.data;
           if (result.status === 200) {
             this.roleList = result.data;

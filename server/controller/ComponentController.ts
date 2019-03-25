@@ -1,5 +1,6 @@
 const {
   getComponentConfSer,
+  getComponentByIdSer,
   createComponentSer,
   updateComponentSer,
   allComponentListSer,
@@ -20,6 +21,20 @@ exports.getComponentConfCtr = async (ctx: any, next: any) => {
     status: 200,
     data: confData
   }
+};
+
+/**
+ * 根据ID获取组件信息
+ * @param ctx
+ * @param next
+ */
+exports.getComponentByIdCtr = async (ctx: any, next: any) => {
+  const componentId = ctx.query.id;
+  const result = await getComponentByIdSer(componentId);
+  ctx.body = {
+    status: 200,
+    data: result
+  };
 };
 
 /**

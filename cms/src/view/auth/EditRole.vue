@@ -44,8 +44,23 @@
 
     data () {
       return {
+        id: '',
         name: '',
         status: true
+      }
+    },
+
+    created () {
+      const id = this.$route.query.id;
+      this.id = id ? id : '';
+      if (id) {
+        this.$http.get(`getRoleById?id=${id}`).then(({data}) => {
+          if (data.status === 200) {
+            this.name = data.data.name;
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       }
     },
 
@@ -65,9 +80,8 @@
           status: this.status
         };
 
-        const id = this.$route.query.id;
-        if (id) {
-          roleData.id = id;
+        if (this.id) {
+          roleData.id = this.id;
         }
 
         this.$http.put('saveRole', roleData).then(res => {

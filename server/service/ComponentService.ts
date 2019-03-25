@@ -9,6 +9,14 @@ exports.getComponentConfSer = async () => {
 };
 
 /**
+ * 获取单个组件信息
+ * @param id
+ */
+exports.getComponentByIdSer = async (id: string = '') => {
+  return await ComponentModel.findById(id);
+};
+
+/**
  * 创建新组件
  * @param componentData
  */

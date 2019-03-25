@@ -9,9 +9,17 @@ exports.createRoleSer = async (roleData: Object = null) => {
   return true;
 };
 
-exports.updateRoleSer = async () => {
+exports.updateRoleSer = async (id: string = '', data: object = null) => {
+  const role = await RoleModel.findById(id);
+  Object.assign(role, data);
+  // @ts-ignore
+  return !await role.save().errors;
 };
 
 exports.getRoleListSer = async (condition: Object = null) => {
   return await RoleModel.find(condition);
+};
+
+exports.getRoleByIdSer = async (id: string = '') => {
+  return await RoleModel.findById(id);
 };

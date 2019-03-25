@@ -1,6 +1,7 @@
 const {
   getComponentConfCtr,
   saveComponentCtr,
+  getComponentByIdCtr,
   allSystemComponentListCtr,
   allExtendComponentListCtr,
   systemComponentListCtr,
@@ -24,6 +25,11 @@ router.get('/componentConf', getComponentConfCtr);
  * 创建/更新组件
  */
 router.put('/saveComponent', saveComponentCtr);
+
+/**
+ * 根据ID获取组件信息
+ */
+router.get('/getComponentById', getComponentByIdCtr);
 
 /**
  * 获取组件列表 - 后台管理使用

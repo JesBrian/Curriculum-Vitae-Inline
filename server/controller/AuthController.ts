@@ -1,7 +1,8 @@
 const {
   createRoleSer,
   updateRoleSer,
-  getRoleListSer
+  getRoleListSer,
+  getRoleByIdSer
 } = require('../service/AuthService');
 
 /**
@@ -49,5 +50,15 @@ exports.getRoleListCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: 200,
     data: roleData
+  };
+};
+
+exports.getRoleByIdCtr = async (ctx: any, next: any) => {
+  const roleId = ctx.query.id;
+  const result = await getRoleByIdSer(roleId);
+
+  ctx.body = {
+    status: 200,
+    data: result
   };
 };

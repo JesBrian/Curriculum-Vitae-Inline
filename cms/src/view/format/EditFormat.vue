@@ -100,7 +100,6 @@
       this.id = id ? id : '';
       if (id) {
         this.$http.get(`getFormatById?id=${id}`).then(({data}) => {
-          console.log(data);
           if (data.status === 200) {
             const formatData = data.data;
             this.name = formatData.name;
