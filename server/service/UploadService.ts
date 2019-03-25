@@ -43,3 +43,11 @@ exports.uploadAvatarSer = async (file: any) => {
 exports.uploadFormatLogoSer = async (file: any) => {
   return handleSaveFile('format', file);
 };
+
+/**
+ * 上传组件图标
+ * @param file
+ */
+exports.uploadComponentLogoSer = async (file: any) => {
+  return handleSaveFile('component/logo', file);
+};

@@ -48,7 +48,7 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
   let result, status = 200, msg = '组件信息保存成功';
 
   if (componentData.id) {
-    result = await updateComponentSer(componentData);
+    result = await updateComponentSer(componentData.id, componentData);
   } else {
     result = await createComponentSer(componentData);
   }

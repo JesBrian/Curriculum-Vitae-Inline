@@ -22,11 +22,8 @@ exports.getComponentByIdSer = async (id: string = '') => {
  */
 exports.createComponentSer = async (componentData: object = null) => {
   let component = new ComponentModel(componentData);
-  const result = await component.save();
-  if (result.errors) {
-    return false;
-  }
-  return true;
+  // @ts-ignore
+  return !await component.save().errors;
 };
 
 /**
@@ -35,6 +32,10 @@ exports.createComponentSer = async (componentData: object = null) => {
  * @param componentData
  */
 exports.updateComponentSer = async (componentId: string = '', componentData: object = null) => {
+  const component = await ComponentModel.findById(componentId);
+  Object.assign(component, componentData);
+  // @ts-ignore
+  return !await component.save().errors;
 };
 
 /**

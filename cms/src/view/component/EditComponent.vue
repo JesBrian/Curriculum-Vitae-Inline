@@ -2,7 +2,7 @@
   <Card>
     <PageTitle icon="md-construct" title="EditComponent" />
 
-    <!--<Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>-->
+    <Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>
 
     <Tabs v-if="componentConf !== null" v-model="nowMainTab" type="card" class="edit-config">
       <TabPane name="base" label="基本配置">
@@ -16,34 +16,35 @@
           <Row style="margin-bottom:23px; line-height:33px;">
             <Col span="8" style="text-align:left;">组件缩略图：</Col>
             <Col span="16">
-              <!--<div class="demo-upload-list" v-for="item in uploadList">-->
-                <!--<template v-if="item.status === 'finished'">-->
-                  <!--<img :src="item.url">-->
-                  <!--<div class="demo-upload-list-cover">-->
-                    <!--<Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>-->
-                  <!--</div>-->
-                <!--</template>-->
-                <!--<template v-else>-->
-                  <!--<Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>-->
-                <!--</template>-->
-              <!--</div>-->
-              <!--<Upload-->
-                  <!--ref="upload"-->
-                  <!--:show-upload-list="false"-->
-                  <!--:default-file-list="defaultList"-->
-                  <!--:on-success="handleSuccess"-->
-                  <!--:format="['jpg','jpeg','png']"-->
-                  <!--:max-size="1024"-->
-                  <!--:on-format-error="handleFormatError"-->
-                  <!--:on-exceeded-size="handleMaxSize"-->
-                  <!--:before-upload="handleBeforeUpload"-->
-                  <!--type="drag"-->
-                  <!--action="//jsonplaceholder.typicode.com/posts/"-->
-                  <!--style="display: inline-block;width:58px;">-->
-                <!--<div style="width: 58px;height:58px;line-height: 58px;">-->
-                  <!--<Icon type="ios-camera" size="20"></Icon>-->
-                <!--</div>-->
-              <!--</Upload>-->
+              <div class="demo-upload-list" v-for="item in uploadList">
+                <template v-if="item.status === 'finished'">
+                  <img :src="item.url">
+                  <div class="demo-upload-list-cover">
+                    <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+                  </div>
+                </template>
+                <template v-else>
+                  <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                </template>
+              </div>
+              <Upload
+                  ref="upload"
+                  :show-upload-list="false"
+                  :default-file-list="defaultList"
+                  :on-success="handleSuccess"
+                  :format="['jpg','jpeg','png']"
+                  :max-size="1024"
+                  :on-format-error="handleFormatError"
+                  :on-exceeded-size="handleMaxSize"
+                  :before-upload="handleBeforeUpload"
+                  :data="{type: 'ComponentLogo'}"
+                  type="drag"
+                  action="//localhost:3000/uploadImg"
+                  style="display: inline-block;width:58px;">
+                <div style="width: 58px;height:58px;line-height: 58px;">
+                  <Icon type="ios-camera" size="20"></Icon>
+                </div>
+              </Upload>
             </Col>
           </Row>
           <Row style="margin-bottom:23px; line-height:33px;">
@@ -376,6 +377,11 @@
         specialStatus: false,
         special: '',
         status: false,
+
+        imgName: '',
+        visible: false,
+        defaultList: [],
+        uploadList: []
       }
     },
 
@@ -383,6 +389,11 @@
       this.$localForage.getItem('componentConf').then(val => {
         if (val) {
           this.componentConf = val;
+          this.$nextTick().then(() => {
+            if (this.uploadList.length === 0) {
+              this.uploadList = this.$refs.upload.fileList;
+            }
+          });
         } else {
           this.getComponentListConfData();
         }
@@ -395,7 +406,6 @@
         this.$http.get(`getComponentById?id=${id}`).then(({data}) => {
           if (data.status === 200) {
             const componentData = data.data;
-            console.log(componentData);
             this.id = componentData._id;
             this.name = componentData.name;
             this.category = componentData.category;
@@ -405,6 +415,14 @@
             this.specialStatus = !!componentData.special;
             this.status = componentData.status;
             this.componentConf = componentData.conf;
+            if (componentData.logo) {
+              this.logo = componentData.logo;
+              this.uploadList.push({
+                name: componentData.logo,
+                url: `http://localhost:3000/img/component/logo/${componentData.logo}`,
+                status: 'finished'
+              });
+            }
           }
         }).catch(err => {
           console.log(err);
@@ -419,6 +437,11 @@
           if (result.status === 200) {
             this.$localForage.setItem('componentConf', result.data);
             this.componentConf = result.data;
+            this.$nextTick().then(() => {
+              if (this.uploadList.length === 0) {
+                this.uploadList = this.$refs.upload.fileList;
+              }
+            });
           }
         }).catch(err => {
           console.log(err);
@@ -462,6 +485,45 @@
         let errTips = '';
         if (this.name === '') errTips = '请填写组件名称';
         return errTips
+      },
+
+
+      handleView (name) {
+        this.imgName = name;
+        this.visible = true;
+      },
+      handleRemove (file) {
+        const fileList = this.$refs.upload.fileList;
+        this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+      },
+      handleSuccess (res, file) {
+        console.log(res);
+        if (res.status === 200) {
+          this.logo = res.data;
+          file.name = res.data;
+          file.url = `http://localhost:3000/img/component/logo/${file.name}`;
+        }
+      },
+      handleFormatError (file) {
+        this.$Notice.warning({
+          title: 'The file format is incorrect',
+          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+        });
+      },
+      handleMaxSize (file) {
+        this.$Notice.warning({
+          title: 'Exceeding file size limit',
+          desc: 'File  ' + file.name + ' is too large, no more than 1M.'
+        });
+      },
+      handleBeforeUpload () {
+        const check = this.uploadList.length < 1;
+        if (!check) {
+          this.$Notice.warning({
+            title: 'Up to one pictures can be uploaded.'
+          });
+        }
+        return check;
       }
     }
   }
@@ -472,5 +534,43 @@
     .ivu-tabs {
       overflow: visible;
     }
+  }
+
+
+  .demo-upload-list{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    margin-right: 4px;
+  }
+  .demo-upload-list img{
+    width: 100%;
+    height: 100%;
+  }
+  .demo-upload-list-cover{
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+  }
+  .demo-upload-list:hover .demo-upload-list-cover{
+    display: block;
+  }
+  .demo-upload-list-cover i{
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 2px;
   }
 </style>
