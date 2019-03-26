@@ -35,6 +35,7 @@
 <script>
   import PathNavbar from '../../PathNavbar.vue'
   import Links from '../../../../components/Links/Links.vue'
+  import Logos from '../../../../components/Logos/Logos.vue'
 
   import { formatDateTime } from '../../../../util/time.js'
 
@@ -42,7 +43,7 @@
     name: 'SelfWeb',
 
     components: {
-      PathNavbar, Links
+      PathNavbar, Links, Logos
     },
 
     data () {
@@ -55,7 +56,14 @@
           },
           {
             title: '缩略图',
-            key: 'logo'
+            key: 'logo',
+            render: (h, params) => {
+              return h(Logos, {
+                props: {
+                  src: params.row.logo ? `http://localhost:3000/img/design/logo/${params.row.logo}` : ''
+                }
+              });
+            }
           },
           {
             title: '名称',

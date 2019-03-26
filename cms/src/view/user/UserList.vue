@@ -9,13 +9,15 @@
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
   import Links from '_c/links/links.vue';
+  import Logos from '_c/logos/logos.vue';
+
   import { formatDateTime } from '_u/time.js';
 
   export default {
     name: 'UserList',
 
     components: {
-      PageTitle, Links
+      PageTitle, Links, Logos
     },
 
     data () {
@@ -28,7 +30,14 @@
           },
           {
             title: 'Avatar',
-            key: 'avatar'
+            key: 'avatar',
+            render: (h, params) => {
+              return h(Logos, {
+                props: {
+                  src: params.row.avatar ? `http://localhost:3000/img/avatar/${params.row.avatar}` : ''
+                }
+              });
+            }
           },
           {
             title: '昵称',

@@ -15,12 +15,13 @@
   import PageTitle from '_c/page-title/page-title.vue';
   import DragableTable from '_c/dragable-table/DragableTable.vue';
   import Links from '_c/links/links.vue';
+  import Logos from '_c/logos/logos.vue';
 
   export default {
     name: 'FormatList',
 
     components: {
-      PageTitle, DragableTable, Links
+      PageTitle, DragableTable, Links, Logos
     },
 
     data () {
@@ -45,7 +46,14 @@
           },
           {
             title: '格式图标',
-            key: 'logo'
+            key: 'logo',
+            render: (h, params) => {
+              return h(Logos, {
+                props: {
+                  src: params.row.logo ? `http://localhost:3000/img/format/${params.row.logo}` : ''
+                }
+              });
+            }
           },
           {
             title: '格式规格',

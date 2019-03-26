@@ -18,12 +18,13 @@
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
   import Links from '_c/links/links.vue';
+  import Logos from '_c/logos/logos.vue';
 
   export default {
     name: 'ComponentList',
 
     components: {
-      PageTitle, Links
+      PageTitle, Links, Logos
     },
 
     data () {
@@ -49,7 +50,14 @@
           },
           {
             title: '缩略图',
-            key: 'logo'
+            key: 'logo',
+            render: (h, params) => {
+              return h(Logos, {
+                props: {
+                  src: params.row.logo ? `http://localhost:3000/img/component/logo/${params.row.logo}` : ''
+                }
+              });
+            }
           },
           {
             title: '状态',
@@ -97,5 +105,4 @@
 </script>
 
 <style lang="less" scoped>
-
 </style>
