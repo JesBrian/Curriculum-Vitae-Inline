@@ -39,6 +39,11 @@
 
 <script>
   import PathNavbar from '../../PathNavbar.vue'
+  import Links from '../../../../components/Table/Links/Links.vue'
+  import Logos from '../../../../components/Table/Logos/Logos.vue'
+  import Status from '../../../../components/Table/Status/Status.vue'
+
+  import { formatDateTime } from '../../../../util/time.js'
 
   export default {
     name: 'CellManagement',
@@ -58,12 +63,26 @@
           },
           {
             title: '缩略图',
-            key: 'logo'
+            key: 'logo',
+            render: (h, params) => {
+              return h(Logos, {
+                props: {
+                  src: params.row.logo ? `http://localhost:3000/img/design/logo/${params.row.logo}` : ''
+                }
+              });
+            }
           },
           {
             title: '名称',
             key: 'name',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Links, {
+                props: {
+                  url: `/EditResume?id=${params.row._id}`
+                }
+              }, params.row.name);
+            }
           },
           {
             title: '标签',
@@ -72,17 +91,32 @@
           {
             title: '创建时间',
             key: 'cTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.cTime));
+            }
           },
           {
             title: '发布时间',
             key: 'mTime',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('span', {
+              }, formatDateTime(params.row.mTime));
+            }
           },
           {
             title: '状态',
             key: 'status',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Status, {
+                props: {
+                  status: params.row.status
+                }
+              });
+            }
           }
         ],
         selfCellList: [],

@@ -14,8 +14,9 @@
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
   import DragableTable from '_c/dragable-table/DragableTable.vue';
-  import Links from '_c/links/links.vue';
-  import Logos from '_c/logos/logos.vue';
+  import Links from '_c/tables/links/links.vue';
+  import Logos from '_c/tables/logos/logos.vue';
+  import Status from '_c/tables/status/status.vue';
 
   export default {
     name: 'FormatList',
@@ -62,7 +63,14 @@
           {
             title: '状态',
             sortable: true,
-            key: 'status'
+            key: 'status',
+            render: (h, params) => {
+              return h(Status, {
+                props: {
+                  status: params.row.status
+                }
+              });
+            }
           }
         ],
         formatData: [],

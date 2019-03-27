@@ -17,14 +17,15 @@
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
-  import Links from '_c/links/links.vue';
-  import Logos from '_c/logos/logos.vue';
+  import Links from '_c/tables/links/links.vue';
+  import Status from '_c/tables/status/status.vue';
+  import Logos from '_c/tables/logos/logos.vue';
 
   export default {
     name: 'ComponentList',
 
     components: {
-      PageTitle, Links, Logos
+      PageTitle, Links, Logos, Status
     },
 
     data () {
@@ -62,7 +63,14 @@
           {
             title: '状态',
             key: 'status',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Status, {
+                props: {
+                  status: params.row.status
+                }
+              });
+            }
           }
         ],
 

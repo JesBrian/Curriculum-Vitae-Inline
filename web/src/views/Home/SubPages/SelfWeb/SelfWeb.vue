@@ -34,8 +34,9 @@
 
 <script>
   import PathNavbar from '../../PathNavbar.vue'
-  import Links from '../../../../components/Links/Links.vue'
-  import Logos from '../../../../components/Logos/Logos.vue'
+  import Links from '../../../../components/Table/Links/Links.vue'
+  import Logos from '../../../../components/Table/Logos/Logos.vue'
+  import Status from '../../../../components/Table/Status/Status.vue'
 
   import { formatDateTime } from '../../../../util/time.js'
 
@@ -43,7 +44,7 @@
     name: 'SelfWeb',
 
     components: {
-      PathNavbar, Links, Logos
+      PathNavbar, Links, Logos, Status
     },
 
     data () {
@@ -126,7 +127,14 @@
           {
             title: '状态',
             key: 'status',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(Status, {
+                props: {
+                  status: params.row.status
+                }
+              });
+            }
           }
         ],
         nowTab: 'true',
