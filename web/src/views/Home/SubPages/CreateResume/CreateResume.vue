@@ -12,13 +12,13 @@
     <div v-if="step === 0">
       <div @click="chooseTempFormat(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: formatIndex === -1}">
         <Card shadow class="cell-logo">
-          <p>Content of card</p>
+          <img src="http://localhost:3000/img/format/default.png" style="width: 100%; height: 100%;">
         </Card>
         <span class="name-label">自定义格式</span>
       </div>
       <div v-for="(formatItem, index) in formatList" @click="chooseTempFormat(index)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: formatIndex === index}">
         <Card shadow class="cell-logo">
-          <p>Content of card</p>
+          <img :src="`http://localhost:3000/img/format/${formatItem.logo}`" style="width: 100%; height: 100%;">
         </Card>
         <span class="name-label">{{ formatItem.name }}</span>
       </div>
@@ -26,13 +26,13 @@
     <div v-else>
       <div @click="chooseTempTemplate(-2)" @dblclick="nextStep" class="resume-cell" :class="{active: templateIndex === -2}">
         <Card shadow class="cell-logo">
-          <p>Content of card</p>
+          <img src="http://localhost:3000/img/template/empty.png" style="width: 100%; height: 100%;">
         </Card>
         <span class="name-label">空白</span>
       </div>
       <div @click="chooseTempTemplate(-1)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: templateIndex === -1}">
         <Card shadow class="cell-logo">
-          <p>Content of card</p>
+          <img src="http://localhost:3000/img/template/net.png" style="width: 100%; height: 100%;">
         </Card>
         <span class="name-label">网络模板</span>
       </div>
@@ -120,12 +120,13 @@
 
 <style lang="scss" scoped>
   .resume-cell {
-    width: 180px; height: 198px; margin: 0 0 26px 38px; padding: 6px 6px; display: inline-block;
+    width: 180px; height: 200px; margin: 0 0 26px 38px; padding: 6px 6px; display: inline-block;
     text-align: center; line-height: 2em; font-size: 17px; border-radius: 6px; cursor: pointer; user-select: none;
     transition: all 600ms;
 
     .cell-logo {
-      height:158px; box-shadow:0 0 6px -1px #282828; transition: all 200ms;
+      height:155px; margin-bottom: 3px; padding: 20px; box-shadow:0 0 6px -1px #282828; transition: all 200ms;
+      display: flex; align-items: center; justify-content: center;
     }
     &:hover {
       box-shadow: 0 0 8px #888;
