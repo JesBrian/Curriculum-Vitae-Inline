@@ -13,7 +13,7 @@
 
     <div style="padding:0 18px 0 38px;">
       <Collapse v-model="openCollapse">
-        <Panel v-for="item in historyRecord" :name="item.label">
+        <Panel v-for="(item, kindIndex) in historyRecord" :name="item.label">
           {{item.label}}
           <div slot="content">
             <CellGroup>
@@ -22,7 +22,7 @@
               </template>
               <template v-else v-for="(design, designIndex) in item.list">
                 <Cell @dblclick.native="openDesign(design.id)" :title="design.name ? design.name : '未命名'" :label="design.time" >
-                  <Icon @click="" type="md-trash" size="20" slot="extra" />
+                  <Icon @click="confirmDeleteRecord(kindIndex, designIndex)" type="md-trash" size="20" slot="extra" />
                 </Cell>
                 <Divider v-if="designIndex !== item.list.length - 1" class="cell-divider" />
               </template>
@@ -59,6 +59,7 @@
 
     created () {
       this.$localForage.getItem('designHistory').then(res => {
+        console.log(res);
         this.handleHistoryRecord(res);
       }).catch(err => {
         console.log(err);
@@ -88,6 +89,8 @@
           0
         ];
 
+        this.allHistoryRecord = JSON.parse(JSON.stringify(records));
+
         for (let record of records) {
           for (let i = dateLine.length - 2; i >= 0; i--) {
             if ((record.time > dateLine[i + 1]) && (record.time < dateLine[i])) {
@@ -111,6 +114,28 @@
         const h = date.getHours();
         const minutes = date.getMinutes();
         return y + '-' + (m > 10 ? m : '0' + m) + '-' + (d > 10 ? d : '0' + d) + ' ' + (h > 10 ? h : '0' + h) + ':' + (minutes > 10 ? minutes : '0' + minutes);
+      },
+
+      confirmDeleteRecord (kindIndex = -1, designIndex = -1) {
+        this.$Modal.confirm({
+          title: '警告',
+          content: '<p>是否删除该历史记录</p>',
+          onOk: () => {
+            const id = this.historyRecord[kindIndex].list.splice(designIndex, 1).id;
+            this.deleteRecord(id);
+          },
+        });
+      },
+
+      deleteRecord (id) {
+        let i = -1;
+        for (i = this.allHistoryRecord.length - 1; i >= 0; i--) {
+          if (this.allHistoryRecord[i].id === id) {
+            break;
+          }
+        }
+        this.allHistoryRecord.splice(i, 1);
+        this.$localForage.setItem('designHistory', this.allHistoryRecord);
       },
 
       /**
