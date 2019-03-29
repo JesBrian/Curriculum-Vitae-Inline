@@ -7,7 +7,7 @@
       <div :name="`${categoryItem}${categoryIndex}`">
         <div v-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
-            <div @dblclick="createCell(cellItem._id)" :data-id="cellItem._id" class="cell-item" draggable="true">{{cellItem.id}}</div>
+            <MenuCell @dblclick.native="createCell(cellItem._id)" :data-id="cellItem._id" :cell-data="cellItem" />
           </Tooltip>
         </div>
         <div v-else-if="$store.state.userInfo" style="text-align: center; color: #CCC; line-height: 43px; letter-spacing: 1px;">
@@ -25,12 +25,13 @@
 
 <script>
   import HiddenComponentContainer from '../../../components/HiddenComponentContainer/HiddenComponentContainer.vue'
+  import MenuCell from './MenuCell/MenuCell.vue'
 
   export default {
     name: 'LeftNavbar',
 
     components: {
-      HiddenComponentContainer
+      HiddenComponentContainer, MenuCell
     },
 
     props: {
@@ -205,13 +206,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .cell-item {
-    width:32px; height:32px; margin:0 6px 8px; display:inline-block; box-sizing:border-box; border:1px solid #282828; border-radius:4px; box-shadow:0 0 12px #282828;
-    &:hover {
-      box-shadow:1px 1px 10px #000; cursor:pointer;
-    }
-    &:active {
-      cursor:move;
-    }
-  }
+
 </style>
