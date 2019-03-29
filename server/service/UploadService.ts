@@ -16,11 +16,15 @@ const handleFileName = () => {
 };
 
 const handleSaveFile = (savePath: string = '', file: any) => {
+  const dirName = path.join(__dirname, `../../upload/${savePath}/`);
+  if (!fs.existsSync(dirName)) {
+    fs.mkdirSync(dirName);
+  }
   const fileName = handleFileName() + file.name.substring(file.name.lastIndexOf('.'));
   // 创建可读流
   const reader = fs.createReadStream(file.path);
   // 保存路径
-  const filePath = `${path.join(__dirname, `../../upload/${savePath}/`)}${fileName}`;
+  const filePath = `${dirName}${fileName}`;
   // 创建可写流
   const upStream = fs.createWriteStream(filePath);
   // 可读流通过管道写入可写流
@@ -50,4 +54,15 @@ exports.uploadFormatLogoSer = async (file: any) => {
  */
 exports.uploadComponentLogoSer = async (file: any) => {
   return handleSaveFile('component/logo', file);
+};
+
+/**
+ * 上传设计封面
+ * @param file
+ */
+exports.uploadDesignLogoSer = async (file: any) => {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const docName = `${date.getFullYear()}${month > 9 ? month : `0${month}`}`;
+  return `${docName}/${handleSaveFile(`design/logo/${docName}`, file)}`;
 };

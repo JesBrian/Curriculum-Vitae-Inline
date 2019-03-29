@@ -159,7 +159,7 @@
       },
 
       changeNowPage (page = 1) {
-        this.getUserListData(page);
+        this.getPersonalDesign(page);
       },
 
       /**
@@ -169,7 +169,7 @@
        */
       getPersonalDesign (page = 1, limit = 10) {
         const status = (this.nowTab === 'true');
-        this.$http.get(`getDesignListByUser?userId=${this.$store.state.userInfo.id}&status=${status}`).then(({data}) => {
+        this.$http.get(`getDesignListByUser?userId=${this.$store.state.userInfo.id}&status=${status}&page=${page}`).then(({data}) => {
           this.designList = data.data.designList;
           this.designTotal = data.data.total;
         }).catch(err => {

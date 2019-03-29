@@ -17,7 +17,7 @@ exports.getDesignByIdSer = async (designId: string = '') => {
  * @param limit
  */
 exports.getDesignListByUserSer = async (userId: string = '', status: boolean = true, page: number = 1, limit: number = 10) => {
-  const designList = await DesignModel.find({author: userId, status}).skip((page - 1) * limit).limit(limit);
+  const designList = await DesignModel.find({author: userId, status}).skip((page - 1) * limit).limit(limit).sort({'mTime': -1});
   const total = await DesignModel.find({author: userId, status}).count();
   return {
     designList, total

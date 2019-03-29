@@ -1,7 +1,8 @@
 const {
   uploadAvatarSer,
   uploadFormatLogoSer,
-  uploadComponentLogoSer
+  uploadComponentLogoSer,
+  uploadDesignLogoSer
 } = require('../service/UploadService');
 
 exports.uploadImgCtr = async (ctx: any, next: any) => {

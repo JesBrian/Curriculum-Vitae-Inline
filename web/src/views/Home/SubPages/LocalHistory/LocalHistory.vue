@@ -59,7 +59,6 @@
 
     created () {
       this.$localForage.getItem('designHistory').then(res => {
-        console.log(res);
         this.handleHistoryRecord(res);
       }).catch(err => {
         console.log(err);

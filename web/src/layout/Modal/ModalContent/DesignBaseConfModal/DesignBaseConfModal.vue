@@ -78,7 +78,11 @@
     data () {
       return {
         name: this.$store.state.designConf.name,
-        defaultList: [],
+        logo: this.$store.state.designConf.logo,
+        defaultList: this.$store.state.designConf.logo ? [{
+          name: this.$store.state.designConf.logo,
+          url: `http://localhost:3000/img/design/logo/${this.$store.state.designConf.logo}`,
+        }] : [],
         uploadList: [],
         tags: this.$store.state.designConf.tags,
         status: this.$store.state.designConf.status
@@ -99,8 +103,8 @@
         this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
       },
       handleSuccess (res, file) {
-        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
-        file.name = '7eb99afb9d5f317c912f08b5212fd69a';
+        file.url = `http://localhost:3000/img/design/logo/${res.data}`;
+        file.name = this.logo = res.data;
       },
       handleFormatError (file) {
         this.$Notice.warning({
@@ -127,7 +131,7 @@
       saveInfo () {
         this.$store.commit('changeDesignConfBase', {
           name: this.name,
-          logo: '',
+          logo: this.logo,
           tags: this.tags,
           status: this.status
         });
@@ -141,6 +145,41 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .demo-upload-list{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    margin-right: 4px;
+  }
+  .demo-upload-list img{
+    width: 100%;
+    height: 100%;
+  }
+  .demo-upload-list-cover{
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+  }
+  .demo-upload-list:hover .demo-upload-list-cover{
+    display: block;
+  }
+  .demo-upload-list-cover i{
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 2px;
+  }
 </style>
