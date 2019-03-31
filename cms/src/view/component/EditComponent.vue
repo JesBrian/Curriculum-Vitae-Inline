@@ -386,24 +386,9 @@
     },
 
     created () {
-      this.$localForage.getItem('componentConf').then(val => {
-        if (val) {
-          this.componentConf = val;
-          this.$nextTick().then(() => {
-            if (this.uploadList.length === 0) {
-              this.uploadList = this.$refs.upload.fileList;
-            }
-          });
-        } else {
-          this.getComponentListConfData();
-        }
-      }).catch(err => {
-        console.log(err);
-      });
-
       const id = this.$route.query.id;
       if (id) {
-        this.$http.get(`getComponentById?id=${id}`).then(({data}) => {
+        return this.$http.get(`getComponentById?id=${id}`).then(({data}) => {
           if (data.status === 200) {
             const componentData = data.data;
             this.id = componentData._id;
@@ -428,6 +413,20 @@
           console.log(err);
         });
       }
+      this.$localForage.getItem('componentConf').then(val => {
+        if (val) {
+          this.componentConf = val;
+          this.$nextTick().then(() => {
+            if (this.uploadList.length === 0) {
+              this.uploadList = this.$refs.upload.fileList;
+            }
+          });
+        } else {
+          this.getComponentListConfData();
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     },
 
     methods: {
