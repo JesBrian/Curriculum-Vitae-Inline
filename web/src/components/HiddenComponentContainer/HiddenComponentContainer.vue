@@ -14,6 +14,7 @@
 
 <script>
   import NormalCell from '../Cell/NormalCell/NormalCell.vue'
+  import SpecialCellLine from '../Cell/SpecialCell/SpecialCellLine.vue'
   import SpecialCellCircle from '../Cell/SpecialCell/SpecialCellCircle.vue'
   import SpecialCellTriangle from '../Cell/SpecialCell/SpecialCellTriangle.vue'
   import SpecialCellFiveStar from '../Cell/SpecialCell/SpecialCellFiveStar.vue'
@@ -25,6 +26,7 @@
 
     components: {
       NormalCell,
+      SpecialCellLine,
       SpecialCellTriangle,
       SpecialCellCircle,
       SpecialCellFiveStar,

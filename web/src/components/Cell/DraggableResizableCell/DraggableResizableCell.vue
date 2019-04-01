@@ -15,6 +15,7 @@
 <script>
   import VueDraggableResizable from 'vue-draggable-resizable'
   import NormalCell from '../NormalCell/NormalCell.vue'
+  import SpecialCellLine from '../SpecialCell/SpecialCellLine.vue'
   import SpecialCellCircle from '../SpecialCell/SpecialCellCircle.vue'
   import SpecialCellTriangle from '../SpecialCell/SpecialCellTriangle.vue'
   import SpecialCellFiveStar from '../SpecialCell/SpecialCellFiveStar.vue'
@@ -27,6 +28,7 @@
     components: {
       VueDraggableResizable,
       NormalCell,
+      SpecialCellLine,
       SpecialCellHeart,
       SpecialCellSnow,
       SpecialCellFiveStar,
@@ -69,10 +71,13 @@
 
 <style lang="scss" scoped>
   .draggable-cell {
-    margin: 3px;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
     box-sizing: border-box;
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
   }
 </style>
