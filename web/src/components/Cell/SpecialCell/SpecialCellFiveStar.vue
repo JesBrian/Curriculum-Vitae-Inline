@@ -1,7 +1,5 @@
 <template>
-  <div class="base-cell">
-    FiveStar
-  </div>
+  <Icon class="base-cell" type="ios-star" />
 </template>
 
 <script>

@@ -1,7 +1,5 @@
 <template>
-  <div class="base-cell">
-    Heart
-  </div>
+  <Icon class="base-cell special-cell-heart" type="md-heart" />
 </template>
 
 <script>

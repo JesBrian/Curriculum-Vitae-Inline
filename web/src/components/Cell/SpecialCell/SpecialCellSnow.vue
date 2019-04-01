@@ -1,12 +1,10 @@
 <template>
-  <div class="base-cell">
-    SixStar
-  </div>
+  <Icon class="base-cell special-cell-heart" type="ios-snow" />
 </template>
 
 <script>
   export default {
-    name: 'SpecialCellSixStar',
+    name: 'SpecialCellSnow',
 
     props: {
       data: {

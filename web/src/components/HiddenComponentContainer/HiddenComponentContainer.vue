@@ -17,7 +17,7 @@
   import SpecialCellCircle from '../Cell/SpecialCell/SpecialCellCircle.vue'
   import SpecialCellTriangle from '../Cell/SpecialCell/SpecialCellTriangle.vue'
   import SpecialCellFiveStar from '../Cell/SpecialCell/SpecialCellFiveStar.vue'
-  import SpecialCellSixStar from '../Cell/SpecialCell/SpecialCellSixStar.vue'
+  import SpecialCellSnow from '../Cell/SpecialCell/SpecialCellSnow.vue'
   import SpecialCellHeart from '../Cell/SpecialCell/SpecialCellHeart.vue'
 
   export default {
@@ -28,7 +28,7 @@
       SpecialCellTriangle,
       SpecialCellCircle,
       SpecialCellFiveStar,
-      SpecialCellSixStar,
+      SpecialCellSnow,
       SpecialCellHeart,
     },
 
