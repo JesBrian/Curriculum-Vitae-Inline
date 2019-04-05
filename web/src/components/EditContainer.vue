@@ -5,7 +5,7 @@
                             :id="`cell${cellItem._id}`"
                             :cellIndex="index"
                             :key="`${cellItem._id}${index}`"
-                            :cell-data="cellItem" />
+                            :cell-data="cellItem" @cellActive="cellActive" />
   </div>
 </template>
 
@@ -17,6 +17,13 @@
 
     components: {
       DraggableResizableCell
+    },
+
+    data () {
+      return {
+        activeIndex: -1,
+        timer: null
+      }
     },
 
     mounted () {
@@ -37,6 +44,18 @@
     beforeDestroy () {
       this.$refs.editContainer.removeEventListener('drop', null);
       this.$refs.editContainer.addEventListener('dragover', null);
+    },
+
+    methods: {
+      cellActive (index) {
+        if (this.timer) {
+          clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+          this.$store.commit('changeNowComponentIndex', index);
+          clearTimeout(this.timer);
+        }, 200)
+      }
     }
   }
 </script>

@@ -4,6 +4,7 @@
                            :x="cellData.conf.format.position.axis[0]"
                            :y="cellData.conf.format.position.axis[1]"
                            :minw="0" :minh="0" :parent="true"
+                           @activated="cellActive(cellIndex)"  @deactivated="cellActive(-1)"
                            @dragging="onDrag" @resizing="onResize" >
     <div class="draggable-cell">
       <component :is="cellData.special ? cellData.special : 'NormalCell'"
@@ -50,15 +51,18 @@
     },
 
     methods: {
-      onResize: function (x, y, w, h) {
-        // console.log(this.cellIndex);
+      cellActive (index) {
+        this.$emit('cellActive', index);
+      },
+
+      onResize (x, y, w, h) {
         this.$store.commit('changeDesignConfCellResize', {
           index: this.cellIndex,
           size: [w - 6, h - 6],
           position: [x, y]
         })
       },
-      onDrag: function (x, y) {
+      onDrag (x, y) {
         this.$store.commit('changeDesignConfCellResize', {
           index: this.cellIndex,
           size: this.$store.state.designConf.cell[this.cellIndex].conf.format.size.size,
