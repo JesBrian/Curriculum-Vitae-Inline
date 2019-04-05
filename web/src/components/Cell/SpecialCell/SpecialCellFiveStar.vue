@@ -1,5 +1,5 @@
 <template>
-  <Icon class="base-cell" type="ios-star" />
+  <Icon class="base-cell" type="ios-star" :size="data.format.size.size[0]" />
 </template>
 
 <script>

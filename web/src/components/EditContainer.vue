@@ -3,6 +3,7 @@
        :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px; background: ${$store.state.designConf.bg};`">
     <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
                             :id="`cell${cellItem._id}`"
+                            :cellIndex="index"
                             :key="`${cellItem._id}${index}`"
                             :cell-data="cellItem" />
   </div>

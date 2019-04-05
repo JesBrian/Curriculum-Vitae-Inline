@@ -27,6 +27,7 @@ exports.createFormatSer = async (formatData: any = null) => {
 };
 
 exports.updateFormatSer = async (id: string = '', data: object = null) => {
+  // @ts-ignore
   const format = await this.getFormatByIdSer(id);
   Object.assign(format, data);
   return !await format.save().errors;

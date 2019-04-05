@@ -37,6 +37,10 @@
     },
 
     props: {
+      cellIndex: {
+        type: Number,
+        default: 0
+      },
       cellData: {
         type: Object,
         default: () => {
@@ -45,25 +49,21 @@
       }
     },
 
-    data: function () {
-      return {
-        width: 0,
-        height: 0,
-        x: 0,
-        y: 0
-      }
-    },
-
     methods: {
-      onResize: function (x, y, width, height) {
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
+      onResize: function (x, y, w, h) {
+        // console.log(this.cellIndex);
+        this.$store.commit('changeDesignConfCellResize', {
+          index: this.cellIndex,
+          size: [w - 6, h - 6],
+          position: [x, y]
+        })
       },
       onDrag: function (x, y) {
-        this.x = x
-        this.y = y
+        this.$store.commit('changeDesignConfCellResize', {
+          index: this.cellIndex,
+          size: this.$store.state.designConf.cell[this.cellIndex].conf.format.size.size,
+          position: [x, y]
+        })
       }
     }
   }
@@ -79,5 +79,6 @@
     flex: 1;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 </style>

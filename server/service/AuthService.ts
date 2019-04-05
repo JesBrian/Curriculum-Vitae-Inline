@@ -16,7 +16,7 @@ exports.updateRoleSer = async (id: string = '', data: object = null) => {
   return !await role.save().errors;
 };
 
-exports.getRoleListSer = async (condition: Object = null) => {
+exports.getRoleListSer = async (condition: object = null) => {
   return await RoleModel.find(condition);
 };
 

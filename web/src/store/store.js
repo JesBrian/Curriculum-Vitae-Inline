@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
 
     changeDesignConf (state, conf = {
-      name: '',
+      name: '未命名',
       logo: '',
       bg: '#FFF',
       size: [], // [长,宽]
@@ -81,6 +81,15 @@ export default new Vuex.Store({
       } else if (data.op === 'add') {
         state.designConf.cell.push(data.cell);
       }
+    },
+    
+    changeDesignConfCellResize (state, data = {
+      index: 0,
+      size: [0, 0],
+      position: [0, 0]
+    }) {
+      state.designConf.cell[data.index].conf.format.size.size = data.size;
+      state.designConf.cell[data.index].conf.format.position.axis = data.position;
     }
   },
   actions: {

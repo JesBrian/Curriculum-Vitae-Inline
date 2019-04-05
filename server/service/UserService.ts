@@ -7,7 +7,7 @@ const { md5, generateRandomString } = require('../helper/FunctionHelper')
  * @param username
  * @param password
  */
-exports.userLoginSer = async (username = '', password = '') => {
+exports.userLoginSer = async (username: string = '', password: string = '') => {
   const user = await UserModel.findOne({'name': username}, '_id name avatar salt password status');
   let msg = '', data = null;
   if (user) {
@@ -38,7 +38,7 @@ exports.userLoginSer = async (username = '', password = '') => {
  * @param mail
  * @param password
  */
-exports.userRegisterSer = async (username = '', mail = '', password = '') => {
+exports.userRegisterSer = async (username: string = '', mail: string = '', password: string = '') => {
   const salt = generateRandomString(4);
   let user = new UserModel({
     name: username,
@@ -71,7 +71,7 @@ exports.allUserListSer = async (condition: object = null, page: number = 1, limi
  *
  * @param id
  */
-exports.getUserByIdSer = async (id = '') => {
+exports.getUserByIdSer = async (id: string = '') => {
   return await UserModel.findById(id, 'name avatar mail cTime lTime status');
 };
 
