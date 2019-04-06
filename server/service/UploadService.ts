@@ -57,6 +57,17 @@ exports.uploadComponentLogoSer = async (file: any) => {
 };
 
 /**
+ * 上传模板封面
+ * @param file
+ */
+exports.uploadTemplateLogoSer = async (file: any) => {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const docName = `${date.getFullYear()}${month > 9 ? month : `0${month}`}`;
+  return `${docName}/${handleSaveFile(`template/logo/${docName}`, file)}`;
+};
+
+/**
  * 上传设计封面
  * @param file
  */

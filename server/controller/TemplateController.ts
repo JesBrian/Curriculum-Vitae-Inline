@@ -11,12 +11,15 @@ const {
  * @param next
  */
 exports.getTemplateByFormatCtr = async (ctx: any, next: any) => {
-  const formatId = ctx.query.formatId;
-  const templateListData = await getTemplateByFormatSer(formatId);
+  const {
+    formatId, page, limit
+  } = ctx.query;
+
+  const result = await getTemplateByFormatSer(formatId, parseInt(page), parseInt(limit));
 
   ctx.body = {
     status: 200,
-    data: templateListData
+    data: result
   };
 };
 
@@ -43,7 +46,7 @@ exports.getTemplateByIdCtr = async (ctx: any, next: any) => {
 exports.saveTemplateCtr = async (ctx: any, next: any) => {
   const param = ctx.request.body;
   const templateId = param.id;
-  const templateData = {};
+  const templateData = param.data;
 
   let result, status = 200, msg = '模板信息保存成功';
   if (templateId) {

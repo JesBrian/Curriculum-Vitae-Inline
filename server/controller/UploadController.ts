@@ -2,6 +2,7 @@ const {
   uploadAvatarSer,
   uploadFormatLogoSer,
   uploadComponentLogoSer,
+  uploadTemplateLogoSer,
   uploadDesignLogoSer
 } = require('../service/UploadService');
 

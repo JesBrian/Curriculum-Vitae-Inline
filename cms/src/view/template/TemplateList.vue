@@ -55,26 +55,13 @@
             }
           },
           {
-            title: '创建时间',
-            key: 'cTime',
-            sortable: true,
-            render: (h, params) => {
-              return h('span', {
-              }, formatDateTime(params.row.cTime));
-            }
+            title: '作者',
+            key: 'author',
+            sortable: true
           },
           {
-            title: '最后修改时间',
-            key: 'mTime',
-            sortable: true,
-            render: (h, params) => {
-              return h('span', {
-              }, formatDateTime(params.row.mTime));
-            }
-          },
-          {
-            title: '类型',
-            key: 'type',
+            title: '系统预设',
+            key: 'system',
             sortable: true
           },
           {
@@ -90,6 +77,7 @@
       this.$http.get('formatList').then(({data}) => {
         if (data.status === 200) {
           this.formatCategory = data.data;
+          this.getTemplateData();
         }
       }).catch(err => {
         console.log(err);
@@ -104,6 +92,17 @@
             break;
           }
         }
+        this.getTemplateData();
+      },
+
+      getTemplateData (page = 1, limit = 10) {
+        this.$http.get(`getTemplateByFormat?formatId=${this.formatCategory[this.nowTabIndex]._id}&page=${page}&limit=${limit}`).then(({data}) => {
+          if (data.status === 200) {
+            console.log(data);
+          }
+        }).catch(err => {
+          console.log(err);
+        })
       }
     }
   }
