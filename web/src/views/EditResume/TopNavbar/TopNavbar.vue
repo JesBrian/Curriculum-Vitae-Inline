@@ -31,9 +31,9 @@
                 <Row>
                   <Col span="4">长宽:</Col>
                   <Col span="20">
-                    <InputNumber v-model="componentConf.format.position.axis[0]" :min="0" size="small" />
+                    <InputNumber v-model="componentConf.format.size.size[0]" :min="0" size="small" />
                     <span>X</span>
-                    <InputNumber v-model="componentConf.format.position.axis[1]" :min="0" size="small" />
+                    <InputNumber v-model="componentConf.format.size.size[1]" :min="0" size="small" />
                   </Col>
                 </Row>
               </Col>
@@ -197,14 +197,31 @@
     data () {
       return {
         isShowComponentConfArea: false,
-        componentConf: null
+        componentConf: null,
+        initConf: null
+      }
+    },
+
+    computed: {
+      nowCellIndex () {
+        return this.$store.state.nowComponentIndex;
+      }
+    },
+
+    watch: {
+      nowCellIndex (nVal) {
+        if (nVal !== -1) {
+          // console.log(this.$store.state.designConf.cell[nVal].conf)
+          return this.componentConf = this.$store.state.designConf.cell[nVal].conf;
+        }
+        this.componentConf = this.initConf;
       }
     },
 
     created () {
       this.$localForage.getItem('componentConf').then(val => {
         if (val) {
-          this.componentConf = val;
+          this.initCellConf(val);
         } else {
           this.getComponentListConfData();
         }
@@ -214,11 +231,18 @@
     },
 
     methods: {
+      initCellConf (conf = null) {
+        this.initConf = JSON.parse(JSON.stringify(conf));
+        this.componentConf = conf;
+      },
+
       getComponentListConfData () {
         this.$http.get('componentConf').then(res => {
           const result = res.data;
           if (result.status === 200) {
-            this.$localForage.setItem('componentConf', result.data);
+            const conf = result.data;
+            this.initCellConf(conf);
+            this.$localForage.setItem('componentConf', conf);
           }
         }).catch(err => {
           console.log(err);

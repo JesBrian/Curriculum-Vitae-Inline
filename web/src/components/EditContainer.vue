@@ -2,9 +2,8 @@
   <div ref="editContainer" class="edit-container"
        :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px; background: ${$store.state.designConf.bg};`">
     <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
-                            :id="`cell${cellItem._id}`"
-                            :cellIndex="index"
-                            :key="`${cellItem._id}${index}`"
+                            :id="`cell${cellItem._id}`" :key="`${cellItem._id}${index}`"
+                            :style="$store.state.nowComponentIndex === index ? 'border: 1px dashed #000;' : 'border: 1px dashed transparent;'" :cellIndex="index"
                             :cell-data="cellItem" @cellActive="cellActive" />
   </div>
 </template>
@@ -48,13 +47,17 @@
 
     methods: {
       cellActive (index) {
-        if (this.timer) {
-          clearTimeout(this.timer);
+        // if (this.timer) {
+        //   clearTimeout(this.timer);
+        // }
+        // this.timer = setTimeout(() => {
+        //   this.$store.commit('changeNowComponentIndex', index);
+        //   clearTimeout(this.timer);
+        // }, 200)
+        if (index === -1) {
+          return ;
         }
-        this.timer = setTimeout(() => {
-          this.$store.commit('changeNowComponentIndex', index);
-          clearTimeout(this.timer);
-        }, 200)
+        this.$store.commit('changeNowComponentIndex', index);
       }
     }
   }
