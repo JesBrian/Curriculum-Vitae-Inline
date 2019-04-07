@@ -10,13 +10,13 @@
     </PathNavbar>
 
     <div v-if="step === 0">
-      <div @click="chooseTempFormat(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: formatIndex === -1}">
+      <div @click="changeTempIndex('formatIndex', -1)" @dblclick="showModal('SelfDefineFormatModal')" class="resume-cell" :class="{active: formatIndex === -1}">
         <div class="cell-logo">
           <img src="http://localhost:3000/img/format/default.png" style="width: 100%; height: 100%;">
         </div>
         <span class="name-label">自定义格式</span>
       </div>
-      <div v-for="(formatItem, index) in formatList" @click="chooseTempFormat(index)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: formatIndex === index}">
+      <div v-for="(formatItem, index) in formatList" @click="changeTempIndex('formatIndex', index)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: formatIndex === index}">
         <div class="cell-logo">
           <img :src="`http://localhost:3000/img/format/${formatItem.logo}`" style="width: 100%; height: 100%;">
         </div>
@@ -24,19 +24,19 @@
       </div>
     </div>
     <div v-else>
-      <div @click="chooseTempTemplate(-2)" @dblclick="nextStep" class="resume-cell" :class="{active: templateIndex === -2}">
+      <div @click="changeTempIndex('templateIndex', -2)" @dblclick="nextStep" class="resume-cell" :class="{active: templateIndex === -2}">
         <div class="cell-logo">
           <img src="http://localhost:3000/img/template/empty.png" style="width: 100%; height: 100%;">
         </div>
         <span class="name-label">空白</span>
       </div>
-      <div @click="chooseTempTemplate(-1)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: templateIndex === -1}">
+      <div @click="changeTempIndex('templateIndex', -1)" @dblclick="showModal('NetTemplateModal')" class="resume-cell" :class="{active: templateIndex === -1}">
         <Card shadow class="cell-logo">
           <img src="http://localhost:3000/img/template/net.png" style="width: 100%; height: 100%;">
         </Card>
         <span class="name-label">网络模板</span>
       </div>
-      <div v-for="(templateItem, index) in templateList" @click="chooseTempTemplate(index)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index + 1}">
+      <div v-for="(templateItem, index) in templateList" @click="changeTempIndex('templateIndex', index)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index}">
         <div class="cell-logo">
           <img :src="`http://localhost:3000/img/template/logo/${templateItem.logo}`" style="width: 100%; height: 100%;">
         </div>
@@ -72,20 +72,12 @@
     },
 
     methods: {
-      selfEdit () {
-        this.$store.commit('changeShowModal', 'SelfDefineFormatModal');
+      showModal (modalType = '') {
+        this.$store.commit('changeShowModal', modalType);
       },
 
-      selectNetTemplate () {
-        this.$store.commit('changeShowModal', 'NetTemplateModal');
-      },
-
-      chooseTempFormat (n) {
-        this.formatIndex = n;
-      },
-
-      chooseTempTemplate (n) {
-        this.templateIndex = n;
+      changeTempIndex (tempCategory = '', index = 0) {
+        this[tempCategory] = index;
       },
 
       nextStep () {
