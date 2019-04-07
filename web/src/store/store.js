@@ -51,20 +51,7 @@ export default new Vuex.Store({
       cell: [],
       status: true
     }) {
-      state.designConf = conf;
-    },
-
-    changeDesignConfBase (state, option = {
-      name: '未命名',
-      logo: '',
-      tags: [],
-      status: true
-    }) {
-      Object.assign(state.designConf, option)
-    },
-    
-    changeDesignConfSize (state, size = [0, 0]) {
-      state.designConf.size = size;
+      Object.assign(state.designConf, conf)
     },
 
     changeDesignConfBg (state, bg = '#FFF') {

@@ -36,7 +36,7 @@
         </Card>
         <span class="name-label">网络模板</span>
       </div>
-      <div v-for="(templateItem, index) in templateList" @click="chooseTempTemplate(index + 1)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index + 1}">
+      <div v-for="(templateItem, index) in templateList" @click="chooseTempTemplate(index)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index + 1}">
         <div class="cell-logo">
           <img :src="`http://localhost:3000/img/template/logo/${templateItem.logo}`" style="width: 100%; height: 100%;">
         </div>
@@ -90,13 +90,27 @@
 
       nextStep () {
         if (this.step) {
-          this.$store.commit('changeDesignConfSize', this.formatList[this.formatIndex].size);
-          this.$nextTick(() => {
-            this.$router.push('/EditResume');
+          if (this.templateIndex >= 0) {
+            return this.$http.get(`getTemplateById?id=${this.templateList[this.templateIndex]._id}`).then(({data}) => {
+              if (data.status === 200) {
+                const templateData = data.data;
+                this.$store.commit('changeDesignConf', {
+                  size: this.formatList[this.formatIndex].size,
+                  bg: templateData.bg,
+                  cell: templateData.cell
+                });
+                this.$router.push('/EditResume');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+          this.$store.commit('changeDesignConf', {
+            size: this.formatList[this.formatIndex].size
           });
+          this.$router.push('/EditResume');
         } else {
           this.$http.get(`getSystemTemplateByFormat?formatId=${this.formatList[this.formatIndex]._id}`).then(({data}) => {
-            console.log(data);
             if (data.status === 200) {
               this.templateList = data.data;
             }
@@ -136,7 +150,7 @@
     .cell-logo {
       height:155px; margin-bottom: 3px; padding: 13px;
       display: flex; align-items: center; justify-content: center;
-      box-shadow:0 0 6px -1px #282828; transition: all 200ms; border-radius: 5px;
+      box-shadow:0 0 6px -1px #282828; transition: all 250ms; border-radius: 5px;
     }
     &:hover {
       box-shadow: 0 0 8px #888;

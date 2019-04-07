@@ -129,7 +129,7 @@
       },
 
       saveInfo () {
-        this.$store.commit('changeDesignConfBase', {
+        this.$store.commit('changeDesignConf', {
           name: this.name,
           logo: this.logo,
           tags: this.tags,
