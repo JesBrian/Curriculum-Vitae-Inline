@@ -2,8 +2,7 @@ import TemplateModel from '../model/TemplateModel'
 
 exports.getTemplateByFormatSer = async (formatId: string = '', page: number = 1, limit: number = 10) => {
   const condition = {
-    formatId: formatId,
-    status: true
+    formatId: formatId
   };
 
   const templateList = await TemplateModel.find(condition).skip((page - 1) * limit).limit(limit);
@@ -12,6 +11,10 @@ exports.getTemplateByFormatSer = async (formatId: string = '', page: number = 1,
   return {
     templateList, total
   };
+};
+
+exports.getSystemTemplateByFormatSer = async (formatId: string = '') => {
+  return await TemplateModel.find({formatId: formatId, status: true},'_id name logo');
 };
 
 exports.getTemplateByIdSer = async (templateId: string = '') => {

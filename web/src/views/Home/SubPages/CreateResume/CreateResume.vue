@@ -11,23 +11,23 @@
 
     <div v-if="step === 0">
       <div @click="chooseTempFormat(-1)" @dblclick="selfEdit" class="resume-cell" :class="{active: formatIndex === -1}">
-        <Card shadow class="cell-logo">
+        <div class="cell-logo">
           <img src="http://localhost:3000/img/format/default.png" style="width: 100%; height: 100%;">
-        </Card>
+        </div>
         <span class="name-label">自定义格式</span>
       </div>
       <div v-for="(formatItem, index) in formatList" @click="chooseTempFormat(index)" @dblclick="nextStep" :key="formatItem.id" class="resume-cell" :class="{active: formatIndex === index}">
-        <Card shadow class="cell-logo">
+        <div class="cell-logo">
           <img :src="`http://localhost:3000/img/format/${formatItem.logo}`" style="width: 100%; height: 100%;">
-        </Card>
+        </div>
         <span class="name-label">{{ formatItem.name }}</span>
       </div>
     </div>
     <div v-else>
       <div @click="chooseTempTemplate(-2)" @dblclick="nextStep" class="resume-cell" :class="{active: templateIndex === -2}">
-        <Card shadow class="cell-logo">
+        <div class="cell-logo">
           <img src="http://localhost:3000/img/template/empty.png" style="width: 100%; height: 100%;">
-        </Card>
+        </div>
         <span class="name-label">空白</span>
       </div>
       <div @click="chooseTempTemplate(-1)" @dblclick="selectNetTemplate" class="resume-cell" :class="{active: templateIndex === -1}">
@@ -36,11 +36,11 @@
         </Card>
         <span class="name-label">网络模板</span>
       </div>
-      <div v-for="n in 10" @click="chooseTempTemplate(n + 1)" @dblclick="nextStep" :key="n + '15'" class="resume-cell" :class="{active: templateIndex === n+1}">
-        <Card shadow class="cell-logo">
-          <p>Content of card</p>
-        </Card>
-        <span class="name-label">编辑</span>
+      <div v-for="(templateItem, index) in templateList" @click="chooseTempTemplate(index + 1)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index + 1}">
+        <div class="cell-logo">
+          <img :src="`http://localhost:3000/img/template/logo/${templateItem.logo}`" style="width: 100%; height: 100%;">
+        </div>
+        <span class="name-label">{{templateItem.name}}</span>
       </div>
     </div>
   </div>
@@ -62,7 +62,8 @@
         formatIndex: -100,
         templateIndex: -100,
 
-        formatList: []
+        formatList: [],
+        templateList: []
       }
     },
 
@@ -94,6 +95,14 @@
             this.$router.push('/EditResume');
           });
         } else {
+          this.$http.get(`getSystemTemplateByFormat?formatId=${this.formatList[this.formatIndex]._id}`).then(({data}) => {
+            console.log(data);
+            if (data.status === 200) {
+              this.templateList = data.data;
+            }
+          }).catch(err => {
+            console.log(err);
+          });
           this.step++;
         }
       },
@@ -125,19 +134,20 @@
     transition: all 600ms;
 
     .cell-logo {
-      height:155px; margin-bottom: 3px; padding: 20px; box-shadow:0 0 6px -1px #282828; transition: all 200ms;
+      height:155px; margin-bottom: 3px; padding: 13px;
       display: flex; align-items: center; justify-content: center;
+      box-shadow:0 0 6px -1px #282828; transition: all 200ms; border-radius: 5px;
     }
     &:hover {
       box-shadow: 0 0 8px #888;
     }
     &.active {
-      box-shadow: 0 0 8px #32BBE6;
+      box-shadow: 0 0 8px #348EF3;
       .cell-logo {
-        box-shadow:0 0 3px #BBB, 0 0 6px #57a3f3;
+        box-shadow:0 0 6px #32BBE6;
       }
       .name-label {
-        color: #57a3f3;
+        color: #348EF3;
       }
     }
   }

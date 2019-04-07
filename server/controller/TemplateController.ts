@@ -1,5 +1,6 @@
 const {
   getTemplateByFormatSer,
+  getSystemTemplateByFormatSer,
   getTemplateByIdSer,
   createTemplateSer,
   updateTemplateSer
@@ -16,6 +17,22 @@ exports.getTemplateByFormatCtr = async (ctx: any, next: any) => {
   } = ctx.query;
 
   const result = await getTemplateByFormatSer(formatId, parseInt(page), parseInt(limit));
+
+  ctx.body = {
+    status: 200,
+    data: result
+  };
+};
+
+/**
+ *
+ * @param ctx
+ * @param next
+ */
+exports.getSystemTemplateByFormatCtr = async (ctx: any, next: any) => {
+  const formatId = ctx.query.formatId;
+
+  const result = await getSystemTemplateByFormatSer(formatId);
 
   ctx.body = {
     status: 200,

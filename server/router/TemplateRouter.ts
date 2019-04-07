@@ -1,5 +1,6 @@
 const {
   getTemplateByFormatCtr,
+  getSystemTemplateByFormatCtr,
   getTemplateByIdCtr,
   saveTemplateCtr
 } = require('../controller/TemplateController');
@@ -11,6 +12,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 router.get('/getTemplateByFormat', getTemplateByFormatCtr);
+router.get('/getSystemTemplateByFormat', getSystemTemplateByFormatCtr);
 router.get('/getTemplateById', getTemplateByIdCtr);
 router.put('/saveTemplate', saveTemplateCtr);
 

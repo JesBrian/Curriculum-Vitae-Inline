@@ -127,6 +127,28 @@
     },
 
     created () {
+      const id = this.$route.query.id;
+      this.id = id ? id : '';
+      if (id) {
+        this.$http.get(`getTemplateById?id=${id}`).then(({data}) => {
+          if (data.status === 200) {
+            const templateData = data.data;
+            this.name = templateData.name;
+            this.formatId = templateData.formatId;
+            this.tags = templateData.tags;
+            this.bg = templateData.bg;
+            this.cell = templateData.cell;
+            this.status = templateData.status;
+            this.uploadList.push({
+              name: templateData.logo,
+              url: `http://localhost:3000/img/template/logo/${templateData.logo}`,
+              status: 'finished'
+            });
+          }
+        }).catch(err => {
+          console.log(err);
+        })
+      }
       this.$http.get('formatList').then(({data}) => {
         if (data.status === 200) {
           this.formatCategory = data.data;
