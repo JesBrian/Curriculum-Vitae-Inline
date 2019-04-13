@@ -40,7 +40,7 @@
               <Button @click="showTempResume" type="success" icon="logo-buffer" size="small" ghost style="margin:0 0 0 6px;">预览</Button>
               <Button @click="exportResume" type="primary" icon="md-code-download" size="small" ghost style="margin:0 0 0 6px;">导出</Button>
               <Button @click="saveResume" type="info" icon="md-list" size="small" ghost style="margin:0 0 0 6px;">保存</Button>
-              <Button @click="delNowCurriculumVitae" type="error" icon="md-trash" size="small" ghost style="margin:0 0 0 6px;">删除</Button>
+              <Button @click="delNowCurriculumVitae" :disabled="(!$store.state.designConf.status) || ($route.query.id === '')" type="error" icon="md-trash" size="small" ghost style="margin:0 0 0 6px;">删除</Button>
             </div>
           </div>
         </Layout>
@@ -221,7 +221,24 @@
       },
 
       delNowCurriculumVitae () {
-        confirm('确认要删除该编辑中的简历/名片');
+        this.$Modal.confirm({
+          title: '警告',
+          content: '<p>确认要删除该编辑中的简历</p>',
+          onOk: () => {
+            this.$http.put('switchDesignStatus', {
+              id: this.id,
+              status: false
+            }).then(({data}) => {
+              if (data.status === 200) {
+                this.$store.commit('changeDesignConf', {
+                  status: false
+                });
+              }
+            }).catch(err => {
+              console.log(err);
+            });
+          },
+        });
       }
     }
   }

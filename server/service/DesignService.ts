@@ -47,3 +47,9 @@ exports.updateDesignSer = async (designId: string = '', designData: object = nul
   await design.save();
   return designId;
 };
+
+exports.switchDesignStatusSer = async (designId: string = '', status: boolean = false) => {
+  const design = await DesignModel.findOne({_id: designId});
+  design.status = status;
+  await design.save();
+};

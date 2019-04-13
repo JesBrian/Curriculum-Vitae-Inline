@@ -30,12 +30,12 @@
         </div>
         <span class="name-label">空白</span>
       </div>
-      <div @click="changeTempIndex('templateIndex', -1)" @dblclick="showModal('NetTemplateModal')" class="resume-cell" :class="{active: templateIndex === -1}">
-        <Card shadow class="cell-logo">
-          <img src="http://localhost:3000/img/template/net.png" style="width: 100%; height: 100%;">
-        </Card>
-        <span class="name-label">网络模板</span>
-      </div>
+      <!--<div @click="changeTempIndex('templateIndex', -1)" @dblclick="showModal('NetTemplateModal')" class="resume-cell" :class="{active: templateIndex === -1}">-->
+        <!--<Card shadow class="cell-logo">-->
+          <!--<img src="http://localhost:3000/img/template/net.png" style="width: 100%; height: 100%;">-->
+        <!--</Card>-->
+        <!--<span class="name-label">网络模板</span>-->
+      <!--</div>-->
       <div v-for="(templateItem, index) in templateList" @click="changeTempIndex('templateIndex', index)" @dblclick="nextStep" :key="templateItem._id" class="resume-cell" :class="{active: templateIndex === index}">
         <div class="cell-logo">
           <img :src="`http://localhost:3000/img/template/logo/${templateItem.logo}`" style="width: 100%; height: 100%;">

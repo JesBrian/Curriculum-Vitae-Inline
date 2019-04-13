@@ -2,7 +2,8 @@ const {
   getDesignByIdSer,
   getDesignListByUserSer,
   createDesignSer,
-  updateDesignSer
+  updateDesignSer,
+  switchDesignStatusSer
 } = require('../service/DesignService');
 
 /**
@@ -57,5 +58,18 @@ exports.saveDesignCtr = async (ctx: any, next: any) => {
     status: 200,
     msg: '保存成功',
     data: result
-  }
+  };
+};
+
+exports.switchDesignStatusCtr = async (ctx: any, next: any) => {
+  const {
+    id, status
+  } = ctx.request.body;
+
+  await switchDesignStatusSer(id, status);
+
+  ctx.body = {
+    status: 200,
+    msg: '修改简历状态成功'
+  };
 };
