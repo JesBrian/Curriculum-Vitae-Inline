@@ -7,7 +7,7 @@
 
       <div slot="right">
         <Button @click="emptyRecords" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">清空记录</Button>
-        <Button @click="openLocalDesign" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">本地打开</Button>
+        <!--<Button @click="openLocalDesign" type="info" icon="md-list" size="small" ghost style="margin:0 3px;">本地打开</Button>-->
       </div>
     </PathNavbar>
 
