@@ -76,6 +76,8 @@
 </template>
 
 <script>
+  import html2canvas from 'html2canvas'
+
   import TopNavbar from './TopNavbar/TopNavbar.vue'
   import LeftNavbar from './LeftNavbar/LeftNavbar.vue'
   import PathNavbar from './PathNavbar/PathNavbar.vue'
@@ -164,14 +166,58 @@
       },
 
       showTempResume () {
+        this.blurComponent();
         this.$store.commit('changeShowModal', 'TempShowModal');
+        this.$nextTick(() => {
+          html2canvas(document.querySelector('#editContainer')).then(canvas => {
+            document.querySelector('#tempShowModalContainer').appendChild(canvas);
+          });
+        });
       },
 
       exportResume () {
-        alert('给钱也不会给你开通这功能！');
+        this.blurComponent();
+        // this.$nextTick(() => {
+        //   html2canvas(document.querySelector('#editContainer')).then(canvas => {
+        //     document.querySelector('#tempShowModalContainer').appendChild(canvas);
+        //   });
+        // });
+        this.downloadResumeImg();
+      },
+
+      dataURLToBlob(dataUrl) {//ie 图片转格式
+        var arr = dataUrl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type: mime});
+      },
+
+      downloadResumeImg () {
+        const canvasID = document.querySelector('#editContainer');
+        let a = document.createElement('a');
+        html2canvas(canvasID).then(canvas => {
+          let dom = document.body.appendChild(canvas);
+          dom.style.display = 'none';
+          a.style.display = 'none';
+          document.body.removeChild(dom);
+          let blob = this.dataURLToBlob(dom.toDataURL('image/png'));
+          a.setAttribute('href', URL.createObjectURL(blob));
+          a.setAttribute('download', this.$store.state.designConf.name + '.png');
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(blob);
+          document.body.removeChild(a);
+        });
+      },
+
+      blurComponent () {
+        this.$store.commit('changeNowComponentIndex');
       },
 
       saveResume () {
+        this.blurComponent();
         let designData = {
           name: '',
           logo: '',

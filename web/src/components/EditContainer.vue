@@ -1,5 +1,5 @@
 <template>
-  <div ref="editContainer" class="edit-container"
+  <div id="editContainer" ref="editContainer" class="edit-container"
        :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px; background: ${$store.state.designConf.bg};`">
     <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
                             :id="`cell${cellItem._id}`" :key="`${cellItem._id}${index}`"
