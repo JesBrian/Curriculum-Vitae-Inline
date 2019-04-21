@@ -12,11 +12,9 @@ const {
  * @param next
  */
 exports.userRegisterCtr = async (ctx: any, next: any) => {
-  const username = ctx.request.body.name;
-  const mail = ctx.request.body.mail;
-  const password = ctx.request.body.password;
+  const {name, mail, password, status} = ctx.request.body;
 
-  let msg = '', userId = await userRegisterSer(username, mail, password);
+  let msg = '', userId = await userRegisterSer(name, mail, password, status);
   if (userId) {
     msg = '用户注册成功';
   } else {

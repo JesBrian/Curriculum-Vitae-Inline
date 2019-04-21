@@ -63,11 +63,11 @@
               }, params.row.name);
             }
           },
-          {
-            title: '作者',
-            key: 'author',
-            sortable: true
-          },
+          // {
+          //   title: '作者',
+          //   key: 'author',
+          //   sortable: true
+          // },
           {
             title: '系统预设',
             key: 'system',
@@ -134,6 +134,6 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 
 </style>

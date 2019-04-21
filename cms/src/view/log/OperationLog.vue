@@ -90,6 +90,6 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="ss" scoped>
 
 </style>

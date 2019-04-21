@@ -64,7 +64,7 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">模板内容：</Col>
         <Col span="16">
-          <Button type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
+          <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
           <Button type="primary" ghost >查看模板</Button>
         </Col>
       </Row>
@@ -95,19 +95,23 @@
         </Col>
       </Row>
     </div>
+
+    <div v-if="isEdit" style="width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 999;">
+      <EditResume />
+    </div>
   </Card>
 </template>
 
 <script>
   import PageTitle from '_c/page-title/page-title.vue';
   import InputTag from "../../../../web/src/components/InputTag/InputTag";
+  import EditResume from '../EditResume/EditResume.vue'
 
   export default {
     name: 'EditTemplate',
 
     components: {
-      InputTag,
-      PageTitle
+      PageTitle, InputTag, EditResume
     },
 
     data () {
@@ -122,7 +126,9 @@
 
         formatCategory: [],
         defaultList: [],
-        uploadList: []
+        uploadList: [],
+
+        isEdit: false
       }
     },
 
@@ -187,6 +193,10 @@
         }).catch(err => {
           console.log(err);
         })
+      },
+
+      editTemplate () {
+        this.isEdit = true;
       },
 
 

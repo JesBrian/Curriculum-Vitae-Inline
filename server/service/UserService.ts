@@ -34,17 +34,19 @@ exports.userLoginSer = async (username: string = '', password: string = '') => {
 
 /**
  * 用户注册
- * @param username
+ * @param name
  * @param mail
  * @param password
+ * @param status
  */
-exports.userRegisterSer = async (username: string = '', mail: string = '', password: string = '') => {
+exports.userRegisterSer = async (name: string = '', mail: string = '', password: string = '', status: boolean = true) => {
   const salt = generateRandomString(4);
   let user = new UserModel({
-    name: username,
+    name: name,
     mail: mail,
     salt: salt,
-    password: md5(salt + password)
+    password: md5(salt + password),
+    status: status
   });
   const result = await user.save();
   if (result.errors) {
@@ -81,10 +83,8 @@ exports.getUserByIdSer = async (id: string = '') => {
  * @param userInfo
  */
 exports.updateUserSer = async (id: string = '', userInfo: any = null) => {
-  const user = await UserModel.findOne({_id: id});
-  user.name = userInfo.name;
-  user.avatar = userInfo.avatar;
-  user.mail = userInfo.mail;
+  let user = await UserModel.findOne({_id: id});
+  user = Object.assign(user, userInfo);
 
   if (userInfo.password) {
     user.password = md5(user.salt + userInfo.password);

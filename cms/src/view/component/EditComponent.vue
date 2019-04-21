@@ -2,7 +2,7 @@
   <Card>
     <PageTitle icon="md-construct" title="EditComponent" />
 
-    <Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>
+    <!--<Button type="info" ghost style="top:71px; right:18px; position:absolute; z-index:9;">预览组件</Button>-->
 
     <Tabs v-if="componentConf !== null" v-model="nowMainTab" type="card" class="edit-config">
       <TabPane name="base" label="基本配置">

@@ -245,22 +245,22 @@ export default [
       }
     ]
   },
-  {
-    path: '/log',
-    name: 'log',
-    component: Main,
-    children: [
-      {
-        path: 'operationLog',
-        name: 'operationLog',
-        meta: {
-          icon: 'md-speedometer',
-          title: '操作日志'
-        },
-        component: resolve => require(['@/view/log/OperationLog.vue'], resolve)
-      }
-    ]
-  },
+  // {
+  //   path: '/log',
+  //   name: 'log',
+  //   component: Main,
+  //   children: [
+  //     {
+  //       path: 'operationLog',
+  //       name: 'operationLog',
+  //       meta: {
+  //         icon: 'md-speedometer',
+  //         title: '操作日志'
+  //       },
+  //       component: resolve => require(['@/view/log/OperationLog.vue'], resolve)
+  //     }
+  //   ]
+  // },
   {
     path: '/401',
     name: 'error_401',
