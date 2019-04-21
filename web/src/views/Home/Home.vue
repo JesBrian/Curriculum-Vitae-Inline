@@ -9,14 +9,14 @@
       </div>
 
       <div class="home-header-user">
-        <Avatar @click.native="showLoginModal" class="home-header-user-avatar" icon="md-person" title="请登录" />
+        <Avatar @click.native="showLoginModal" :src="$store.state.userInfo && $store.state.userInfo.avatar ? `http://localhost:3000/img/avatar/${$store.state.userInfo.avatar}` : ''" class="home-header-user-avatar" icon="md-person" title="请登录" />
       </div>
     </Header>
 
     <Layout>
       <Sider hide-trigger class="home-left-navbar">
         <div class="home-left-navbar-user">
-          <Avatar @click.native="showLoginModal" class="home-left-navbar-user-avatar" icon="md-person" title="请登录" />
+          <Avatar @click.native="showLoginModal" :src="$store.state.userInfo && $store.state.userInfo.avatar ? `http://localhost:3000/img/avatar/${$store.state.userInfo.avatar}` : ''" class="home-left-navbar-user-avatar" icon="md-person" title="请登录" />
         </div>
 
         <RouterLink class="home-left-navbar-link" to="/Home/CreateResume">

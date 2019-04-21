@@ -152,11 +152,13 @@
             const userInfo = data.data;
             this.name = userInfo.name;
             this.avatar = userInfo.avatar;
-            this.uploadList.push({
-              name: userInfo.avatar,
-              url: `http://localhost:3000/img/avatar/${userInfo.avatar}`,
-              status: 'finished'
-            });
+            if (userInfo.avatar) {
+              this.uploadList.push({
+                name: userInfo.avatar,
+                url: `http://localhost:3000/img/avatar/${userInfo.avatar}`,
+                status: 'finished'
+              });
+            }
             this.mail = userInfo.mail;
           }
         }).catch(err => {

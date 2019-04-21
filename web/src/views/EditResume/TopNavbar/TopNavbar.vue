@@ -8,7 +8,7 @@
       </div>
 
       <div class="layout-user">
-        <Avatar @click.native="changeRightNavbar" class="user" shape="square" icon="md-person" size="small" title="请登录" />
+        <Avatar @click.native="changeRightNavbar" :src="$store.state.userInfo && $store.state.userInfo.avatar ? `http://localhost:3000/img/avatar/${$store.state.userInfo.avatar}` : ''" class="user" shape="square" icon="md-person" size="small" title="请登录" />
       </div>
     </Menu>
 
