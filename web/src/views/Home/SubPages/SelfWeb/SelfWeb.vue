@@ -143,8 +143,24 @@
       }
     },
 
+    computed: {
+      userInfo () {
+        return this.$store.state.userInfo;
+      }
+    },
+
+    watch: {
+      userInfo (nVal) {
+        if (nVal) {
+          this.getPersonalDesign();
+        }
+      }
+    },
+
     created () {
-      this.getPersonalDesign();
+      if (this.$store.state.userInfo) {
+        this.getPersonalDesign();
+      }
     },
 
     methods: {

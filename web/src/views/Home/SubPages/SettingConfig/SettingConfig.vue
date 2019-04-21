@@ -119,8 +119,34 @@
       }
     },
 
+    computed: {
+      userInfo () {
+        return this.$store.state.userInfo;
+      }
+    },
+
+    watch: {
+      userInfo (nVal) {
+        if (nVal) {
+          this.getUserInfo();
+        }
+      }
+    },
+
     created () {
       if (this.$store.state.userInfo) {
+        this.getUserInfo();
+      }
+    },
+
+    mounted () {
+      if (this.$store.state.userInfo) {
+        this.uploadList = this.$refs.upload.fileList;
+      }
+    },
+
+    methods: {
+      getUserInfo () {
         this.$http.get(`getUserById?id=${this.$store.state.userInfo.id}`).then(({data}) => {
           if (data.status === 200) {
             const userInfo = data.data;
@@ -136,16 +162,8 @@
         }).catch(err => {
           console.log(err);
         });
-      }
-    },
+      },
 
-    mounted () {
-      if (this.$store.state.userInfo) {
-        this.uploadList = this.$refs.upload.fileList;
-      }
-    },
-
-    methods: {
       saveUserInfo () {
         let saveData = {
           id: this.$store.state.userInfo.id,
@@ -157,8 +175,9 @@
         if (this.password !== '') saveData.userInfo.password = this.password;
         if (this.avatar !== '') saveData.userInfo.avatar = this.avatar;
         this.$http.put('updateUser', saveData).then(({data}) => {
-          if (data === 200) {
+          if (data.status === 200) {
             // 修改 vuex && localForage
+            this.$Message.success(data.msg);
           }
         }).catch(err => {
           console.log(err);

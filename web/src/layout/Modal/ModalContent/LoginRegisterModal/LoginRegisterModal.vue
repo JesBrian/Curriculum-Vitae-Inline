@@ -46,19 +46,19 @@
             </Input>
             <!--<p class="error-text marb8" v-show="Register.error.mobile">{{Register.error.mobile}}</p>-->
           </FormItem>
-          <FormItem prop="code">
-            <Row>
-              <Col span="16">
-                <Input v-model="code" type="text" placeholder="请输入获取的验证码" style="text-align:center;">
-                  <Icon type="md-code-working" slot="prepend" size="22"/>
-                </Input>
-              </Col>
-              <Col span="6" offset="1">
-                <Button>获取邮箱验证码</Button>
-              </Col>
-            </Row>
-            <!--<p class="error-text marb8" v-show="Register.error.code">{{Register.error.code}}</p>-->
-          </FormItem>
+          <!--<FormItem prop="code">-->
+            <!--<Row>-->
+              <!--<Col span="16">-->
+                <!--<Input v-model="code" type="text" placeholder="请输入获取的验证码" style="text-align:center;">-->
+                  <!--<Icon type="md-code-working" slot="prepend" size="22"/>-->
+                <!--</Input>-->
+              <!--</Col>-->
+              <!--<Col span="6" offset="1">-->
+                <!--<Button>获取邮箱验证码</Button>-->
+              <!--</Col>-->
+            <!--</Row>-->
+            <!--&lt;!&ndash;<p class="error-text marb8" v-show="Register.error.code">{{Register.error.code}}</p>&ndash;&gt;-->
+          <!--</FormItem>-->
           <FormItem prop="password">
             <Input v-model="password" type="password" placeholder="请输入密码">
               <Icon type="ios-key" slot="prepend" size="22"/>
@@ -156,9 +156,9 @@
           if (this.mail === '') {
             return '请输入邮箱地址'
           }
-          if (this.code === '') {
-            return '请输入验证码'
-          }
+          // if (this.code === '') {
+          //   return '请输入验证码'
+          // }
         }
         if (this.password === '') {
           return '请输入密码'

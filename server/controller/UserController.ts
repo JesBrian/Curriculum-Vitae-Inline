@@ -78,6 +78,7 @@ exports.updateUserCtr = async (ctx: any, next: any) => {
   const result = await updateUserSer(userId, userInfo);
 
   ctx.body = {
-    status: 200
+    status: 200,
+    msg: '信息保存成功'
   };
 };
