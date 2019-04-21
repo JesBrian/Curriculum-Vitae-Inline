@@ -83,7 +83,7 @@ exports.getUserByIdSer = async (id: string = '') => {
  * @param userInfo
  */
 exports.updateUserSer = async (id: string = '', userInfo: any = null) => {
-  let user = await UserModel.findOne({_id: id});
+  let user = await UserModel.findById(id);
   user = Object.assign(user, userInfo);
 
   if (userInfo.password) {

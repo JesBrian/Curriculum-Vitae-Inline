@@ -87,6 +87,24 @@
       }).catch(err => {
         console.log(err);
       });
+
+      const id = this.$route.query.id;
+      if (id) {
+        this.$http.get(`getAdminById?id=${id}`).then(({data}) => {
+          if (data.status === 200) {
+            const adminInfo = data.data;
+            this.trueName = adminInfo.trueName;
+            this.userId = adminInfo.userId;
+            this.roleId = adminInfo.roleId;
+            this.status = adminInfo.status;
+            if (adminInfo.userId) {
+              this.hasRegisterUser = true;
+            }
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     },
 
     methods: {
@@ -118,8 +136,10 @@
           adminData.id = id;
         }
 
-        this.$http.put('saveAdmin', adminData).then(res => {
-          console.log(res);
+        this.$http.put('saveAdmin', adminData).then(({data}) => {
+          if (data.status === 200) {
+            this.$Message.success(data.msg);
+          }
         }).catch(err => {
           console.log(err);
         });

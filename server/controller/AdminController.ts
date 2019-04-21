@@ -1,6 +1,7 @@
 const {
   createAdminSer,
   updateAdminSer,
+  getAdminByIdSer,
   adminListSer
 } = require('../service/AdminService');
 
@@ -19,7 +20,7 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
     status: param.status
   };
 
-  let result, status = 200, msg = '角色信息保存成功';
+  let result, status = 200, msg = '管理员信息保存成功';
   if (adminId) {
     result = await updateAdminSer(adminId, adminData);
   } else {
@@ -34,6 +35,15 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: status,
     msg: msg
+  };
+};
+
+exports.getAdminByIdCtr = async (ctx: any, next: any) => {
+  const adminId = ctx.query.id;
+  const result = await getAdminByIdSer(adminId);
+  ctx.body = {
+    status: 200,
+    data: result
   };
 };
 
