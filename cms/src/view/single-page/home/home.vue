@@ -8,13 +8,6 @@
         </infor-card>
       </i-col>
     </Row>
-    <!--<Row :gutter="20" style="margin-top: 10px;">-->
-      <!--<i-col :md="24" :lg="8" style="margin-bottom: 20px;">-->
-        <!--<Card shadow>-->
-          <!--<chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>-->
-        <!--</Card>-->
-      <!--</i-col>-->
-    <!--</Row>-->
   </div>
 </template>
 
@@ -35,21 +28,28 @@ export default {
   data () {
     return {
       inforCardData: [
-        { title: '新增用户', icon: 'md-person-add', count: 0, color: '#2d8cf0' },
-        { title: '新增组件', icon: 'md-person-add', count: 0, color: '#9A66E4' },
-        { title: '新增设计', icon: 'md-person-add', count: 2, color: '#E46CBB' },
-        { title: '累计点击', icon: 'md-locate', count: 10, color: '#19be6b' },
-        { title: '分享统计', icon: 'md-share', count: 0, color: '#ed3f14' },
-      ],
-      pieData: [
-        {value: 335, name: '直接访问'},
-        {value: 310, name: '邮件营销'},
-        {value: 234, name: '联盟广告'},
-        {value: 135, name: '视频广告'},
-        {value: 1548, name: '搜索引擎'}
+        {title: '用户总数', icon: 'md-person-add', count: 0, color: '#2d8cf0'},
+        {title: '格式总数', icon: 'md-share', count: 0, color: '#ed3f14'},
+        {title: '模板总数', icon: 'md-locate', count: 0, color: '#19be6b'},
+        {title: '组件总数', icon: 'md-person-add', count: 0, color: '#9A66E4'},
+        {title: '简历总数', icon: 'md-person-add', count: 0, color: '#E46CBB'},
       ]
     }
   },
+
+  created () {
+    this.$http.get('totalStatistical').then(({data}) => {
+      if (data.status === 200) {
+        const reportData = data.data;
+        for (let i = 0, len = reportData.length; i < len; i++) {
+          this.inforCardData[i].count = reportData[i];
+        }
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  },
+
   mounted () {
   }
 }
