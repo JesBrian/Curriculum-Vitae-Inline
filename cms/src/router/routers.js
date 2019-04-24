@@ -227,22 +227,40 @@ export default [
     ]
   },
   {
-    path: '/componentConf',
-    name: 'componentConf',
+    path: '/report',
+    name: 'report',
     meta: {
-      icon: 'ios-cog-outline',
-      title: '组件配置模块'
+      icon: 'md-calendar',
+      title: '报表模块'
     },
     component: Main,
     children: [
       {
-        path: 'componentConfView',
-        name: 'componentConfView',
+        path: 'formatReport',
+        name: 'formatReport',
         meta: {
-          icon: 'ios-cog-outline',
-          title: '组件配置浏览'
+          icon: 'logo-buffer',
+          title: '格式相关'
         },
-        component: resolve => require(['@/view/componentConf/ComponentConf.vue'], resolve)
+        component: resolve => require(['@/view/report/formatReport.vue'], resolve)
+      },
+      {
+        path: 'templateReport',
+        name: 'templateReport',
+        meta: {
+          icon: 'logo-buffer',
+          title: '模板相关'
+        },
+        component: resolve => require(['@/view/report/templateReport.vue'], resolve)
+      },
+      {
+        path: 'componentReport',
+        name: 'componentReport',
+        meta: {
+          icon: 'logo-buffer',
+          title: '组件相关'
+        },
+        component: resolve => require(['@/view/report/componentReport.vue'], resolve)
       }
     ]
   },
@@ -262,6 +280,26 @@ export default [
   //     }
   //   ]
   // },
+  {
+    path: '/componentConf',
+    name: 'componentConf',
+    meta: {
+      icon: 'ios-cog-outline',
+      title: '组件配置模块'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'componentConfView',
+        name: 'componentConfView',
+        meta: {
+          icon: 'ios-cog-outline',
+          title: '组件配置浏览'
+        },
+        component: resolve => require(['@/view/componentConf/ComponentConf.vue'], resolve)
+      }
+    ]
+  },
   {
     path: '/401',
     name: 'error_401',
