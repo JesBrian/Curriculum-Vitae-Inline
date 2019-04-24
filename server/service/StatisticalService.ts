@@ -4,6 +4,35 @@ import TemplateModel from '../model/TemplateModel';
 import ComponentModel from '../model/ComponentModel';
 import DesignModel from '../model/DesignModel';
 
+import FormatLogModel from '../model/FormatLogModel';
+import TemplateLogModel from '../model/TemplateLogModel';
+import ComponentLogModel from '../model/ComponentLogModel';
+
+
+exports.chooseFormatLogSer = async (userId: string = '', formatId: string = '') => {
+  let formatLog = new FormatLogModel({
+    userId, formatId
+  });
+  // @ts-ignore
+  return !await formatLog.save().errors;
+};
+
+exports.chooseTemplateLogSer = async (userId: string = '', templateId: string = '') => {
+  let templateLog = new TemplateLogModel({
+    userId, templateId
+  });
+  // @ts-ignore
+  return !await templateLog.save().errors;
+};
+
+exports.chooseComponentLogSer = async (userId: string = '', componentId: string = '') => {
+  let componentLog = new ComponentLogModel({
+    userId, componentId
+  });
+  // @ts-ignore
+  return !await componentLog.save().errors;
+};
+
 exports.allUserCountSer = async () => {
   return await UserModel.count({status: true});
 };

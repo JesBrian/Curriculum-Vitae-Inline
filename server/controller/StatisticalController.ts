@@ -1,4 +1,8 @@
 const {
+  chooseFormatLogSer,
+  chooseTemplateLogSer,
+  chooseComponentLogSer,
+
   allUserCountSer,
   allFormatCountSer,
   allTemplateCountSer,
@@ -7,12 +11,18 @@ const {
 } = require('../service/StatisticalService');
 
 exports.chooseFormatLogCtr = async (ctx: any, next: any) => {
+  const {userId, formatId} = ctx.request.body;
+  chooseFormatLogSer(userId, formatId);
 };
 
 exports.chooseTemplateLogCtr = async (ctx: any, next: any) => {
+  const {userId, templateId} = ctx.request.body;
+  chooseTemplateLogSer(userId, templateId);
 };
 
 exports.chooseComponentLogCtr = async (ctx: any, next: any) => {
+  const {userId, componentId} = ctx.request.body;
+  chooseComponentLogSer(userId, componentId);
 };
 
 /**
@@ -30,12 +40,37 @@ exports.totalStatisticalCtr = async (ctx: any, next: any) => {
 };
 
 exports.allUserCountCtr = async (ctx: any, next: any) => {
+  const count = await allUserCountSer();
+  ctx.body = {
+    status: 200,
+    data: count
+  };
 };
 exports.allFormatCountCtr = async (ctx: any, next: any) => {
+  const count = await allFormatCountSer();
+  ctx.body = {
+    status: 200,
+    data: count
+  };
 };
 exports.allTemplateCountCtr = async (ctx: any, next: any) => {
+  const count = await allTemplateCountSer();
+  ctx.body = {
+    status: 200,
+    data: count
+  };
 };
 exports.allComponentCountCtr = async (ctx: any, next: any) => {
+  const count = await allComponentCountSer();
+  ctx.body = {
+    status: 200,
+    data: count
+  };
 };
 exports.allDesignCountCtr = async (ctx: any, next: any) => {
+  const count = await allDesignCountSer();
+  ctx.body = {
+    status: 200,
+    data: count
+  };
 };
