@@ -82,8 +82,10 @@
 
       nextStep () {
         if (this.step) {
-          if (this.templateIndex >= 0) {
-            return this.$http.get(`getTemplateById?id=${this.templateList[this.templateIndex]._id}`).then(({data}) => {
+          let templateId = '';
+          if (this.templateIndex >= 0) { // 选择格式
+            templateId = this.templateList[this.templateIndex]._id;
+            this.$http.get(`getTemplateById?id=${templateId}`).then(({data}) => {
               if (data.status === 200) {
                 const templateData = data.data;
                 this.$store.commit('changeDesignConf', {
@@ -95,14 +97,22 @@
               }
             }).catch(err => {
               console.log(err);
-            })
+            });
+          } else {
+            this.$store.commit('changeDesignConf', {
+              size: this.formatList[this.formatIndex].size
+            });
+
+            this.$router.push('/EditResume');
           }
-          this.$store.commit('changeDesignConf', {
-            size: this.formatList[this.formatIndex].size
+
+          this.$http.put('chooseTemplateLog', {
+            userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+            templateId
           });
-          this.$router.push('/EditResume');
-        } else {
-          this.$http.get(`getSystemTemplateByFormat?formatId=${this.formatList[this.formatIndex]._id}`).then(({data}) => {
+        } else { // 选择模板
+          let formatId = this.formatList[this.formatIndex]._id;
+          this.$http.get(`getSystemTemplateByFormat?formatId=${formatId}`).then(({data}) => {
             if (data.status === 200) {
               this.templateList = data.data;
             }
@@ -110,6 +120,10 @@
             console.log(err);
           });
           this.step++;
+          this.$http.put('chooseFormatLog', {
+            userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+            formatId
+          });
         }
       },
 

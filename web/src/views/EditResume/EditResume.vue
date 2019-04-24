@@ -66,9 +66,9 @@
     </Layout>
 
     <Drawer v-if="$store.state.userInfo" v-model="showRightNavbar" title="Basic Drawer" :closable="false">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <!--<p>Some contents...</p>-->
+      <!--<p>Some contents...</p>-->
+      <!--<p>Some contents...</p>-->
     </Drawer>
 
     <LoginTips />

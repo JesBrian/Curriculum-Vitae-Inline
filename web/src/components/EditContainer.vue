@@ -34,6 +34,11 @@
           op: 'add',
           cell: cellData
         });
+
+        this.$http.put('chooseComponentLog', {
+          userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+          componentId: cellData._id
+        });
       });
       this.$refs.editContainer.addEventListener('dragover', (event) => {
         event.preventDefault();

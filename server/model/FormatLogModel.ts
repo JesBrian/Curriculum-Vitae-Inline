@@ -4,7 +4,7 @@ import {Schema, Model, model} from 'mongoose'
 import IFormatLog from '../interface/IFormatLog'
 
 const FormatLogSchema: Schema = new Schema({
-  FormatId: String,
+  formatId: String,
   userId: String,
   time: {
     type: Date,

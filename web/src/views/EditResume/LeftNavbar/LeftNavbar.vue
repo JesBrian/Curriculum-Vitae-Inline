@@ -186,6 +186,11 @@
           op: 'add',
           cell: this.getComponentDataById(cellId)
         });
+
+        this.$http.put('chooseComponentLog', {
+          userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+          componentId: cellId
+        });
       },
 
       getComponentDataById (id = '') {

@@ -13,16 +13,25 @@ const {
 exports.chooseFormatLogCtr = async (ctx: any, next: any) => {
   const {userId, formatId} = ctx.request.body;
   chooseFormatLogSer(userId, formatId);
+  ctx.body = {
+    status: 200
+  };
 };
 
 exports.chooseTemplateLogCtr = async (ctx: any, next: any) => {
   const {userId, templateId} = ctx.request.body;
   chooseTemplateLogSer(userId, templateId);
+  ctx.body = {
+    status: 200
+  };
 };
 
 exports.chooseComponentLogCtr = async (ctx: any, next: any) => {
   const {userId, componentId} = ctx.request.body;
   chooseComponentLogSer(userId, componentId);
+  ctx.body = {
+    status: 200
+  };
 };
 
 /**

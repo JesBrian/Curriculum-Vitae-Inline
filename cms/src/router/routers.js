@@ -61,6 +61,7 @@ export default [
         path: 'userList',
         name: 'userList',
         meta: {
+          // access: ['5c60106b856f42020c9373df', ],
           icon: 'md-contact',
           title: '用户列表'
         },

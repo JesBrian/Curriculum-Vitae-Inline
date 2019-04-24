@@ -4,7 +4,7 @@ import {Schema, Model, model} from 'mongoose'
 import ITemplateLog from '../interface/ITemplateLog'
 
 const TemplateLogSchema: Schema = new Schema({
-  TemplateId: String,
+  templateId: String,
   userId: String,
   time: {
     type: Date,

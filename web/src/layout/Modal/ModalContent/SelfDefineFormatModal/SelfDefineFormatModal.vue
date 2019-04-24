@@ -44,6 +44,10 @@
           size: [this.width, this.height]
         });
         this.closeModal();
+        this.$http.put('chooseFormatLog', {
+          userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+          formatId: ''
+        });
         this.$nextTick(() => {
           this.$router.push('/EditResume');
         });
