@@ -67,6 +67,8 @@ export default new Vuex.Store({
         state.designConf.cell.splice(data.index, 1);
       } else if (data.op === 'add') {
         state.designConf.cell.push(data.cell);
+      } else if (data.op === 'rev') {
+        state.designConf.cell[data.index] = Object(state.designConf.cell[data.index], data.cell);
       }
     },
     

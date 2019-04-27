@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import VueDraggableResizable from 'vue-draggable-resizable'
+  import VueDraggableResizable from './VueDraggableResizable.vue'
   import NormalCell from '../NormalCell/NormalCell.vue'
   import SpecialCellLine from '../SpecialCell/SpecialCellLine.vue'
   import SpecialCellCircle from '../SpecialCell/SpecialCellCircle.vue'

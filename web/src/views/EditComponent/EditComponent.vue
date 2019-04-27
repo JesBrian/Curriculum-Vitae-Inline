@@ -1,8 +1,9 @@
 <template>
   <Layout style="width: 100%; height: 100%; padding: 20px; position: relative; box-sizing: border-box;">
     <Split v-model="splitArea" mode="vertical" style="width: 100%; height: 100%; box-shadow: 0 0 5px -1px #333; border-radius: 8px; background: #FFF; overflow: auto;" >
-      <div slot="top" class="demo-split-pane">
-        123
+      <div slot="top" class="demo-split-pane" style="width: 100%; height: 100%; padding-top: 30px; position: relative; overflow: auto;">
+        <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
+                                :cellIndex="index" :cell-data="cellItem" style="top: 50%; left: 50%; transform: translate(-50%, -50%);" />
       </div>
 
       <div slot="bottom" class="demo-split-pane" style="padding-top: 20px;">
@@ -317,18 +318,21 @@
 </template>
 
 <script>
+  import DraggableResizableCell from '../../components/Cell/DraggableResizableCell/DraggableResizableCell.vue';
   import InputTag from '../../components/InputTag/InputTag.vue';
 
   export default {
     name: 'EditComponent',
 
     components: {
+      DraggableResizableCell,
       InputTag
     },
 
     data () {
       return {
         splitArea: 0.3,
+        timer: null,
 
         nowMainTab: 'base',
         nowSecondTab: 'format',
@@ -347,6 +351,34 @@
         visible: false,
         defaultList: [],
         uploadList: []
+      }
+    },
+
+    watch: {
+      componentConf: {
+        handler (nVal, oVal) {
+          // console.log(nVal, oVal);
+          if (oVal === null) {
+            this.$store.commit('changeDesignConfCell', {
+              op: 'add',
+              cell: {
+                conf: nVal
+              }
+            });
+          } else {
+            if (this.timer) clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+              this.$store.commit('changeDesignConfCell', {
+                op: 'rev',
+                index: 0,
+                cell: {
+                  conf: nVal
+                }
+              });
+            }, 500);
+          }
+        },
+        deep: true
       }
     },
 
@@ -498,6 +530,7 @@
 
   .demo-split-pane{
     padding: 10px;
+    box-sizing: border-box;
   }
 
 
