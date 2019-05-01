@@ -6,25 +6,25 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">真实姓名：</Col>
         <Col span="16">
-          <Input v-model="trueName" placeholder="Enter something..." />
+          <Input v-model="trueName" placeholder="请输入真实姓名..." />
         </Col>
       </Row>
 
-      <Row style="margin-bottom:23px; line-height:33px;">
-        <Col span="8" style="text-align:left;">已注册用户：</Col>
-        <Col span="16">
-          <Switch v-model="hasRegisterUser">
-            <span slot="open">是</span>
-            <span slot="close">否</span>
-          </Switch>
-        </Col>
-      </Row>
+      <!--<Row style="margin-bottom:23px; line-height:33px;">-->
+        <!--<Col span="8" style="text-align:left;">已注册用户：</Col>-->
+        <!--<Col span="16">-->
+          <!--<Switch v-model="hasRegisterUser">-->
+            <!--<span slot="open">是</span>-->
+            <!--<span slot="close">否</span>-->
+          <!--</Switch>-->
+        <!--</Col>-->
+      <!--</Row>-->
 
-      <Row v-show="hasRegisterUser" style="margin-bottom:23px; line-height:33px;">
-        <Col span="8" style="text-align:left;">对应用户：</Col>
-        <Col span="16">
-        </Col>
-      </Row>
+      <!--<Row v-show="hasRegisterUser" style="margin-bottom:23px; line-height:33px;">-->
+        <!--<Col span="8" style="text-align:left;">对应用户：</Col>-->
+        <!--<Col span="16">-->
+        <!--</Col>-->
+      <!--</Row>-->
 
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">所属角色：</Col>
@@ -32,6 +32,20 @@
           <Select v-model="roleId" style="width:200px">
             <Option v-for="item in roleList" :value="item._id" :key="item._id">{{ item.name }}</Option>
           </Select>
+        </Col>
+      </Row>
+
+      <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">用户密码：</Col>
+        <Col span="16">
+          <Input v-model="password" type="password" placeholder="请输入密码..." />
+        </Col>
+      </Row>
+
+      <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">确认密码：</Col>
+        <Col span="16">
+          <Input v-model="rePassword" type="password" placeholder="请再次输入密码..." />
         </Col>
       </Row>
 
@@ -74,6 +88,8 @@
         hasRegisterUser: false,
         userId: '',
         roleId: '',
+        password: '',
+        rePassword: '',
         status: true
       }
     },

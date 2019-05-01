@@ -7,7 +7,10 @@ const {
   allFormatCountSer,
   allTemplateCountSer,
   allComponentCountSer,
-  allDesignCountSer
+  allDesignCountSer,
+
+  getFormatReportSer,
+  getTemplateReportSer
 } = require('../service/StatisticalService');
 
 exports.chooseFormatLogCtr = async (ctx: any, next: any) => {
@@ -81,5 +84,28 @@ exports.allDesignCountCtr = async (ctx: any, next: any) => {
   ctx.body = {
     status: 200,
     data: count
+  };
+};
+
+
+exports.getFormatReportCtr = async (ctx: any, next: any) => {
+  const {
+    start, end
+  } = ctx.query;
+
+  ctx.body = {
+    status: 200,
+    data: await getFormatReportSer(start, end)
+  };
+};
+
+exports.getTemplateReportCtr = async (ctx: any, next: any) => {
+  const {
+    start, end
+  } = ctx.query;
+
+  ctx.body = {
+    status: 200,
+    data: await getTemplateReportSer(start, end)
   };
 };

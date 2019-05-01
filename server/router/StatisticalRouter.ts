@@ -9,7 +9,10 @@ const {
   allFormatCountCtr,
   allTemplateCountCtr,
   allComponentCountCtr,
-  allDesignCountCtr
+  allDesignCountCtr,
+
+  getFormatReportCtr,
+  getTemplateReportCtr
 } = require('../controller/StatisticalController');
 
 // @ts-ignore
@@ -29,5 +32,9 @@ router.get('/allFormatCount', allFormatCountCtr);
 router.get('/allTemplateCount', allTemplateCountCtr);
 router.get('/allComponentCount', allComponentCountCtr);
 router.get('/allDesignCount', allDesignCountCtr);
+
+
+router.get('/getFormatReport', getFormatReportCtr);
+router.get('/getTemplateReport', getTemplateReportCtr);
 
 module.exports = router;

@@ -13,7 +13,6 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">用户头像：</Col>
         <Col span="16">
-
           <div class="demo-upload-list" v-for="item in uploadList">
             <template v-if="item.status === 'finished'">
               <img :src="item.url">

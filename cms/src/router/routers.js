@@ -240,7 +240,7 @@ export default [
         name: 'formatReport',
         meta: {
           icon: 'logo-buffer',
-          title: '格式相关'
+          title: '格式统计'
         },
         component: resolve => require(['@/view/report/formatReport.vue'], resolve)
       },
@@ -249,7 +249,7 @@ export default [
         name: 'templateReport',
         meta: {
           icon: 'logo-buffer',
-          title: '模板相关'
+          title: '模板统计'
         },
         component: resolve => require(['@/view/report/templateReport.vue'], resolve)
       },
@@ -258,7 +258,7 @@ export default [
         name: 'componentReport',
         meta: {
           icon: 'logo-buffer',
-          title: '组件相关'
+          title: '组件统计'
         },
         component: resolve => require(['@/view/report/componentReport.vue'], resolve)
       }
