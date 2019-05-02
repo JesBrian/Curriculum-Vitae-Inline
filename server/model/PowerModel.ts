@@ -5,6 +5,7 @@ import IPower from '../interface/IPower'
 
 const PowerSchema: Schema = new Schema({
   name: String,
+  icon: String,
   route: String,
   parent: String,
   cTime: {

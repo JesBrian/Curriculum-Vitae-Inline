@@ -77,10 +77,11 @@ exports.getAdminByIdCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.adminListCtr = async (ctx: any, next: any) => {
-  const pageNum = ctx.query.page;
-  const limitNum = ctx.query.limit;
+  const {
+    page, limit
+  } = ctx.query;
 
-  const result = await adminListSer(pageNum, limitNum);
+  const result = await adminListSer(parseInt(page), parseInt(limit));
 
   ctx.body = {
     status: 200,

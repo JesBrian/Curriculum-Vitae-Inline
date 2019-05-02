@@ -48,6 +48,9 @@ exports.getAdminByIdSer = async (adminId: string = '') => {
   return await AdminModel.findById(adminId);
 };
 
-exports.adminListSer = async (page: number = 1, limit: number = 15) => {
-  return await AdminModel.find();
+exports.adminListSer = async (page: number = 1, limit: number = 10) => {
+  return {
+    adminList: await AdminModel.find().skip((page - 1) * limit).limit(limit),
+    total: await AdminModel.find().count()
+  };
 };

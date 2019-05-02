@@ -2,7 +2,7 @@
   <Card>
     <PageTitle icon="md-person" title="管理员列表" />
     <Table border ref="selection" :columns="columns" :data="adminList" stripe />
-    <Page :total="100" show-elevator style="margin:23px auto 8px; text-align:center;" />
+    <Page @on-change="changeNowPage" :total="total" show-elevator style="margin:23px auto 8px; text-align:center;" />
   </Card>
 </template>
 
@@ -70,7 +70,8 @@
             }
           }
         ],
-        adminList: []
+        adminList: [],
+        total: 0
       }
     },
 
@@ -79,15 +80,20 @@
     },
 
     methods: {
-      getAdminListData () {
-        this.$http.get('adminList').then(res => {
+      getAdminListData (page = 1, limit = 10) {
+        this.$http.get(`adminList?page=${page}&limit=${limit}`).then(res => {
           const result = res.data;
           if (result.status === 200) {
-            this.adminList = result.data;
+            this.adminList = result.data.adminList;
+            this.total = result.data.total;
           }
         }).catch(err => {
           console.log(err);
         });
+      },
+
+      changeNowPage (page = 1) {
+        this.getAdminListData(page);
       }
     }
   }

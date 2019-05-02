@@ -15,6 +15,15 @@ import Main from '@/components/main'
  * }
  */
 
+/**
+ * 目前权限角色
+ *  超级管理员 - 5c60106b856f42020c9373df
+ *  普通管理员 - 5c60109e1db2ea407cc6f3ec
+ *  开发工程师 - 5c6931d597f2cb0f947f1131
+ *  测试工程师 - 5c6931c597f2cb0f947f1130
+ *  访客 - 5c68eb4fcda7601cf0cb0ad9
+ */
+
 export default [
   {
     path: '/login',
@@ -74,7 +83,8 @@ export default [
     name: 'user',
     meta: {
       icon: 'md-contacts',
-      title: '用户模块'
+      title: '用户模块',
+      access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130', '5c68eb4fcda7601cf0cb0ad9']
     },
     component: Main,
     children: [
@@ -83,7 +93,8 @@ export default [
         name: 'userList',
         meta: {
           icon: 'md-contact',
-          title: '用户列表'
+          title: '用户列表',
+          access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130', '5c68eb4fcda7601cf0cb0ad9']
         },
         component: resolve => require(['@/view/user/UserList.vue'], resolve)
       },
@@ -93,7 +104,8 @@ export default [
         meta: {
           title: '用户管理',
           icon: 'md-construct',
-          notCache: true
+          notCache: true,
+          access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
         },
         component: resolve => require(['@/view/user/EditUser.vue'], resolve)
       }
@@ -104,7 +116,8 @@ export default [
     name: 'admin',
     meta: {
       icon: 'ios-people',
-      title: '管理员模块'
+      title: '管理员模块',
+      access: ['5c60106b856f42020c9373df', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
     },
     component: Main,
     children: [
@@ -134,7 +147,8 @@ export default [
     name: 'auth',
     meta: {
       icon: 'ios-ribbon',
-      title: '权限模块'
+      title: '权限模块',
+      access: ['5c60106b856f42020c9373df', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
     },
     component: Main,
     children: [
@@ -157,25 +171,25 @@ export default [
         },
         component: resolve => require(['@/view/auth/EditRole.vue'], resolve)
       },
-      {
-        path: 'powerList',
-        name: 'powerList',
-        meta: {
-          icon: 'md-school',
-          title: '权限列表'
-        },
-        component: resolve => require(['@/view/auth/PowerList.vue'], resolve)
-      },
-      {
-        path: 'editPower',
-        name: 'editPower',
-        meta: {
-          icon: 'md-construct',
-          title: '权限管理',
-          notCache: true
-        },
-        component: resolve => require(['@/view/auth/EditPower.vue'], resolve)
-      }
+      // {
+      //   path: 'powerList',
+      //   name: 'powerList',
+      //   meta: {
+      //     icon: 'md-school',
+      //     title: '权限列表'
+      //   },
+      //   component: resolve => require(['@/view/auth/PowerList.vue'], resolve)
+      // },
+      // {
+      //   path: 'editPower',
+      //   name: 'editPower',
+      //   meta: {
+      //     icon: 'md-construct',
+      //     title: '权限管理',
+      //     notCache: true
+      //   },
+      //   component: resolve => require(['@/view/auth/EditPower.vue'], resolve)
+      // }
     ]
   },
   {
@@ -202,7 +216,8 @@ export default [
         meta: {
           icon: 'md-construct',
           title: '格式管理',
-          notCache: true
+          notCache: true,
+          access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
         },
         component: resolve => require(['@/view/format/EditFormat.vue'], resolve)
       }
@@ -232,7 +247,8 @@ export default [
         meta: {
           icon: 'md-construct',
           title: '模板管理',
-          notCache: true
+          notCache: true,
+          access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
         },
         component: resolve => require(['@/view/template/EditTemplate.vue'], resolve)
       }
@@ -262,7 +278,8 @@ export default [
         meta: {
           icon: 'md-construct',
           title: '组件管理',
-          notCache: true
+          notCache: true,
+          access: ['5c60106b856f42020c9373df', '5c60109e1db2ea407cc6f3ec', '5c6931d597f2cb0f947f1131', '5c6931c597f2cb0f947f1130']
         },
         component: resolve => require(['@/view/component/EditComponent.vue'], resolve)
       }
@@ -327,7 +344,8 @@ export default [
     name: 'componentConf',
     meta: {
       icon: 'ios-cog-outline',
-      title: '组件配置模块'
+      title: '组件配置模块',
+      access: ['5c60106b856f42020c9373df', '5c6931d597f2cb0f947f1131']
     },
     component: Main,
     children: [

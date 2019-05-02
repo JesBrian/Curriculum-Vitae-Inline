@@ -4,9 +4,23 @@
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
-        <Col span="8" style="text-align:left;">角色昵称：</Col>
+        <Col span="8" style="text-align:left;">权限名称：</Col>
         <Col span="16">
-          <Input v-model="name" placeholder="Enter something..." />
+          <Input v-model="name" placeholder="请输入权限名称..." />
+        </Col>
+      </Row>
+
+      <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">权限图标：</Col>
+        <Col span="16">
+          <Input v-model="icon" placeholder="请输入权限图标..." />
+        </Col>
+      </Row>
+
+      <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">权限路由：</Col>
+        <Col span="16">
+          <Input v-model="route" placeholder="请输入权限图标..." />
         </Col>
       </Row>
 
@@ -25,7 +39,7 @@
           <Button type="primary">取消返回</Button>
         </Col>
         <Col span="12" style="text-align:center;">
-          <Button @click="saveRole" type="primary">确定保存</Button>
+          <Button @click="savePower" type="primary">确定保存</Button>
         </Col>
       </Row>
     </div>
@@ -46,6 +60,7 @@
       return {
         id: '',
         name: '',
+        icon: '',
         status: true
       }
     },
@@ -54,7 +69,7 @@
       const id = this.$route.query.id;
       this.id = id ? id : '';
       if (id) {
-        this.$http.get(`getRoleById?id=${id}`).then(({data}) => {
+        this.$http.get(`getPowerById?id=${id}`).then(({data}) => {
           if (data.status === 200) {
             this.name = data.data.name;
           }
@@ -65,26 +80,25 @@
     },
 
     methods: {
-      saveRole () {
+      savePower () {
         if (this.name === '') {
           this.$Notice.error({
-            title: '请输入角色昵称',
-            desc: ''
+            title: '请输入权限名称'
           });
           return false;
         }
 
-        let roleData = {
+        let powerData = {
           name: this.name,
           powers: [],
           status: this.status
         };
 
         if (this.id) {
-          roleData.id = this.id;
+          powerData.id = this.id;
         }
 
-        this.$http.put('saveRole', roleData).then(res => {
+        this.$http.put('savePower', powerData).then(res => {
           console.log(res);
         }).catch(err => {
           console.log(err);

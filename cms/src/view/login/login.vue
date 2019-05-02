@@ -32,7 +32,7 @@
           password: password
         }).then(({data}) => {
           if (data.status === 200) {
-            const result = data.data;
+            const result = data.data.data;
             this.handleLogin({
               token: result.roleId
             }).then(() => {
