@@ -12,7 +12,14 @@ const {
  * @param next
  */
 exports.adminLoginCtr = async (ctx: any, next: any) => {
-  return await adminLoginSer();
+  const {
+    nickName, password
+  } = ctx.request.body;
+
+  ctx.body = {
+    status: 200,
+    data: await adminLoginSer(nickName, password)
+  };
 };
 
 /**

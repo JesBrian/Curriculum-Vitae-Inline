@@ -82,7 +82,6 @@ export default [
         path: 'userList',
         name: 'userList',
         meta: {
-          // access: ['5c60106b856f42020c9373df', ],
           icon: 'md-contact',
           title: '用户列表'
         },
@@ -92,7 +91,6 @@ export default [
         path: 'editUser',
         name: 'editUser',
         meta: {
-          access: ['super_admin'],
           title: '用户管理',
           icon: 'md-construct',
           notCache: true
@@ -123,7 +121,6 @@ export default [
         path: 'editAdmin',
         name: 'editAdmin',
         meta: {
-          access: ['super_admin'],
           icon: 'md-construct',
           title: '管理员管理',
           notCache: true
@@ -136,7 +133,6 @@ export default [
     path: '/auth',
     name: 'auth',
     meta: {
-      access: ['super_admin'],
       icon: 'ios-ribbon',
       title: '权限模块'
     },

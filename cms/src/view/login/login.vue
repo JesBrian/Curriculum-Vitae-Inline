@@ -12,28 +12,41 @@
 </template>
 
 <script>
-import LoginForm from '_c/login-form'
-import { mapActions } from 'vuex'
-export default {
-  components: {
-    LoginForm
-  },
-  methods: {
-    ...mapActions([
-      'handleLogin',
-      'getUserInfo'
-    ]),
-    handleSubmit ({ userName, password }) {
-      this.handleLogin({ userName, password }).then(res => {
-        this.getUserInfo().then(res => {
-          this.$router.push({
-            name: this.$config.homeName
-          })
+  import LoginForm from '_c/login-form'
+  import {mapActions} from 'vuex'
+
+  export default {
+    components: {
+      LoginForm
+    },
+
+    methods: {
+      ...mapActions([
+        'handleLogin',
+        'getUserInfo'
+      ]),
+
+      handleSubmit({userName, password}) {
+        this.$http.post('adminLogin', {
+          nickName: userName,
+          password: password
+        }).then(({data}) => {
+          if (data.status === 200) {
+            const result = data.data;
+            this.handleLogin({
+              token: result.roleId
+            }).then(() => {
+              this.$router.push({
+                name: this.$config.homeName
+              });
+            })
+          }
+        }).catch(err => {
+          console.log(err);
         })
-      })
+      }
     }
   }
-}
 </script>
 
 <style lang="less">

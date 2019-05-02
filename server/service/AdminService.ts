@@ -3,14 +3,15 @@ import AdminModel from '../model/AdminModel'
 const { md5, generateRandomString } = require('../helper/FunctionHelper');
 
 exports.adminLoginSer = async (nickName: string = '', password: string = '') => {
-  const admin = await AdminModel.findOne({'name': nickName, status: true}, '_id nickName salt password');
+  const admin = await AdminModel.findOne({'nickName': nickName, status: true}, '_id nickName roleId salt password');
   let msg = '', data = null;
   if (admin) {
-    if (admin.status && (md5(admin.salt + password) === admin.password)) {
+    if (md5(admin.salt + password) === admin.password) {
       admin.lTime = new Date();
       admin.save();
       data = {
         id: admin._id,
+        roleId: admin.roleId,
       };
       msg = '管理员登录成功';
     } else {
