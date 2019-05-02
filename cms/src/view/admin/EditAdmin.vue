@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-construct" title="EditFormat" />
+    <PageTitle icon="md-construct" title="管理员管理" />
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
@@ -29,7 +29,7 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">所属角色：</Col>
         <Col span="16">
-          <Select v-model="roleId" style="width:200px">
+          <Select v-model="roleId" :disabled="$route.name === 'modifyInfo'" style="width:200px">
             <Option v-for="item in roleList" :value="item._id" :key="item._id">{{ item.name }}</Option>
           </Select>
         </Col>

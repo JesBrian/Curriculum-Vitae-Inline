@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-construct" title="角色管理" />
+    <PageTitle icon="md-construct" title="权限管理" />
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
@@ -36,7 +36,7 @@
   import PageTitle from '_c/page-title/page-title.vue'
 
   export default {
-    name: 'EditRole',
+    name: 'EditPower',
 
     components: {
       PageTitle

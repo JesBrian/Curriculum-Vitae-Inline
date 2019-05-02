@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-school" title="角色列表" />
+    <PageTitle icon="md-school" title="权限列表" />
     <Table border ref="selection" :columns="columns" :data="roleList" stripe />
   </Card>
 </template>
@@ -12,7 +12,7 @@
   import { formatDateTime } from '_u/time.js';
 
   export default {
-    name: 'RoleList',
+    name: 'PowerList',
 
     components: {
       PageTitle, Links

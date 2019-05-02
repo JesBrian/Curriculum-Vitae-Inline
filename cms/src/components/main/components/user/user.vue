@@ -4,6 +4,7 @@
       <Avatar :src="userAvator"/>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
+        <DropdownItem name="editInfo">修改信息</DropdownItem>
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
@@ -15,24 +16,32 @@ import './user.less'
 import { mapActions } from 'vuex'
 export default {
   name: 'User',
+
   props: {
     userAvator: {
       type: String,
       default: ''
     }
   },
+
   methods: {
     ...mapActions([
       'handleLogOut'
     ]),
+
     handleClick (name) {
       switch (name) {
+        case 'editInfo':
+          this.$router.push({
+            name: 'modifyInfo'
+          });
+          break;
         case 'logout':
           this.handleLogOut().then(() => {
             this.$router.push({
               name: 'login'
             })
-          })
+          });
           break
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-construct" title="EditFormat" />
+    <PageTitle icon="md-construct" title="格式管理" />
 
     <Row style="margin-bottom:23px;">
       <Col span="8" style="line-height:30px; text-align:center;">格式名称：</Col>

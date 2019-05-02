@@ -44,7 +44,28 @@ export default [
           notCache: true,
           icon: 'md-home'
         },
-        component: resolve => require(['@/view/single-page/home'], resolve)
+        component: resolve => require(['@/view/home'], resolve)
+      }
+    ]
+  },
+  {
+    path: '/',
+    name: '_modifyInfo',
+    redirect: '/modifyInfo',
+    component: Main,
+    meta: {
+      hideInMenu: true,
+      notCache: true
+    },
+    children: [
+      {
+        path: '/modifyInfo',
+        name: 'modifyInfo',
+        meta: {
+          title: '修改个人信息',
+          hideInMenu: true
+        },
+        component: resolve => require(['@/view/admin/EditAdmin.vue'], resolve)
       }
     ]
   },
@@ -74,6 +95,7 @@ export default [
           access: ['super_admin'],
           title: '用户管理',
           icon: 'md-construct',
+          notCache: true
         },
         component: resolve => require(['@/view/user/EditUser.vue'], resolve)
       }
@@ -103,7 +125,8 @@ export default [
         meta: {
           access: ['super_admin'],
           icon: 'md-construct',
-          title: '管理员管理'
+          title: '管理员管理',
+          notCache: true
         },
         component: resolve => require(['@/view/admin/EditAdmin.vue'], resolve)
       }
@@ -133,9 +156,29 @@ export default [
         name: 'editRole',
         meta: {
           icon: 'md-construct',
-          title: '角色管理'
+          title: '角色管理',
+          notCache: true
         },
         component: resolve => require(['@/view/auth/EditRole.vue'], resolve)
+      },
+      {
+        path: 'powerList',
+        name: 'powerList',
+        meta: {
+          icon: 'md-school',
+          title: '权限列表'
+        },
+        component: resolve => require(['@/view/auth/PowerList.vue'], resolve)
+      },
+      {
+        path: 'editPower',
+        name: 'editPower',
+        meta: {
+          icon: 'md-construct',
+          title: '权限管理',
+          notCache: true
+        },
+        component: resolve => require(['@/view/auth/EditPower.vue'], resolve)
       }
     ]
   },
@@ -162,7 +205,8 @@ export default [
         name: 'editFormat',
         meta: {
           icon: 'md-construct',
-          title: '格式管理'
+          title: '格式管理',
+          notCache: true
         },
         component: resolve => require(['@/view/format/EditFormat.vue'], resolve)
       }
@@ -191,7 +235,8 @@ export default [
         name: 'editTemplate',
         meta: {
           icon: 'md-construct',
-          title: '模板管理'
+          title: '模板管理',
+          notCache: true
         },
         component: resolve => require(['@/view/template/EditTemplate.vue'], resolve)
       }
@@ -220,7 +265,8 @@ export default [
         name: 'editComponent',
         meta: {
           icon: 'md-construct',
-          title: '组件管理'
+          title: '组件管理',
+          notCache: true
         },
         component: resolve => require(['@/view/component/EditComponent.vue'], resolve)
       }
