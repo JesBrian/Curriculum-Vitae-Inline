@@ -1,4 +1,5 @@
 const {
+  adminLoginCtr,
   saveAdminCtr,
   getAdminByIdCtr,
   adminListCtr
@@ -12,8 +13,7 @@ const router = new Router();
 
 router.put('/saveAdmin', saveAdminCtr);
 
-router.post('/adminLogin', async (ctx: any, next: any) => {
-});
+router.post('/adminLogin', adminLoginCtr);
 
 router.get('/getAdminById', getAdminByIdCtr);
 router.get('/adminList', adminListCtr);

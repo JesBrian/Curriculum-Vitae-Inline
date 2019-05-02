@@ -1,6 +1,6 @@
 import UserModel from '../model/UserModel'
 
-const { md5, generateRandomString } = require('../helper/FunctionHelper')
+const { md5, generateRandomString } = require('../helper/FunctionHelper');
 
 /**
  * 用户登录

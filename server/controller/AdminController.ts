@@ -1,9 +1,19 @@
 const {
+  adminLoginSer,
   createAdminSer,
   updateAdminSer,
   getAdminByIdSer,
   adminListSer
 } = require('../service/AdminService');
+
+/**
+ * 管理员后台登录
+ * @param ctx
+ * @param next
+ */
+exports.adminLoginCtr = async (ctx: any, next: any) => {
+  return await adminLoginSer();
+};
 
 /**
  * 创建/更新管理员信息
@@ -15,8 +25,10 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
   const adminId = param.id;
   let adminData = {
     trueName: param.trueName,
+    nickName: param.nickName,
     userId: param.userId,
     roleId: param.roleId,
+    password: param.password,
     status: param.status
   };
 
@@ -38,6 +50,11 @@ exports.saveAdminCtr = async (ctx: any, next: any) => {
   };
 };
 
+/**
+ * 根据 ID 获取管理员信息
+ * @param ctx
+ * @param next
+ */
 exports.getAdminByIdCtr = async (ctx: any, next: any) => {
   const adminId = ctx.query.id;
   const result = await getAdminByIdSer(adminId);

@@ -12,7 +12,9 @@ const {
  * @param next
  */
 exports.userRegisterCtr = async (ctx: any, next: any) => {
-  const {name, mail, password, status} = ctx.request.body;
+  const {
+    name, mail, password, status
+  } = ctx.request.body;
 
   let msg = '', userId = await userRegisterSer(name, mail, password, status);
   if (userId) {
