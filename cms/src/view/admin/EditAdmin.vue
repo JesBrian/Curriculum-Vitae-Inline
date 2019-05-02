@@ -4,6 +4,12 @@
 
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
+        <Col span="8" style="text-align:left;">账户昵称：</Col>
+        <Col span="16">
+          <Input v-model="nickName" placeholder="请输入昵称..." />
+        </Col>
+      </Row>
+      <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">真实姓名：</Col>
         <Col span="16">
           <Input v-model="trueName" placeholder="请输入真实姓名..." />
@@ -84,6 +90,7 @@
     data () {
       return {
         roleList: [],
+        nickName: '',
         trueName: '',
         hasRegisterUser: false,
         userId: '',
@@ -109,6 +116,7 @@
         this.$http.get(`getAdminById?id=${id}`).then(({data}) => {
           if (data.status === 200) {
             const adminInfo = data.data;
+            this.nickName = adminInfo.nickName;
             this.trueName = adminInfo.trueName;
             this.userId = adminInfo.userId;
             this.roleId = adminInfo.roleId;
@@ -141,9 +149,11 @@
         }
 
         let adminData = {
+          nickName: this.nickName,
           trueName: this.trueName,
           userId: this.userId,
           roleId: this.roleId,
+          password: this.password,
           status: this.status
         };
 

@@ -29,11 +29,8 @@ exports.createAdminSer = async (adminData: any = null) => {
   adminData.salt = generateRandomString(4);
   adminData.password = md5(adminData.salt + adminData.password);
   let admin = new AdminModel(adminData);
-  const result = await admin.save();
-  if (result.errors) {
-    return false;
-  }
-  return true;
+  // @ts-ignore
+  return !await admin.save().errors;
 };
 
 exports.updateAdminSer = async (adminId: string = '', adminData: any = null) => {

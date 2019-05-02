@@ -5,8 +5,11 @@ import IAdmin from '../interface/IAdmin'
 
 const AdminSchema: Schema = new Schema({
   userId: String,
+  nickName: String,
   trueName: String,
   roleId: String,
+  salt: String,
+  password: String,
   cTime: {
     type: Date,
     default: Date
