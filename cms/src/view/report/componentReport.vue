@@ -6,36 +6,28 @@
         <Col span="4">
           开始时间
         </Col>
-        <Col span="10">
-          <DatePicker type="date" placeholder="Select date" style="width: 200px"></DatePicker>
+        <Col span="8">
+          <DatePicker v-model="start" type="datetime" placeholder="Select date" placement="bottom" style="width: 200px"></DatePicker>
         </Col>
-        <Col span="10">
-          <TimePicker type="time" placeholder="Select time" style="width: 168px"></TimePicker>
-        </Col>
-      </Row>
-      <Row style="margin-bottom: 15px;">
         <Col span="4">
           截至时间
         </Col>
-        <Col span="10">
-          <DatePicker type="date" placeholder="Select date" style="width: 200px"></DatePicker>
-        </Col>
-        <Col span="10">
-          <TimePicker type="time" placeholder="Select time" style="width: 168px"></TimePicker>
+        <Col span="8">
+          <DatePicker v-model="end" type="datetime" placeholder="Select date" placement="bottom" style="width: 200px"></DatePicker>
         </Col>
       </Row>
       <Row style="margin-bottom: 15px;">
         <Col span="12" style="text-align:center;">
-          <Button type="primary">重置条件</Button>
+          <Button @click="reset" type="primary">重置条件</Button>
         </Col>
         <Col span="12" style="text-align:center;">
-          <Button type="primary">确定查询</Button>
+          <Button @click="submitSearch" type="primary">确定查询</Button>
         </Col>
       </Row>
       <Divider class="page-title-divider" />
     </div>
 
-    <ChartPie v-if="pieData.length" style="height: 300px;" :value="pieData" text="用户访问来源"/>
+    <ChartPie v-if="reportData.length" style="height: 300px;" :value="reportData" text="用户访问来源"/>
   </Card>
 </template>
 
@@ -53,21 +45,30 @@
 
     data () {
       return {
-        pieData: [
-        ]
+        start: '',
+        end: '',
+
+        reportData: []
       }
     },
 
-    created () {
-      setTimeout(() => {
-        this.pieData = [
-          {value: 335, name: '直接访问'},
-          {value: 310, name: '邮件营销'},
-          {value: 234, name: '联盟广告'},
-          {value: 135, name: '视频广告'},
-          {value: 1548, name: '搜索引擎'}
-        ]
-      }, 2200)
+    methods: {
+      reset () {
+        this.start = this.end = '';
+      },
+
+      submitSearch () {
+        this.$http.post(`getComponentReport`, {
+          start: this.start,
+          end: this.end
+        }).then(({data}) => {
+          if (data.status === 200) {
+            this.reportData = data.data;
+          }
+        }).catch(err => {
+          console.log(err);
+        })
+      }
     }
   }
 </script>
