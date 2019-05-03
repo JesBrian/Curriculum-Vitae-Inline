@@ -61,7 +61,10 @@ exports.allDesignCountSer = async () => {
 exports.getFormatReportSer = async (start: Date, end: Date) => {
   const result = await Promise.all([
     FormatModel.find({status: true}, '_id name'),
-    FormatLogModel.aggregate([{$group: {_id: '$formatId', count: {$sum: 1}}}])
+    FormatLogModel.aggregate([
+      {$match: {'time': {$gte: new Date(start), $lte: new Date(end)}}},
+      {$group: {_id: '$formatId', count: {$sum: 1}}}
+    ])
   ]);
 
   let formatData = result[0];
@@ -95,7 +98,10 @@ exports.getFormatReportSer = async (start: Date, end: Date) => {
 exports.getTemplateReportSer = async (start: Date, end: Date) => {
   const result = await Promise.all([
     TemplateModel.find({status: true}, '_id name'),
-    TemplateLogModel.aggregate([{$group: {_id: '$templateId', count: {$sum: 1}}}])
+    TemplateLogModel.aggregate([
+      {$match: {'time': {$gte: new Date(start), $lte: new Date(end)}}},
+      {$group: {_id: '$templateId', count: {$sum: 1}}}
+    ])
   ]);
 
   let templateData = result[0];

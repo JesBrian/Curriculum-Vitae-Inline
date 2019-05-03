@@ -7,22 +7,14 @@
         <Col span="4">
           开始时间
         </Col>
-        <Col span="10">
-          <DatePicker v-model="startDate" type="date" placeholder="Select date" style="width: 200px"></DatePicker>
+        <Col span="8">
+          <DatePicker v-model="start" type="datetime" placeholder="Select date" placement="bottom" style="width: 200px"></DatePicker>
         </Col>
-        <Col span="10">
-          <TimePicker v-model="startTime" type="time" placeholder="Select time" style="width: 168px"></TimePicker>
-        </Col>
-      </Row>
-      <Row style="margin-bottom: 15px;">
         <Col span="4">
           截至时间
         </Col>
-        <Col span="10">
-          <DatePicker v-model="endDate" type="date" placeholder="Select date" style="width: 200px"></DatePicker>
-        </Col>
-        <Col span="10">
-          <TimePicker v-model="endTime" type="time" placeholder="Select time" style="width: 168px"></TimePicker>
+        <Col span="8">
+          <DatePicker v-model="end" type="datetime" placeholder="Select date" placement="bottom" style="width: 200px"></DatePicker>
         </Col>
       </Row>
       <Row style="margin-bottom: 15px;">
@@ -54,10 +46,8 @@
 
     data () {
       return {
-        startDate: '',
-        startTime: '',
-        endDate: '',
-        endTime: '',
+        start: '',
+        end: '',
 
         reportData: []
       }
@@ -65,12 +55,14 @@
 
     methods: {
       reset () {
-        this.startDate = this.startTime = this.endDate = this.endTime = '';
+        this.start = this.end = '';
       },
 
       submitSearch () {
-        console.log(this.startDate, this.startTime, this.endDate, this.endTime);
-        this.$http.get(`getFormatReport`).then(({data}) => {
+        this.$http.post(`getFormatReport`, {
+          start: this.start,
+          end: this.end
+        }).then(({data}) => {
           if (data.status === 200) {
             this.reportData = data.data;
           }

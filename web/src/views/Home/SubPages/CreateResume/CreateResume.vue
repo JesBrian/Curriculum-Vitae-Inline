@@ -82,7 +82,7 @@
 
       nextStep () {
         if (this.step) {
-          let templateId = '';
+          let templateId = 'custom';
           if (this.templateIndex >= 0) { // 选择格式
             templateId = this.templateList[this.templateIndex]._id;
             this.$http.get(`getTemplateById?id=${templateId}`).then(({data}) => {

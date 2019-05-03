@@ -34,7 +34,7 @@ router.get('/allComponentCount', allComponentCountCtr);
 router.get('/allDesignCount', allDesignCountCtr);
 
 
-router.get('/getFormatReport', getFormatReportCtr);
+router.post('/getFormatReport', getFormatReportCtr);
 router.get('/getTemplateReport', getTemplateReportCtr);
 
 module.exports = router;

@@ -91,7 +91,7 @@ exports.allDesignCountCtr = async (ctx: any, next: any) => {
 exports.getFormatReportCtr = async (ctx: any, next: any) => {
   const {
     start, end
-  } = ctx.query;
+  } = ctx.request.body;
 
   ctx.body = {
     status: 200,
