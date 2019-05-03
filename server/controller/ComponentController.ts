@@ -65,7 +65,7 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
 };
 
 /**
- *
+ * 获取除了用户上传的组件列表 Ctr
  * @param ctx
  * @param next
  */
@@ -87,54 +87,58 @@ exports.allSystemComponentListCtr = async (ctx: any, next: any) => {
 };
 
 /**
- *
+ * 获取用户上传的组件列表 Ctr
  * @param ctx
  * @param next
  */
 exports.allExtendComponentListCtr = async (ctx: any, next: any) => {
-  const param = ctx.query;
-  const page = parseInt(param.page);
-  const limit = parseInt(param.limit);
+  const {
+    page, limit
+  } = ctx.query;
+
   const condition = {
     category: 'extend'
   };
-  const result = await allComponentListSer(condition, page, limit);
 
   ctx.body = {
     status: 200,
-    data: result
+    data: await allComponentListSer(condition, parseInt(page), parseInt(limit))
   }
 };
 
 
 exports.systemComponentListCtr = async (ctx: any, next: any) => {
-  const result = await systemComponentListSer();
+  const userId = ctx.query.userId;
+
   ctx.body = {
     status: 200,
-    data: result
+    data: await systemComponentListSer(userId)
   }
 };
 
 exports.selfComponentListCtr = async (ctx: any, next: any) => {
-  const result = await selfComponentListSer();
+  const userId = ctx.query.userId;
+
   ctx.body = {
     status: 200,
-    data: result
+    data:  await selfComponentListSer(userId)
   }
 };
 
 exports.collectionComponentListCtr = async (ctx: any, next: any) => {
-  const result = await collectionComponentListSer();
+  const userId = ctx.query.userId;
+
   ctx.body = {
     status: 200,
-    data: result
+    data: await collectionComponentListSer(userId)
   }
 };
 
 exports.extendComponentListCtr = async (ctx: any, next: any) => {
-  const result = await extendComponentListSer();
+  const userId = ctx.query.userId;
+
   ctx.body = {
     status: 200,
-    data: result
+    data: await extendComponentListSer(userId)
   }
 };

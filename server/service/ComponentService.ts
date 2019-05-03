@@ -39,7 +39,7 @@ exports.updateComponentSer = async (componentId: string = '', componentData: obj
 };
 
 /**
- *
+ * 获取除了用户上传的组件列表 Ser
  * @param condition
  * @param page
  * @param limit
@@ -74,11 +74,11 @@ exports.systemComponentListSer = async () => {
   };
 };
 
-exports.selfComponentListSer = async () => {
+exports.selfComponentListSer = async (userId: string = '') => {
 };
 
-exports.collectionComponentListSer = async () => {
+exports.collectionComponentListSer = async (userId: string = '') => {
 };
 
-exports.extendComponentListSer = async () => {
+exports.extendComponentListSer = async (userId: string = '') => {
 };

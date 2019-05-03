@@ -4,8 +4,15 @@ import {Schema, Model, model} from 'mongoose'
 import IComponent from '../interface/IComponent'
 
 const ComponentSchema: Schema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    default: ''
+  },
   logo: {
+    type: String,
+    default: ''
+  },
+  author: {
     type: String,
     default: ''
   },
@@ -20,6 +27,14 @@ const ComponentSchema: Schema = new Schema({
   special: String,
   tags: Array,
   conf: Object,
+  cTime: {
+    type: Date,
+    default: Date
+  },
+  pTime: {
+    type: Date,
+    default: Date
+  },
   status: Boolean
 }, {versionKey: false});
 
