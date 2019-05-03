@@ -152,8 +152,14 @@
 
       initSelfComponent () {
         return new Promise((resolve, reject) => {
-          this.$http.get('selfComponentList').then(({data}) => {
-            resolve();
+          if (!this.$store.state.userInfo) {
+            return resolve();
+          }
+          this.$http.get(`selfComponentList?userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+            if (data.status === 200) {
+              this.componentCell.SelfCell.cell = data.data;
+              resolve();
+            }
           }).catch(err => {
             console.log(err);
           })
@@ -162,7 +168,10 @@
 
       initCollectionComponent () {
         return new Promise((resolve, reject) => {
-          this.$http.get('collectionComponentList').then(({data}) => {
+          if (!this.$store.state.userInfo) {
+            return resolve();
+          }
+          this.$http.get(`collectionComponentList?userId=${this.$store.state.userInfo.id}`).then(({data}) => {
             resolve();
           }).catch(err => {
             console.log(err);

@@ -75,6 +75,9 @@ exports.systemComponentListSer = async () => {
 };
 
 exports.selfComponentListSer = async (userId: string = '') => {
+  return await ComponentModel.find({
+    author: userId
+  });
 };
 
 exports.collectionComponentListSer = async (userId: string = '') => {

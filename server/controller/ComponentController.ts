@@ -108,11 +108,9 @@ exports.allExtendComponentListCtr = async (ctx: any, next: any) => {
 
 
 exports.systemComponentListCtr = async (ctx: any, next: any) => {
-  const userId = ctx.query.userId;
-
   ctx.body = {
     status: 200,
-    data: await systemComponentListSer(userId)
+    data: await systemComponentListSer()
   }
 };
 
@@ -121,7 +119,7 @@ exports.selfComponentListCtr = async (ctx: any, next: any) => {
 
   ctx.body = {
     status: 200,
-    data:  await selfComponentListSer(userId)
+    data: await selfComponentListSer(userId)
   }
 };
 
