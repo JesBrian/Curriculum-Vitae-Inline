@@ -59,10 +59,8 @@
       },
       
       submitSearch () {
-        this.$http.post(`getTemplateReport`, {
-          start: this.start,
-          end: this.end
-        }).then(({data}) => {
+        this.reportData = [];
+        this.$http.get(`getTemplateReport?start=${this.start}&end=${this.end}`).then(({data}) => {
           if (data.status === 200) {
             this.reportData = data.data;
           }

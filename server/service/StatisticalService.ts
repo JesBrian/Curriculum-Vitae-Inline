@@ -126,3 +126,36 @@ exports.getTemplateReportSer = async (start: Date, end: Date) => {
   });
   return tempTemplateData;
 };
+
+/**
+ * 获取组件报表数据
+ * @param start
+ * @param end
+ */
+exports.getComponentReportSer = async (start: Date, end: Date) => {
+  const result = await Promise.all([
+    ComponentModel.find({status: true}, '_id name'),
+    ComponentLogModel.aggregate([
+      {$match: {'time': {$gte: new Date(start), $lte: new Date(end)}}},
+      {$group: {_id: '$componentId', count: {$sum: 1}}}
+    ])
+  ]);
+
+  let componentData = result[0];
+  let componentLogData = result[1];
+  let tempComponentLogData: any = {};
+  let tempComponentData: any[] = [];
+
+  for (let i = componentLogData.length - 1; i >= 0; i--) {
+    let item = componentLogData[i];
+    tempComponentLogData[item._id] = item.count;
+  }
+
+  componentData.forEach((item) => {
+    tempComponentData.push({
+      name: item.name,
+      value: tempComponentLogData.hasOwnProperty(item._id) ? tempComponentLogData[item._id]: 0
+    });
+  });
+  return tempComponentData;
+};
