@@ -38,7 +38,7 @@
       <Divider class="page-title-divider" />
     </div>
 
-    <ChartPie v-if="reportData.length" style="height: 300px;" :value="reportData" text="用户访问来源"/>
+    <ChartPie v-if="reportData.length" style="height: 300px;" :value="reportData" text="组件使用情况"/>
   </Card>
 </template>
 

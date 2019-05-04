@@ -88,7 +88,7 @@
             render: (h, params) => {
               return h(Links, {
                 props: {
-                  url: `/EditComponent?id=${params.row._id}`
+                  url: `/home/EditComponent?id=${params.row._id}`
                 }
               }, params.row.name);
             }
@@ -165,7 +165,7 @@
 
     methods: {
       createComponent () {
-        this.$router.push('/EditComponent');
+        this.$router.push('/home/EditComponent');
       },
 
       switchTabs (nowTab = 'self') {

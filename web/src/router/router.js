@@ -42,6 +42,11 @@ export default new Router({
           name: 'SettingConfig',
           component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/SettingConfig/SettingConfig.vue'], resolve)
         },
+        {
+          path: '/Home/EditComponent',
+          name: 'EditComponent',
+          component: resolve => require(/* webpackChunkName: "home-sub" */ ['../views/Home/SubPages/EditComponent/EditComponent.vue'], resolve)
+        },
       ]
     },
     {
@@ -52,11 +57,6 @@ export default new Router({
       path: '/EditResume',
       name: 'EditResume',
       component: resolve => require(['../views/EditResume/EditResume.vue'], resolve)
-    },
-    {
-      path: '/EditComponent',
-      name: 'EditResume',
-      component: resolve => require(['../views/EditComponent/EditComponent.vue'], resolve)
-    },
+    }
   ]
 })
