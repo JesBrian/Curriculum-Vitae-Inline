@@ -5,9 +5,9 @@ const {
   updateComponentSer,
   allComponentListSer,
   systemComponentListSer,
-  selfComponentListSer,
-  collectionComponentListSer,
-  extendComponentListSer
+  collectionListSer,
+  extendListSer,
+  collectionComponentOptSer
 } = require('../service/ComponentService');
 
 /**
@@ -70,19 +70,19 @@ exports.saveComponentCtr = async (ctx: any, next: any) => {
  * @param next
  */
 exports.allSystemComponentListCtr = async (ctx: any, next: any) => {
-  const param = ctx.query;
-  const page = parseInt(param.page);
-  const limit = parseInt(param.limit);
+  const {
+    page, limit
+  } = ctx.query;
+
   const condition = {
     'category': {
       $ne: 'extend'
     }
   };
-  const result = await allComponentListSer(condition, page, limit);
 
   ctx.body = {
     status: 200,
-    data: result
+    data: await allComponentListSer(condition, parseInt(page), parseInt(limit))
   }
 };
 
@@ -115,28 +115,78 @@ exports.systemComponentListCtr = async (ctx: any, next: any) => {
 };
 
 exports.selfComponentListCtr = async (ctx: any, next: any) => {
-  const userId = ctx.query.userId;
+  const {
+    page, limit, userId
+  } = ctx.query;
+
+  const condition = {
+    author: userId
+  };
 
   ctx.body = {
     status: 200,
-    data: await selfComponentListSer(userId)
+    data: await allComponentListSer(condition, parseInt(page), parseInt(limit))
   }
 };
 
+/**
+ * 前台展示个人收藏组件列表
+ * @param ctx
+ * @param next
+ */
 exports.collectionComponentListCtr = async (ctx: any, next: any) => {
-  const userId = ctx.query.userId;
+  const {
+    page, limit, userId
+  } = ctx.query;
+
+  const condition = {
+    userId: userId
+  };
 
   ctx.body = {
     status: 200,
-    data: await collectionComponentListSer(userId)
+    data: await collectionListSer(condition, parseInt(page), parseInt(limit))
   }
 };
 
+/**
+ * 前台展示网络组件列表
+ * @param ctx
+ * @param next
+ */
 exports.extendComponentListCtr = async (ctx: any, next: any) => {
-  const userId = ctx.query.userId;
+  const {
+    page, limit, userId
+  } = ctx.query;
 
   ctx.body = {
     status: 200,
-    data: await extendComponentListSer(userId)
+    data: await extendListSer(userId, parseInt(page), parseInt(limit))
+  }
+};
+
+/**
+ * 用户收藏/取消收藏组件
+ * @param ctx
+ * @param next
+ */
+exports.collectionComponentOptCtr = async (ctx: any, next: any) => {
+  const {
+    userId, componentId, cId
+  } = ctx.request.body;
+
+  let code = 200, msg = '收藏组件成功', result;
+  result = await collectionComponentOptSer(userId, componentId, cId);
+  if (!result) {
+    code = 555;
+    msg = '收藏组件失败';
+  }
+
+  ctx.body = {
+    status: code,
+    msg: `${(cId ? '取消' : '')}${msg}`
+  };
+  if (!cId && (code === 200)) {
+    ctx.body.data = result;
   }
 };

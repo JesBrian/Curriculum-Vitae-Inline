@@ -7,7 +7,9 @@ const {
   systemComponentListCtr,
   selfComponentListCtr,
   collectionComponentListCtr,
-  extendComponentListCtr
+  extendComponentListCtr,
+
+  collectionComponentOptCtr
 } = require('../controller/ComponentController');
 
 // @ts-ignore
@@ -44,5 +46,7 @@ router.get('/systemComponentList', systemComponentListCtr);
 router.get('/selfComponentList', selfComponentListCtr);
 router.get('/collectionComponentList', collectionComponentListCtr);
 router.get('/extendComponentList', extendComponentListCtr);
+
+router.put('/collectionComponentOpt', collectionComponentOptCtr);
 
 module.exports = router;

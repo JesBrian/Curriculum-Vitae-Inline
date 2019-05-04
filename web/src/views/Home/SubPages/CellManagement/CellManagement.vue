@@ -16,19 +16,29 @@
         <Tabs @on-click="switchTabs" type="card">
           <TabPane name="self" label="个人组件">
             <template v-if="nowTab === 'self'">
-              <Table border ref="selection" :columns="columns" :data="selfCellList" stripe />
-              <Page @on-change="changeNowPage" :total="selfTotal" :current="selfCurrent" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Table border ref="selection" :columns="columns" :data="componentList" stripe />
+              <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
+
           <TabPane name="collection" label="收藏组件">
             <template v-if="nowTab === 'collection'">
-              <Table border ref="selection" :columns="columns" :data="collectionCellList" stripe />
-              <Page @on-change="changeNowPage" :total="collectionTotal" :current="collectionCurrent" show-elevator style="margin:23px auto 8px; text-align:center;" />
+              <Table border ref="selection" :columns="columns" :data="componentList" stripe />
+              <Page @on-change="changeNowPage" :total="totalNum" show-elevator style="margin:23px auto 8px; text-align:center;" />
             </template>
           </TabPane>
+
           <TabPane name="extend" label="网络组件">
             <template v-if="nowTab === 'extend'">
-              <!--这里可能会使用瀑布流 [ 错了，是一定会，也是必须使用 ]-->
+              <Scroll :distance-to-edge="[0, -20]" :on-reach-bottom="handleReachBottom">
+                <Card v-for="(item, index) in componentList" :key="index" style="width: 158px; height: 188px; margin:8px; display: inline-block;">
+                  <p slot="title">{{item.name}}</p>
+                  <a href="javascript:void(0)" slot="extra" @click.prevent="collectionComponent(index)">
+                    <Icon :type="item.cId ? 'md-heart' : 'md-heart-outline'" />
+                  </a>
+                  <img :src="`http://localhost:3000/img/component/logo/${item.logo}`" style="width: 105px; height: 105px; margin: 0 10px; border-radius: 5px; box-shadow: 0 0 3px -2px #383838;" />
+                </Card>
+              </Scroll>
             </template>
           </TabPane>
         </Tabs>
@@ -54,7 +64,6 @@
 
     data () {
       return {
-        nowTab: 'self',
         columns: [
           {
             type: 'selection',
@@ -67,7 +76,7 @@
             render: (h, params) => {
               return h(Logos, {
                 props: {
-                  src: params.row.logo ? `http://localhost:3000/img/design/logo/${params.row.logo}` : ''
+                  src: params.row.logo ? `http://localhost:3000/img/component/logo/${params.row.logo}` : ''
                 }
               });
             }
@@ -79,14 +88,30 @@
             render: (h, params) => {
               return h(Links, {
                 props: {
-                  url: `/EditResume?id=${params.row._id}`
+                  url: `/EditComponent?id=${params.row._id}`
                 }
               }, params.row.name);
             }
           },
           {
             title: '标签',
-            key: 'tags'
+            key: 'tags',
+            render: (h, params) => {
+              const tagsLen = params.row.tags.length - 1;
+              return h('div', params.row.tags.map((tag, index) => {
+                let renderArr = [
+                  h('span', {
+                  }, tag)
+                ];
+                if (tagsLen !== index) {
+                  renderArr.push(
+                    h('span', {
+                    }, ',')
+                  );
+                }
+                return renderArr;
+              }));
+            }
           },
           {
             title: '创建时间',
@@ -99,11 +124,11 @@
           },
           {
             title: '发布时间',
-            key: 'mTime',
+            key: 'pTime',
             sortable: true,
             render: (h, params) => {
               return h('span', {
-              }, formatDateTime(params.row.mTime));
+              }, formatDateTime(params.row.pTime));
             }
           },
           {
@@ -119,17 +144,24 @@
             }
           }
         ],
-        selfCellList: [],
-        selfTotal: 0,
-        selfCurrent: 1,
-        collectionCellList: [],
-        collectionTotal: 0,
-        collectionCurrent: 1,
-        extendCellList: [],
-        extendTotal: 0,
-        extendCurrent: 1,
+
+        page: 1,
+        nowTab: 'self',
+        totalNum: 0,
+        componentList: [],
       }
     },
+
+    watch: {
+      nowTab (nVal) {
+        this.getComponentListData();
+      }
+    },
+
+    created () {
+      this.getComponentListData();
+    },
+
 
     methods: {
       createComponent () {
@@ -137,16 +169,62 @@
       },
 
       switchTabs (nowTab = 'self') {
+        this.componentList = [];
+        this.page = 1;
         this.nowTab = nowTab;
       },
 
       changeNowPage (page = 1) {
-        this[`${this.nowTab}Current`] = page;
-        this.getCellListData();
+        this.getComponentListData(page);
       },
 
-      getCellListData () {
-        this.$http.get(``).then(({data}) => {
+      getComponentListData (page = 1, limit = 10) {
+        this.$http.get(`${this.nowTab}ComponentList?page=${page}&limit=${limit}&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+          if (data.status === 200) {
+            this.componentList = data.data.componentList;
+            this.totalNum = data.data.total;
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      },
+
+      handleReachBottom () {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            this.page++;
+            this.$http.get(`${this.nowTab}ComponentList?page=${this.page}&limit=10&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+              if (data.status === 200) {
+                const result = data.data.componentList;
+                for (let i = 0, len = result.length; i < len; i++) {
+                  this.componentList.push(result[i]);
+                }
+              }
+            }).catch(err => {
+              console.log(err);
+            });
+            resolve();
+          }, 2000);
+        });
+      },
+
+      collectionComponent (index = -1) {
+        const item = this.componentList[index];
+        let data = {};
+        if (item.cId) {
+          data.cId = item.cId;
+        } else {
+          data = {
+            userId: this.$store.state.userInfo.id,
+            componentId: item._id
+          };
+        }
+        this.$http.put('collectionComponentOpt', data).then(({data}) => {
+          if (data.status === 200) {
+            if (item.cId) item.cId = '';
+            else this.$set(item, 'cId', data.data);
+            this.$Message.success(data.msg);
+          }
         }).catch(err => {
           console.log(err);
         })

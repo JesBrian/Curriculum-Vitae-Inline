@@ -452,6 +452,7 @@
         let componentData = {
           name: this.name,
           logo: this.logo,
+          author: this.$store.state.userInfo.id,
           category: 'extend',
           graphics: false,
           tags: this.tags,

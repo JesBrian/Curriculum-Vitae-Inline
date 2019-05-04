@@ -1,5 +1,6 @@
-import ComponentConfModel from '../model/ComponentConfModel'
-import ComponentModel from '../model/ComponentModel'
+import ComponentModel from '../model/ComponentModel';
+import ComponentConfModel from '../model/ComponentConfModel';
+import ComponentCollectionModel from '../model/ComponentCollectionModel';
 
 /**
  * 获取组件配置信息
@@ -39,7 +40,7 @@ exports.updateComponentSer = async (componentId: string = '', componentData: obj
 };
 
 /**
- * 获取除了用户上传的组件列表 Ser
+ * 获取组件列表 Ser
  * @param condition
  * @param page
  * @param limit
@@ -74,14 +75,74 @@ exports.systemComponentListSer = async () => {
   };
 };
 
-exports.selfComponentListSer = async (userId: string = '') => {
-  return await ComponentModel.find({
-    author: userId
+/**
+ * 获取收藏的组件列表
+ * @param condition
+ * @param page
+ * @param limit
+ */
+exports.collectionListSer = async (condition: object = null, page: number = 1, limit: number = 10) => {
+  const collectionList = await ComponentCollectionModel.find(condition).skip((page - 1) * limit).limit(limit);
+  const total = await ComponentCollectionModel.find(condition).count();
+
+  let componentList: any[] = [];
+
+  for (let i = 0, len = collectionList.length; i < len; i++) {
+    // @ts-ignore
+    componentList.push(await this.getComponentByIdSer(collectionList[i].componentId));
+  }
+
+  return {
+    componentList, total
+  };
+};
+
+/**
+ * 获取已发布的用户组件列表 - 区分用户是否已经收藏
+ * @param userId
+ * @param page
+ * @param limit
+ */
+exports.extendListSer = async (userId: string = '', page: number = 1, limit: number = 10) => {
+  const condition = {
+    $and: [
+      {category: 'extend'},
+      {status: true}
+    ]
+  };
+
+  // @ts-ignore
+  let result = JSON.parse(JSON.stringify(await this.allComponentListSer(condition, page, limit)));
+  let componentList = result.componentList;
+
+  for (let i = 0, len = componentList.length; i < len; i++) {
+    const item = await ComponentCollectionModel.findOne({userId, componentId: componentList[i]._id});
+    if (item) {
+      componentList[i].cId = item._id;
+    }
+  }
+  return result;
+};
+
+/**
+ * 收藏/取消收藏操作
+ * @param userId
+ * @param componentId
+ * @param cId
+ */
+exports.collectionComponentOptSer = async (userId: string = '', componentId: string = '', cId: string = '') => {
+  if (cId) {
+    return await ComponentCollectionModel.findByIdAndRemove(cId);
+  }
+
+  const componentCollection = new ComponentCollectionModel({
+    userId: userId,
+    componentId: componentId
   });
-};
 
-exports.collectionComponentListSer = async (userId: string = '') => {
-};
-
-exports.extendComponentListSer = async (userId: string = '') => {
+  const result = await componentCollection.save();
+  if (result._id) {
+    return result._id;
+  }
+  return false;
 };
