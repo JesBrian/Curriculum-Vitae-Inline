@@ -11,6 +11,7 @@ exports.adminLoginSer = async (nickName: string = '', password: string = '') => 
       admin.save();
       data = {
         id: admin._id,
+        name: admin.nickName,
         roleId: admin.roleId,
       };
       msg = '管理员登录成功';

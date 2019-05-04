@@ -34,6 +34,8 @@
           if (data.status === 200) {
             const result = data.data.data;
             this.handleLogin({
+              id: result.id,
+              userName: result.name,
               token: result.roleId
             }).then(() => {
               this.$router.push({
