@@ -113,11 +113,11 @@ exports.getTemplateReportCtr = async (ctx: any, next: any) => {
 
 exports.getComponentReportCtr = async (ctx: any, next: any) => {
   const {
-    start, end
+    start, end, category
   } = ctx.query;
 
   ctx.body = {
     status: 200,
-    data: await getComponentReportSer(start, end)
+    data: await getComponentReportSer(start, end, category)
   };
 };

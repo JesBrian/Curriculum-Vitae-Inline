@@ -58,7 +58,7 @@ exports.allDesignCountSer = async () => {
  * @param start
  * @param end
  */
-exports.getFormatReportSer = async (start: Date, end: Date) => {
+exports.getFormatReportSer = async (start: string = '', end: string = '') => {
   const result = await Promise.all([
     FormatModel.find({status: true}, '_id name'),
     FormatLogModel.aggregate([
@@ -95,7 +95,7 @@ exports.getFormatReportSer = async (start: Date, end: Date) => {
  * @param start
  * @param end
  */
-exports.getTemplateReportSer = async (start: Date, end: Date) => {
+exports.getTemplateReportSer = async (start: string = '', end: string = '') => {
   const result = await Promise.all([
     TemplateModel.find({status: true}, '_id name'),
     TemplateLogModel.aggregate([
@@ -131,12 +131,29 @@ exports.getTemplateReportSer = async (start: Date, end: Date) => {
  * 获取组件报表数据
  * @param start
  * @param end
+ * @param category
  */
-exports.getComponentReportSer = async (start: Date, end: Date) => {
+exports.getComponentReportSer = async (start: string = '', end: string = '', category: string = 'extend') => {
+  let categoryCondition;
+  if (category === 'extend') categoryCondition = {'category': category};
+  else categoryCondition = {'category': {$ne: 'extend'}};
+
   const result = await Promise.all([
-    ComponentModel.find({status: true}, '_id name'),
+    ComponentModel.find({
+      $and: [
+        categoryCondition,
+        {status: true}
+      ]
+    }, '_id name'),
     ComponentLogModel.aggregate([
-      {$match: {'time': {$gte: new Date(start), $lte: new Date(end)}}},
+      {
+        $match: {
+          $and: [
+            categoryCondition,
+            {'time': {$gte: new Date(start), $lte: new Date(end)}}
+          ]
+        }
+      },
       {$group: {_id: '$componentId', count: {$sum: 1}}}
     ])
   ]);
