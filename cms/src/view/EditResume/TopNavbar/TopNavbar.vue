@@ -67,7 +67,7 @@
                     <Select v-model="componentConf.input.align[0]" size="small" style="width:60px">
                       <Option value="left">靠左</Option>
                       <Option value="center">居中</Option>
-                      <Option value="bottom">靠右</Option>
+                      <Option value="right">靠右</Option>
                     </Select>
                   </Col>
                   <Col span="8">
