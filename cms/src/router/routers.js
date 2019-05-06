@@ -35,6 +35,15 @@ export default [
     component: resolve => require(['@/view/login/login.vue'], resolve)
   },
   {
+    path: '/editTemplate',
+    name: 'editResume',
+    meta: {
+      title: '编辑模板',
+      hideInMenu: true
+    },
+    component: resolve => require(['@/view/EditResume/EditResume.vue'], resolve)
+  },
+  {
     path: '/',
     name: '_home',
     redirect: '/home',

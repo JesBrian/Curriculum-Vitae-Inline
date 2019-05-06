@@ -64,8 +64,10 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">模板内容：</Col>
         <Col span="16">
-          <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
-          <Button type="primary" ghost >查看模板</Button>
+          <a href="/#/editTemplate" target="_blank">
+            <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
+          </a>
+          <Button type="primary" ghost >保存预览</Button>
         </Col>
       </Row>
 
@@ -95,10 +97,6 @@
         </Col>
       </Row>
     </div>
-
-    <div v-if="isEdit" style="width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 999;">
-      <EditResume />
-    </div>
   </Card>
 </template>
 
@@ -126,9 +124,7 @@
 
         formatCategory: [],
         defaultList: [],
-        uploadList: [],
-
-        isEdit: false
+        uploadList: []
       }
     },
 
@@ -196,7 +192,6 @@
       },
 
       editTemplate () {
-        this.isEdit = true;
       },
 
 

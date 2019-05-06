@@ -306,6 +306,23 @@
                           </Col>
                         </Row>
                       </div>
+                      <Row style="margin-bottom:23px; line-height:33px;">
+                        <Col span="8" style="text-align:left;">开启圆角：</Col>
+                        <Col span="16">
+                          <Switch v-model="componentConf.style.radius[0]">
+                            <Icon type="md-checkmark" slot="open"></Icon>
+                            <Icon type="md-close" slot="close"></Icon>
+                          </Switch>
+                        </Col>
+                      </Row>
+                      <div v-if="componentConf.style.radius[0]">
+                        <Row style="margin-bottom:23px; line-height:33px;">
+                          <Col span="8" style="text-align:left;">圆角程度：</Col>
+                          <Col span="16">
+                            <InputNumber v-model="componentConf.style.radius[1]" :min="0"></InputNumber>
+                          </Col>
+                        </Row>
+                      </div>
                     </div>
                   </TabPane>
                 </Tabs>
