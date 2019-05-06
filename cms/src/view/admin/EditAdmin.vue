@@ -1,7 +1,6 @@
 <template>
   <Card>
-    <PageTitle icon="md-construct" title="管理员管理" />
-
+    <PageTitle icon="md-construct" :title="$route.name === 'modifyInfo' ? '修改个人信息' : '管理员管理'" />
     <div style="margin: 0 18px 8px 28px;">
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">账户昵称：</Col>
@@ -110,8 +109,7 @@
       }).catch(err => {
         console.log(err);
       });
-
-      const id = this.$route.query.id;
+      const id = (this.$route.name === 'modifyInfo') ? this.$store.state.user.userId : this.$route.query.id;
       if (id) {
         this.$http.get(`getAdminById?id=${id}`).then(({data}) => {
           if (data.status === 200) {
@@ -156,8 +154,7 @@
           password: this.password,
           status: this.status
         };
-
-        const id = this.$route.query.id;
+        const id = (this.$route.name === 'modifyInfo') ? this.$store.state.user.userId : this.$route.query.id;
         if (id) {
           adminData.id = id;
         }
