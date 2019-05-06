@@ -41,7 +41,7 @@
         <div style="height:58px;"></div>
       </Sider>
 
-      <Layout style="padding-bottom: 78px;">
+      <Layout id="homeContainer" style="padding-bottom: 78px;">
         <RouterView />
       </Layout>
 

@@ -30,7 +30,7 @@
 
           <TabPane name="extend" label="网络组件">
             <template v-if="nowTab === 'extend'">
-              <Scroll :distance-to-edge="[0, -20]" :on-reach-bottom="handleReachBottom">
+              <Scroll id="componentScrollContainer" :height="scrollContainerH - 240" :distance-to-edge="[0, -20]" :on-reach-bottom="handleReachBottom">
                 <Card v-for="(item, index) in componentList" :key="index" style="width: 158px; height: 188px; margin:8px; display: inline-block;">
                   <p slot="title">{{item.name}}</p>
                   <a href="javascript:void(0)" slot="extra" @click.prevent="collectionComponent(index)">
@@ -160,6 +160,7 @@
 
     created () {
       this.getComponentListData();
+      this.scrollContainerH = document.querySelector('#homeContainer').offsetHeight;
     },
 
 
@@ -179,7 +180,7 @@
       },
 
       getComponentListData (page = 1, limit = 10) {
-        this.$http.get(`${this.nowTab}ComponentList?page=${page}&limit=${limit}&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+        this.$http.get(`${this.nowTab}ComponentList?page=${page}&limit=${this.nowTab === 'extend' ? 20 : limit}&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
           if (data.status === 200) {
             this.componentList = data.data.componentList;
             this.totalNum = data.data.total;
@@ -193,7 +194,7 @@
         return new Promise(resolve => {
           setTimeout(() => {
             this.page++;
-            this.$http.get(`${this.nowTab}ComponentList?page=${this.page}&limit=10&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+            this.$http.get(`${this.nowTab}ComponentList?page=${this.page}&limit=20&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
               if (data.status === 200) {
                 const result = data.data.componentList;
                 for (let i = 0, len = result.length; i < len; i++) {

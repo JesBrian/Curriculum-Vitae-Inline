@@ -61,6 +61,26 @@
             }
           },
           {
+            title: '标签',
+            key: 'tags',
+            render: (h, params) => {
+              const tagsLen = params.row.tags.length - 1;
+              return h('div', params.row.tags.map((tag, index) => {
+                let renderArr = [
+                  h('span', {
+                  }, tag)
+                ];
+                if (tagsLen !== index) {
+                  renderArr.push(
+                    h('span', {
+                    }, ',')
+                  );
+                }
+                return renderArr;
+              }));
+            }
+          },
+          {
             title: '状态',
             key: 'status',
             sortable: true,
