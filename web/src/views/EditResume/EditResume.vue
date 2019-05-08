@@ -1,6 +1,6 @@
 <template>
   <Layout class="layout">
-    <TopNavbar @changeRightNavbar="changeRightNavbar" />
+    <TopNavbar @changeRightNavbar="changeRightNavbar" v-model="showTopNavbar" />
 
     <Layout>
       <!-- 左侧菜单 -->
@@ -8,7 +8,7 @@
         <LeftNavbar :is-collapsed="isCollapsed" />
       </Sider>
 
-      <Content class="page-layout" :style="`padding:50px ${showNodePanel ? 200 : 45}px 18px 15px; position: relative;`">
+      <Content class="page-layout" :style="`padding:50px ${showNodePanel ? 200 : 45}px ${showTopNavbar ? 139 : 48}px 15px; position: relative;`">
         <PathNavbar />
 
         <Layout style="width:100%; height:100%; padding:13px; box-sizing:border-box; border-radius:3px; box-shadow: 0 1px 10px -1px #282828;">
@@ -93,6 +93,7 @@
 
     data () {
       return {
+        showTopNavbar: false,
         isCollapsed: false,
         showRightNavbar: false,
         showNodePanel: false,

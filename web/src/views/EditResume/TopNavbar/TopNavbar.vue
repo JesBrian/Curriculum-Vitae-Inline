@@ -202,9 +202,16 @@
   export default {
     name: 'TopNavbar',
 
+    props: {
+      value: {
+        type: Boolean,
+        default: false
+      }
+    },
+
     data () {
       return {
-        isShowComponentConfArea: false,
+        isShowComponentConfArea: this.value,
         componentConf: null,
         initConf: null
       }
@@ -263,6 +270,7 @@
 
       changeShowComponentConfArea () {
         this.isShowComponentConfArea = !this.isShowComponentConfArea;
+        this.$emit('input', this.isShowComponentConfArea);
       }
     }
   }

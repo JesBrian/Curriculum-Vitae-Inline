@@ -64,7 +64,7 @@
       <Row style="margin-bottom:23px; line-height:33px;">
         <Col span="8" style="text-align:left;">模板内容：</Col>
         <Col span="16">
-          <a href="http://localhost:8080/#/EditResume" target="_blank">
+          <a href="http://localhost:9090/#/editTemplate" target="_blank">
             <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
           </a>
           <Button type="primary" ghost >保存预览</Button>

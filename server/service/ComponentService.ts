@@ -44,8 +44,12 @@ exports.updateComponentSer = async (componentId: string = '', componentData: obj
  * @param condition
  * @param page
  * @param limit
+ * @param all
  */
-exports.allComponentListSer = async (condition: object = null, page: number = 1, limit: number = 10) => {
+exports.allComponentListSer = async (condition: object = null, page: number = 1, limit: number = 10, all: boolean = false) => {
+  if (all) {
+    return await ComponentModel.find(condition);
+  }
   const componentList = await ComponentModel.find(condition).skip((page - 1) * limit).limit(limit);
   const total = await ComponentModel.find(condition).count();
   return {
@@ -80,10 +84,16 @@ exports.systemComponentListSer = async () => {
  * @param condition
  * @param page
  * @param limit
+ * @param all
  */
-exports.collectionListSer = async (condition: object = null, page: number = 1, limit: number = 10) => {
-  const collectionList = await ComponentCollectionModel.find(condition).skip((page - 1) * limit).limit(limit);
-  const total = await ComponentCollectionModel.find(condition).count();
+exports.collectionListSer = async (condition: object = null, page: number = 1, limit: number = 10, all: boolean = false) => {
+  let collectionList = [], total = 0;
+  if (all) {
+    collectionList = await ComponentCollectionModel.find(condition);
+  } else {
+    collectionList = await ComponentCollectionModel.find(condition).skip((page - 1) * limit).limit(limit);
+    total = await ComponentCollectionModel.find(condition).count();
+  }
 
   let componentList: any[] = [];
 
@@ -92,6 +102,9 @@ exports.collectionListSer = async (condition: object = null, page: number = 1, l
     componentList.push(await this.getComponentByIdSer(collectionList[i].componentId));
   }
 
+  if (all) {
+    return componentList;
+  }
   return {
     componentList, total
   };

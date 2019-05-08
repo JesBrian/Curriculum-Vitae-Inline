@@ -116,7 +116,7 @@ exports.systemComponentListCtr = async (ctx: any, next: any) => {
 
 exports.selfComponentListCtr = async (ctx: any, next: any) => {
   const {
-    page, limit, userId
+    page, limit, userId, all
   } = ctx.query;
 
   const condition = {
@@ -125,7 +125,7 @@ exports.selfComponentListCtr = async (ctx: any, next: any) => {
 
   ctx.body = {
     status: 200,
-    data: await allComponentListSer(condition, parseInt(page), parseInt(limit))
+    data: await allComponentListSer(condition, parseInt(page), parseInt(limit), all === 'true')
   }
 };
 
@@ -136,7 +136,7 @@ exports.selfComponentListCtr = async (ctx: any, next: any) => {
  */
 exports.collectionComponentListCtr = async (ctx: any, next: any) => {
   const {
-    page, limit, userId
+    page, limit, userId, all
   } = ctx.query;
 
   const condition = {
@@ -145,7 +145,7 @@ exports.collectionComponentListCtr = async (ctx: any, next: any) => {
 
   ctx.body = {
     status: 200,
-    data: await collectionListSer(condition, parseInt(page), parseInt(limit))
+    data: await collectionListSer(condition, parseInt(page), parseInt(limit), all === 'true')
   }
 };
 

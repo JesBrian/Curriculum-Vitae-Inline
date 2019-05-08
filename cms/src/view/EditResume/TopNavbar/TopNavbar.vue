@@ -6,10 +6,6 @@
           <img class="logo" src="../../../../public/img/logo.png" />
         </router-link>
       </div>
-
-      <div class="layout-user">
-        <Avatar @click.native="changeRightNavbar" class="user" shape="square" icon="md-person" size="small" title="请登录" />
-      </div>
     </Menu>
 
     <div v-if="componentConf !== null" class="component-conf-container" style="width:100%; height:100%; position:relative;">
@@ -60,23 +56,23 @@
                   </Col>
                 </Row>
               </Col>
-              <Col span="7">
+              <Col span="5">
                 <Row>
-                  <Col span="7">对齐方式:</Col>
-                  <Col span="8">
+                  <Col span="10">对齐方式:</Col>
+                  <Col span="14">
                     <Select v-model="componentConf.input.align[0]" size="small" style="width:60px">
                       <Option value="left">靠左</Option>
                       <Option value="center">居中</Option>
                       <Option value="right">靠右</Option>
                     </Select>
                   </Col>
-                  <Col span="8">
-                    <Select v-model="componentConf.input.align[1]" size="small" style="width:60px">
-                      <Option value="top">顶部</Option>
-                      <Option value="center">中间</Option>
-                      <Option value="bottom">底部</Option>
-                    </Select>
-                  </Col>
+                  <!--<Col span="8">-->
+                    <!--<Select v-model="componentConf.input.align[1]" size="small" style="width:60px">-->
+                      <!--<Option value="top">顶部</Option>-->
+                      <!--<Option value="center">中间</Option>-->
+                      <!--<Option value="bottom">底部</Option>-->
+                    <!--</Select>-->
+                  <!--</Col>-->
                 </Row>
               </Col>
               <Col span="6">
@@ -152,6 +148,14 @@
             <Row :gutter="16" >
               <Col span="6">
                 <Row>
+                  <Col span="9">圆角程度:</Col>
+                  <Col span="15">
+                    <InputNumber v-model="componentConf.style.radius[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
                   <Col span="9">阴影宽度:</Col>
                   <Col span="15">
                     <InputNumber v-model="componentConf.style.shadow[1]" :min="0" size="small" />
@@ -194,9 +198,16 @@
   export default {
     name: 'TopNavbar',
 
+    props: {
+      value: {
+        type: Boolean,
+        default: false
+      }
+    },
+
     data () {
       return {
-        isShowComponentConfArea: false,
+        isShowComponentConfArea: this.value,
         componentConf: null,
         initConf: null
       }
@@ -255,6 +266,7 @@
 
       changeShowComponentConfArea () {
         this.isShowComponentConfArea = !this.isShowComponentConfArea;
+        this.$emit('input', this.isShowComponentConfArea);
       }
     }
   }

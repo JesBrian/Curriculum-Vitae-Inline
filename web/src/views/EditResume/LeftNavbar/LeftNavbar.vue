@@ -155,7 +155,7 @@
           if (!this.$store.state.userInfo) {
             return resolve();
           }
-          this.$http.get(`selfComponentList?userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+          this.$http.get(`selfComponentList?userId=${this.$store.state.userInfo.id}&all=true`).then(({data}) => {
             if (data.status === 200) {
               this.componentCell.SelfCell.cell = data.data;
               resolve();
@@ -171,7 +171,8 @@
           if (!this.$store.state.userInfo) {
             return resolve();
           }
-          this.$http.get(`collectionComponentList?userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+          this.$http.get(`collectionComponentList?userId=${this.$store.state.userInfo.id}&all=true`).then(({data}) => {
+            this.componentCell.CollectionCell.cell = data.data;
             resolve();
           }).catch(err => {
             console.log(err);

@@ -5,7 +5,7 @@
         <Icon :type="categoryItem.icon" />{{categoryItem.ch}}
       </template>
       <div :name="`${categoryItem}${categoryIndex}`">
-        <div style="padding:15px 10px 3px;">
+        <div v-if="categoryItem.cell.length" style="padding:15px 10px 3px;">
           <Tooltip v-for="(cellItem, cellIndex) in categoryItem.cell" :key="cellIndex + categoryIndex + '05'" :content="cellItem.name" theme="light" placement="right-start">
             <MenuCell @dblclick.native="createCell(cellItem._id)" :data-id="cellItem._id" :cell-data="cellItem" />
           </Tooltip>
@@ -99,21 +99,21 @@
 
     methods: {
       initComponent () {
-        this.$localForage.getItem('componentList').then(val => {
-          if (val) {
-            this.componentCell.PreventCell.cell = val.prevent;
-            this.componentCell.BaseCell.cell = val.base;
-            this.componentCell.AdvanceCell.cell = val.advance;
-            return true;
-          }
+        // this.$localForage.getItem('componentList').then(val => {
+        //   if (val) {
+        //     this.componentCell.PreventCell.cell = val.prevent;
+        //     this.componentCell.BaseCell.cell = val.base;
+        //     this.componentCell.AdvanceCell.cell = val.advance;
+        //     this.componentCell.SelfCell.cell = val.self;
+        //     this.componentCell.CollectionCell.cell = val.collection;
+        //     return true;
+        //   }
           Promise.all([
-            this.initSystemComponent(),
-            this.initSelfComponent(),
-            this.initCollectionComponent()
+            this.initSystemComponent()
           ]).then(res => {
             this.saveComponentDataForLocal();
           });
-        });
+        // });
       },
 
       initSystemComponent () {
@@ -132,31 +132,13 @@
         })
       },
 
-      initSelfComponent () {
-        return new Promise((resolve, reject) => {
-          this.$http.get('selfComponentList').then(({data}) => {
-            resolve();
-          }).catch(err => {
-            console.log(err);
-          })
-        })
-      },
-
-      initCollectionComponent () {
-        return new Promise((resolve, reject) => {
-          this.$http.get('collectionComponentList').then(({data}) => {
-            resolve();
-          }).catch(err => {
-            console.log(err);
-          })
-        })
-      },
-
       saveComponentDataForLocal () {
         const data = {
           prevent: this.componentCell.PreventCell.cell,
           base: this.componentCell.BaseCell.cell,
-          advance: this.componentCell.AdvanceCell.cell
+          advance: this.componentCell.AdvanceCell.cell,
+          self: this.componentCell.SelfCell.cell,
+          collection: this.componentCell.CollectionCell.cell
         };
         this.$localForage.setItem('componentList', data);
       },
@@ -165,6 +147,11 @@
         this.$store.commit('changeDesignConfCell', {
           op: 'add',
           cell: this.getComponentDataById(cellId)
+        });
+
+        this.$http.put('chooseComponentLog', {
+          userId: this.$store.state.userInfo ? this.$store.state.userInfo.id : '',
+          componentId: cellId
         });
       },
 
