@@ -115,15 +115,15 @@
 
     methods: {
       initComponent () {
-        this.$localForage.getItem('componentList').then(val => {
-          if (val) {
-            this.componentCell.PreventCell.cell = val.prevent;
-            this.componentCell.BaseCell.cell = val.base;
-            this.componentCell.AdvanceCell.cell = val.advance;
-            this.componentCell.SelfCell.cell = val.self;
-            this.componentCell.CollectionCell.cell = val.collection;
-            return true;
-          }
+        // this.$localForage.getItem('componentList').then(val => {
+        //   if (val) {
+        //     this.componentCell.PreventCell.cell = val.prevent;
+        //     this.componentCell.BaseCell.cell = val.base;
+        //     this.componentCell.AdvanceCell.cell = val.advance;
+        //     this.componentCell.SelfCell.cell = val.self;
+        //     this.componentCell.CollectionCell.cell = val.collection;
+        //     return true;
+        //   }
           Promise.all([
             this.initSystemComponent(),
             this.initSelfComponent(),
@@ -131,7 +131,7 @@
           ]).then(res => {
             this.saveComponentDataForLocal();
           });
-        });
+        // });
       },
 
       initSystemComponent () {

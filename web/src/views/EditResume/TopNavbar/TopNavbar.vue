@@ -152,6 +152,14 @@
             <Row :gutter="16" >
               <Col span="6">
                 <Row>
+                  <Col span="9">圆角程度:</Col>
+                  <Col span="15">
+                    <InputNumber v-model="componentConf.style.radius[1]" :min="0" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="6">
+                <Row>
                   <Col span="9">阴影宽度:</Col>
                   <Col span="15">
                     <InputNumber v-model="componentConf.style.shadow[1]" :min="0" size="small" />

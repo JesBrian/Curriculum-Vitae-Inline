@@ -180,7 +180,7 @@
       },
 
       getComponentListData (page = 1, limit = 10) {
-        this.$http.get(`${this.nowTab}ComponentList?page=${page}&limit=${this.nowTab === 'extend' ? 20 : limit}&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+        this.$http.get(`${this.nowTab}ComponentList?page=${page}&limit=${this.nowTab === 'extend' ? 15 : limit}&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
           if (data.status === 200) {
             this.componentList = data.data.componentList;
             this.totalNum = data.data.total;
@@ -194,7 +194,7 @@
         return new Promise(resolve => {
           setTimeout(() => {
             this.page++;
-            this.$http.get(`${this.nowTab}ComponentList?page=${this.page}&limit=20&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
+            this.$http.get(`${this.nowTab}ComponentList?page=${this.page}&limit=15&userId=${this.$store.state.userInfo.id}`).then(({data}) => {
               if (data.status === 200) {
                 const result = data.data.componentList;
                 for (let i = 0, len = result.length; i < len; i++) {
