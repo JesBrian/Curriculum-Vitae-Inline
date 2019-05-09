@@ -1,6 +1,7 @@
 <template>
   <div class="base-cell special-cell-triangle"
-       :style="`border-bottom-color: ${data.style.bgColor}; opacity: ${data.style.opacity}; `">
+       :style="`border-bottom-color: ${data.style.bgColor}; opacity: ${data.style.opacity};
+                transform: scale(${data.format.size.size[0] / this.w}, ${data.format.size.size[1] / this.h});`">
   </div>
 </template>
 
@@ -18,6 +19,13 @@
       graphics: {
         type: Boolean,
         default: false
+      }
+    },
+
+    data () {
+      return {
+        w: this.data.format.size.size[0],
+        h: this.data.format.size.size[1]
       }
     }
   }

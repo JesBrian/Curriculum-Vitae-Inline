@@ -12,7 +12,7 @@
       <Tabs value="format" style="line-height: 35px; z-index: 5;">
         <TabPane label="规格" name="format" style="padding-top:6px; ">
           <div v-show="isShowComponentConfArea" class="component-conf-content" >
-            <Row :gutter="32" >
+            <Row :gutter="16" >
               <Col span="8">
                 <Row>
                   <Col span="4">定位:</Col>
@@ -33,11 +33,18 @@
                   </Col>
                 </Row>
               </Col>
-              <Col span="8">
+              <Col span="6">
                 <Row>
                   <Col span="4">层级:</Col>
                   <Col span="20">
                     <InputNumber :min="1" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="2">
+                <Row>
+                  <Col span="24">
+                    <Button @click="delCell" :disabled="$store.state.nowComponentIndex === -1" type="primary" size="small">删除节点</Button>
                   </Col>
                 </Row>
               </Col>
@@ -54,7 +61,7 @@
         <TabPane label="输入" name="input" style="padding-top:6px; ">
           <div v-show="isShowComponentConfArea" class="component-conf-content" >
             <Row :gutter="16" >
-              <Col span="5">
+              <Col span="7">
                 <Row>
                   <Col span="6">{{componentConf.input.title}}:</Col>
                   <Col span="17">
@@ -252,6 +259,12 @@
       initCellConf (conf = null) {
         this.initConf = JSON.parse(JSON.stringify(conf));
         this.componentConf = conf;
+      },
+
+      delCell () {
+        this.$store.commit('changeDesignConfCell', {
+          op: 'del', index: this.$store.state.nowComponentIndex
+        });
       },
 
       getComponentListConfData () {
