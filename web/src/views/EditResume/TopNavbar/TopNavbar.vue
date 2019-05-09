@@ -16,7 +16,7 @@
       <Tabs value="format" style="line-height: 35px; z-index: 5;">
         <TabPane label="规格" name="format" style="padding-top:6px; ">
           <div v-show="isShowComponentConfArea" class="component-conf-content" >
-            <Row :gutter="32" >
+              <Row :gutter="16" >
               <Col span="8">
                 <Row>
                   <Col span="4">定位:</Col>
@@ -37,11 +37,18 @@
                   </Col>
                 </Row>
               </Col>
-              <Col span="8">
+              <Col span="6">
                 <Row>
                   <Col span="4">层级:</Col>
                   <Col span="20">
                     <InputNumber :min="1" size="small" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span="2">
+                <Row>
+                  <Col span="24">
+                    <Button @click="delCell" :disabled="$store.state.nowComponentIndex === -1" type="primary" size="small">删除节点</Button>
                   </Col>
                 </Row>
               </Col>
@@ -51,7 +58,7 @@
         <TabPane label="输入" name="input" style="padding-top:6px; ">
           <div v-show="isShowComponentConfArea" class="component-conf-content" >
             <Row :gutter="16" >
-              <Col span="5">
+              <Col span="7">
                 <Row>
                   <Col span="6">{{componentConf.input.title}}:</Col>
                   <Col span="17">
@@ -65,9 +72,9 @@
                   <Col span="10">对齐方式:</Col>
                   <Col span="14">
                     <Select v-model="componentConf.input.align[0]" size="small" style="width:60px">
-                      <Option value="left">靠左</Option>
+                      <Option value="flex-start">靠左</Option>
                       <Option value="center">居中</Option>
-                      <Option value="right">靠右</Option>
+                      <Option value="flex-end">靠右</Option>
                     </Select>
                   </Col>
                   <!--<Col span="8">-->
@@ -185,10 +192,10 @@
             </Row>
           </div>
         </TabPane>
-        <TabPane label="特殊" name="special" style="padding-top:6px; ">
-          <div class="component-conf-content" v-show="isShowComponentConfArea">
-          </div>
-        </TabPane>
+        <!--<TabPane label="特殊" name="special" style="padding-top:6px; ">-->
+          <!--<div class="component-conf-content" v-show="isShowComponentConfArea">-->
+          <!--</div>-->
+        <!--</TabPane>-->
       </Tabs>
 
       <div @click="changeShowComponentConfArea" style="width: 188px; height:25px; top: 98%; left: 50%; position:absolute; transform: translateX(-50%); border-radius: 0 0 8px 8px; background:#50596E; box-shadow: 0 8px 18px -6px #000; line-height:25px; text-align:center; ">
@@ -249,6 +256,12 @@
       initCellConf (conf = null) {
         this.initConf = JSON.parse(JSON.stringify(conf));
         this.componentConf = conf;
+      },
+
+      delCell () {
+        this.$store.commit('changeDesignConfCell', {
+          op: 'del', index: this.$store.state.nowComponentIndex
+        });
       },
 
       getComponentListConfData () {

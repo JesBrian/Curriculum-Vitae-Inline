@@ -21,7 +21,17 @@ html,body{
   margin: 0;
   padding: 0;
 }
-#app {
+#app, .layout, .ivu-layout {
   .size;
+}
+
+.ivu-layout-sider-zero-width-trigger {
+  z-index:9;
+}
+
+.base-cell {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
 }
 </style>

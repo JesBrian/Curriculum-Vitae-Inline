@@ -1,13 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
   state: {
-    userInfo: null,
-    showModal: '',
-  
     nowCell: null,
     dragComponent: null, // 拖拽创建
     nowComponentIndex: -1, // 当前选中
@@ -22,14 +14,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    changeUserInfo (state, userInfo = null) {
-      state.userInfo = userInfo;
-    },
-    
-    changeShowModal (state, modalType = '') {
-      state.showModal = modalType;
-    },
-  
     changeNowCell (state, cell) {
       state.nowCell = cell;
     },
@@ -37,11 +21,11 @@ export default new Vuex.Store({
     changeDragComponent (state, component = null) {
       state.dragComponent = component;
     },
-
+  
     changeNowComponentIndex (state, index = -1) {
       state.nowComponentIndex = index;
     },
-
+  
     changeDesignConf (state, conf = {
       name: '未命名',
       logo: '',
@@ -53,11 +37,11 @@ export default new Vuex.Store({
     }) {
       Object.assign(state.designConf, conf)
     },
-
+  
     changeDesignConfBg (state, bg = '#FFF') {
       state.designConf.bg = bg;
     },
-
+  
     changeDesignConfCell (state, data = {
       op: '',
       index: -1,
@@ -71,7 +55,7 @@ export default new Vuex.Store({
         state.designConf.cell[data.index] = Object(state.designConf.cell[data.index], data.cell);
       }
     },
-    
+  
     changeDesignConfCellResize (state, data = {
       index: 0,
       size: [0, 0],
@@ -82,6 +66,5 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
   }
-})
+}

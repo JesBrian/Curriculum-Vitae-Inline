@@ -56,6 +56,11 @@ exports.uploadComponentLogoSer = async (file: any) => {
   return handleSaveFile('component/logo', file);
 };
 
+
+exports.uploadComponentContentSer = async (file: any) => {
+  return handleSaveFile('component/content', file);
+};
+
 /**
  * 上传模板封面
  * @param file

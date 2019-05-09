@@ -41,6 +41,13 @@
                   </Col>
                 </Row>
               </Col>
+              <Col span="6">
+                <Row>
+                  <Col span="24">
+
+                  </Col>
+                </Row>
+              </Col>
             </Row>
           </div>
         </TabPane>
@@ -61,9 +68,9 @@
                   <Col span="10">对齐方式:</Col>
                   <Col span="14">
                     <Select v-model="componentConf.input.align[0]" size="small" style="width:60px">
-                      <Option value="left">靠左</Option>
+                      <Option value="flex-start">靠左</Option>
                       <Option value="center">居中</Option>
-                      <Option value="right">靠右</Option>
+                      <Option value="flex-end">靠右</Option>
                     </Select>
                   </Col>
                   <!--<Col span="8">-->
@@ -215,15 +222,15 @@
 
     computed: {
       nowCellIndex () {
-        return this.$store.state.nowComponentIndex;
+        return this.$store.state.template.nowComponentIndex;
       }
     },
 
     watch: {
       nowCellIndex (nVal) {
         if (nVal !== -1) {
-          // console.log(this.$store.state.designConf.cell[nVal].conf)
-          return this.componentConf = this.$store.state.designConf.cell[nVal].conf;
+          // console.log(this.$store.state.template.designConf.cell[nVal].conf)
+          return this.componentConf = this.$store.state.template.designConf.cell[nVal].conf;
         }
         this.componentConf = this.initConf;
       }

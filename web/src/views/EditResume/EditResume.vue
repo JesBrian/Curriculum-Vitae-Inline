@@ -48,7 +48,7 @@
         <Layout :style="`width:${showNodePanel ? 180 : 25}px; height:100%; top: 0; right: 0; box-sizing: border-box; position: absolute; background: #50596E; box-shadow: 0 0 8px #282828; color: #FFF;`">
           <div v-if="showNodePanel" style="width: 100%; height: 100%; padding: 18px 10px; overflow: auto;">
             <template v-if="$store.state.designConf.cell.length" >
-              <div v-for="(item, index) in $store.state.designConf.cell" class="nodeCell">
+              <div v-for="(item, index) in $store.state.designConf.cell" @click="selectNode(index)" :class="['nodeCell', {'active': $store.state.nowComponentIndex === index}]">
                 {{index + 1}}
                 <Icon @click="delNode(index)" type="md-trash" size="18" style="margin-left: auto;" />
               </div>
@@ -158,6 +158,10 @@
 
       switchShowNodePanel () {
         this.showNodePanel = !this.showNodePanel;
+      },
+
+      selectNode (index) {
+        this.$store.commit('changeNowComponentIndex', index);
       },
 
       delNode (index) {
@@ -321,9 +325,12 @@
 
 
   .nodeCell {
-    width: 100%; height: 28px; padding: 0 8px 0 12px; display: flex; flex-direction: row; align-items: center; border-radius: 14px;
+    width: 100%; height: 28px; margin: 5px 0; padding: 0 8px 0 12px; box-sizing: border-box; display: flex; flex-direction: row; align-items: center; border-radius: 14px;
     &:hover {
       background: rgba(255, 255, 255, 0.08); box-shadow: 1px 1px 8px -2px #000;
+    }
+    &.active {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid #383838;
     }
   }
 </style>

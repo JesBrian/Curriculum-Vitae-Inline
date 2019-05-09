@@ -187,9 +187,9 @@
                             <Row :gutter="16">
                               <Col span="12">
                                 <Select v-model="componentConf.input.align[0]" size="small" style="width:100px">
-                                  <Option value="left">靠左</Option>
+                                  <Option value="flex-start">靠左</Option>
                                   <Option value="center">居中</Option>
-                                  <Option value="right">靠右</Option>
+                                  <Option value="flex-end">靠右</Option>
                                 </Select>
                               </Col>
                             </Row>
