@@ -475,6 +475,7 @@
         this.$http.put('saveComponent', componentData).then(res => {
           const result = res.data;
           if (result.status === 200) {
+            this.$Message.success(result.msg);
           }
         }).catch(err => {
           console.log(err);
