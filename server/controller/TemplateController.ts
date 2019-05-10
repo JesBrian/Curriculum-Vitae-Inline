@@ -79,6 +79,7 @@ exports.saveTemplateCtr = async (ctx: any, next: any) => {
 
   ctx.body = {
     status: status,
+    data: result,
     msg: msg
   };
 };

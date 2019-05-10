@@ -24,12 +24,18 @@ exports.getTemplateByIdSer = async (templateId: string = '') => {
 exports.createTemplateSer = async (templateData: any = null) => {
   const template = new TemplateModel(templateData);
   // @ts-ignore
-  return !await template.save().errors;
+  if (await template.save().errors) {
+    return false;
+  }
+  return template.id;
 };
 
 exports.updateTemplateSer = async (templateId: string = '', templateData: any = null) => {
   // @ts-ignore
   const template = await this.getTemplateByIdSer(templateId);
   Object.assign(template, templateData);
-  return !await template.save().errors;
+  if (await template.save().errors) {
+    return false;
+  }
+  return template.id;
 };

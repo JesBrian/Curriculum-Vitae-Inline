@@ -66,8 +66,8 @@
         <Col span="16">
           <!--<a href="http://localhost:9090/#/editTemplate" target="_blank">-->
           <!--</a>-->
-          <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >编辑模板</Button>
-          <Button type="primary" ghost >保存预览</Button>
+          <Button @click="editTemplate" type="info" ghost style="margin-right: 18px;" >保存编辑模板</Button>
+          <!--<Button type="primary" ghost >保存预览</Button>-->
         </Col>
       </Row>
 
@@ -186,13 +186,46 @@
 
         this.$http.put('saveTemplate', templateData).then(({data}) => {
           console.log(data);
+          if (data.status === 200) {
+            this.id = data.data;
+            this.$Message.success(data.msg);
+          }
         }).catch(err => {
           console.log(err);
-        })
+        });
       },
 
       editTemplate () {
-        window.open(`http://localhost:9090/#/editTemplate?id=${this.id}`)
+        if (this.id) {
+          return window.open(`http://localhost:9090/#/editTemplate?id=${this.id}`);
+        }
+        const templateData = {
+          data: {
+            name: this.name,
+            logo: this.logo,
+            formatId: this.formatId,
+            author: '',
+            tags: this.tags,
+            bg: this.bg,
+            cell: this.cell,
+            system: true,
+            status: this.status,
+          }
+        };
+
+        if (this.id) {
+          templateData.id = this.id;
+        }
+
+        this.$http.put('saveTemplate', templateData).then(({data}) => {
+          console.log(data);
+          if (data.status === 200) {
+            this.id = data.data;
+            return window.open(`http://localhost:9090/#/editTemplate?id=${this.id}`);
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       },
 
       handleView (name) {
