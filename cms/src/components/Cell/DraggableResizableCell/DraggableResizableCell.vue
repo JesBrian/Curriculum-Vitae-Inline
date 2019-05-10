@@ -67,9 +67,9 @@
       onDrag (x, y) {
         this.$store.commit('changeDesignConfCellResize', {
           index: this.cellIndex,
-          size: this.$store.state.designConf.cell[this.cellIndex].conf.format.size.size,
+          size: this.$store.state.template.designConf.cell[this.cellIndex].conf.format.size.size,
           position: [x, y]
-        })
+        });
       }
     }
   }

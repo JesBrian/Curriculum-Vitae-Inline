@@ -107,13 +107,20 @@
           logo: confData.logo,
           bg: confData.bg,
           status: confData.status,
-          size: confData.size ? confData.size : [0, 0], // [长,宽]
           cell: confData.cell,
           tags: confData.tags
         };
-
-        console.log(confData);
-        this.$store.commit('changeDesignConf', designConf);
+        
+        this.$localForage.getItem('formatList').then(res => {
+          for (let i = res.length - 1; i >= 0; i--) {
+            if (res[i]._id === confData.formatId) {
+              designConf.size = res[i].size;
+              this.$store.commit('changeDesignConf', designConf);
+            }
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       }).catch(err => {
         console.log(err);
       });
@@ -177,7 +184,10 @@
           tags: [],
           ...this.$store.state.template.designConf
         };
-        this.$http.put('saveTemplate', designData).then(({data}) => {
+        this.$http.put('saveTemplate', {
+          id: this.id,
+          data: designData
+        }).then(({data}) => {
           if (data.status === 200) {
             this.id = data.data;
           }
