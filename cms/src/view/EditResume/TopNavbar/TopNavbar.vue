@@ -44,7 +44,7 @@
               <Col span="2">
                 <Row>
                   <Col span="24">
-                    <Button @click="delCell" :disabled="$store.state.nowComponentIndex === -1" type="primary" size="small">删除节点</Button>
+                    <Button @click="delCell" :disabled="$store.state.template.nowComponentIndex === -1" type="primary" size="small">删除节点</Button>
                   </Col>
                 </Row>
               </Col>
@@ -195,10 +195,10 @@
             </Row>
           </div>
         </TabPane>
-        <TabPane label="特殊" name="special" style="padding-top:6px; ">
-          <div class="component-conf-content" v-show="isShowComponentConfArea">
-          </div>
-        </TabPane>
+        <!--<TabPane label="特殊" name="special" style="padding-top:6px; ">-->
+          <!--<div class="component-conf-content" v-show="isShowComponentConfArea">-->
+          <!--</div>-->
+        <!--</TabPane>-->
       </Tabs>
 
       <div @click="changeShowComponentConfArea" style="width: 188px; height:25px; top: 98%; left: 50%; position:absolute; transform: translateX(-50%); border-radius: 0 0 8px 8px; background:#50596E; box-shadow: 0 8px 18px -6px #000; line-height:25px; text-align:center; ">
@@ -236,7 +236,6 @@
     watch: {
       nowCellIndex (nVal) {
         if (nVal !== -1) {
-          // console.log(this.$store.state.template.designConf.cell[nVal].conf)
           return this.componentConf = this.$store.state.template.designConf.cell[nVal].conf;
         }
         this.componentConf = this.initConf;
@@ -263,7 +262,7 @@
 
       delCell () {
         this.$store.commit('changeDesignConfCell', {
-          op: 'del', index: this.$store.state.nowComponentIndex
+          op: 'del', index: this.$store.state.template.nowComponentIndex
         });
       },
 
@@ -318,41 +317,42 @@
       }
     }
 
-    .component-conf {
-      &-container /deep/ {
-        .ivu-tabs {
-          overflow: visible;
+    .component-conf-content {
+      min-width: 800px;
+      max-width: 800px;
+      padding: 0 18px 0;
+      box-sizing: border-box;
+      color: #BBB;
+    }
 
-          &-nav-wrap {
-            margin:0 68px 0 58px;
-          }
-          &-ink-bar {
-            background: #00C3FF;
-            border-radius: 2px;
-          }
-          &-bar {
-            margin: 0 0 4px;
-            border: none;
-            box-shadow: 0 2px 6px -2px #383838;
-          }
-          &-tab {
-            color: #AAA;
-            &:hover {
-              color: #57a3f3;
-            }
-            &-active {
-              color: #00C3FF!important;
-            }
-          }
-        }
+    .component-conf-container /deep/ .ivu-tabs {
+      overflow: visible;
+
+      &-nav-wrap {
+        margin: 0 68px 0 58px;
       }
 
-      &-content {
-        min-width: 800px;
-        max-width: 800px;
-        padding: 0 18px 0;
-        box-sizing: border-box;
-        color: #BBB;
+      &-ink-bar {
+        background: #00C3FF;
+        border-radius: 2px;
+      }
+
+      &-bar {
+        margin: 0 0 4px;
+        border: none;
+        box-shadow: 0 2px 6px -2px #383838;
+      }
+
+      &-tab {
+        color: #AAA;
+
+        &:hover {
+          color: #57a3f3;
+        }
+
+        &-active {
+          color: #00C3FF !important;
+        }
       }
     }
   }

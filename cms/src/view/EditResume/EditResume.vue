@@ -1,6 +1,6 @@
 <template>
   <Layout class="layout">
-    <TopNavbar @changeRightNavbar="changeRightNavbar" v-model="showTopNavbar" />
+    <TopNavbar v-model="showTopNavbar" />
 
     <Layout>
       <!-- 左侧菜单 -->
@@ -37,8 +37,7 @@
             <ColorPicker @on-change="changeBg" :value="$store.state.template.designConf.bg" alpha size="small" />
 
             <div style="float: right;">
-              <Button @click="saveResume" type="info" icon="md-list" size="small" ghost style="margin:0 0 0 6px;">编辑完成</Button>
-              <Button @click="delNowCurriculumVitae" :disabled="(!$store.state.template.designConf.status) || ($route.query.id === '')" type="error" icon="md-trash" size="small" ghost style="margin:0 0 0 6px;">取消返回</Button>
+              <Button @click="saveResume" type="info" icon="md-list" size="small" ghost style="margin:0 0 0 6px;">编辑完成和保存</Button>
             </div>
           </div>
         </Layout>
@@ -91,31 +90,33 @@
       }
     },
 
-    beforeCreate () {
+    // computed: {
+    //   templateStore () {
+    //     return this.$store.state.template
+    //   }
+    // },
+
+    beforeMount () {
       this.id = this.$route.query.id;
-      if ((this.$store.state.template.template.designConf.size.length === 0) || (this.id === '')) {
-        // this.$router.push('/');
-      }
-      if (this.id) {
-        this.$http.get(`getDesignById?id=${this.id}`).then(({data}) => {
-          const confData = data.data;
-          const designConf = {
-            name: confData.name,
-            logo: confData.logo,
-            bg: confData.bg,
-            status: confData.status,
-            size: confData.size, // [长,宽]
-            cell: confData.cell,
-            tags: confData.tags
-          };
-          this.$store.commit('changeDesignConf', designConf);
-          this.$nextTick(() => {
-            this.updateLocalHistory();
-          });
-        }).catch(err => {
-          console.log(err);
-        });
-      }
+      this.$http.get(`getTemplateById?id=${this.id}`).then(({data}) => {
+        const confData = data.data;
+
+        console.log(confData)
+        const designConf = {
+          name: confData.name,
+          logo: confData.logo,
+          bg: confData.bg,
+          status: confData.status,
+          size: confData.size ? confData.size : [0, 0], // [长,宽]
+          cell: confData.cell,
+          tags: confData.tags
+        };
+
+        console.log(confData);
+        this.$store.commit('changeDesignConf', designConf);
+      }).catch(err => {
+        console.log(err);
+      });
     },
 
     beforeDestroy () {
@@ -123,14 +124,6 @@
     },
 
     methods: {
-      changeRightNavbar () {
-        if (this.$store.state.template.userInfo) {
-          this.showRightNavbar = !this.showRightNavbar;
-          return true;
-        }
-        this.$store.commit('changeShowModal', 'LoginRegisterModal');
-      },
-
       changeZoomRate (category = true, step = 10, reset = false) {
         if (reset) {
           this.zoomRate = 50; return;
@@ -170,74 +163,26 @@
         });
       },
 
+      blurComponent () {
+        this.$store.commit('changeNowComponentIndex');
+      },
+
       saveResume () {
         this.blurComponent();
         let designData = {
+          id: this.id,
           name: '',
           logo: '',
-          author: this.$store.state.template.userInfo.id,
+          author: '',
           tags: [],
           ...this.$store.state.template.designConf
         };
-        if (this.id) {
-          designData.id = this.id
-        }
-        this.$http.put('saveDesign', designData).then(({data}) => {
+        this.$http.put('saveTemplate', designData).then(({data}) => {
           if (data.status === 200) {
             this.id = data.data;
-            this.updateLocalHistory();
           }
         }).catch(err => {
           console.log(err);
-        });
-      },
-
-      updateLocalHistory () {
-        this.$localForage.getItem('designHistory').then(res => {
-          const designId = this.id;
-          let history = [], flag = true;
-          if (res) {
-            history = res;
-          }
-          for (let i = 0, len = history.length; i < len; i++) {
-            if (history[i].id === designId) {
-              history[i].name =this.$store.state.template.designConf.name;
-              history[i].time = Date.now();
-              flag = false;
-              break;
-            }
-          }
-          if (flag) {
-            history.push({
-              id: this.id,
-              name: this.$store.state.template.designConf.name,
-              time: Date.now()
-            });
-          }
-          this.$localForage.setItem('designHistory', history);
-        }).catch(err => {
-          console.log(err);
-        });
-      },
-
-      delNowCurriculumVitae () {
-        this.$Modal.confirm({
-          title: '警告',
-          content: '<p>确认要删除该编辑中的简历</p>',
-          onOk: () => {
-            this.$http.put('switchDesignStatus', {
-              id: this.id,
-              status: false
-            }).then(({data}) => {
-              if (data.status === 200) {
-                this.$store.commit('changeDesignConf', {
-                  status: false
-                });
-              }
-            }).catch(err => {
-              console.log(err);
-            });
-          },
         });
       }
     }

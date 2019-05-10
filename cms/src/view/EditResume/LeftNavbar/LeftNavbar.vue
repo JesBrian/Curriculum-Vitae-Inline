@@ -111,7 +111,7 @@
           Promise.all([
             this.initSystemComponent()
           ]).then(res => {
-            this.saveComponentDataForLocal();
+            // this.saveComponentDataForLocal();
           });
         // });
       },

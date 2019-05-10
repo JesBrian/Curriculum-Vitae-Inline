@@ -1,9 +1,9 @@
 <template>
   <div ref="editContainer" class="edit-container"
-       :style="`width:${$store.state.designConf.size[0]}px; height:${$store.state.designConf.size[1]}px; background: ${$store.state.designConf.bg};`">
-    <DraggableResizableCell v-for="(cellItem, index) in $store.state.designConf.cell"
+       :style="`width:${$store.state.template.designConf.size[0]}px; height:${$store.state.template.designConf.size[1]}px; background: ${$store.state.template.designConf.bg};`">
+    <DraggableResizableCell v-for="(cellItem, index) in $store.state.template.designConf.cell"
                             :id="`cell${cellItem._id}`" :key="`${cellItem._id}${index}`"
-                            :style="$store.state.nowComponentIndex === index ? 'border: 1px dashed #000;' : 'border: 1px dashed transparent;'" :cellIndex="index"
+                            :style="$store.state.template.nowComponentIndex === index ? 'border: 1px dashed #000;' : 'border: 1px dashed transparent;'" :cellIndex="index"
                             :cell-data="cellItem" @cellActive="cellActive" />
   </div>
 </template>
@@ -27,7 +27,7 @@
 
     mounted () {
       this.$refs.editContainer.addEventListener('drop', (event) => {
-        let cellData = JSON.parse(JSON.stringify(this.$store.state.dragComponent));
+        let cellData = JSON.parse(JSON.stringify(this.$store.state.template.dragComponent));
         const size = cellData.conf.format.size.size;
         cellData.conf.format.position.axis = [event.offsetX - size[0] / 2, event.offsetY - size[1] / 2];
         this.$store.commit('changeDesignConfCell', {
