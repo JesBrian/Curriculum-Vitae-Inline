@@ -1,5 +1,5 @@
 <template>
-  <Icon class="base-cell special-cell-heart" type="md-heart" :size="data.format.size.size[0]" />
+  <Icon class="base-cell special-cell-heart" type="md-heart" :size="data.format.size.size[0]"  :color="data.input.color" />
 </template>
 
 <script>

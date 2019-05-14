@@ -190,6 +190,7 @@
         }).then(({data}) => {
           if (data.status === 200) {
             this.id = data.data;
+            this.$Message.success(data.msg);
           }
         }).catch(err => {
           console.log(err);
